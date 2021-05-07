@@ -1,5 +1,5 @@
 " vimrc by @windvalley
-" https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+" https://raw.githubusercontent.com/windvalley/dotfiles/master/vimrc
 
 
 " vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
@@ -71,7 +71,7 @@
 "       mv ~/.vim ~/.vim.$(date +%F_%T)
 
 "    2. 替换你的当前 ~/.vimrc 文件:
-"       wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"       wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vimrc
 
 "    3. 安装用于管理 VIM 插件的插件`vim-plug`:
 "       curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -1120,6 +1120,7 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 
 " 标记当前行光标右侧的字符.
 map <Leader>l <Plug>(easymotion-lineforward)
+
 " 标记当前行光标左侧的字符.
 map <Leader>h <Plug>(easymotion-linebackward)
 
@@ -1127,10 +1128,6 @@ map <Leader>h <Plug>(easymotion-linebackward)
 nmap s <Plug>(easymotion-overwin-f)
 " 需要输入2个目标字符才可高亮定位, 支持多窗口同时定位.
 "nmap s <Plug>(easymotion-overwin-f2)
-
-" 覆盖 VIM 自带的 / 搜索模式.
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
 
 " 是否启用默认的快捷键映射, 默认值: 1, 表示启用.
 let g:EasyMotion_do_mapping = 1
@@ -1272,7 +1269,7 @@ let g:go_imports_autosave = 1
 
 " *** 代码高效阅读 ***
 
-" 使用 K 触发 :GoDoc 文档, 覆盖默认的 man, 默认值: 1, 表示启用.
+" 使用 K 触发 :GoDoc 文档, 覆盖默认的 man, 默认值: 1, 表示启用;
 " 此处禁用, 这里使用 coc.nvim 的 K 映射.
 let g:go_doc_keywordprg_enabled = 0
 
@@ -1289,7 +1286,7 @@ let g:go_doc_keywordprg_enabled = 0
 "let g:go_doc_popup_window = 1
 
 " gr  在 location list 中列出哪些地方引用了光标所在的对象.
-" NOTE: coc-go 的 gr 表现的更好, 不使用此配置.
+" NOTE: coc-go 的 gr 表现的更好, 故注释掉不使用此配置.
 "au FileType go nmap gr :GoReferrers<CR>
 
 " ,cl  在 location list 中列出哪些地方调用了光标所在的函数.
@@ -1305,13 +1302,14 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 " gd  默认以覆盖当前页面的方式跳转到函数定义处, vim-go插件默认行为, 无需配置.
 "
 " gl  新开一个标签页的方式跳转到函数定义处.
-au FileType go nmap gl <Plug>(go-def-tab).
+au FileType go nmap <silent> gl <Plug>(go-def-tab)
 " gs  上下分屏跳转到函数定义处.
-au FileType go nmap gs <Plug>(go-def-split)
+au FileType go nmap <silent> gs <Plug>(go-def-split)
 " gv  左右分屏跳转到函数定义处.
-au FileType go nmap gv <Plug>(go-def-vertical)
+au FileType go nmap <silent> gv <Plug>(go-def-vertical)
+
 " 对于跳转到对象定义处的功能, 重用已经打开的buffer. 默认值: 0
-let g:go_def_reuse_buffer = 0
+let g:go_def_reuse_buffer = 1
 
 
 " *** 代码自动生成 ***
@@ -1339,13 +1337,13 @@ let g:go_template_use_pkg = 1
 
 " *** 运行当前 Go 文件 ***
 " ,gr  go run 当前的go文件.
-au FileType go nmap ,gr <Plug>(go-run)
+au FileType go nmap <leader>gr <Plug>(go-run)
 " ,gb  go build 当前的go文件, 不产生二进制文件, 只是检查是否可以成功build.
-au FileType go nmap ,gb <Plug>(go-build)
+au FileType go nmap <leader>gb <Plug>(go-build)
 " ,gt  go test 当前的go文件.
-au FileType go nmap ,gt <Plug>(go-test)
+au FileType go nmap <leader>gt <Plug>(go-test)
 " ,gc  查看当前代码文件的测试覆盖率.
-au FileType go nmap ,gc <Plug>(go-coverage)
+au FileType go nmap <leader>gc <Plug>(go-coverage)
 
 
 " *** 代码语法高亮 ***
@@ -2052,7 +2050,6 @@ endif
 "                ,l  标记当前行光标右侧的字符.
 "                ,h  标记当前行光标左侧的字符.
 "                 s  输入1个目标字符即可高亮定位, 支持多窗口同时定位.
-"                 /  覆盖了 VIM 自带的 / 搜索模式.
 "
 " ** preservim/nerdcommenter (https://github.com/preservim/nerdcommenter)
 "       [n],c<space>  注释或取消注释光标所在行,
