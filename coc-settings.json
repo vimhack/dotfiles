@@ -1,0 +1,34 @@
+{
+   // edit, split, vsplit, tab drop
+  "coc.preferences.jumpCommand": "tab drop",
+
+  "git.addGBlameToBufferVar": true,
+  "git.showCommitInFloating": true,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterDelete",
+
+  "languageserver": {
+    // luarocks install --server=http://luarocks.org/dev lua-lsp
+    // luarocks install luacheck
+    // luarocks-5.3 install lcf
+    // doc: https://github.com/Alloyed/lua-lsp
+    "lua": {
+      "command": "lua-lsp",
+      "filetypes": ["lua"]
+    },
+    // npm i -g dockerfile-language-server-nodejs
+    // doc: https://github.com/rcjsuen/dockerfile-language-server-nodejs
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": [
+        "dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
+    }
+  }
+}
