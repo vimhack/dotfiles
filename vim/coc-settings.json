@@ -1,5 +1,10 @@
 {
-   // edit, split, vsplit, tab drop
+  // 本文件 coc-settings.json 是 Vim 的代码补全插件 coc.nvim 的配置文件, 配合 Vim 使用.
+  // 安装方法:
+  // wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+
+
+  // edit, split, vsplit, tab drop
   "coc.preferences.jumpCommand": "tab drop",
 
   "git.addGBlameToBufferVar": true,

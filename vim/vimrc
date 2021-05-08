@@ -1,5 +1,5 @@
 " vimrc by @windvalley
-" https://raw.githubusercontent.com/windvalley/dotfiles/master/vimrc
+" https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
 
 
 " vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
@@ -71,7 +71,7 @@
 "       mv ~/.vim ~/.vim.$(date +%F_%T)
 
 "    2. 替换你的当前 ~/.vimrc 文件:
-"       wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vimrc
+"       wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
 
 "    3. 安装用于管理 VIM 插件的插件`vim-plug`:
 "       curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
