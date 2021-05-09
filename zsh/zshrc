@@ -1,0 +1,171 @@
+# zshrc by @windvalley
+# https://raw.githubusercontent.com/windvalley/work-efficiency-utils/master/zsh/zshrc
+
+
+# vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
+#
+# NOTE:
+#   查看折叠内容的方法:
+#      za: normal 模式下按 za , 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
+#          在打开的折叠内部任意处按 za , 也会关闭折叠.
+#      zA: 是 za 的递归操作, 是针对嵌套折叠的场景.
+
+
+# --- 安装步骤 {{
+
+#   1. 安装 ohmyzsh
+#      doc: https://github.com/ohmyzsh/ohmyzsh
+#      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#      官方主题所在目录: ~/.oh-my-zsh/themes
+#      官方插件所在目录: ~/.oh-my-zsh/plugins
+#      第三方主题所在目录: ~/.oh-my-zsh/custom/themes
+#      第三方插件所在目录: ~/.oh-my-zsh/custom/plugins
+#
+#   2. 常用第三方插件安装
+#      doc: https://github.com/unixorn/awesome-zsh-plugins
+#      1) 自动补全插件:
+#         git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+#      2) 语法高亮插件:
+#         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+#
+#   3. 使用本 zshrc 文件
+#      wget -O ~/.zshrc https://raw.githubusercontent.com/windvalley/work-efficiency-utils/master/zsh/zshrc
+
+# }}
+
+
+# --- 基础配置 {{
+
+# oh-my-zsh 安装路径.
+export ZSH="$HOME/.oh-my-zsh"
+
+# 为 zsh 定制的内容的放置目录.
+export ZSH_CUSTOM="$ZSH/custom"
+
+# 推荐的主题列表: ys, robbyrussell, amuse, agnoster, random
+# doc: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="ys"
+
+# 标准插件存放在: $ZSH/plugins/
+# 定制插件存放在: $ZSH_CUSTOM/plugins/
+# NOTE:
+# 光标移到下面的 README.md 文件, 按 gf 可以打开帮助文件, 按 ctrl o 返回到当前文件.
+# vi-mode:  ~/.oh-my-zsh/plugins/vi-mode/README.md
+# tmux:  ~/.oh-my-zsh/plugins/tmux/README.md
+# git:  ~/.oh-my-zsh/plugins/git/README.md
+# history: ~/.oh-my-zsh/plugins/history/README.md
+# brew:  ~/.oh-my-zsh/plugins/brew/README.md
+# extract:  ~/.oh-my-zsh/plugins/extract/README.md
+# web-search: ~/.oh-my-zsh/plugins/web-search/README.md 
+# emoji: ~/.oh-my-zsh/plugins/emoji/README.md
+plugins=(vi-mode tmux git z history brew extract web-search emoji zsh-autosuggestions zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+export LANG=en_US.UTF-8
+
+# 解决执行 crontab -e 报错的问题.
+export EDITOR=vim
+
+# }}
+
+
+# --- 代理配置 {{
+
+# 为终端设置使用 ShadowsocksX 提供的 HTTP 代理快捷命令.
+# NOTE:
+# 需要先启动 ShadowsocksX 软件, 配置好代理服务器, 选择'自动模式'和'启用HTTP代理' 即可;
+# 每个终端标签页想使用代理, 都需要先执行 proxy, 然后 curl google.com 进行测试;
+# 关闭当前标签页的代理, 使用 unproxy 命令.
+alias proxy="export http_proxy=http://127.0.0.1:1081 https_proxy=http://127.0.0.1:1081"
+alias unproxy="unset http_proxy https_proxy"
+
+# brew 资源镜像配置, 使用代理的时候不使用此资源镜像.
+[[ -z "http_proxy" ]] &&
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+
+# }}
+
+
+# --- 编程语言 {{
+
+# ****** Go ******
+GOPATH=$HOME/go
+GOBIN=$GOPATH/bin
+GOPROXY=https://goproxy.cn
+PATH="$GOBIN:$PATH"
+export GOPATH GOBIN GOPROXY PATH
+
+alias gf=gf
+# ****************
+
+# ****** Python3 ******
+export PATH="/usr/local/opt/python3/bin:$PATH"
+ln -sf /usr/local/opt/python3/bin/python3 /usr/local/opt/python3/bin/python
+
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+# *********************
+
+# ****** Lua ******
+# lua 指定使用 5.3 版本.
+ln -sf /usr/local/Cellar/lua/5.3.5_1/bin/lua /usr/local/bin/lua
+# luarocks 指定使用 lua 的 5.3 版本.
+alias luarocks="luarocks  --lua-dir=/usr/local/opt/lua@5.3"
+export PATH=$HOME/.luarocks/bin:$PATH
+# *****************
+
+# }}
+
+
+# --- 其他配置 {{
+
+# 列出正在监听的tcp连接.
+alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
+
+export GPG_TTY=$(tty)
+
+# fzf
+# doc: https://github.com/junegunn/fzf
+export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border'
+alias vimfzf="vim \$(fzf)"
+
+# }}
+
+
+# --- 使用技巧 {{
+
+#             ctrl f  输入任意命令行的一部分时, 如果自动出现补全提示,
+#                     使用此快捷键自动采纳提示的补全信息.
+#                     NOTE: 如果使用了 vi-mode 插件, 此快捷键将失效, 请使用 ctrl e 替代.
+#                tab  命令行输入一部分后按 tab 键触发补全提示或在提示项中选择.
+#             ctrl g  取消选择 tab 选择的补全提示项, 回到命令行本身.
+#                  z  z 后输入你要切换的目标目录的一部分, 回车即可自动跳转到目标目录.
+#
+# *** vi-mode 插件 (~/.oh-my-zsh/plugins/web-search/README.md)
+#             ctrl e  编辑模式下将光标移动到行尾, 如果命令行有提示的补全, 则会有补全效果,
+#                     替代不使用 vi-mode 插件时的 ctrl f 快捷键.
+#                ESC  使命令行进入 vim 的 normal 模式, 光标移动/文本对象编辑与 vim 一致.
+#                 vv  将命令行文本放到 vim 中进行编辑.
+#                j/k  向下或向上翻阅历史命令行.
+#                  /  输入关键字搜索历史命令行.
+#                  n  翻阅通过 / 搜索的历史命令行.
+#
+# *** web-search 插件 (~/.oh-my-zsh/plugins/web-search/README.md)
+#         google key  打开浏览器使用 google 搜索 key.
+#           bing key  打开浏览器使用 bing 搜索 key.
+#          baidu key  打开浏览器使用 baidu 搜索 key.
+#  stackoverflow key  打开浏览器使用 stackoverflow 搜索 key. 
+#
+# *** git 插件 (~/.oh-my-zsh/plugins/git/README.md)
+#                gst  git status
+#                gsh  git show
+#                 ga  git add
+#                 gc  git commit -v
+#                 gp  git push
+#                gpf  git push -f
+#                glo  git log --oneline --decorate
+#               glog  git log --oneline --decorate --graph
+#                 gl  git pull
+
+# }}
