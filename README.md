@@ -5,7 +5,21 @@ Go/Python/Lua/Bash and JavaScript programming.
 
 ## Show
 
-![show1](images/show1.png)
+Vim
+
+![show1](images/vim.png)
+
+Tmux
+
+![show1](images/tmux.png)
+
+Zsh
+
+![show1](images/zsh.png)
+
+Ranger
+
+![show1](images/ranger.png)
 
 ## Install
 
