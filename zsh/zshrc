@@ -56,7 +56,7 @@ ZSH_THEME="ys"
 # history: ~/.oh-my-zsh/plugins/history/README.md
 # brew:  ~/.oh-my-zsh/plugins/brew/README.md
 # extract:  ~/.oh-my-zsh/plugins/extract/README.md
-# web-search: ~/.oh-my-zsh/plugins/web-search/README.md 
+# web-search: ~/.oh-my-zsh/plugins/web-search/README.md
 # emoji: ~/.oh-my-zsh/plugins/emoji/README.md
 plugins=(vi-mode tmux git z history brew extract web-search emoji zsh-autosuggestions zsh-syntax-highlighting)
 
@@ -72,16 +72,19 @@ export EDITOR=vim
 
 # --- 代理配置 {{
 
-# 为终端设置使用 ShadowsocksX 提供的 HTTP 代理快捷命令.
+# 为终端设置使用 ShadowsocksX 提供的 HTTP 代理的快捷命令.
 # NOTE:
-# 需要先启动 ShadowsocksX 软件, 配置好代理服务器, 选择'自动模式'和'启用HTTP代理' 即可;
-# 每个终端标签页想使用代理, 都需要先执行 proxy, 然后 curl google.com 进行测试;
-# 关闭当前标签页的代理, 使用 unproxy 命令.
-alias proxy="export http_proxy=http://127.0.0.1:1081 https_proxy=http://127.0.0.1:1081"
-alias unproxy="unset http_proxy https_proxy"
+#   1. 需要先启动 ShadowsocksX 软件, 配置好代理服务器, 选择'自动模式'和'启用HTTP代理'即可;
+#   2. 每个终端标签页想使用代理, 都需要先执行 proxy, 然后 curl google.com 进行测试;
+#   3. 关闭当前标签页的代理, 使用 unproxy 命令.
+#   4. 经过实测, 无法正常使用 socks5 代理, 比如: export ALL_PROXY=socks5://127.0.0.1:10808
+alias proxy="export ALL_PROXY=http://127.0.0.1:10818;
+gsed -i '/^Host github.com/{s/^/#/;n;s/^/#/}' ~/.ssh/config"
+alias unproxy="unset ALL_PROXY;
+gsed -i '/^#Host github.com/{s/^#//;n;s/^#//}' ~/.ssh/config"
 
 # brew 资源镜像配置, 使用代理的时候不使用此资源镜像.
-[[ -z "http_proxy" ]] &&
+[[ -z "$ALL_PROXY" ]] &&
     export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # }}
