@@ -1,5 +1,5 @@
 # zshrc by @windvalley
-# https://raw.githubusercontent.com/windvalley/work-efficiency-utils/master/zsh/zshrc
+# https://raw.githubusercontent.com/windvalley/dotfiles/master/zsh/zshrc
 
 
 # vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
@@ -29,7 +29,7 @@
 #         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 #
 #   3. 使用本 zshrc 文件
-#      wget -O ~/.zshrc https://raw.githubusercontent.com/windvalley/work-efficiency-utils/master/zsh/zshrc
+#      wget -O ~/.zshrc https://raw.githubusercontent.com/windvalley/dotfiles/master/zsh/zshrc
 
 # }}
 
