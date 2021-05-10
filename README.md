@@ -1,30 +1,43 @@
-# Windvalley's dotfiles
+# Windvalley's dotfiles 🍀
 
 This is my personal development environment focusing on
 Go/Python/Lua/Bash and JavaScript programming.
 
-## Show
+## 💝 Powers
+
+- [Vim](https://github.com/vim/vim)
+- [Tmux](https://github.com/tmux/tmux)
+- [Oh My Zsh](https://ohmyz.sh/)
+- [Ranger](https://github.com/ranger/ranger)
+- [Iterm2](https://iterm2.com/)
+
+## 🔮 Show
 
 Vim
 
-![show1](images/vim.png)
+![vim](images/vim.png)
 
 Tmux
 
-![show1](images/tmux.png)
+![tmux](images/tmux.png)
 
 Zsh
 
-![show1](images/zsh.png)
+![zsh](images/zsh.png)
 
 Ranger
 
-![show1](images/ranger.png)
+![ranger](images/ranger.png)
 
-## Install
+## 📀 Installation
 
 You can check the installation method at the beginning of each dotfiles.
 
-## Tips
+## 📜 Tips
 
 Almost every dotfile has usage tips at the end of it for reference.
+
+## ⚖️ License
+
+This project is under the MIT License.
+See the [LICENSE](LICENSE) file for the full license text.
