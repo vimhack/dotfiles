@@ -136,6 +136,9 @@ Plug 'rakr/vim-one'
 " dracula
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+" rigel
+Plug 'Rigellute/rigel'
+
 " ********************** 代码补全 ********************************************
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
@@ -818,12 +821,17 @@ syntax enable
 " 设置背景色为黑色或亮色, dark or light.
 set background=dark
 
+" 启用 24bit 真彩.
+" NOTE: 如果不启用这个配置, vim 背景颜色还是默认的黑色.
+set termguicolors
+
 " 启用颜色主题方案, 优秀方案:
 "   solarized: https://github.com/altercation/vim-colors-solarized
 "   gruvbox: https://github.com/morhetz/gruvbox
 "   molokai: https://github.com/tomasr/molokai
 "   one: https://github.com/rakr/vim-one
 "   dracula: https://draculatheme.com/vim
+"   rigel: https://github.com/Rigellute/rigel
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
@@ -831,7 +839,14 @@ set background=dark
 "      更多 iterm2 主题请参见: https://github.com/mbadolato/iTerm2-Color-Schemes
 "   2) molokai 主题暂时没有 light 方案.
 "
-colorscheme gruvbox
+colorscheme rigel
+
+" rigel 主题的自定义配置.
+if (g:colors_name == 'rigel')
+  " 定制状态栏的主题颜色.
+  let g:rigel_lightline = 1
+  let g:lightline.colorscheme = 'rigel'
+endif
 
 " solarized 主题的自定义配置.
 if (g:colors_name == 'solarized')
@@ -1207,10 +1222,12 @@ noremap <Leader>rc :<C-U>Leaderf! rg --recall<CR>
 "   cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
 "   git clone https://github.com/myshov/libxkbswitch-macosx
 "   cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
+"
+" NOTE:
+"   如果使用 Iterm2 终端, 则无法在 tmux 下正常使用, Alacritty 终端没有这个问题, 严重推荐.
 
 " 是否开启输入法切换功能.
-" NOTE: 在 tmux 下无法正常使用, 为避免影响切换效率, 建议禁用, 0 为禁用.
-let g:XkbSwitchEnabled = 0
+let g:XkbSwitchEnabled = 1
 
 let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
 
@@ -1513,6 +1530,8 @@ inoreabbrev <expr> __
 
 """"""" instant-markdown/vim-instant-markdown
 " doc: https://github.com/instant-markdown/vim-instant-markdown
+" NOTE:
+"   如果使用 Iterm2 终端, 则在 tmux 下无法正常使用, 但在 Alacritty 终端下的 tmux 中完美使用.
 
 " ,p  打开浏览器预览.
 nmap <leader>p :InstantMarkdownPreview<CR>
