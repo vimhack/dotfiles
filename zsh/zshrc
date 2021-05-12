@@ -121,6 +121,50 @@ export PATH=$HOME/.luarocks/bin:$PATH
 # }}
 
 
+# --- Vim & Alacritty 主题切换配置 {{
+
+# 主题切换函数.
+theme(){
+    local theme_name=$1
+    local vimrc=~/github/dotfiles/vim/vimrc
+    local alacritty=~/github/dotfiles/alacritty/alacritty.yml
+
+    if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
+        current_theme=$(awk '/^colorscheme/{print $2}' $vimrc)
+        cat <<EOF
+Current theme is '$current_theme', you can change to follows:
+
+* rigel
+* gruvbox
+* solarized
+* one
+* molokai
+* dracula
+
+For example, change theme to 'rigel':
+
+$ theme rigel
+EOF
+        return
+    fi
+
+    [[ "$theme_name" != "gruvbox" ]] &&
+    [[ "$theme_name" != "solarized" ]] &&
+    [[ "$theme_name" != "one" ]] &&
+    [[ "$theme_name" != "rigel" ]] &&
+    [[ "$theme_name" != "molokai" ]] &&
+    [[ "$theme_name" != "dracula" ]] && {
+        echo "no such theme: \"$theme_name\""
+        return 2
+    }
+
+    gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty
+    gsed -i "/^colorscheme/s/^.*$/colorscheme $theme_name/" $vimrc
+}
+
+# }}
+
+
 # --- 其他配置 {{
 
 # 列出正在监听的tcp连接.
