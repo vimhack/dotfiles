@@ -123,11 +123,12 @@ export PATH=$HOME/.luarocks/bin:$PATH
 
 # --- Vim & Alacritty 主题切换配置 {{
 
+vimrc=~/github/dotfiles/vim/vimrc
+alacritty=~/github/dotfiles/alacritty/alacritty.yml
+
 # 主题切换函数.
 theme(){
     local theme_name=$1
-    local vimrc=~/github/dotfiles/vim/vimrc
-    local alacritty=~/github/dotfiles/alacritty/alacritty.yml
 
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
         current_theme=$(awk '/^colorscheme/{print $2}' $vimrc)
@@ -160,6 +161,21 @@ EOF
 
     gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty
     gsed -i "/^colorscheme/s/^.*$/colorscheme $theme_name/" $vimrc
+}
+
+# alacritty 终端背景透明度调整命令.
+opacity(){
+    local value=$1
+
+    [[ -z "$value" ]] && { echo Usage: opacity 0.0 - 1.0; return 1; }
+    [[ "$#" -gt 1 ]] && { echo Usage example: opacity 0.6; return 2; }
+
+    if  [[ "$value" -lt 0 ]] || [[ "$value" -gt 1 ]]; then
+        echo opacity value should between 0 and 1
+        return 3
+    fi
+
+    gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty
 }
 
 # }}
@@ -214,5 +230,12 @@ alias vimfzf="vim \$(fzf)"
 #                glo  git log --oneline --decorate
 #               glog  git log --oneline --decorate --graph
 #                 gl  git pull
+#
+# *** 自定义命令
+#              theme  列出vim和alacritty主题颜色和使用方法.
+#      theme gruvbox  将vim和alacritty的主题颜色替换为gruvbox.
+#        opacity 0.8  将alacritty终端的背景透明度设置为80%, 数字越小, 透明度越大.
+#             vimfzf  通过fzf搜索文件并用vim打开.
+#           lsof_tcp  查看当前监听的端口信息.
 
 # }}
