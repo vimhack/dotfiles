@@ -1,15 +1,15 @@
 # Windvalley's dotfiles 🍀
 
 This is my personal development environment focusing on
-Go/Python/Lua/Bash and JavaScript programming.
+Go, Python, OpenResty/Lua, Bash and JavaScript programming.
 
 ## 💝 Powers
 
 - [Vim](https://github.com/vim/vim)
 - [Tmux](https://github.com/tmux/tmux)
-- [Oh My Zsh](https://ohmyz.sh/)
+- [Zsh](https://ohmyz.sh/)
 - [Ranger](https://github.com/ranger/ranger)
-- [Iterm2](https://iterm2.com/)
+- [Alacritty](https://github.com/alacritty/alacritty)
 
 ## 🔮 Show
 
@@ -28,6 +28,10 @@ Zsh
 Ranger
 
 ![ranger](images/ranger.png)
+
+Alacritty
+
+![alacritty](images/alacritty.png)
 
 ## 📀 Installation
 
