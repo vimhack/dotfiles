@@ -1,0 +1,583 @@
+# alacritty.yml by @windvalley
+# https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty.yml
+
+# vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
+#
+# NOTE:
+#   1. 查看折叠内容的方法:
+#      za: normal 模式下按`za`, 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
+#          在打开的折叠内部任意处按`za`, 也会关闭折叠.
+#      zA: 是`za`的递归操作, 是针对嵌套折叠的场景.
+#
+#   2. 官方原始配置文件:
+#      https://raw.githubusercontent.com/alacritty/alacritty/master/alacritty.yml
+
+# 安装步骤 {{
+
+# For macOS:
+#
+#   1. brew install alacritty
+#
+#   2. wget -O ~/.config/alacritty/alacritty.yml https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty.conf
+#
+#   3. 私密配置, 非必需
+#      wget -O ~/.alacritty_private.yml https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty_private.conf
+
+# }}
+
+# 基础配置 {{
+
+# 导入额外的配置文件.
+import:
+  # 可以在这个配置文件中放入额外的配置项.
+  # NOTE: 如果配置项和 ~/.config/alacritty/alacritty.yml 或 ~/.alacritty.yml 有重叠,
+  # 则以 ~/.config/alacritty/alacritty.yml 或 ~/.alacritty.yml 中配置的为准.
+  - ~/.alacritty_private.yml
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  TERM: xterm-256color
+
+# Live config reload (changes require restart)
+# 配置变更是否实时生效.
+# Default: true
+live_config_reload: true
+
+# 打开 alacritty 终端时自动进入 tmux 终端.
+shell:
+  program: /usr/local/bin/tmux
+  args:
+    - -u # force UTF-8 in tmux
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  # Default: 10000
+  history: 50000
+
+# Spaces per Tab (changes require restart)
+#
+# This setting defines the width of a tab in cells.
+#
+# Some applications, like Emacs, rely on knowing about the width of a tab.
+# To prevent unexpected behavior in these applications, it's also required to
+# change the `it` value in terminfo when altering this setting.
+#
+# Default: 8
+tabspaces: 4
+
+selection:
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  # Default: false
+  save_to_clipboard: true
+
+debug:
+  # Log level
+  #
+  # Values for `log_level`:
+  #   - Off
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  log_level: Debug
+
+# }}
+
+# Color Schemas 定义 {{
+
+# doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
+schemes:
+  # rigel
+  # doc: https://github.com/Rigellute/rigel
+  rigel: &rigel
+    primary:
+      background: "0x002635"
+      foreground: "0xe6e6dc"
+    normal:
+      black: "0x00384d"
+      red: "0xc43061"
+      green: "0x7fc06e"
+      yellow: "0xf08e48"
+      blue: "0x1c8db2"
+      magenta: "0xc694ff"
+      cyan: "0x00cccc"
+      white: "0x77929e"
+    bright:
+      black: "0x517f8d"
+      red: "0xff5a67"
+      green: "0x9cf087"
+      yellow: "0xffcc1b"
+      blue: "0x7eb2dd"
+      magenta: "0xfb94ff"
+      cyan: "0x00ffff"
+      white: "0xb7cff9"
+    cursor:
+      text: "0x002635"
+      cursor: "0xffcc1b"
+
+  # Colors (Dracula)
+  dracula: &dracula # Default colors
+    primary:
+      background: "#282a36"
+      foreground: "#f8f8f2"
+    # Normal colors
+    normal:
+      black: "#000000"
+      red: "#ff5555"
+      green: "#50fa7b"
+      yellow: "#f1fa8c"
+      blue: "#caa9fa"
+      magenta: "#ff79c6"
+      cyan: "#8be9fd"
+      white: "#bfbfbf"
+    # Bright colors
+    bright:
+      black: "#575b70"
+      red: "#ff6e67"
+      green: "#5af78e"
+      yellow: "#f4f99d"
+      blue: "#caa9fa"
+      magenta: "#ff92d0"
+      cyan: "#9aedfe"
+      white: "#e6e6e6"
+
+  # Colors (Molokai)
+  molokai: &molokai # Default colors
+    primary:
+      background: "#1B1D1E"
+      foreground: "#F8F8F2"
+    # Normal colors
+    normal:
+      black: "#333333"
+      red: "#C4265E"
+      green: "#86B42B"
+      yellow: "#B3B42B"
+      blue: "#6A7EC8"
+      magenta: "#8C6BC8"
+      cyan: "#56ADBC"
+      white: "#E3E3DD"
+    # Bright colors
+    bright:
+      black: "#666666"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#E2E22E"
+      blue: "#819AFF"
+      magenta: "#AE81FF"
+      cyan: "#66D9EF"
+      white: "#F8F8F2"
+
+  # Colors (Solarized Light)
+  solarized_light: &solarized_light # Default colors
+    primary:
+      background: "#fdf6e3" # base3
+      foreground: "#657b83" # base00
+    # Cursor colors
+    cursor:
+      text: "#fdf6e3" # base3
+      cursor: "#657b83" # base00
+    # Normal colors
+    normal:
+      black: "#073642" # base02
+      red: "#dc322f" # red
+      green: "#859900" # green
+      yellow: "#b58900" # yellow
+      blue: "#268bd2" # blue
+      magenta: "#d33682" # magenta
+      cyan: "#2aa198" # cyan
+      white: "#eee8d5" # base2
+    # Bright colors
+    bright:
+      black: "#002b36" # base03
+      red: "#cb4b16" # orange
+      green: "#586e75" # base01
+      yellow: "#657b83" # base00
+      blue: "#839496" # base0
+      magenta: "#6c71c4" # violet
+      cyan: "#93a1a1" # base1
+      white: "#fdf6e3" # base3
+
+  # Colors (Solarized Dark)
+  solarized_dark: &solarized # Default colors
+    primary:
+      background: "#002b36" # base03
+      foreground: "#839496" # base0
+    # Cursor colors
+    cursor:
+      text: "#002b36" # base03
+      cursor: "#839496" # base0
+    # Normal colors
+    normal:
+      black: "#073642" # base02
+      red: "#dc322f" # red
+      green: "#859900" # green
+      yellow: "#b58900" # yellow
+      blue: "#268bd2" # blue
+      magenta: "#d33682" # magenta
+      cyan: "#2aa198" # cyan
+      white: "#eee8d5" # base2
+    # Bright colors
+    bright:
+      black: "#002b36" # base03
+      red: "#cb4b16" # orange
+      green: "#586e75" # base01
+      yellow: "#657b83" # base00
+      blue: "#839496" # base0
+      magenta: "#6c71c4" # violet
+      cyan: "#93a1a1" # base1
+      white: "#fdf6e3" # base3
+
+  # Colors (Gruvbox light)
+  gruvbox_light: &gruvbox_light # Default colors
+    primary:
+      # hard contrast: background = '#f9f5d7'
+      background: "#fbf1c7"
+      # soft contrast: background = '#f2e5bc'
+      foreground: "#3c3836"
+    # Normal colors
+    normal:
+      black: "#fbf1c7"
+      red: "#cc241d"
+      green: "#98971a"
+      yellow: "#d79921"
+      blue: "#458588"
+      magenta: "#b16286"
+      cyan: "#689d6a"
+      white: "#7c6f64"
+    # Bright colors
+    bright:
+      black: "#928374"
+      red: "#9d0006"
+      green: "#79740e"
+      yellow: "#b57614"
+      blue: "#076678"
+      magenta: "#8f3f71"
+      cyan: "#427b58"
+      white: "#3c3836"
+
+  # Colors (Gruvbox dark)
+  gruvbox_dark: &gruvbox
+    primary:
+      # hard contrast background - '#1d2021'
+      background: &gruvbox_dark_bg "#282828"
+      # soft contrast background - '#32302f'
+      foreground: "#fbf1c7"
+      bright_foreground: "#f9f5d7"
+      dim_foreground: "#f2e5bc"
+    cursor:
+      text: CellBackground
+      cursor: CellForeground
+    vi_mode_cursor:
+      text: CellBackground
+      cursor: CellForeground
+    # search:
+    #   matches:
+    #     foreground: '#000000'
+    #     background: '#ffffff'
+    #   focused_match:
+    #    foreground: CellBackground
+    #    background: CellForeground
+    #   bar:
+    #     background: ''
+    #     foreground: ''
+    # line_indicator:
+    #   foreground: None
+    #   background: None
+    selection:
+      text: CellBackground
+      background: CellForeground
+    bright:
+      black: "#928374"
+      red: "#fb4934"
+      green: "#b8bb26"
+      yellow: "#fabd2f"
+      blue: "#83a598"
+      magenta: "#d3869b"
+      cyan: "#8ec07c"
+      white: "#ebdbb2"
+    normal:
+      black: *gruvbox_dark_bg
+      red: "#cc241d"
+      green: "#98971a"
+      yellow: "#d79921"
+      blue: "#458588"
+      magenta: "#b16286"
+      cyan: "#689d6a"
+      white: "#a89984"
+    dim:
+      black: "#32302f"
+      red: "#9d0006"
+      green: "#79740e"
+      yellow: "#b57614"
+      blue: "#076678"
+      magenta: "#8f3f71"
+      cyan: "#427b58"
+      white: "#928374"
+    # indexed_colors: []
+
+  # Colors (One Light - https://github.com/atom/atom/tree/master/packages/one-light-syntax)
+  one_light: &one_light
+    primary:
+      background: "#fafafa"
+      foreground: "#383a42"
+    cursor:
+      text: CellBackground
+      cursor: "#526eff" # syntax-cursor-color
+    selection:
+      text: CellForeground
+      background: "#e5e5e6" # syntax-selection-color
+    normal:
+      black: "#696c77" # mono-2
+      red: "#e45649" # red 1
+      green: "#50a14f"
+      yellow: "#c18401" # orange 2
+      blue: "#4078f2"
+      magenta: "#a626a4"
+      cyan: "#0184bc"
+      white: "#a0a1a7" # mono-3
+
+  # Colors (One Dark - https://github.com/atom/atom/tree/master/packages/one-dark-syntax)
+  one_dark: &one
+    primary:
+      background: "#282c34"
+      foreground: "#abb2bf"
+    cursor:
+      text: CellBackground
+      cursor: "#528bff" # syntax-cursor-color
+    selection:
+      text: CellForeground
+      background: "#3e4451" # syntax-selection-color
+    normal:
+      black: "#5c6370" # mono-3
+      red: "#e06c75" # red 1
+      green: "#98c379"
+      yellow: "#e5c07b" # orange 2
+      blue: "#61afef"
+      magenta: "#c678dd"
+      cyan: "#56b6c2"
+      white: "#828997" # mono-2
+
+# }}
+
+# 主题配置 {{
+
+# 从 Color Schemes 中选则一个使用:
+#   rigel, dracula, molokai, gruvbox_dark, gruvbox_light,
+#   solarized_dark, solarized_light, one_dark, one_light
+colors: *rigel
+
+# 窗口样式配置.
+window:
+  # Window decorations
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background and no title bar buttons
+  #
+  # Default: full
+  decorations: buttonless
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  #
+  # Default: Windowed
+  startup_mode: Maximized
+
+# 背景透明度配置, 取值范围: 0.0 到 1.0
+background_opacity: 0.9
+
+# 字体(Font)样式配置.
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: Hack Nerd Font Mono
+
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+
+  # Bold font face
+  bold:
+    # Font family
+    #
+    # If the bold family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Hack Nerd Font Mono
+
+    # The `style` can be specified to pick a specific face.
+    style: Bold
+
+  # Italic font face
+  italic:
+    # Font family
+    #
+    # If the italic family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Hack Nerd Font Mono
+
+    # The `style` can be specified to pick a specific face.
+    style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    # Font family
+    #
+    # If the bold italic family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Hack Nerd Font Mono
+
+    # The `style` can be specified to pick a specific face.
+    style: Bold Italic
+
+  # Point size
+  size: 12.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
+  # spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`.
+  use_thin_strokes: true
+
+# If `true`, bold text is drawn using the bright color variants.
+# Default: false
+draw_bold_text_with_bright_colors: true
+
+# }}
+
+# 键盘 & 鼠标 {{
+
+# 快捷键配置.
+key_bindings:
+  # command 0  重置字体大小到配置文件中配置的大小.
+  - { key: Key0, mods: Command, action: ResetFontSize }
+  # command +  放大字体.
+  - { key: Equals, mods: Command, action: IncreaseFontSize }
+  - { key: Plus, mods: Command, action: IncreaseFontSize }
+  - { key: NumpadAdd, mods: Command, action: IncreaseFontSize }
+  # command -  缩小字体.
+  - { key: Minus, mods: Command, action: DecreaseFontSize }
+  - { key: NumpadSubtract, mods: Command, action: DecreaseFontSize }
+  # command v  粘贴.
+  - { key: V, mods: Command, action: Paste }
+  # command c  拷贝.
+  - { key: C, mods: Command, action: Copy }
+  - { key: C, mods: Command, mode: Vi|~Search, action: ClearSelection }
+  # command h  隐藏当前终端.
+  - { key: H, mods: Command, action: Hide }
+  # command m  最小化当前终端到程序坞.
+  - { key: M, mods: Command, action: Minimize }
+  # command q/w  关闭当前终端.
+  - { key: Q, mods: Command, action: Quit }
+  - { key: W, mods: Command, action: Quit }
+  # command n  创建新的 alacritty 终端实例.
+  - { key: N, mods: Command, action: SpawnNewInstance }
+  # command ctrl f  全屏显示终端.
+  - { key: F, mods: Command|Control, action: ToggleFullscreen }
+  # command f/b  向下或向上搜索屏幕内容.
+  - { key: F, mods: Command, mode: ~Search, action: SearchForward }
+  - { key: B, mods: Command, mode: ~Search, action: SearchBackward }
+
+# 光标样式配置.
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Beam
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Always
+
+  # Vi mode cursor style
+  #
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
+  # the style of the active value of the normal cursor.
+  #
+  # See `cursor.style` for available options.
+  # Default: None
+  vi_mode_style: Beam
+
+  # Cursor blinking interval in milliseconds.
+  # Default: 750
+  blink_interval: 600
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  # Default: true
+  unfocused_hollow: true
+
+  # Thickness of the cursor relative to the cell width as floating point number
+  # from `0.0` to `1.0`.
+  # Default: 0.15
+  thickness: 0.1
+
+# 鼠标配置.
+mouse:
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  # 如果设置为 true, 则使用键盘的时候自动隐藏鼠标箭头.
+  # Default: false
+  hide_when_typing: true
+# }}
+
+# 使用技巧 {{
+
+#             ctrl l  清除状态栏上的 alacritty 发出的警告信息.
+#      command +/-/0  放大或缩小或重置字体大小.
+#          command h  隐藏当前终端.
+#          command m  最小化当前终端到程序坞.
+#          command n  创建新的终端实例.
+#        command q/w  关闭当前终端.
+#     command ctrl f  全屏显示终端.
+#        command f/b  向前或向后搜索.
+
+# }}

@@ -1,0 +1,14 @@
+# alacritty_private.yml by @windvalley
+# https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty_private.yml
+#
+# NOTE:
+#   1. 此配置文件中的选项如果与 ~/.config/alacritty/alacritty.yml 或 ~/.alacritty.yml 存在重叠,
+#      则这里的相关配置不会生效, 应避免和主配置文件中的配置选项重叠.
+
+key_bindings:
+  # ctrl <Backspace>  输出固定字符串(比如服务器密码等)
+  - {
+      key: Back,
+      mods: Control,
+      chars: "your-password-or-something-other-string",
+    }
