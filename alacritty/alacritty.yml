@@ -9,7 +9,7 @@
 #          在打开的折叠内部任意处按`za`, 也会关闭折叠.
 #      zA: 是`za`的递归操作, 是针对嵌套折叠的场景.
 #
-#   2. 官方原始配置文件:
+#   2. Alacritty 官方原始配置文件:
 #      https://raw.githubusercontent.com/alacritty/alacritty/master/alacritty.yml
 
 # 安装步骤 {{
@@ -89,7 +89,13 @@ debug:
   #   - Info
   #   - Debug
   #   - Trace
+  #
+  # Default: Warn
   log_level: Debug
+
+  # Print all received window events.
+  # Default: false
+  #print_events: true
 
 # }}
 
@@ -405,7 +411,7 @@ window:
   startup_mode: Maximized
 
 # 背景透明度配置, 取值范围: 0.0 到 1.0
-background_opacity: 0.9
+background_opacity: 0.88
 
 # 字体(Font)样式配置.
 font:
@@ -488,6 +494,10 @@ draw_bold_text_with_bright_colors: true
 
 # 快捷键配置.
 key_bindings:
+  # NOTE: 解决在使用Pinyin输入法中按 <Backspace> 键的时候删除已经输入的文字的问题.
+  # from: https://github.com/alacritty/alacritty/issues/1606
+  - { key: Back, action: ReceiveChar }
+
   # command 0  重置字体大小到配置文件中配置的大小.
   - { key: Key0, mods: Command, action: ResetFontSize }
   # command +  放大字体.
@@ -571,6 +581,7 @@ mouse:
 
 # 使用技巧 {{
 
+# *** 快捷键 ***
 #             ctrl l  清除状态栏上的 alacritty 发出的警告信息.
 #      command +/-/0  放大或缩小或重置字体大小.
 #          command h  隐藏当前终端.
@@ -579,5 +590,10 @@ mouse:
 #        command q/w  关闭当前终端.
 #     command ctrl f  全屏显示终端.
 #        command f/b  向前或向后搜索.
+#
+# *** 注意事项 ***
+#   1. vim 的 insert 模式下, 如果当前是拼音输入法, 快速的按 esc 是无法正常切换到 normal 模式的,
+#      按 esc 键要稍微停顿一下才可以, 或者直接按 ctrl [ 来代替 esc 键.
+#
 
 # }}
