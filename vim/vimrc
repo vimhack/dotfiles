@@ -818,43 +818,70 @@ endfunction
 " 代码高亮显示.
 syntax enable
 
-" 设置背景色为黑色或亮色, dark or light.
-set background=dark
-
 " 启用 24bit 真彩.
 " NOTE: 如果不启用这个配置, vim 背景颜色还是默认的黑色.
 set termguicolors
 
-" 启用颜色主题方案, 优秀方案:
-"   solarized: https://github.com/altercation/vim-colors-solarized
-"   gruvbox: https://github.com/morhetz/gruvbox
-"   molokai: https://github.com/tomasr/molokai
-"   one: https://github.com/rakr/vim-one
+" 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
+" from: https://github.com/dracula/vim/issues/219
+let g:dracula_italic = 0
+
+" 设置背景色为黑色或亮色, dark or light.
+set background=dark
+
+" 启用颜色主题方案.
+colorscheme dracula
+
+" 优秀的几种颜色主题方案:
 "   dracula: https://draculatheme.com/vim
 "   rigel: https://github.com/Rigellute/rigel
+"   gruvbox: https://github.com/morhetz/gruvbox
+"   solarized: https://github.com/altercation/vim-colors-solarized
+"   molokai: https://github.com/tomasr/molokai
+"   one: https://github.com/rakr/vim-one
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
 "      拿 iterm2 举例: Preferences->Profiles->Colors->Color Presets->Solarized Dark;
 "      更多 iterm2 主题请参见: https://github.com/mbadolato/iTerm2-Color-Schemes
-"   2) molokai 主题暂时没有 light 方案.
+"   2) dracula, molokai 主题暂时没有 light 方案.
 "
-colorscheme rigel
+" 针对以上几种颜色方案的个性配置 {{
 
-" rigel 主题的自定义配置.
+" *** rigel ***
 if (g:colors_name == 'rigel')
   " 定制状态栏的主题颜色.
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
 endif
 
-" solarized 主题的自定义配置.
+" *** solarized ***
 if (g:colors_name == 'solarized')
-  " 定制状态栏的主题颜色.
+  " solarized 主题不支持 termguicolors 选项, 需要关闭, 否则色彩显示将出现混乱.
+  set notermguicolors
+
   let g:lightline.colorscheme = 'solarized'
 endif
 
-" gruvbox 主题的自定义配置.
+" *** dracula ***
+if (g:colors_name == 'dracula')
+  let g:lightline.colorscheme = 'dracula'
+endif
+
+" *** one ***
+if (g:colors_name == 'one')
+  let g:lightline.colorscheme = 'one'
+endif
+
+" *** molokai ***
+if (g:colors_name == 'molokai')
+  let g:lightline.colorscheme = 'molokai'
+  hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
+  hi Cursorcolumn cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
+  hi colorcolumn  cterm=NONE ctermbg=236 ctermfg=NONE guibg=NONE guifg=NONE
+endif
+
+" *** gruvbox ***
 " doc: https://github.com/morhetz/gruvbox/wiki/Configuration
 if (g:colors_name == 'gruvbox')
   let g:lightline.colorscheme = 'gruvbox'
@@ -874,20 +901,7 @@ if (g:colors_name == 'gruvbox')
   endif
 endif
 
-" molokai 主题的自定义配置.
-if (g:colors_name == 'molokai')
-  let g:lightline.colorscheme = 'molokai'
-  if (&background == 'dark')
-    hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
-    hi Cursorcolumn cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
-    hi colorcolumn  cterm=NONE ctermbg=236 ctermfg=NONE guibg=NONE guifg=NONE
-  endif
-endif
-
-" one 主题的自定义配置.
-if (g:colors_name == 'one')
-  let g:lightline.colorscheme = 'one'
-endif
+" }}
 
 " 显示行号.
 set nu
@@ -929,7 +943,7 @@ hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 "   2: 永远会
 set showtabline=1
 
-" 命令行窗口的函数, 默认值7.
+" 命令行窗口的高度, 默认值7.
 " 命令行窗口打开的方法:
 "   1) command-line 模式下, 按快捷键 ctrl f 打开命令行窗口并显示命令历史记录.
 "   2) normal 模式下, 按快捷键 q: 打开命令行窗口并显示命令历史记录.
