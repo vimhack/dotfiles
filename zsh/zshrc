@@ -129,34 +129,43 @@ alacritty=~/github/dotfiles/alacritty/alacritty.yml
 # Vim 和 Alacritty 主题切换命令.
 theme(){
     local theme_name=$1
+    local themes=(
+        # dark
+        dracula molokai rigel jellybeans
+        # both dark and light
+        gruvbox solarized one iceberg
+    )
 
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
-        current_theme=$(awk '/^colorscheme/{print $2}' $vimrc)
+        current_theme=$(awk -F'*' '/^colors:/{print $2}' $alacritty)
+
+        echo -e "Current theme is '$current_theme', you can change to follows:\n"
+
+        for i in ${themes[@]};do
+            [[ "$i" != "$current_theme" ]] && {
+                echo "* $i"
+                example_theme=$i
+            }
+        done
+
         cat <<EOF
-Current theme is '$current_theme', you can change to follows:
 
-* rigel
-* gruvbox
-* solarized
-* one
-* molokai
-* dracula
-* iceberg
+For example, change theme to '$example_theme':
 
-For example, change theme to 'rigel':
-
-$ theme rigel
+$ theme $example_theme
 EOF
         return
     fi
 
-    [[ "$theme_name" != "gruvbox" ]] &&
-    [[ "$theme_name" != "solarized" ]] &&
-    [[ "$theme_name" != "one" ]] &&
-    [[ "$theme_name" != "rigel" ]] &&
-    [[ "$theme_name" != "molokai" ]] &&
-    [[ "$theme_name" != "iceberg" ]] &&
-    [[ "$theme_name" != "dracula" ]] && {
+    exist_flag=1
+    for i in ${themes[*]};do
+        [[ "$i" = "$theme_name" ]] && {
+            exist_flag=0
+            break
+        }
+    done
+
+    [[ "$exist_flag" -eq 1 ]] && {
         echo "no such theme: \"$theme_name\""
         return 2
     }
