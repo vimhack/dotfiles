@@ -168,7 +168,9 @@ opacity(){
     local value=$1
 
     [[ -z "$value" ]] && {
-        echo "Usage example:
+        current_opacity=$(awk '/^background_opacity/{print $2}' $alacritty)
+
+        echo "Current opacity is '$current_opacity', you can change by:
 
 $ opacity number
 
@@ -192,7 +194,9 @@ font() {
     local value=$1
 
     [[ -z "$value" ]] && {
-        echo "Usage example:
+        current_font_size=$(awk '/^  size:/{print $2}' $alacritty)
+
+        echo "Current font size is '$current_font_size', you can change by:
 
 $ font number
 
