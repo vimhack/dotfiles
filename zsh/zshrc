@@ -141,6 +141,7 @@ Current theme is '$current_theme', you can change to follows:
 * one
 * molokai
 * dracula
+* iceberg
 
 For example, change theme to 'rigel':
 
@@ -154,6 +155,7 @@ EOF
     [[ "$theme_name" != "one" ]] &&
     [[ "$theme_name" != "rigel" ]] &&
     [[ "$theme_name" != "molokai" ]] &&
+    [[ "$theme_name" != "iceberg" ]] &&
     [[ "$theme_name" != "dracula" ]] && {
         echo "no such theme: \"$theme_name\""
         return 2

@@ -139,6 +139,9 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " rigel
 Plug 'Rigellute/rigel'
 
+" iceberg
+Plug 'cocopon/iceberg.vim'
+
 " ********************** 代码补全 ********************************************
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
@@ -839,6 +842,7 @@ colorscheme dracula
 "   solarized: https://github.com/altercation/vim-colors-solarized
 "   molokai: https://github.com/tomasr/molokai
 "   one: https://github.com/rakr/vim-one
+"   iceberg: https://github.com/cocopon/iceberg.vim
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
@@ -897,6 +901,11 @@ if (g:colors_name == 'gruvbox')
     hi CursorLine cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
     hi ColorColumn cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
   endif
+endif
+
+" *** iceberg ***
+if (g:colors_name == 'iceberg')
+  let g:lightline.colorscheme = 'iceberg'
 endif
 
 " }}

@@ -103,8 +103,7 @@ debug:
 
 # doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
 schemes:
-  # rigel
-  # doc: https://github.com/Rigellute/rigel
+  # Colors (rigel - (https://github.com/Rigellute/rigel)
   rigel: &rigel
     primary:
       background: "0x002635"
@@ -132,11 +131,10 @@ schemes:
       cursor: "0xffcc1b"
 
   # Colors (Dracula)
-  dracula: &dracula # Default colors
+  dracula: &dracula
     primary:
       background: "#282a36"
       foreground: "#f8f8f2"
-    # Normal colors
     normal:
       black: "#000000"
       red: "#ff5555"
@@ -146,7 +144,6 @@ schemes:
       magenta: "#ff79c6"
       cyan: "#8be9fd"
       white: "#bfbfbf"
-    # Bright colors
     bright:
       black: "#575b70"
       red: "#ff6e67"
@@ -158,11 +155,10 @@ schemes:
       white: "#e6e6e6"
 
   # Colors (Molokai)
-  molokai: &molokai # Default colors
+  molokai: &molokai
     primary:
       background: "#1B1D1E"
       foreground: "#F8F8F2"
-    # Normal colors
     normal:
       black: "#333333"
       red: "#C4265E"
@@ -172,7 +168,6 @@ schemes:
       magenta: "#8C6BC8"
       cyan: "#56ADBC"
       white: "#E3E3DD"
-    # Bright colors
     bright:
       black: "#666666"
       red: "#F92672"
@@ -184,15 +179,13 @@ schemes:
       white: "#F8F8F2"
 
   # Colors (Solarized Light)
-  solarized_light: &solarized_light # Default colors
+  solarized_light: &solarized_light
     primary:
       background: "#fdf6e3" # base3
       foreground: "#657b83" # base00
-    # Cursor colors
     cursor:
       text: "#fdf6e3" # base3
       cursor: "#657b83" # base00
-    # Normal colors
     normal:
       black: "#073642" # base02
       red: "#dc322f" # red
@@ -202,7 +195,6 @@ schemes:
       magenta: "#d33682" # magenta
       cyan: "#2aa198" # cyan
       white: "#eee8d5" # base2
-    # Bright colors
     bright:
       black: "#002b36" # base03
       red: "#cb4b16" # orange
@@ -214,15 +206,13 @@ schemes:
       white: "#fdf6e3" # base3
 
   # Colors (Solarized Dark)
-  solarized_dark: &solarized # Default colors
+  solarized_dark: &solarized
     primary:
       background: "#002b36" # base03
       foreground: "#839496" # base0
-    # Cursor colors
     cursor:
       text: "#002b36" # base03
       cursor: "#839496" # base0
-    # Normal colors
     normal:
       black: "#073642" # base02
       red: "#dc322f" # red
@@ -232,7 +222,6 @@ schemes:
       magenta: "#d33682" # magenta
       cyan: "#2aa198" # cyan
       white: "#eee8d5" # base2
-    # Bright colors
     bright:
       black: "#002b36" # base03
       red: "#cb4b16" # orange
@@ -244,13 +233,12 @@ schemes:
       white: "#fdf6e3" # base3
 
   # Colors (Gruvbox light)
-  gruvbox_light: &gruvbox_light # Default colors
+  gruvbox_light: &gruvbox_light
     primary:
       # hard contrast: background = '#f9f5d7'
       background: "#fbf1c7"
       # soft contrast: background = '#f2e5bc'
       foreground: "#3c3836"
-    # Normal colors
     normal:
       black: "#fbf1c7"
       red: "#cc241d"
@@ -260,7 +248,6 @@ schemes:
       magenta: "#b16286"
       cyan: "#689d6a"
       white: "#7c6f64"
-    # Bright colors
     bright:
       black: "#928374"
       red: "#9d0006"
@@ -372,6 +359,54 @@ schemes:
       magenta: "#c678dd"
       cyan: "#56b6c2"
       white: "#828997" # mono-2
+
+  # Colors (Iceberg Dark)
+  iceberg_dark: &iceberg
+    primary:
+      background: "#161821"
+      foreground: "#d2d4de"
+    normal:
+      black: "#161821"
+      red: "#e27878"
+      green: "#b4be82"
+      yellow: "#e2a478"
+      blue: "#84a0c6"
+      magenta: "#a093c7"
+      cyan: "#89b8c2"
+      white: "#c6c8d1"
+    bright:
+      black: "#6b7089"
+      red: "#e98989"
+      green: "#c0ca8e"
+      yellow: "#e9b189"
+      blue: "#91acd1"
+      magenta: "#ada0d3"
+      cyan: "#95c4ce"
+      white: "#d2d4de"
+
+  # Colors (Iceberg Light)
+  iceberg_light: &iceberg_light
+    primary:
+      background: "#e8e9ec"
+      foreground: "#33374c"
+    normal:
+      black: "#dcdfe7"
+      red: "#cc517a"
+      green: "#668e3d"
+      yellow: "#c57339"
+      blue: "#2d539e"
+      magenta: "#7759b4"
+      cyan: "#3f83a6"
+      white: "#33374c"
+    bright:
+      black: "#8389a3"
+      red: "#cc3768"
+      green: "#598030"
+      yellow: "#b6662d"
+      blue: "#22478e"
+      magenta: "#6845ad"
+      cyan: "#327698"
+      white: "#262a3f"
 
 # }}
 
