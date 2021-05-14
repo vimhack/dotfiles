@@ -834,9 +834,24 @@ syntax enable
 " NOTE: 如果不启用这个配置, vim 背景颜色还是默认的黑色.
 set termguicolors
 
+" 使 Vim 背景色将变透明.
+autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
+
+" 部分主题颜色方案的个性配置 {{
+" NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
+
 " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
 " from: https://github.com/dracula/vim/issues/219
 let g:dracula_italic = 0
+
+" 调整 gruvbox 主题的颜色对比度.
+" from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
+" 可选值: soft, medium, hard
+" 默认值: medium
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_light = 'hard'
+
+" }}
 
 " 设置背景色为黑色或亮色, dark or light.
 set background=dark
@@ -899,22 +914,6 @@ endif
 " doc: https://github.com/morhetz/gruvbox/wiki/Configuration
 if (g:colors_name == 'gruvbox')
   let g:lightline.colorscheme = 'gruvbox'
-
-  let g:gruvbox_underline = 0  " defaut: 1
-
-  let g:gruvbox_contrast_dark = 'hard'  " default: medium
-
-  if (&background == 'dark')
-    let g:gruvbox_italicize_strings = 1  " default: 0
-    let g:gruvbox_invert_signs = 1  " default: 0
-    let g:gruvbox_improved_strings = 1  " default: 0
-    let g:gruvbox_improved_warnings = 1  " default: 0
-    hi Visual cterm=NONE ctermfg=NONE ctermbg=237 guibg=#3a3a3a
-  else
-    hi Visual cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
-    hi CursorLine cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
-    hi ColorColumn cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
-  endif
 endif
 
 " *** iceberg ***
