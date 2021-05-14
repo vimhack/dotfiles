@@ -142,6 +142,9 @@ Plug 'Rigellute/rigel'
 " iceberg
 Plug 'cocopon/iceberg.vim'
 
+" jellybeans
+Plug 'nanotech/jellybeans.vim'
+
 " ********************** 代码补全 ********************************************
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
@@ -846,7 +849,7 @@ colorscheme dracula
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
-"   2) dracula, molokai 主题暂时没有 light 方案.
+"   2) dracula, molokai, jellybeans 主题暂时没有 light 方案.
 "
 " 针对以上几种颜色方案的个性配置 {{
 
@@ -906,6 +909,11 @@ endif
 " *** iceberg ***
 if (g:colors_name == 'iceberg')
   let g:lightline.colorscheme = 'iceberg'
+endif
+
+" *** jellybeans ***
+if (g:colors_name == 'jellybeans')
+  let g:lightline.colorscheme = 'jellybeans'
 endif
 
 " }}
