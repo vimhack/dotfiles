@@ -187,7 +187,7 @@ $ opacity number
 
 * number should between 0.0 and 1.0"
 
-return 1
+    return 1
 }
 
     [[ "$#" -gt 1 ]] && { echo Usage example: opacity 0.6; return 2; }
@@ -213,7 +213,7 @@ $ font number
 
 * number should between 1.0 and  200.0"
 
-return 1
+    return 1
 }
     [[ "$#" -gt 1 ]] && { echo Usage example: font 12.0; return 2; }
 
@@ -225,9 +225,21 @@ return 1
     gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty
 }
 
+# 开启或关闭 Vim 背景透明色.
+vim-opacity-toggle() {
+    local vim_autocmd="autocmd VimEnter \* hi Normal ctermbg=NONE guibg=NONE"
+
+    if grep -q "^$vim_autocmd$" $vimrc; then
+        gsed -i "/^$vim_autocmd/s/^/\"/" $vimrc
+    else
+        gsed -i "/^\"$vim_autocmd/s/^\"//" $vimrc
+    fi
+}
+
 alias t="theme"
 alias o="opacity"
 alias f="font"
+alias v="vim-opacity-toggle"
 
 # }}
 
@@ -287,7 +299,8 @@ alias vimfzf="vim \$(fzf)"
 #      theme gruvbox  将 vim 和 alacritty 的主题颜色替换为 gruvbox.
 #        opacity 0.8  将 alacritty 终端的背景透明度设置为80%, 数字越小, 透明度越大.
 #            font 12  将 alacritty 终端的字体大小设置为 12.
-#              t/o/f  theme, opacity, font 的 alias 命令.
+# vim-opacity-toggle  打开或关闭 Vim 背景透明色.
+#            t/o/f/v  theme, opacity, font, vim-opacity-toggle 的 alias 命令.
 #             vimfzf  通过 fzf 搜索文件并用 vim 打开.
 #           lsof_tcp  查看当前监听的端口信息.
 
