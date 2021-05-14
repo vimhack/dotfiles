@@ -145,6 +145,9 @@ Plug 'cocopon/iceberg.vim'
 " jellybeans
 Plug 'nanotech/jellybeans.vim'
 
+" tomorrow night
+Plug 'chriskempson/base16-vim'
+
 " ********************** 代码补全 ********************************************
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
@@ -846,10 +849,11 @@ colorscheme dracula
 "   molokai: https://github.com/tomasr/molokai
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
+"   base16-default-dark(tomorrow night): https://github.com/chriskempson/base16-vim
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
-"   2) dracula, molokai, jellybeans 主题暂时没有 light 方案.
+"   2) dracula, molokai, jellybeans, base16-default-dark 主题暂时没有 light 方案.
 "
 " 针对以上几种颜色方案的个性配置 {{
 
@@ -881,6 +885,7 @@ endif
 " *** molokai ***
 if (g:colors_name == 'molokai')
   let g:lightline.colorscheme = 'molokai'
+
   hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
   hi Cursorcolumn cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
   hi colorcolumn  cterm=NONE ctermbg=236 ctermfg=NONE guibg=NONE guifg=NONE
@@ -890,16 +895,18 @@ endif
 " doc: https://github.com/morhetz/gruvbox/wiki/Configuration
 if (g:colors_name == 'gruvbox')
   let g:lightline.colorscheme = 'gruvbox'
+
   let g:gruvbox_underline = 0  " defaut: 1
+
+  let g:gruvbox_contrast_dark = 'hard'  " default: medium
+
   if (&background == 'dark')
-    let g:gruvbox_contrast_dark = 'hard'  " default: medium
     let g:gruvbox_italicize_strings = 1  " default: 0
     let g:gruvbox_invert_signs = 1  " default: 0
     let g:gruvbox_improved_strings = 1  " default: 0
     let g:gruvbox_improved_warnings = 1  " default: 0
     hi Visual cterm=NONE ctermfg=NONE ctermbg=237 guibg=#3a3a3a
   else
-    let g:gruvbox_contrast_light = 'hard'  " default: medium
     hi Visual cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
     hi CursorLine cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
     hi ColorColumn cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
@@ -914,6 +921,11 @@ endif
 " *** jellybeans ***
 if (g:colors_name == 'jellybeans')
   let g:lightline.colorscheme = 'jellybeans'
+endif
+
+" *** base16-default-dark ***
+if (g:colors_name == 'base16-default-dark')
+  let g:lightline.colorscheme = 'Tomorrow_Night'
 endif
 
 " }}
