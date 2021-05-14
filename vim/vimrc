@@ -195,7 +195,7 @@ Plug 'luochen1990/rainbow'
 
 " 为目录树或LeaderF等插件显示文件类型.
 " NOTE:
-" 1) 需安装 nerd-fonts, 并设置iterm2 的字体为: Hack Nerd Font 或 Hack Nerd Font Mono;
+" 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为: Hack Nerd Font 或 Hack Nerd Font Mono;
 "    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
 "    brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 " 2) 此插件要安装在目录树 或 LeaderF 等插件的后面.
@@ -842,8 +842,6 @@ colorscheme dracula
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
-"      拿 iterm2 举例: Preferences->Profiles->Colors->Color Presets->Solarized Dark;
-"      更多 iterm2 主题请参见: https://github.com/mbadolato/iTerm2-Color-Schemes
 "   2) dracula, molokai 主题暂时没有 light 方案.
 "
 " 针对以上几种颜色方案的个性配置 {{
@@ -1062,15 +1060,18 @@ let g:tagbar_sort = 0
 
 """""" 'ryanoasis/vim-devicons'
 " doc: https://github.com/ryanoasis/vim-devicons
+" NOTE:
+"   1. 需要提前为你的终端模拟器(terminal emulator)设置如下字体:
+"      Hack Nerd Font 或 Hack Nerd Font Mono
+"   2. Hack Nerd Font 字体安装(macOS):
+"      brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
+
 
 " 是否启用文件类型图标显示, 默认值: 1, 表示启用.
 let g:webdevicons_enable = 1
 
-" 为 gvim/mvim 设置字体和字号.
-" NOTE: 如果使用 iterm2 终端, 需要通过更改 iterm2 的 font 字体才可以,
-"       此处的配置对 iterm2 无效, 更改 iterm2 的 font 字体:
-"       Preferences -> Text -> Font, 选择 Hack Nerd Font 或 Hack Nerd Font Mono.
-set guifont=Hack_Nerd_Font:h13
+" 为 gvim/mvim(GUI) 设置字体和字号.
+set guifont=Hack_Nerd_Font:h12
 """""""""""""""""""""""""""""""
 
 """""" 'airblade/vim-gitgutter'
@@ -1236,13 +1237,11 @@ noremap <Leader>rc :<C-U>Leaderf! rg --recall<CR>
 "   cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
 "   git clone https://github.com/myshov/libxkbswitch-macosx
 "   cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
-"
-" NOTE:
-"   如果使用 Iterm2 终端, 则无法在 tmux 下正常使用, Alacritty 终端没有这个问题, 严重推荐.
 
 " 是否开启输入法切换功能.
 let g:XkbSwitchEnabled = 1
 
+" 依赖的库文件.
 let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
 
 " 默认情况从 insert 模式到 normal 模式, 将还原 normal 的上一次输入法,
@@ -1530,22 +1529,8 @@ inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
-""""""" iamcco/markdown-preview.nvim
-" doc: https://github.com/iamcco/markdown-preview.nvim
-
-" 打开或关闭预览.
-"nmap <leader>p <Plug>MarkdownPreviewToggle
-
-"let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
-
-"let g:mkdp_auto_close=0
-
-"let g:mkdp_refresh_slow=1
-
 """"""" instant-markdown/vim-instant-markdown
 " doc: https://github.com/instant-markdown/vim-instant-markdown
-" NOTE:
-"   如果使用 Iterm2 终端, 则在 tmux 下无法正常使用, 但在 Alacritty 终端下的 tmux 中完美使用.
 
 " ,p  打开浏览器预览.
 nmap <leader>p :InstantMarkdownPreview<CR>
@@ -1720,21 +1705,6 @@ if has('clipboard')
     else
         set clipboard=unnamed " for macOS、Windows
     endif
-endif
-
-" 此配置确保在非图形界面的终端, 且终端类型不是 xterm 的情况下,
-" 只能在 c v i 三种模式下使用鼠标, 也就是在 normal 模式(n)下禁用鼠标,
-" 这样当用户在 normal 模式下时, VIM 将不对鼠标进行响应,
-" 这样就可以使用鼠标复制 VIM 窗口里的内容到其他应用程序里去了.
-"
-" 注意: 这里的配置适合使用 macOS 自带的 terminal 的场景,
-" 如果使用的是 iterm2, 则不需要这段配置也能正常使用.
-if has('mouse')
-  if has('gui_running') || (&term =~ 'xterm' && !has('mac'))
-    set mouse=a  " a 表示全部 VIM 模式下都可以使用鼠标.
-  else
-    set mouse=vic  " 只在命令模式(c)、visual 模式(v)、insert 模式(i)中使用鼠标.
-  endif
 endif
 
 " }}
@@ -2237,12 +2207,6 @@ endif
 "       可在本文件、其他 VIM 实例文件 normal 模式下按 p/P 来粘贴,
 "       或 insert 模式下`command v`粘贴,
 "       或操作系统上的任何文本框内进行`command v`粘贴.
-"
-" ** 通过 SSH 远程管理的 Linux 系统下使用 VIM 时的复制和粘贴:
-"       远程 Linux 系统 VIM 实例 normal 模式下(适用于使用termimal,
-"       如果是iterm2则任何模式均可), 需要使用鼠标(或option+command+鼠标)选择文本,
-"       通过 command c 将选中文本复制到 macOS 本地的剪贴板,
-"       最后通过 command v 粘贴到本地各应用的文本输入框.
 "
 " ** 宏的使用方法举例, 比如给文本的每一行的行首和行尾都加上双引号:
 "       normal 模式下按 qa,  其中 q 是宏指令, 表明开始录制宏, a 为宏的名称,
