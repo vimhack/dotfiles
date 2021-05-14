@@ -375,33 +375,34 @@ set shortmess+=c
 "   coc-gocode: 为 Go 提供代码片段补全的数据库.
 "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
 let g:coc_global_extensions = [
-	\ 'coc-json',
-	\ 'coc-git',
-	\ 'coc-go',
-	\ 'coc-gocode',
-	\ 'coc-rls',
-	\ 'coc-clangd',
-	\ 'coc-jedi',
-	\ 'coc-java',
+    \ 'coc-json',
+    \ 'coc-git',
+    \ 'coc-go',
+    \ 'coc-gocode',
+    \ 'coc-rls',
+    \ 'coc-clangd',
+    \ 'coc-jedi',
+    \ 'coc-java',
     \ 'coc-sh',
     \ 'coc-perl',
-	\ 'coc-tsserver',
-	\ 'coc-css',
-	\ 'coc-cssmodules',
+    \ 'coc-tsserver',
+    \ 'coc-css',
+    \ 'coc-cssmodules',
     \ 'coc-emmet',
-	\ 'coc-html',
-	\ 'coc-vetur',
+    \ 'coc-html',
+    \ 'coc-vetur',
     \ 'coc-sql',
     \ 'coc-toml',
     \ 'coc-yaml',
     \ 'coc-xml',
     \ 'coc-vimlsp',
-	\ 'coc-snippets',
-	\ 'coc-ultisnips',
-	\ 'coc-emoji',
-	\ 'coc-swagger',
+    \ 'coc-snippets',
+    \ 'coc-ultisnips',
+    \ 'coc-emoji',
+    \ 'coc-swagger',
     \ 'coc-translator',
-	\ ]
+    \ 'coc-ecdict',
+    \ ]
 " *************************
 
 " *** ~/.vim/coc-settings.json ***
@@ -420,6 +421,8 @@ call SetupCommandAbbrs('C', 'CocConfig')
 
 " *** coc-translator
 " doc: https://github.com/voldikss/coc-translator
+" NOTE: 有可能被google翻译禁止使用其接口导致翻译失败报错.
+
 " normal 和 visual 模式下, 将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
 nmap ts <Plug>(coc-translator-p)
 vmap ts <Plug>(coc-translator-pv)
@@ -430,6 +433,15 @@ vmap tse <Plug>(coc-translator-ev)
 nmap tsr <Plug>(coc-translator-r)
 vmap tsr <Plug>(coc-translator-rv)
 " ******************
+
+" *** coc-ecdict
+" doc: https://github.com/fannheyward/coc-ecdict
+" 查询本地词典进行翻译, 而非调用网络接口, 仅支持英译中.
+
+" lts  将光标下的英文单词翻译成中文, 以悬浮窗口显示.
+" NOTE: 如果出现滚动条, 则使用 ctrl f/b 向下或向上滚动翻阅.
+nnoremap <silent> lts :call CocActionAsync('doHover')<CR>
+" ***********
 
 " *** coc-css
 autocmd FileType scss setl iskeyword+=@-@
@@ -2050,6 +2062,10 @@ endif
 "                     将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
 "                tse  在状态栏下面显示翻译的结果.
 "                tsr  将翻译结果替换掉光标下的单词.
+"
+" ** coc-ecdict (https://github.com/fannheyward/coc-ecdict)
+"                lts  将光标下的英文单词翻译成中文, 注意这里使用的是本地词库;
+"                     如果翻译结果内容较多出现了滚动条, 使用 ctrl f/b 向下或向上滚动翻阅.
 "
 " ** dense-analysis/ale (https://github.com/dense-analysis/ale)
 "                 :w  保存代码文件的时候, 将自动检查语法错误并提示.
