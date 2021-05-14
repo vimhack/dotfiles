@@ -148,6 +148,9 @@ Plug 'nanotech/jellybeans.vim'
 " tomorrow night
 Plug 'chriskempson/base16-vim'
 
+" nord
+Plug 'arcticicestudio/nord-vim'
+
 " ********************** 代码补全 ********************************************
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
@@ -850,10 +853,11 @@ colorscheme dracula
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
 "   base16-default-dark(tomorrow night): https://github.com/chriskempson/base16-vim
+"   nord: https://github.com/arcticicestudio/nord-vim
 "
 " NOTE:
 "   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
-"   2) dracula, molokai, jellybeans, base16-default-dark 主题暂时没有 light 方案.
+"   2) dracula, molokai, jellybeans, base16-default-dark, nord 主题暂时没有 light 方案.
 "
 " 针对以上几种颜色方案的个性配置 {{
 
@@ -926,6 +930,11 @@ endif
 " *** base16-default-dark ***
 if (g:colors_name == 'base16-default-dark')
   let g:lightline.colorscheme = 'Tomorrow_Night'
+endif
+
+" *** nord ***
+if (g:colors_name == 'nord')
+  let g:lightline.colorscheme = 'nord'
 endif
 
 " }}
