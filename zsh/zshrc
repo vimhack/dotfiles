@@ -64,6 +64,9 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 
+# 解决 ranger.vim 乱码的问题.
+export LC_ALL=en_US.UTF-8
+
 # 解决执行 crontab -e 报错的问题.
 export EDITOR=vim
 
