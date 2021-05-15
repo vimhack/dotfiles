@@ -205,12 +205,18 @@ Plug 'maximbaz/lightline-ale'
 " 彩虹括号插件, 层级较多的括号场景使用不同颜色区分.
 Plug 'luochen1990/rainbow'
 
+" 快速打开想要的文件, 类似grep搜索文件内容等, 替代ctrlp插件.
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+
+" 集成 ranger 文件管理器.
+Plug 'francoiscabrol/ranger.vim'
+
 " 为目录树或LeaderF等插件显示文件类型.
 " NOTE:
 " 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为: Hack Nerd Font 或 Hack Nerd Font Mono;
 "    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
 "    brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
-" 2) 此插件要安装在目录树 或 LeaderF 等插件的后面.
+" 2) 此插件要安装在目录树、LeaderF 等插件的后面.
 Plug 'ryanoasis/vim-devicons'
 
 " 在上一个插件的基础上, 根据文件类型的不同, 改变图标的颜色.
@@ -254,9 +260,6 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'cespare/vim-toml'
 
 " ********************** 效率相关 ********************************************
-
-" 快速打开想要的文件, 类似grep搜索文件内容等, 替代ctrlp插件.
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 " 方便注释的插件, normal 模式下或 visual 模式下:
 " `, c <space>` 注释或取消注释选中的代码.
@@ -1133,13 +1136,13 @@ hi GitGutterDelete guifg=#ff2222 ctermfg=1
 """""""""""""""""""""""""""""""
 
 """""" 'Yggdroot/indentLine'
+" doc: https://github.com/Yggdroot/indentLine
 
 " 此插件会自动设置 set conceallevel=2, 导致 markdown 隐藏部分语法的显示, 比如 ** **,
 " 通过在这里排除掉 markdown 来解决这个问题.
 " NOTE: 如果 json 类型文件中无法显示双引号可能也是由此插件导致,
 " 把 json 和 jsonc 添加到下面列表中即可.
 let g:indentLine_fileTypeExclude = ['markdown']
-
 """""""""""""""""""""""""""""""
 
 """""" 'voldikss/vim-floaterm'
@@ -1159,6 +1162,18 @@ let g:floaterm_keymap_next = '<Leader>tn'
 
 " 显示目前存在的悬浮窗口.
 let g:floaterm_keymap_show = '<Leader>ts'
+""""""""""""""""""""""""""""""
+
+"""""" 'francoiscabrol/ranger.vim'
+" doc: https://github.com/francoiscabrol/ranger.vim
+" NOTE: 需要在 ~/.zshrc 中加入 export LC_ALL="en_US.UTF-8", 否则 ranger 中将出现乱码.
+
+" 禁用默认的 <leader>f 快捷键.
+let g:ranger_map_keys = 0
+
+" ,r  打开 ranger, 选择文件后按 l 或 enter 以新建标签页的方式打开文件,
+" 如果文件已经打开了, 则直接跳转到相关的标签页.
+map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
 """"""""""""""""""""""""""""""
 
 " }}
@@ -2089,6 +2104,10 @@ endif
 "                     显示搜索结果.
 "                ,rc  ,rg/rg 搜索内容关闭后, 想再次搜索上次搜索的内容,
 "                     normal 模式下按 ,rc 即可.
+" ** francoiscabrol/ranger.vim (https://github.com/francoiscabrol/ranger.vim)
+"                 ,r  打开 ranger, 选择文件后按 enter 或 l 以新建标签页的方式打开文件,
+"                     如果文件已经打开了, 则直接跳转到相关标签页.
+"
 " ** terryma/vim-multiple-cursors (https://github.com/mg979/vim-visual-multi)
 "             ctrl n  开启多光标模式, 默认对应 VIM 的 visual 模式.
 "                n/N  开启多光标模式后, 按 n/N 向下或向上选择光标下的单词.
