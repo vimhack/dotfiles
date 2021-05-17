@@ -296,6 +296,10 @@ Plug 'tmux-plugins/vim-tmux'
 " 强制你根据不同场景来思考使用更高效的命令的习惯.
 Plug 'takac/vim-hardtime'
 
+" 异步任务插件.
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+
 " ********************** 其他 ************************************************
 
 " 日历插件.
@@ -1348,6 +1352,14 @@ let g:qs_enable=1
 
 " 性能考虑, 是否延迟显示高亮字符, 默认值: 0, 表示实时显示.
 let g:qs_lazy_highlight = 0
+
+"""""" skywind3000/asyncrun.vim
+" doc: https://github.com/skywind3000/asyncrun.vim
+
+" ,ar  在 command-line 模式下输入要异步执行的命令, 并在当前窗口底部输出执行结果.
+" NOTE: 本行尾的空格不要去掉.
+nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10 
+
 """""""""""""""""""""
 
 " }}
@@ -2140,6 +2152,9 @@ endif
 "             [n],cs  添加较美观的注释.
 "             [n],cy  添加注释并复制被被注释的部分.
 "             [n],cA  跳转到该行结尾添加注释符号，并进入 insert 模式.
+"
+"** skywind3000/asyncrun.vim (https://github.com/skywind3000/asyncrun.vim)
+"                ,ar  command-line 模式下异步运行命令, 并在当前窗口底部输出执行结果.
 "
 " ** fatih/vim-go (https://github.com/fatih/vim-go/wiki/Tutorial) 只适用于Go
 "   代码阅读相关:
