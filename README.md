@@ -37,6 +37,13 @@ $ ln -sf ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 
 💡 You can go to the beginning of each dotfile to view the detailed installation steps.
 
+To update:
+
+```bash
+$ cd ~/.dotfiles
+$ git pull
+```
+
 ## 📜 Tips
 
 Almost every dotfile has usage tips at the end of it for reference.
