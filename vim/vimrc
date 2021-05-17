@@ -849,9 +849,6 @@ syntax enable
 " NOTE: 如果不启用这个配置, vim 背景颜色还是默认的黑色.
 set termguicolors
 
-" 使 Vim 背景色将变透明.
-autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
-
 " 部分主题颜色方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
 
@@ -953,12 +950,21 @@ endif
 
 " }}
 
+" 是否启用 Vim 透明背景色, 1 为启用, 0 为禁用.
+let bgtransparent=1
+if ( bgtransparent == 1)
+  " 使 vim 背景透明.
+  autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
+  " 去掉颜色主题自带的行号背景色.
+  hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
+else
+  " 设置行号颜色.
+  " NOTE: VIM 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+  hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
+endif
+
 " 显示行号.
 set nu
-
-" 设置行号颜色.
-" NOTE: VIM 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
-hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
 
 " 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
 set number relativenumber

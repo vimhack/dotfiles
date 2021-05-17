@@ -230,12 +230,10 @@ $ font number
 
 # 开启或关闭 Vim 背景透明色.
 vim-opacity-toggle() {
-    local vim_autocmd="autocmd VimEnter \* hi Normal ctermbg=NONE guibg=NONE"
-
-    if grep -q "^$vim_autocmd$" $vimrc; then
-        gsed -i "/^$vim_autocmd/s/^/\"/" $vimrc
+    if grep -q "^let bgtransparent=1" $vimrc; then
+        gsed -i "/^let bgtransparent/s/1/0/" $vimrc
     else
-        gsed -i "/^\"$vim_autocmd/s/^\"//" $vimrc
+        gsed -i "/^let bgtransparent/s/0/1/" $vimrc
     fi
 }
 
