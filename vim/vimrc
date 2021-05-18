@@ -961,6 +961,10 @@ if ( bgtransparent == 1)
   autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
   " 去掉颜色主题自带的行号背景色.
   hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
+
+  if (g:colors_name == 'jellybeans')
+    hi LineNr cterm=NONE ctermbg=NONE ctermfg=241 guibg=NONE guifg=NONE
+  endif
 else
   " 设置行号颜色.
   " NOTE: VIM 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
