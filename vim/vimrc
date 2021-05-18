@@ -940,6 +940,9 @@ endif
 " *** jellybeans ***
 if (g:colors_name == 'jellybeans')
   let g:lightline.colorscheme = 'jellybeans'
+
+  " autocmd FileType * set colorcolumn=80 指令定义的列的颜色方案.
+  hi ColorColumn ctermbg=236 guibg=NONE
 endif
 
 " *** base16-default-dark ***
@@ -956,7 +959,7 @@ endif
 
 " 是否启用 Vim 透明背景色, 1 为启用, 0 为禁用.
 let bgtransparent=1
-if ( bgtransparent == 1)
+if (bgtransparent == 1)
   " 使 vim 背景透明.
   autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
   " 去掉颜色主题自带的行号背景色.
