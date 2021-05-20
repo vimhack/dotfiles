@@ -566,7 +566,7 @@ window:
   startup_mode: Maximized
 
 # 背景透明度配置, 取值范围: 0.0 到 1.0
-background_opacity: 0.6
+background_opacity: 0.8
 
 # 字体(Font)样式配置.
 font:
@@ -692,7 +692,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Beam
+    shape: Block
 
     # Cursor blinking state
     #
@@ -710,7 +710,7 @@ cursor:
   #
   # See `cursor.style` for available options.
   # Default: None
-  vi_mode_style: Beam
+  vi_mode_style: Block
 
   # Cursor blinking interval in milliseconds.
   # Default: 750
