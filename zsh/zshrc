@@ -121,6 +121,8 @@ alias luarocks="luarocks  --lua-dir=/usr/local/opt/lua@5.3"
 export PATH=$HOME/.luarocks/bin:$PATH
 # *****************
 
+# ****** node ******
+export PATH="/usr/local/opt/node@14/bin:$PATH"
 # }}
 
 
