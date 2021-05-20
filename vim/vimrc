@@ -261,8 +261,7 @@ Plug 'cespare/vim-toml'
 
 " ********************** 效率相关 ********************************************
 
-" 方便注释的插件, normal 模式下或 visual 模式下:
-" `, c <space>` 注释或取消注释选中的代码.
+" 代码注释插件.
 Plug 'preservim/nerdcommenter'
 
 " 光标高效跳转插件.
@@ -961,7 +960,9 @@ endif
 let bgtransparent=1
 if (bgtransparent == 1)
   " 使 vim 背景透明.
-  autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
+  "autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
+  hi Normal ctermbg=NONE guibg=NONE
+
   " 去掉颜色主题自带的行号背景色.
   hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
 
@@ -1215,6 +1216,31 @@ let g:hardtime_allow_different_key = 1
 
 " 允许连续按几次简单命令, 默认值: 1.
 let g:hardtime_maxcount = 2
+
+"""""" preservim/nerdcommenter
+" doc: https://github.com/preservim/nerdcommenter
+
+" 解决 vue 类型文件的代码注释问题.
+" from: https://github.com/posva/vim-vue#how-can-i-use-nerdcommenter-in-vue-files
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
 
 """""" easymotion/vim-easymotion
 " doc: https://github.com/easymotion/vim-easymotion
