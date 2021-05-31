@@ -52,25 +52,7 @@ Almost every dotfile has usage tips at the end of it for reference.
 
 ## 🔮 Show
 
-Vim
-
-![vim](images/vim.png)
-
-Tmux
-
-![tmux](images/tmux.png)
-
-Zsh
-
-![zsh](images/zsh.png)
-
-Ranger
-
-![ranger](images/ranger.png)
-
-Alacritty
-
-![alacritty](images/alacritty.png)
+![show](images/show.png)
 
 ## ⚖️ License
 
