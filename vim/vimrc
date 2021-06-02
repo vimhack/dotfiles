@@ -407,7 +407,6 @@ let g:coc_global_extensions = [
     \ 'coc-emoji',
     \ 'coc-swagger',
     \ 'coc-translator',
-    \ 'coc-ecdict',
     \ ]
 " *************************
 
@@ -439,15 +438,6 @@ vmap tse <Plug>(coc-translator-ev)
 nmap tsr <Plug>(coc-translator-r)
 vmap tsr <Plug>(coc-translator-rv)
 " ******************
-
-" *** coc-ecdict
-" doc: https://github.com/fannheyward/coc-ecdict
-" 查询本地词典进行翻译, 而非调用网络接口, 仅支持英译中.
-
-" lts  将光标下的英文单词翻译成中文, 以悬浮窗口显示.
-" NOTE: 如果出现滚动条, 则使用 ctrl f/b 向下或向上滚动翻阅.
-nnoremap <silent> lts :call CocActionAsync('doHover')<CR>
-" ***********
 
 " *** coc-css
 autocmd FileType scss setl iskeyword+=@-@
@@ -2149,10 +2139,6 @@ endif
 "                     将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
 "                tse  在状态栏下面显示翻译的结果.
 "                tsr  将翻译结果替换掉光标下的单词.
-"
-" ** coc-ecdict (https://github.com/fannheyward/coc-ecdict)
-"                lts  将光标下的英文单词翻译成中文, 注意这里使用的是本地词库;
-"                     如果翻译结果内容较多出现了滚动条, 使用 ctrl f/b 向下或向上滚动翻阅.
 "
 " ** dense-analysis/ale (https://github.com/dense-analysis/ale)
 "                 :w  保存代码文件的时候, 将自动检查语法错误并提示.
