@@ -1196,6 +1196,13 @@ set nu
 " 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
 set number relativenumber
 
+" 使查看帮助文档的窗口也显示相对行号.
+augroup vim help
+    autocmd!
+    autocmd FileType help setlocal number
+    autocmd FileType help setlocal relativenumber
+augroup END
+
 " 显示当前光标所在的行号和列号.
 set ruler
 
