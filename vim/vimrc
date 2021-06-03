@@ -445,9 +445,9 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " 使用 tab 键触发补全, 选择补全.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -471,12 +471,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 " gr  在 location list 中列出相关条目, 如果相关的只有1条, 则直接跳转过去.
 nmap <silent> gr <Plug>(coc-references)
 
-" ,rn  级联的进行重命名.
+" ,rn  级联的对光标所在 symbol 进行重命名.
 nmap <leader>rn <Plug>(coc-rename)
-
-" visual 和 normal 模式下对选中的代码进行格式化.
-xmap <leader>f <Plug>(coc-format-selected)
-nmap <leader>f <Plug>(coc-format-selected)
 
 " 使用 K 在预览窗口中查看文档.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -493,13 +489,18 @@ function! s:show_documentation()
   endif
 endfunction
 
-" 使用 <C-f> 和 <C-b> 在悬浮窗口向下翻页和向上翻页, 比如在查看较长的文档时使用.
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" 突出显示光标所在 symbol 及其引用.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" 使用 <C-d> 和 <C-u> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
+" 比如在查看较长的文档时出现了滚动条的场景下使用.
+let lines_count=5
+nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1, lines_count) : "\<C-d>"
+nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0, lines_count) : "\<C-u>"
+inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1, lines_count) : "\<C-d>"
+vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0, lines_count) : "\<C-u>"
 
 " *** CocList 相关命令快捷键映射 ***
 " NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
@@ -512,7 +513,6 @@ nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
 " space p  重新列出上一次展示的 CocList.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-" **********************************
 """"""""""""""""""""""""""
 
 """""" ycm-core/YouCompleteMe 已注释, 不再使用 {{
@@ -2130,6 +2130,9 @@ endif
 "                 gi  跳转到接口实现处.
 "                 gr  在 location list 中列出相关条目, 如果只有1条, 则直接跳转过去.
 "                  K  使用 K 在预览窗口中查看文档.
+"           ctrl d/u  使用 K 查看文档时, 或者出现代码补全提示时,
+"                     如果文档或提示所在的悬浮窗口出现了滚动条,
+"                     则使用此快捷键进行向下或向上翻滚页面.
 "
 " ** coc-translator (https://github.com/voldikss/coc-translator)
 "                 ts  normal 和 visual 模式下,
