@@ -845,8 +845,9 @@ let g:Lf_PreviewInPopup = 1
 
 " 弹出的窗口的颜色模式, 默认值: 'default';
 " 可选值: gruvbox_default, gruvbox_material, one;
-" 可在 LeaderF/autoload/leaderf/colorscheme/popup 目录中增加新的颜色方案文件.
-let g:Lf_PopupColorscheme = 'default'
+" 可在 LeaderF/autoload/leaderf/colorscheme/popup 目录中增加新的颜色方案文件;
+" 经过测试 one 可以适配几乎所有颜色主题, 所以建议设置为 one.
+let g:Lf_PopupColorscheme = 'one'
 
 " 弹出的窗口的高度, 默认值: 0.4, 表示占屏幕的 40%.
 let g:Lf_PopupHeight = 0.6
@@ -1089,7 +1090,6 @@ if (g:colors_name == 'rigel')
   " 定制状态栏的主题颜色.
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** solarized ***
@@ -1098,19 +1098,16 @@ if (g:colors_name == 'solarized')
   set notermguicolors
 
   let g:lightline.colorscheme = 'solarized'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** dracula ***
 if (g:colors_name == 'dracula')
   let g:lightline.colorscheme = 'dracula'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** one ***
 if (g:colors_name == 'one')
   let g:lightline.colorscheme = 'one'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** molokai ***
@@ -1121,20 +1118,17 @@ if (g:colors_name == 'molokai')
   hi Cursorcolumn cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
   hi colorcolumn  cterm=NONE ctermbg=236 ctermfg=NONE guibg=NONE guifg=NONE
 
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** gruvbox ***
 " doc: https://github.com/morhetz/gruvbox/wiki/Configuration
 if (g:colors_name == 'gruvbox')
   let g:lightline.colorscheme = 'gruvbox'
-  let g:Lf_PopupColorscheme = 'gruvbox_default'
 endif
 
 " *** iceberg ***
 if (g:colors_name == 'iceberg')
   let g:lightline.colorscheme = 'iceberg'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** jellybeans ***
@@ -1144,19 +1138,16 @@ if (g:colors_name == 'jellybeans')
   " autocmd FileType * set colorcolumn=80 指令定义的列的颜色方案.
   hi ColorColumn ctermbg=236 guibg=NONE
 
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** base16-default-dark ***
 if (g:colors_name == 'base16-default-dark')
   let g:lightline.colorscheme = 'Tomorrow_Night'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " *** nord ***
 if (g:colors_name == 'nord')
   let g:lightline.colorscheme = 'nord'
-  let g:Lf_PopupColorscheme = 'one'
 endif
 
 " }}
