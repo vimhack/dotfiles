@@ -1169,6 +1169,11 @@ if (bgtransparent == 1)
   " 使 popup window 背景变透明.
   hi Pmenu ctermbg=NONE guibg=NONE
 
+  " 设置 popup window 背景透明色后, dracula 主题的字体颜色变得很难辨认, 这里进行优化.
+  if (g:colors_name == 'dracula')
+      hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
+  endif
+
   " 去掉颜色主题自带的行号背景色.
   hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
 
