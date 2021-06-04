@@ -1,0 +1,318 @@
+" vimrc_with_no_plugins by @windvalley
+" https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+
+
+" 安装方法:
+"
+"   1. 全局安装
+"     1) Neovim
+"     curl --create-dirs -fLo /usr/share/nvim/sysinit.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"     2) Vim
+"     curl -fLo /etc/vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"
+"   2. 用户环境安装
+"     1) Neovim
+"     curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"     2) Vim
+"     curl -fLo ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+
+
+" 关闭兼容模式, 也就是不再兼容 VI, 必需放在第一行.
+set nocompatible
+
+" 设置 Vim 内部使用的字符编码, 默认值 latin1 或者操作系统 $LANG 环境变量对应的编码.
+set encoding=utf-8
+
+" Vim 保存多少个历史命令, 一般保存在 ~/.viminfo 隐藏文件中.
+set history=1000
+
+" 如果过了这么多毫秒数以后还没有任何输入, 则把交换文件写入磁盘,
+" 也用于 CursorHold 自动命令事件.
+" 默认值: 4000(毫秒)
+set updatetime=100
+
+" 解决使用 vim 在部分情况下从 insert 切换到 normal 时出现卡顿的情况.
+set ttimeoutlen=5
+
+" 打开文件类型检测, 允许插件文件载入, 允许缩进文件载入.
+filetype plugin indent on
+
+" 重新设置 leader 键, 即一些自定义命令的前缀, 默认值: '\'
+let mapleader = ','
+
+" 代码高亮显示.
+syntax enable
+
+" 设置背景色为黑色或亮色, dark or light.
+set background=dark
+
+" 显示行号.
+set nu
+
+" 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
+set number relativenumber
+
+" 使查看帮助文档的窗口也显示相对行号.
+augroup vim help
+    autocmd!
+    autocmd FileType help setlocal number
+    autocmd FileType help setlocal relativenumber
+augroup END
+
+" 设置行号颜色.
+" NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+hi LineNr cterm=NONE ctermbg=NONE ctermfg=240 guibg=NONE guifg=NONE
+
+" 显示当前光标所在的行号和列号.
+set ruler
+
+" 指定何时显示页面标签, 默认值: 1
+"   0: 永远不会
+"   1: 至少有两个标签页时才会
+"   2: 永远会
+set showtabline=1
+
+" 命令行窗口的高度, 默认值7.
+" 命令行窗口打开的方法:
+"   1) command-line 模式下, 按快捷键 ctrl f 打开命令行窗口并显示命令历史记录.
+"   2) normal 模式下, 按快捷键 q: 打开命令行窗口并显示命令历史记录.
+"   3) normal 模式下, 按快捷键 q/ 将会打开命令行窗口并显示向下搜索的历史记录.
+"   4) normal 模式下, 按快捷键 q? 将会打开命令行窗口并显示向上搜索的历史记录.
+set cmdwinheight=8
+
+" 突出显示当前行.
+set cursorline
+hi CursorLine cterm=NONE ctermbg=239 ctermfg=NONE guibg=NONE guifg=NONE
+
+" 突出显示当前列.
+set cursorcolumn
+hi Cursorcolumn cterm=NONE ctermbg=239 ctermfg=NONE guibg=NONE guifg=NONE
+
+" 一行内容超过终端宽度时是否折行, 默认就是折行.
+set wrap
+
+" 显示括号匹配.
+set showmatch
+
+" normal 模式下显示输入的 Vim 命令.
+set showcmd
+
+" 一个 tab 显示几个空格长度, 默认是8个空格, 这里改为4个空格.
+set ts=4
+
+" 将 tab 缩进用空格来表示, 提高效率.
+set expandtab
+
+" insert 模式下按退格键的时候退回缩进的长度为4个空格, 默认是退回一个空格.
+set softtabstop=4
+
+" 启用智能缩进, 按回车键后自动缩进,
+" 注意启用此模式后, 粘贴代码时要先 :set paste
+set smartindent
+
+" 进行搜索时会快速找到结果, 随着输入的字符进行及时匹配.
+set incsearch
+
+" 搜索关键字高亮显示.
+set hlsearch
+
+" 搜索时忽略大小写.
+set ignorecase
+
+" 如果同时打开了ignorecase, 那么对于搜索只有一个大写字母的搜索词, 将大小写敏感;
+" 其他情况都是大小写不敏感, 比如: 搜索 Test 时, 将不匹配 test,
+" 但搜索 test 时, 将匹配 Test.
+set smartcase
+
+" 不创建备份文件. 默认情况下, 文件保存时, 会额外创建一个备份文件,
+" 它的文件名是在原文件名的末尾, 再添加一个波浪号(〜).
+set nobackup
+
+" 出错时不要发出响声.
+set noerrorbells
+
+" command-line 模式下, 操作指令按下 tab 键自动补全:
+" 第1次按下 tab, 会显示所有匹配的操作指令的清单, 第2次按下 tab, 会依次选择各个指令.
+set wildmenu
+set wildmode=longest:list,full
+
+" 打字的时候隐藏鼠标光标.
+set mousehide
+
+" 打开文件监视, 在修改内容后保存文件, 如果文件已经被其他 Vim 实例打开, 则会进行提示,
+" 如果忽略提示强制进行保存, 则其他 Vim 实例打开的此文件也会同步变更.
+set autoread
+
+" normal 模式下允许光标移动到最后一个字符的右边.
+set virtualedit=onemore
+
+" 当一行字符长度超过多少个字符时, 会自动换行, 注意会加上换行符;
+" 我这里配置这个的目的是解决 .vimrc 的注释内容超过80个字符就自动换行的问题.
+set textwidth=1000
+
+" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题.
+set list listchars=tab:>-,trail:-
+
+" 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
+" 所以这里使用 SpecialKey 来改变 tab 键和行尾空格的颜色样式,
+" 从而方便我们能看到多余的空白字符.
+hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=240 guibg=NONE guifg=NONE
+
+" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
+autocmd FileType * set colorcolumn=80
+hi colorcolumn  cterm=NONE ctermbg=236 ctermfg=NONE guibg=NONE guifg=NONE
+
+" ,E  上下分屏方式打开 vim 或 nvim 的配置文件;
+" ,R  变更配置文件后不需要退出, 直接使用此命令进行 reload 生效.
+if has('nvim')
+  noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
+  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
+else
+  noremap <silent> <leader>E :sp ~/.vimrc<CR>
+  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '~/.vimrc reloaded'"<CR>
+endif
+
+" 多窗口之间上下左右移动的快捷键重新映射.
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" 解决中文乱码问题.
+let $LANG='en'
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" visual 模式下选择内容, 然后通过按 ,) 或 ,] 或 ,} 或 ," 或 ,' 或 ,`
+" 将选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
+vnoremap <leader>) <esc>`>a)<esc>`<i(<esc>
+vnoremap <leader>] <esc>`>a]<esc>`<i[<esc>
+vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
+
+" insert 模式下移动光标的快捷键:
+"   `ctrl f` 右, `ctrl b` 左, `ctrl p` 上, `ctrl n` 下,
+"   `ctrl a` 行首, `ctrl e` 行尾.
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+imap <C-a> <Home>
+imap <C-e> <End>
+
+" ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候, 从默认的每次移动1行改为3行.
+noremap <C-e> 3<C-e>
+noremap <C-y> 3<C-y>
+
+" normal 模式下, 使用Y复制当前行光标之后的内容, 和C和D用法统一起来.
+nnoremap Y y$
+
+" normal 模式下 shift >> 和 shift << 或
+" visual 模式下 shift > 和 shift < 每次缩进4个空格, 默认是8个空格.
+set shiftwidth=4
+
+" visual 模式下进行 shift > 和 shift < 缩进操作时,
+" 使不退出 visual 模式, 这样可方便执行多行的连续缩进.
+vnoremap < <gv
+vnoremap > >gv
+
+" 重新打开文件时, 光标恢复在上次离开时的位置.
+augroup resCur
+    autocmd!
+    autocmd BufReadPost * call setpos(".", getpos("'\""))
+augroup END
+
+" insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题,
+" 比如按 backspace 键无反应.
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" :W  普通用户没有权限时使用 sudo 权限保存文件.
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" 保留撤销历史, Vim 会在编辑时保存操作历史, 用来供用户撤消更改;
+" 默认情况下, 操作记录只在本次编辑时有效, 一旦编辑结束、文件关闭, 操作历史就消失了;
+" 打开这个设置, 可以在文件关闭后, 操作记录保留在一个文件里面继续存在.
+" 这意味着, 重新打开一个文件, 可以撤销上一次编辑时的操作;
+" 撤消文件是跟原文件保存在一起的隐藏文件, 文件名以 .un~ 开头.
+set undofile
+set undodir=~/.vim/undo
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p', 0700)
+endif
+
+" normal 模式下的 nyy 复制(n为数字), 或进入 visual 模式下选择内容后的 y 复制,
+" 除了可以将复制的内容粘贴(使用 p)到其他 Vim 实例,
+" 还可以将内容粘贴(command v)到系统的其他任何可输入窗口.
+"
+" 注意: 以上所说的都是针对本地操作系统使用本地 Vim 的情况,
+" 比如 macOS/Windows/Linux 本地的 Vim 和本地的其他应用窗口之间,
+" 不包括远程连接的操作系统的 Vim 和本地应用的窗口之间.
+if has('clipboard')
+    if has('unnamedplus')
+        set clipboard=unnamed,unnamedplus " for Linux
+    else
+        set clipboard=unnamed " for macOS、Windows
+    endif
+endif
+
+" ,E  上下分屏方式打开 vim 或 nvim 的配置文件;
+" ,R  变更配置文件后不需要退出, 直接使用此命令进行 reload 生效.
+if has('nvim')
+  noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
+  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
+else
+  noremap <silent> <leader>E :sp ~/.vimrc<CR>
+  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '~/.vimrc reloaded'"<CR>
+endif
+
+" ---------- 状态栏配置 ----------
+au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
+au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ "\<C-v>" : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ "\<C-S>" : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+
+set laststatus=2
+set noshowmode
+set statusline=
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
+set statusline+=%3*│                                     " Separator
+set statusline+=%2*\ %Y\                                 " FileType
+set statusline+=%3*│                                     " Separator
+set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
+set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
+set statusline+=%=                                       " Right Side
+set statusline+=%2*\ col:\ %02v\                         " Colomn number
+set statusline+=%3*│                                     " Separator
+set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
+
+hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
+hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
+hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
+hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
+" --------------------------------
