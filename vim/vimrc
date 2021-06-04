@@ -120,6 +120,9 @@ set history=1000
 " 默认值: 4000(毫秒)
 set updatetime=100
 
+" 解决使用 vim 在部分情况下从 insert 切换到 normal 时出现卡顿的情况.
+set ttimeoutlen=5
+
 " 打开文件类型检测, 允许插件文件载入, 允许缩进文件载入.
 filetype plugin indent on
 
@@ -1721,6 +1724,10 @@ inoremap <C-n> <Down>
 imap <C-a> <Home>
 imap <C-e> <End>
 
+" ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候, 从默认的每次移动1行改为3行.
+noremap <C-e> 3<C-e>
+noremap <C-y> 3<C-y>
+
 " normal 模式下, 使用Y复制当前行光标之后的内容, 和C和D用法统一起来.
 nnoremap Y y$
 
@@ -1971,7 +1978,8 @@ endif
 "           ctrl o/i  将光标跳转到之前/之后的位置.
 "           ctrl f/b  向下/向上翻整屏.
 "           ctrl d/u  向下/向上翻半屏.
-"           ctrl e/y  以一行为单位上下移动屏幕, 而不移动光标.
+"           ctrl e/y  以1行(已自定义配置成3行)为单位上下移动屏幕, 而不移动光标.
+"                     NOTE: 阅读的时候推荐使用这种方式, 而不是通过 jklh 或 ctrl d/u/f/b 快捷键.
 "           zt/zz/zb  把光标所在行放置到屏幕的顶部、中间、底部.
 "                  %  跳转到光标所在的 {([ 匹配匹配的另一端.
 "                 gf  跳转到光标所在文本对象所对应的文件.
