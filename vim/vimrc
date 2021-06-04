@@ -992,7 +992,10 @@ set termguicolors
 
 " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
 " from: https://github.com/dracula/vim/issues/219
-let g:dracula_italic = 0
+" NOTE: Vim 存在此问题, Neovim 不存在此问题.
+if !has('nvim')
+  let g:dracula_italic = 0
+endif
 
 " 调整 gruvbox 主题的颜色对比度.
 " from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
@@ -1054,11 +1057,6 @@ endif
 " *** molokai ***
 if (g:colors_name == 'molokai')
   let g:lightline.colorscheme = 'molokai'
-
-  hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
-  hi Cursorcolumn cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
-  hi colorcolumn  cterm=NONE ctermbg=236 ctermfg=NONE guibg=NONE guifg=NONE
-
 endif
 
 " *** gruvbox ***
@@ -1076,9 +1074,11 @@ endif
 if (g:colors_name == 'jellybeans')
   let g:lightline.colorscheme = 'jellybeans'
 
-  " autocmd FileType * set colorcolumn=80 指令定义的列的颜色方案.
-  hi ColorColumn ctermbg=236 guibg=NONE
-
+  if !has('nvim')
+    " 自定义 colorcolumn=80 列的颜色方案, jellybeans 默认的颜色太黑了;
+    " nvim 不能设置这个, 会导致 colorcolumn 对应的列消失, 暂时还没有去找原因.
+    hi ColorColumn ctermbg=236 guibg=NONE
+  endif
 endif
 
 " *** base16-default-dark ***
@@ -1093,35 +1093,42 @@ endif
 
 " }}
 
-" 是否启用 Vim 透明背景色, 1 为启用, 0 为禁用.
-let bgtransparent=1
-if (bgtransparent == 1)
-  " 使 vim 背景透明.
-  hi Normal ctermbg=NONE guibg=NONE
-  " 使 popup window 背景变透明.
-  hi Pmenu ctermbg=NONE guibg=NONE
-
-  " 设置 popup window 背景透明色后, dracula 主题的字体颜色变得很难辨认, 这里进行优化.
-  if (g:colors_name == 'dracula')
-      hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
-  endif
-
-  " 去掉颜色主题自带的行号背景色.
-  hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
-
-  if (g:colors_name == 'jellybeans')
-    hi LineNr cterm=NONE ctermbg=NONE ctermfg=241 guibg=NONE guifg=NONE
-  endif
-else
-  " 设置行号颜色.
-  " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
-  hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
-endif
-
-" 设置提示列的颜色方案;
+" 设置提示列的颜色方案, 去掉默认的背景色;
 " 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
 " coc-git 扩展的文件变化信息也会出现在此列.
 hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+
+" 是否启用 Vim/Neovim 透明背景色, 1 为启用, 0 为禁用.
+let bgtransparent=1
+if (bgtransparent == 1)
+  " 使 vim/nvim 背景透明.
+  hi Normal ctermbg=NONE guibg=NONE
+
+  " 使 popup window 背景变透明.
+  hi Pmenu ctermbg=NONE guibg=NONE
+
+  if !has('nvim')
+    " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
+    " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
+    if (g:colors_name == 'dracula')
+      hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
+    endif
+
+    " 去掉颜色主题自带的行号背景色, 值为1时表示去掉行号背景色, 默认不启用.
+    " NOTE: nvim 不能设置此条目, 会造成行号颜色变为亮白色, 很不协调.
+    let linenr_bg_color=0
+    if (linenr_bg_color==1)
+      hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
+    endif
+  endif
+
+  " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
+  " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+  let linenr_colorscheme_custom=0
+  if (linenr_colorscheme_custom==1)
+    hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
+  endif
+endif
 
 " }}
 
@@ -1239,7 +1246,6 @@ let g:tagbar_sort = 0
 "      Hack Nerd Font 或 Hack Nerd Font Mono
 "   2. Hack Nerd Font 字体安装(macOS):
 "      brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
-
 
 " 是否启用文件类型图标显示, 默认值: 1, 表示启用.
 let g:webdevicons_enable = 1
