@@ -1819,16 +1819,19 @@ endif
 " }}
 
 
-" Vim 使用技巧 {{
+" Vim/Neovim 使用技巧 {{
 
 """""""""" 常用命令行 {{
 "
+" vim/nvim --version            可以查看到全局和用户级别的配置文件的加载顺序等信息.
 " vim -u NONE                   无插件方式运行 Vim.
 " vim -g 或 mvim 或 gvim        macOS 下运行 Vim 的图形界面模式, 需安装 macvim.
 " vim -V9myVim.log              将 Vim 运行的详细日志保存到 myVim.log 文件中.
 " vim --startuptime vim.log     记录带时间字段的启动日志.
 " vim -c 'normal 5G36|'         normal 模式下跳转到第 5 行第 36 列.
 " vimtutor                      Vim 自带的学习教程.
+" vim -e --cmd 'echo $VIM|quit' 查看 $VIM 对应的路径.
+" vim -e --cmd 'echo $VIMRUNTIME|quit'
 "
 " }}
 
