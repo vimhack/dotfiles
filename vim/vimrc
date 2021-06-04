@@ -5,28 +5,34 @@
 " vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
 "
 " 查看折叠内容的方法:
-"    za: normal 模式下按`za`, 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
-"        在打开的折叠内部任意处按`za`, 也会关闭折叠.
-"    zA: 是`za`的递归操作, 是针对嵌套折叠的场景.
+"    za: normal 模式下按 za, 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
+"        在打开的折叠内部任意处按 za, 也会关闭折叠.
+"    zA: 是 za 的递归操作, 是针对嵌套折叠的场景.
 
 
 " 安装步骤 {{
 
-" 一. 安装 VIM 及依赖:
+" 一. 安装 Vim 及依赖
 "    1. macOS 系统
 "    # 用于目录树文件图标显示的依赖安装
 "    brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 "
-"    # 从 insert 切换到 normal 模式时自动切换输入法功能需要的系统依赖安装:
+"    # 从 insert 切换到 normal 模式时自动切换输入法功能需要的系统依赖安装
 "    git clone https://github.com/myshov/xkbswitch-macosx.git
 "    cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
 "    git clone https://github.com/myshov/libxkbswitch-macosx
 "    cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
 "
-"    # macvim 安装
+"    # 安装相关依赖
 "    brew install cmake python mono go nodejs yarn
 "    brew install ctags rg
+"
+"    1) Vim
 "    brew install macvim
+"
+"    2) Neovim
+"    brew install neovim
+"    pip3 install neovim
 "
 "    2. Linux 系统
 "    # 用于目录树文件图标显示
@@ -35,7 +41,7 @@
 "       curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" \
 "       https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 "
-"    1) CentOS7
+"    1) Vim
 "    sudo yum -y remove vim-common vim-enhanced vim-filesystem
 "    sudo yum -y install gcc-c++ make ncurses ncurses-devel python3 ctags git
 "    sudo yum -y install epel-release && yum -y install golang
@@ -52,32 +58,48 @@
 "       --enable-rubyinterp --enable-perlinterp --enable-luainterp
 "    make && sudo make install
 "
-"    2) Ubuntu
-"    apt install build-essential cmake vim-nox python3-dev
-"    apt install mono-complete golang nodejs default-jdk npm
+"    2) Neovim
+"    # https://github.com/neovim/neovim/releases
+"    sudo yum install -y neovim python3 nodejs
 
-" 二. 注意事项:
-"    * VIM 版本要求在 8.2+, 可通过`vim --version`查看.
-"    * 为了支持 python3 和复制粘贴的便利, 需要 VIM 支持 python3 和 clipboard, 可通过
-"      `vim --version|grep -Eo '\+python3|\+clipboard'`查看是否有相关输出,
+" 二. 注意事项
+"    * Vim 版本要求在 8.2+, 可通过 vim --version 查看.
+"    * Neovim 版本要求在 0.4.0+, 可通过 nvim --version 查看.
+"    * 对于 Vim, 为了支持 python3 和复制粘贴的便利, 需要 Vim 支持 python3 和 clipboard,
+"      可通过`vim --version|grep -Eo '\+python3|\+clipboard'`查看是否有相关输出,
 "      没有的话请重新编译安装.
-"    * `vimrc`默认集成了 Go 开发插件`vim-go`, 需要系统已经有 Go 环境,
+"    * 本配置文件默认集成了 Go 开发插件 vim-go, 需要系统已经有 Go 环境,
 "      并配置 Go 代理解决墙的问题.
 "    * macOS 和 Linux 系统可正常使用, Windows 系统未测试.
 
-" 三. 配置步骤:
-"    1. 备份原有的 ~/.vimrc 和 ~/.vim/ 等相关文件和目录:
-"       mv ~/.vimrc ~/.vimrc.$(date +%F_%T)
-"       mv ~/.vim ~/.vim.$(date +%F_%T)
+" 三. 配置步骤
+"    1. Vim
+"      1) 备份原有的 ~/.vimrc 和 ~/.vim/ 等相关文件和目录
+"         mv ~/.vimrc ~/.vimrc.$(date +%F_%T)
+"         mv ~/.vim ~/.vim.$(date +%F_%T)
 
-"    2. 替换你的当前 ~/.vimrc 文件:
-"       wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"      2) 替换你的当前 ~/.vimrc 文件
+"         wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
 
-"    3. 安装用于管理 VIM 插件的插件`vim-plug`:
-"       curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"      3) 安装用于管理 Vim 插件的插件 vim-plug
+"         curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-"    4. 安装 vimrc 中已配置的 VIM 插件:
-"       vim +PlugInstall +qa
+"      4) 安装 vimrc 中已配置的 Vim 插件
+"         vim +PlugInstall +qa
+"
+"    2. Neovim
+"      1) 备份原有的 ~/.config/nvim/init.vim 和 ~/.vim/ 等相关文件和目录
+"         mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.$(date +%F_%T)
+"         mv ~/.vim ~/.vim.$(date +%F_%T)
+"
+"      2) 替换你的当前 ~/.config/nvim/init.vim 文件
+"         curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"
+"      3) 安装用于管理 Vim 插件的插件 vim-plug
+"         curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+"      4) 安装已配置的 Vim 插件
+"         vim +PlugInstall +qa
 
 " }}
 
@@ -87,10 +109,10 @@
 " 关闭兼容模式, 也就是不再兼容 VI, 必需放在第一行.
 set nocompatible
 
-" 设置 VIM 内部使用的字符编码, 默认值 latin1 或者操作系统 $LANG 环境变量对应的编码.
+" 设置 Vim 内部使用的字符编码, 默认值 latin1 或者操作系统 $LANG 环境变量对应的编码.
 set encoding=utf-8
 
-" VIM 保存多少个历史命令, 一般保存在 ~/.viminfo 隐藏文件中.
+" Vim 保存多少个历史命令, 一般保存在 ~/.viminfo 隐藏文件中.
 set history=1000
 
 " 如果过了这么多毫秒数以后还没有任何输入, 则把交换文件写入磁盘,
@@ -109,17 +131,17 @@ let mapleader = ','
 
 " 插件安装 {{
 
-" 需要先安装用于管理 VIM 插件的插件: vim-plug
+" 需要先安装用于管理 Vim 插件的插件: vim-plug
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "
-" 下面每一个 Plug 对应一个 VIM 插件, 插件名称就是相应 github 项目名称,
+" 下面每一个 Plug 对应一个 Vim 插件, 插件名称就是相应 github 项目名称,
 " 可通过访问 https://github.com/插件名称 来查看相关插件的详细使用文档;
 " 也可以通过 command-line 模式 :help 插件名称 来查看相关插件文档.
 call plug#begin('~/.vim/plugged')
 
 
-" ********************** VIM 主题 ********************************************
+" ********************** Vim 主题 ********************************************
 
 " solarized
 Plug 'altercation/vim-colors-solarized'
@@ -231,10 +253,10 @@ Plug 'Yggdroot/indentLine'
 " ********************** 编程语言 ********************************************
 
 """""""" Go
-" 搭建 Go 开发环境的 VIM 插件, 安装该插件的过程中,
+" 搭建 Go 开发环境的 Vim 插件, 安装该插件的过程中,
 " 会自动安装该插件依赖的大量 Go 二进制工具;
 " 如果由于 Go 环境等问题导致自动安装失败,
-" 可后续通过 VIM 的 command-line 模式安装`:GoInstallBinaries`.
+" 可后续通过 Vim 的 command-line 模式安装`:GoInstallBinaries`.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 """""""" openresty
@@ -291,7 +313,7 @@ Plug 'lyokha/vim-xkbswitch'
 " 在 .tmux.conf 中直接通过 K 查看 tmux 文档等功能.
 Plug 'tmux-plugins/vim-tmux'
 
-" VIM 从菜鸟到高手之路必备, 禁止连续按 jkhl 等低效操作,
+" Vim 从菜鸟到高手之路必备, 禁止连续按 jkhl 等低效操作,
 " 强制你根据不同场景来思考使用更高效的命令的习惯.
 Plug 'takac/vim-hardtime'
 
@@ -814,7 +836,7 @@ nmap s <Plug>(easymotion-overwin-f)
 " 是否启用默认的快捷键映射, 默认值: 1, 表示启用.
 let g:EasyMotion_do_mapping = 1
 
-" 搜索字母的时候是否忽略大小写和 VIM 的 smartcase 表现一致.
+" 搜索字母的时候是否忽略大小写和 Vim 的 smartcase 表现一致.
 let g:EasyMotion_smartcase = 1
 
 " 搜索小写字母, 搜索结果大小写字母都包含, 但搜索大写字母时, 搜索结果仅包含大写字母.
@@ -958,7 +980,7 @@ nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10
 " 默认值: 1, 为了单窗口也可以显示状态栏, 此处设置为2.
 set laststatus=2
 
-" 由于此插件已经帮我们美化显示了当前的 VIM 模式, 所以 VIM 自带的模式显示可以去除.
+" 由于此插件已经帮我们美化显示了当前的 Vim 模式, 所以 Vim 自带的模式显示可以去除.
 set noshowmode
 """""""""""""""""""""""""""
 
@@ -1080,7 +1102,7 @@ colorscheme dracula
 "   nord: https://github.com/arcticicestudio/nord-vim
 "
 " NOTE:
-"   1) 使用 VIM 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
+"   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
 "   2) dracula, molokai, jellybeans, base16-default-dark, nord 主题暂时没有 light 方案.
 "
 " 针对以上几种颜色方案的个性配置 {{
@@ -1173,7 +1195,7 @@ if (bgtransparent == 1)
   endif
 else
   " 设置行号颜色.
-  " NOTE: VIM 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+  " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
   hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
 endif
 
@@ -1255,16 +1277,16 @@ let NERDTreeMinimalUI=1
 " 默认值: 0, 表示不使用.
 let NERDTreeMinimalMenu=0
 
-" 运行 VIM 时, 后面不接任何文件的情况, 自动打开目录树窗口.
+" 运行 Vim 时, 后面不接任何文件的情况, 自动打开目录树窗口.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-" 运行 VIM 的时候自动打开目录树. 如果 vim 后面接了文件, 则将光标自动移动到文件窗口.
+" 运行 Vim 的时候自动打开目录树. 如果 vim 后面接了文件, 则将光标自动移动到文件窗口.
 " NOTE: 如果使用 tmux, 不建议启用此条配置.
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
-" 如果文件都退出了, 只剩目录树窗口的情况下自动退出 VIM.
+" 如果文件都退出了, 只剩目录树窗口的情况下自动退出 Vim.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " 每新打开一个标签页都显示当前已存在的目录树窗口.
@@ -1587,7 +1609,7 @@ autocmd BufRead,BufNewFile *.json set filetype=jsonc
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 """""" posva/vim-vue 插件
-" 解决 vim-vue 插件导致的 VIM 速度变慢的问题.
+" 解决 vim-vue 插件导致的 Vim 速度变慢的问题.
 let g:vue_pre_processors = []
 
 """""" 'mattn/emmet-vim'
@@ -1680,7 +1702,7 @@ set wrap
 " 显示括号匹配.
 set showmatch
 
-" normal 模式下显示输入的 VIM 命令.
+" normal 模式下显示输入的 Vim 命令.
 set showcmd
 
 " 一个 tab 显示几个空格长度, 默认是8个空格, 这里改为4个空格.
@@ -1725,8 +1747,8 @@ set wildmode=longest:list,full
 " 打字的时候隐藏鼠标光标.
 set mousehide
 
-" 打开文件监视, 在修改内容后保存文件, 如果文件已经被其他 VIM 实例打开, 则会进行提示,
-" 如果忽略提示强制进行保存, 则其他 VIM 实例打开的此文件也会同步变更.
+" 打开文件监视, 在修改内容后保存文件, 如果文件已经被其他 Vim 实例打开, 则会进行提示,
+" 如果忽略提示强制进行保存, 则其他 Vim 实例打开的此文件也会同步变更.
 set autoread
 
 " normal 模式下允许光标移动到最后一个字符的右边.
@@ -1804,7 +1826,7 @@ set whichwrap+=<,>,h,l
 " :W  普通用户没有权限时使用 sudo 权限保存文件.
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
-" 保留撤销历史, VIM 会在编辑时保存操作历史, 用来供用户撤消更改;
+" 保留撤销历史, Vim 会在编辑时保存操作历史, 用来供用户撤消更改;
 " 默认情况下, 操作记录只在本次编辑时有效, 一旦编辑结束、文件关闭, 操作历史就消失了;
 " 打开这个设置, 可以在文件关闭后, 操作记录保留在一个文件里面继续存在.
 " 这意味着, 重新打开一个文件, 可以撤销上一次编辑时的操作;
@@ -1816,12 +1838,12 @@ if !isdirectory(&undodir)
 endif
 
 " normal 模式下的 nyy 复制(n为数字), 或进入 visual 模式下选择内容后的 y 复制,
-" 除了可以将复制的内容粘贴(使用 p)到其他 VIM 实例,
+" 除了可以将复制的内容粘贴(使用 p)到其他 Vim 实例,
 " 还可以将内容粘贴(command v)到系统的其他任何可输入窗口.
 "
-" 注意: 以上所说的都是针对本地操作系统使用本地 VIM 的情况,
-" 比如 macOS/Windows/Linux 本地的 VIM 和本地的其他应用窗口之间,
-" 不包括远程连接的操作系统的 VIM 和本地应用的窗口之间.
+" 注意: 以上所说的都是针对本地操作系统使用本地 Vim 的情况,
+" 比如 macOS/Windows/Linux 本地的 Vim 和本地的其他应用窗口之间,
+" 不包括远程连接的操作系统的 Vim 和本地应用的窗口之间.
 if has('clipboard')
     if has('unnamedplus')
         set clipboard=unnamed,unnamedplus " for Linux
@@ -1869,26 +1891,26 @@ endif
 " }}
 
 
-" VIM 使用技巧 {{
+" Vim 使用技巧 {{
 
 """""""""" 常用命令行 {{
 "
-" vim -u NONE                   无插件方式运行 VIM.
-" vim -g 或 mvim 或 gvim        macOS 下运行 VIM 的图形界面模式, 需安装 macvim.
-" vim -V9myVIM.log              将 VIM 运行的详细日志保存到 myVIM.log 文件中.
+" vim -u NONE                   无插件方式运行 Vim.
+" vim -g 或 mvim 或 gvim        macOS 下运行 Vim 的图形界面模式, 需安装 macvim.
+" vim -V9myVim.log              将 Vim 运行的详细日志保存到 myVim.log 文件中.
 " vim --startuptime vim.log     记录带时间字段的启动日志.
 " vim -c 'normal 5G36|'         normal 模式下跳转到第 5 行第 36 列.
-" vimtutor                      VIM 自带的学习教程.
+" vimtutor                      Vim 自带的学习教程.
 "
 " }}
 
 """""""""" 常用的原生能力 {{
 "
 " ** 持续优化你的 vimrc 文件:
-"           :version  显示当前 VIM 的版本号和支持的特性.
-"     :help [object]  object 表示你要查看其文档的 VIM 某个命令或者插件名称等.
+"           :version  显示当前 Vim 的版本号和支持的特性.
+"     :help [object]  object 表示你要查看其文档的 Vim 某个命令或者插件名称等.
 "        :h [object]  同上.
-"           :h index  查询 VIM 所有键盘命令定义.
+"           :h index  查询 Vim 所有键盘命令定义.
 "          :h ctrl-p  查看 normal 模式下 ctrl p 快捷键的意思.
 "        :h i_ctrl-p  查看 insert 模式下 ctrl p 快捷键的意思.
 "                  K  1)通过上个命令打开文档, 对于有下划线的文本对象,
@@ -1900,7 +1922,7 @@ endif
 "                 ,R  同上, 只不过这个是为了操作简便做的自定义配置.
 "          :messages  如果出现报错信息, 但是你还没看清楚就消息就已经退出了,
 "                     使用此命令可以重新看到错误信息.
-"           :h error  查看 VIM 都有哪些错误信息.
+"           :h error  查看 Vim 都有哪些错误信息.
 "             :h E11  查看具体的某一个错误编号的释义.
 "
 " ** 文本对象的快捷编辑:
@@ -2106,7 +2128,7 @@ endif
 "                "ap  将寄存器 a 中的内容粘贴到光标所在处,
 "                     我们可以拷贝不同内容到不同的寄存器,
 "                     粘贴时分别选择相应的寄存器的内容进行粘贴.
-"               :reg  查看当前 VIM 实例的寄存器列表.
+"               :reg  查看当前 Vim 实例的寄存器列表.
 "
 " ** 不依赖插件的自定义配置提供的功能:
 "                  Y  这个命令默认是复制整行的意思,
@@ -2117,7 +2139,7 @@ endif
 "                     () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
 "       ctrl j/k/h/l  光标移动到 下面/上面/左边/右边 的窗口.
 "                 ,R  文件 ~/.vimrc 发生变化后, 正在编辑的文件不需要退出,
-"                     通过该快捷键即可重新加载 VIM 配置文件, 使变更马上生效.
+"                     通过该快捷键即可重新加载 Vim 配置文件, 使变更马上生效.
 "                 ,E  上下分屏方式打开 ~/.vimrc 文件.
 
 " }}
@@ -2167,7 +2189,7 @@ endif
 "                     如果文件已经打开了, 则直接跳转到相关标签页.
 "
 " ** terryma/vim-multiple-cursors (https://github.com/mg979/vim-visual-multi)
-"             ctrl n  开启多光标模式, 默认对应 VIM 的 visual 模式.
+"             ctrl n  开启多光标模式, 默认对应 Vim 的 visual 模式.
 "                n/N  开启多光标模式后, 按 n/N 向下或向上选择光标下的单词.
 "                  q  取消选择当前行的目标单词并同时选择下一行的目标单词.
 "                  Q  不选择当前行的目标单词.
@@ -2268,7 +2290,7 @@ endif
 "            :Gblame
 "         :Git blame  类似 git blame.
 "          :Git diff  类似 git diff.
-"                     等等, 都可以直接在 VIM 的 command-line 模式运行.
+"                     等等, 都可以直接在 Vim 的 command-line 模式运行.
 "
 " ** junegunn/gv.vim (https://github.com/junegunn/gv.vim)
 "                :GV  类似 :Git log.
@@ -2337,7 +2359,7 @@ endif
 " ** 本地编辑器之间的复制和粘贴:
 "       [n]yy / Y 或 v 选择文本使用y复制等复制命令需要的文本对象,
 "       此时默认已复制到本地系统剪贴板,
-"       可在本文件、其他 VIM 实例文件 normal 模式下按 p/P 来粘贴,
+"       可在本文件、其他 Vim 实例文件 normal 模式下按 p/P 来粘贴,
 "       或 insert 模式下`command v`粘贴,
 "       或操作系统上的任何文本框内进行`command v`粘贴.
 "
