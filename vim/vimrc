@@ -1199,56 +1199,10 @@ else
   hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
 endif
 
-" 显示行号.
-set nu
-
-" 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
-set number relativenumber
-
-" 使查看帮助文档的窗口也显示相对行号.
-augroup vim help
-    autocmd!
-    autocmd FileType help setlocal number
-    autocmd FileType help setlocal relativenumber
-augroup END
-
-" 显示当前光标所在的行号和列号.
-set ruler
-
-" 突出显示当前行.
-set cursorline
-
-" 突出显示当前列.
-set cursorcolumn
-
-" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题.
-set list listchars=tab:>-,trail:-
-
-" 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
-" 所以这里使用 SpecialKey 来改变 tab 键和行尾空格的颜色样式.
-hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
-
-" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
-autocmd FileType * set colorcolumn=80
-
 " 设置提示列的颜色方案;
 " 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
 " coc-git 扩展的文件变化信息也会出现在此列.
 hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
-
-" 指定何时显示页面标签, 默认值: 1
-"   0: 永远不会
-"   1: 至少有两个标签页时才会
-"   2: 永远会
-set showtabline=1
-
-" 命令行窗口的高度, 默认值7.
-" 命令行窗口打开的方法:
-"   1) command-line 模式下, 按快捷键 ctrl f 打开命令行窗口并显示命令历史记录.
-"   2) normal 模式下, 按快捷键 q: 打开命令行窗口并显示命令历史记录.
-"   3) normal 模式下, 按快捷键 q/ 将会打开命令行窗口并显示向下搜索的历史记录.
-"   4) normal 模式下, 按快捷键 q? 将会打开命令行窗口并显示向上搜索的历史记录.
-set cmdwinheight=8
 
 " }}
 
@@ -1696,6 +1650,42 @@ let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
 " 常用原生选项 {{
 
+" 显示行号.
+set nu
+
+" 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
+set number relativenumber
+
+" 使查看帮助文档的窗口也显示相对行号.
+augroup vim help
+    autocmd!
+    autocmd FileType help setlocal number
+    autocmd FileType help setlocal relativenumber
+augroup END
+
+" 显示当前光标所在的行号和列号.
+set ruler
+
+" 指定何时显示页面标签, 默认值: 1
+"   0: 永远不会
+"   1: 至少有两个标签页时才会
+"   2: 永远会
+set showtabline=1
+
+" 命令行窗口的高度, 默认值7.
+" 命令行窗口打开的方法:
+"   1) command-line 模式下, 按快捷键 ctrl f 打开命令行窗口并显示命令历史记录.
+"   2) normal 模式下, 按快捷键 q: 打开命令行窗口并显示命令历史记录.
+"   3) normal 模式下, 按快捷键 q/ 将会打开命令行窗口并显示向下搜索的历史记录.
+"   4) normal 模式下, 按快捷键 q? 将会打开命令行窗口并显示向上搜索的历史记录.
+set cmdwinheight=8
+
+" 突出显示当前行.
+set cursorline
+
+" 突出显示当前列.
+set cursorcolumn
+
 " 一行内容超过终端宽度时是否折行, 默认就是折行.
 set wrap
 
@@ -1757,6 +1747,17 @@ set virtualedit=onemore
 " 当一行字符长度超过多少个字符时, 会自动换行, 注意会加上换行符;
 " 我这里配置这个的目的是解决 .vimrc 的注释内容超过80个字符就自动换行的问题.
 set textwidth=1000
+
+" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题.
+set list listchars=tab:>-,trail:-
+
+" 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
+" 所以这里使用 SpecialKey 来改变 tab 键和行尾空格的颜色样式,
+" 从而方便我们能看到多余的空白字符.
+hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
+
+" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
+autocmd FileType * set colorcolumn=80
 
 " }}
 
