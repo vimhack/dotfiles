@@ -1764,11 +1764,15 @@ autocmd FileType * set colorcolumn=80
 
 " 自定义配置 {{
 
-" ,E  上下分屏方式打开 ~/.vimrc 配置文件.
-noremap <leader>E :sp ~/.vimrc<CR>
-
-" ,R  变更 ~/.vimrc 文件后不需要退出, 直接使用此命令进行 reload 生效.
-noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" ,E  上下分屏方式打开 vim 或 nvim 的配置文件;
+" ,R  变更配置文件后不需要退出, 直接使用此命令进行 reload 生效.
+if has('nvim')
+  noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
+  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
+else
+  noremap <silent> <leader>E :sp ~/.vimrc<CR>
+  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '~/.vimrc reloaded'"<CR>
+endif
 
 " 多窗口之间上下左右移动的快捷键重新映射.
 noremap <C-h> <C-w>h
