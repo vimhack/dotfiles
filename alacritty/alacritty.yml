@@ -103,6 +103,30 @@ debug:
 
 # doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
 schemes:
+  # Colors (Tender)
+  tender: &tender
+    primary:
+      background: "#282828"
+      foreground: "#eeeeee"
+    normal:
+      black: "#282828"
+      red: "#f43753"
+      green: "#c9d05c"
+      yellow: "#ffc24b"
+      blue: "#b3deef"
+      magenta: "#d3b987"
+      cyan: "#73cef4"
+      white: "#eeeeee"
+    bright:
+      black: "#4c4c4c"
+      red: "#f43753"
+      green: "#c9d05c"
+      yellow: "#ffc24b"
+      blue: "#b3deef"
+      magenta: "#d3b987"
+      cyan: "#73cef4"
+      white: "#feffff"
+
   # Default colors (Tomorrow Night)
   base16-default-dark: &base16-default-dark
     primary:
@@ -566,7 +590,7 @@ window:
   startup_mode: Maximized
 
 # 背景透明度配置, 取值范围: 0.0 到 1.0
-background_opacity: 0.8
+background_opacity: 0.9
 
 # 字体(Font)样式配置.
 font:

@@ -137,7 +137,7 @@ theme(){
     local theme_name=$1
     local themes=(
         # dark
-        dracula molokai rigel jellybeans base16-default-dark nord
+        dracula molokai rigel jellybeans base16-default-dark nord tender
         # both dark and light
         gruvbox solarized one iceberg
     )
