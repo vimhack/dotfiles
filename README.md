@@ -29,9 +29,12 @@ To install, run the following from your terminal:
 $ git clone https://github.com/windvalley/dotfiles.git ~/.dotfiles
 
 # vim
-$ ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc  # for vim
-$ mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim  # for nvim
+$ ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 $ ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
+
+# nvim
+$ mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
+$ ln -sf ~/.dotfiles/vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # tmux
 $ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
