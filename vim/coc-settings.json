@@ -12,11 +12,11 @@
 
   "git.addGBlameToBufferVar": true,
   "git.showCommitInFloating": true,
-  "git.addedSign.hlGroup": "GitGutterAdd",
-  "git.changedSign.hlGroup": "GitGutterChange",
-  "git.removedSign.hlGroup": "GitGutterDelete",
-  "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "git.addedSign.hlGroup": "GitAddSign",
+  "git.changedSign.hlGroup": "GitChangeSign",
+  "git.removedSign.hlGroup": "GitDeleteSign",
+  "git.topRemovedSign.hlGroup": "GitTopDeleteSign",
+  "git.changeRemovedSign.hlGroup": "GitChangeDeleteSign",
 
   "languageserver": {
     // luarocks install --server=http://luarocks.org/dev lua-lsp

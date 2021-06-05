@@ -215,10 +215,6 @@ Plug 'tpope/vim-fugitive'
 " git 历史版本的浏览插件, 该插件依赖 vim-fugitive 插件.
 Plug 'junegunn/gv.vim'
 
-" 在文件窗口左侧标记列显示内容变化的行.
-" NOTE: 这里只使用到此插件的配色, 为 coc-git 提供标记的配色.
-Plug 'airblade/vim-gitgutter'
-
 " 美化状态栏插件.
 Plug 'itchyny/lightline.vim'
 
@@ -1093,11 +1089,6 @@ endif
 
 " }}
 
-" 设置提示列的颜色方案, 去掉默认的背景色;
-" 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
-" coc-git 扩展的文件变化信息也会出现在此列.
-hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
-
 " 是否启用 Vim/Neovim 透明背景色, 1 为启用, 0 为禁用.
 let bgtransparent=1
 if (bgtransparent == 1)
@@ -1129,6 +1120,19 @@ if (bgtransparent == 1)
     hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
   endif
 endif
+
+" 设置提示列的颜色方案, 去掉默认的背景色;
+" 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
+" coc-git 扩展的文件变化信息也会出现在此列.
+hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+
+" 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
+" NOTE: 必须放在颜色主题设置的后面才有效果.
+hi GitAddSign    guifg=SeaGreen ctermfg=2
+hi GitChangeSign guifg=DarkYellow ctermfg=3 
+hi GitDeleteSign guifg=DarkRed ctermfg=1
+hi GitTopDeleteSign guifg=Red ctermfg=1*
+hi GitChangeDeleteSign guifg=LightRed ctermfg=1*
 
 " }}
 
@@ -1254,13 +1258,6 @@ let g:webdevicons_enable = 1
 set guifont=Hack_Nerd_Font:h12
 """""""""""""""""""""""""""""""
 
-"""""" 'airblade/vim-gitgutter'
-" doc: https://github.com/airblade/vim-gitgutter
-
-" 设置提示标识的高亮颜色.
-hi GitGutterAdd    guifg=#009900 ctermfg=2
-hi GitGutterChange guifg=#bbbb00 ctermfg=3
-hi GitGutterDelete guifg=#ff2222 ctermfg=1
 """""""""""""""""""""""""""""""
 
 """""" 'Yggdroot/indentLine'
