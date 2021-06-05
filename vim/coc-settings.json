@@ -1,7 +1,10 @@
 {
-  // 本文件 coc-settings.json 是 Vim 的代码补全插件 coc.nvim 的配置文件, 配合 Vim 使用.
+  // 本文件 coc-settings.json 是 Vim/Neovim 的代码补全插件 coc.nvim 的配置文件.
   // 安装方法:
-  // wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+  // 1. Vim
+  //    wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+  // 2. Neovim
+  //    wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
 
 
   // edit, split, vsplit, tab drop
@@ -13,7 +16,7 @@
   "git.changedSign.hlGroup": "GitGutterChange",
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.changeRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
 
   "languageserver": {
     // luarocks install --server=http://luarocks.org/dev lua-lsp
