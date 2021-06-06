@@ -73,6 +73,7 @@ Current theme is 'dracula', you can change to follows:
 * jellybeans
 * base16-default-dark
 * nord
+* tender
 * gruvbox
 * solarized
 * one
@@ -121,7 +122,54 @@ $ vim-bgtransparent 0
 
 ## 🔮 Show
 
-![show](images/show.png)
+ColorScheme: `dracula`
+FontSize: `11`
+Opacity: `0.9`
+VimBgTransparent: `1`
+
+![show](images/dracula.png)
+
+ColorScheme: `gruvbox`
+FontSize: `11`
+Opacity: `0.95`
+VimBgTransparent: `1`
+
+![show](images/gruvbox.png)
+
+ColorScheme: `one`
+FontSize: `11`
+Opacity: `1`
+VimBgTransparent: `1`
+
+![show](images/one.png)
+
+ColorScheme: `solarized`
+FontSize: `11`
+Opacity: `0.95`
+VimBgTransparent: `1`
+
+![show](images/solarized.png)
+
+ColorScheme: `jellybeans`
+FontSize: `11`
+Opacity: `0.8`
+VimBgTransparent: `0`
+
+![show](images/jellybeans.png)
+
+ColorScheme: `molokai`
+FontSize: `11`
+Opacity: `0.85`
+VimBgTransparent: `1`
+
+![show](images/molokai.png)
+
+ColorScheme: `iceberg`
+FontSize: `11`
+Opacity: `0.9`
+VimBgTransparent: `1`
+
+![show](images/iceberg.png)
 
 ## ⚖️ License
 
