@@ -1023,6 +1023,7 @@ colorscheme dracula
 "   iceberg: https://github.com/cocopon/iceberg.vim
 "   base16-default-dark(tomorrow night): https://github.com/chriskempson/base16-vim
 "   nord: https://github.com/arcticicestudio/nord-vim
+"   tender: https://github.com/jacoborus/tender.vim
 "
 " NOTE:
 "   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
@@ -1057,6 +1058,9 @@ endif
 
 " *** molokai ***
 if (g:colors_name == 'molokai')
+  let g:molokai_original = 1
+  let g:rehash256 = 1
+
   let g:lightline.colorscheme = 'molokai'
 endif
 
@@ -1103,6 +1107,8 @@ endif
 let bgtransparent=1
 if (bgtransparent == 1)
   " 使 vim/nvim 背景透明.
+  " FIXME: 设置这条指令后, 对于 Go 类型文件, 使用 vim 会有部分单词背景色是黑色,
+  " 而 nvim 不存在此问题.
   hi Normal ctermbg=NONE guibg=NONE
 
   " 使 popup window 背景变透明.
@@ -1280,6 +1286,7 @@ let g:indentLine_fileTypeExclude = ['markdown']
 
 """""" 'voldikss/vim-floaterm'
 " doc: https://github.com/voldikss/vim-floaterm
+" FIXME: 使用 Vim 的情况, floaterm 的颜色方案和 Vim 的不一致, 使用 Neovim 无此问题.
 
 " 显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
 let g:floaterm_keymap_toggle = '<Leader>t'
