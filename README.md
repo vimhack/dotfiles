@@ -26,28 +26,28 @@ To install, run the following from your terminal:
 (please backup your existing dotfiles first)
 
 ```bash
-$ git clone https://github.com/windvalley/dotfiles.git ~/.dotfiles
+git clone https://github.com/windvalley/dotfiles.git ~/.dotfiles
 
 # vim
-$ ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
-$ ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
+ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
+ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
 
 # nvim
-$ mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
-$ ln -sf ~/.dotfiles/vim/coc-settings.json ~/.config/nvim/coc-settings.json
+mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
+ln -sf ~/.dotfiles/vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
 # tmux
-$ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
 # zsh
-$ ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 
 # ranger
-$ ln -sf ~/.dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
+ln -sf ~/.dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
 
 # alacritty
-$ ln -sf ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-$ cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
+ln -sf ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 ```
 
 💡 You can go to the beginning of each dotfile to view the detailed installation steps.
@@ -55,13 +55,69 @@ $ cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 To update:
 
 ```bash
-$ cd ~/.dotfiles
-$ git pull
+cd ~/.dotfiles
+git pull
 ```
 
 ## 📜 Tips
 
-Almost every dotfile has usage tips at the end of it for reference.
+**Change colorscheme of Vim/Neovim and Alacritty:**
+
+```text
+theme
+
+Current theme is 'dracula', you can change to follows:
+
+* molokai
+* rigel
+* jellybeans
+* base16-default-dark
+* nord
+* gruvbox
+* solarized
+* one
+* iceberg
+
+For example, change theme to 'iceberg':
+
+$ theme iceberg
+```
+
+**Change font size of Alacritty:**
+
+```text
+font
+
+Current font size is '12.0', you can change by:
+
+$ font number
+
+* number should between 1.0 and  200.0
+```
+
+**Change opacity of Alacritty:**
+
+```text
+opacity
+
+Current opacity is '0.9', you can change by:
+
+$ opacity number
+
+* number should between 0.0 and 1.0
+```
+
+**Toggle Vim/Neovim transparent background color:**
+
+```text
+vim-bgtransparent
+
+Vim background transparent was enabled, to disable:
+
+$ vim-bgtransparent 0
+```
+
+💡 Almost every dotfile has usage tips at the end of it for reference.
 
 ## 🔮 Show
 
