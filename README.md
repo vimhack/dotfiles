@@ -127,49 +127,49 @@ FontSize: `11`
 Opacity: `0.9`
 VimBgTransparent: `1`
 
-![show](images/dracula.png)
+![dracula](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/dracula.png)
 
 ColorScheme: `gruvbox`
 FontSize: `11`
 Opacity: `0.95`
 VimBgTransparent: `1`
 
-![show](images/gruvbox.png)
-
-ColorScheme: `one`
-FontSize: `11`
-Opacity: `1`
-VimBgTransparent: `1`
-
-![show](images/one.png)
-
-ColorScheme: `solarized`
-FontSize: `11`
-Opacity: `0.95`
-VimBgTransparent: `1`
-
-![show](images/solarized.png)
-
-ColorScheme: `jellybeans`
-FontSize: `11`
-Opacity: `0.8`
-VimBgTransparent: `0`
-
-![show](images/jellybeans.png)
-
-ColorScheme: `molokai`
-FontSize: `11`
-Opacity: `0.85`
-VimBgTransparent: `1`
-
-![show](images/molokai.png)
+![gruvbox](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/gruvbox.png)
 
 ColorScheme: `iceberg`
 FontSize: `11`
 Opacity: `0.9`
 VimBgTransparent: `1`
 
-![show](images/iceberg.png)
+![iceberg](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/iceberg.png)
+
+ColorScheme: `solarized`
+FontSize: `11`
+Opacity: `0.95`
+VimBgTransparent: `1`
+
+![solarized](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/solarized.png)
+
+ColorScheme: `one`
+FontSize: `11`
+Opacity: `1`
+VimBgTransparent: `1`
+
+![one](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/one.png)
+
+ColorScheme: `jellybeans`
+FontSize: `12`
+Opacity: `0.8`
+VimBgTransparent: `0`
+
+![jellybeans](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/jellybeans.png)
+
+ColorScheme: `molokai`
+FontSize: `12`
+Opacity: `0.9`
+VimBgTransparent: `1`
+
+![molokai](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/molokai.png)
 
 ## ⚖️ License
 
