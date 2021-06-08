@@ -556,7 +556,7 @@ schemes:
 # 主题配置 {{
 
 # 从 Color Schemes 中选则一个使用:
-#   rigel, dracula, molokai, jellybeans, base16-default-dark,
+#   rigel, dracula, molokai, jellybeans, base16-default-dark, nord, tender,
 #   gruvbox_dark, gruvbox_light, iceberg, iceberg_light,
 #   solarized_dark, solarized_light, one_dark, one_light
 colors: *dracula

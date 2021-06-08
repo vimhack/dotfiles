@@ -138,8 +138,9 @@ theme(){
     local themes=(
         # dark
         dracula molokai rigel jellybeans base16-default-dark nord tender
-        # both dark and light
         gruvbox solarized one iceberg
+        # light
+        gruvbox_light solarized_light one_light iceberg_light
     )
 
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
@@ -177,7 +178,14 @@ EOF
     }
 
     gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty
-    gsed -i "/^colorscheme/s/^.*$/colorscheme $theme_name/" $vimrc
+
+    if echo $theme_name|grep -q "_light"; then
+        gsed -i "/^colorscheme/s/^.*$/colorscheme ${theme_name/_light}/" $vimrc
+        gsed -i "/^set background=/s/^.*$/set background=light/" $vimrc
+    else
+        gsed -i "/^colorscheme/s/^.*$/colorscheme $theme_name/" $vimrc
+        gsed -i "/^set background=/s/^.*$/set background=dark/" $vimrc
+    fi
 }
 
 # Alacritty 终端背景透明度调整命令.

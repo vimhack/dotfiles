@@ -1013,7 +1013,7 @@ set background=dark
 " 启用颜色主题方案.
 colorscheme dracula
 
-" 优秀的几种颜色主题方案:
+" 优秀的颜色主题方案:
 "   dracula: https://draculatheme.com/vim
 "   rigel: https://github.com/Rigellute/rigel
 "   gruvbox: https://github.com/morhetz/gruvbox
@@ -1022,12 +1022,13 @@ colorscheme dracula
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
 "   base16-default-dark(tomorrow night): https://github.com/chriskempson/base16-vim
+"   jellybeans: https://github.com/nanotech/jellybeans.vim
 "   nord: https://github.com/arcticicestudio/nord-vim
 "   tender: https://github.com/jacoborus/tender.vim
 "
 " NOTE:
-"   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉体验.
-"   2) dracula, molokai, jellybeans, base16-default-dark, nord 主题暂时没有 light 方案.
+"   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
+"   2) dracula, molokai, jellybeans, base16-default-dark, nord, tender 主题没有 light 方案.
 "
 " 针对以上几种颜色方案的个性配置 {{
 

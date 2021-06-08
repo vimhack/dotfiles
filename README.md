@@ -78,10 +78,14 @@ Current theme is 'dracula', you can change to follows:
 * solarized
 * one
 * iceberg
+* gruvbox_light
+* solarized_light
+* one_light
+* iceberg_light
 
-For example, change theme to 'iceberg':
+For example, change theme to 'iceberg_light':
 
-$ theme iceberg
+$ theme iceberg_light
 ```
 
 **Change font size of Alacritty:**
