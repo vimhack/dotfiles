@@ -62,13 +62,14 @@ plugins=(vi-mode tmux git z history brew extract web-search emoji zsh-autosugges
 
 source $ZSH/oh-my-zsh.sh
 
+# 设置系统默认语言, 避免终端出现中文乱码.
 export LANG=en_US.UTF-8
 
-# 解决 ranger.vim 乱码的问题.
+# 专门用来解决 ranger.vim 乱码的问题.
 export LC_ALL=en_US.UTF-8
 
-# 解决执行 crontab -e 报错的问题.
-export EDITOR=vim
+# 默认的编辑器, git、crontab等会默认使用.
+export EDITOR=nvim
 
 # }}
 
@@ -102,6 +103,7 @@ GOPROXY=https://goproxy.cn
 PATH="$GOBIN:$PATH"
 export GOPATH GOBIN GOPROXY PATH
 
+# gf 框架命令行工具(https://github.com/gogf/gf)
 alias gf=gf
 # ****************
 
@@ -116,23 +118,28 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # ****** Lua ******
 # lua 指定使用 5.3 版本.
 ln -sf /usr/local/Cellar/lua/5.3.5_1/bin/lua /usr/local/bin/lua
+
 # luarocks 指定使用 lua 的 5.3 版本.
 alias luarocks="luarocks  --lua-dir=/usr/local/opt/lua@5.3"
+
 export PATH=$HOME/.luarocks/bin:$PATH
 # *****************
 
 # ****** node ******
 export PATH="/usr/local/opt/node@14/bin:$PATH"
+# ******************
+
 # }}
 
 
-# --- Vim & Alacritty 主题相关命令配置 {{
+# --- Vim/Neovim & Alacritty 主题相关命令配置 {{
 
-# NOTE: Vim 和 Alacritty 的配置文件位置请根据你的实际情况填写.
+# Vim 和 Alacritty 的配置文件.
+# NOTE: 尽量不要在这里写软连接文件, 应该写原始文件路径.
 vimrc=~/.dotfiles/vim/vimrc
 alacritty=~/.dotfiles/alacritty/alacritty.yml
 
-# Vim 和 Alacritty 主题切换命令.
+# Vim/Neovim 和 Alacritty 颜色方案主题切换命令.
 theme(){
     local theme_name=$1
     local themes=(
@@ -279,13 +286,18 @@ alias v="vim-bgtransparent"
 
 # --- 其他配置 {{
 
+alias vi="nvim"
+
+# 拷贝和移动文件的时候, 如果目标文件存在则进行交互式确认.
+alias cp='cp -i'
+alias mv='mv -i'
+
 # 列出正在监听的tcp连接.
 alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
 
 export GPG_TTY=$(tty)
 
-# fzf
-# doc: https://github.com/junegunn/fzf
+# fzf(https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border'
 alias vimfzf="vim \$(fzf)"
 
