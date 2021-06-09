@@ -97,19 +97,45 @@ gsed -i '/^#Host github.com/{s/^#//;n;s/^#//}' ~/.ssh/config"
 # --- 编程语言 {{
 
 # ****** Go ******
+# 安装 Go:
+#   brew install go
+# 更新 Go:
+#   brew upgrade go
+# 安装 protobuf 的编译器 protoc:
+#   brew install protobuf
+# 安装 protoc 需要的 Go 语言代码转换工具 protoc-gen-go:
+#   brew install protoc-gen-go
+
 GOPATH=$HOME/go
 GOBIN=$GOPATH/bin
-GOPROXY=https://goproxy.cn
+
+# on  开启 Go Modules 特性, 使 Go 编译器忽略 $GOPATH 和 vender 文件夹, 只根据 go.mod 下载依赖;
+# off  关闭 Go Modules 特性, 使 Go 编译器依旧在 $GOPATH 和 vender 文件夹来查找依赖;
+# auto  当源码在 $GOPATH/src 目录下, 并且项目目录下没有 go.mod 文件时, 关闭 Go Modules 特性, 其他情况下均开启.
+# Go 1.14+ 版本后 auto 为默认值.
+GO111MODULE=auto
+# 下载 Go 包的代理服务器, direct 的作用是当代理服务器上没有要下载的包, 则直接从原始地址下载.
+GOPROXY=https://goproxy.cn,direct
+# 下载 Go 包时, 如果包地址是这里配置的地址, 则不走设置的代理服务器, 直接从这里配置的地址下载;
+# 一般这里配置公司内部配置的私有 Go 包仓库;
+# Go 1.13+ 开始支持.
+GOPRIVATE=
+# 默认值: sum.golang.org, 是一个 Web 服务器, 用来查询依赖包指定版本的哈希值, 确保拉取到的 Go 包未经过篡改;
+# 如果不需要校验, 则设置为 off.
+GOSUMDB=sum.golang.org
+
 PATH="$GOBIN:$PATH"
-export GOPATH GOBIN GOPROXY PATH
+
+export GOPATH GOBIN GOPROXY GOPRIVATE GOSUMDB PATH
 
 # gf 框架命令行工具(https://github.com/gogf/gf)
 alias gf=gf
 # ****************
 
 # ****** Python3 ******
-export PATH="/usr/local/opt/python3/bin:$PATH"
 ln -sf /usr/local/opt/python3/bin/python3 /usr/local/opt/python3/bin/python
+
+export PATH="/usr/local/opt/python3/bin:$PATH"
 
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
