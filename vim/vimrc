@@ -1040,8 +1040,19 @@ let g:gruvbox_contrast_light = 'hard'
 " 调整 solarized 主题的颜色对比度.
 " 可选值: normal, high, low
 let g:solarized_contrast = 'high'
-" 禁用下划线
+" 禁用下划线.
 let g:solarized_underline = 0
+
+" papercolor 主题设置:
+" 是否允许部分 symbol 粗体字, 1 是允许, 0 是不允许.
+let g:PaperColor_Theme_Options.theme.default.allow_bold = 0
+" 是否允许部分 symbol 斜体字, 1 是允许, 0 是不允许.
+if has('nvim')
+  let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
+else
+  " vim 不支持斜体字, 需要禁用.
+  let g:PaperColor_Theme_Options.theme.default.allow_italic = 0
+endif
 
 " }}
 
@@ -1063,6 +1074,7 @@ colorscheme dracula
 "   jellybeans: https://github.com/nanotech/jellybeans.vim
 "   nord: https://github.com/arcticicestudio/nord-vim
 "   tender: https://github.com/jacoborus/tender.vim
+"   papercolor: https://github.com/NLKNguyen/papercolor-theme
 "
 " NOTE:
 "   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
