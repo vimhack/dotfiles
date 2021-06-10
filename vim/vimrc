@@ -1006,12 +1006,21 @@ if (bgtransparent == 1)
   " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
   " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
   let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default': {
-  \       'transparent_background': 1
+  \  'theme': {
+  \    'default': {
+  \      'transparent_background': 1
   \     }
   \   }
   \ }
+
+  " 对于 jellybeans 主题, 使用 hi Normal 的方式设置背景透明的方式,
+  " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
+  let g:jellybeans_overrides = {
+  \  'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+  \ }
+  if has('termguicolors') && &termguicolors
+    let g:jellybeans_overrides['background']['guibg'] = 'none'
+  endif
 endif
 
 " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
@@ -1064,7 +1073,7 @@ colorscheme dracula
 
 if (bgtransparent == 1)
   " 使 vim/nvim 背景透明.
-  if (g:colors_name != 'solarized' && g:colors_name == 'PaperColor')
+  if (g:colors_name != 'solarized' && g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
     " FIXME: 设置这条指令后, 对于 molokai 主题, 当打开 Go 类型文件时,
     " 使用 vim 会有部分单词背景色是黑色, 而 nvim 不存在此问题.
     hi Normal ctermbg=NONE guibg=NONE
