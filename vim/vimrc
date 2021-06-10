@@ -1005,6 +1005,12 @@ endif
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
 
+" 调整 solarized 主题的颜色对比度.
+" 可选值: normal, high, low
+let g:solarized_contrast = 'high'
+" 禁用下划线
+let g:solarized_underline = 0
+
 " }}
 
 " 设置背景色为黑色或亮色, dark or light.
@@ -1108,9 +1114,16 @@ endif
 let bgtransparent=1
 if (bgtransparent == 1)
   " 使 vim/nvim 背景透明.
-  " FIXME: 设置这条指令后, 对于 Go 类型文件, 使用 vim 会有部分单词背景色是黑色,
-  " 而 nvim 不存在此问题.
-  hi Normal ctermbg=NONE guibg=NONE
+  if (g:colors_name == 'solarized')
+    " 对于 solarized light 主题, 使用 hi Normal 的方式设置背景透明的方式,
+    " lightline 插件提供的状态栏的背景色还是 dark, 所以对于 solarized 主题,
+    " 通过其提供的特有指令还实现背景透明.
+    let g:solarized_termtrans = 1
+  else
+    " FIXME: 设置这条指令后, 对于 molokai 主题, 当打开 Go 类型文件时,
+    " 使用 vim 会有部分单词背景色是黑色, 而 nvim 不存在此问题.
+    hi Normal ctermbg=NONE guibg=NONE
+  endif
 
   " 使 popup window 背景变透明.
   hi Pmenu ctermbg=NONE guibg=NONE
