@@ -171,9 +171,9 @@ theme(){
     local themes=(
         # dark
         dracula molokai rigel jellybeans base16-default-dark nord tender
-        gruvbox solarized one iceberg
+        gruvbox solarized one iceberg papercolor
         # light
-        gruvbox_light solarized_light one_light iceberg_light
+        gruvbox_light solarized_light one_light iceberg_light papercolor_light
     )
 
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then

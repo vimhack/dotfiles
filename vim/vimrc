@@ -179,6 +179,9 @@ Plug 'arcticicestudio/nord-vim'
 " tender
 Plug 'jacoborus/tender.vim'
 
+" papercolor
+Plug 'NLKNguyen/papercolor-theme'
+
 " ********************** 代码补全 ********************************************
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
@@ -988,8 +991,28 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" 部分主题颜色方案的个性配置 {{
+" 自定义配置, 是否启用 Vim/Neovim 透明背景色, 1 为启用, 0 为禁用.
+let bgtransparent=1
+
+" 颜色主题方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
+
+if (bgtransparent == 1)
+  " 对于 solarized light 主题, 使用 hi Normal 的方式设置背景透明的方式,
+  " lightline 插件提供的状态栏的背景色还是 dark, 所以对于 solarized 主题,
+  " 通过其提供的特有指令还实现背景透明.
+  let g:solarized_termtrans = 1
+
+  " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
+  " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
+  let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }
+endif
 
 " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
 " from: https://github.com/dracula/vim/issues/219
@@ -1036,7 +1059,42 @@ colorscheme dracula
 "   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
 "   2) dracula, molokai, jellybeans, base16-default-dark, nord, tender 主题没有 light 方案.
 "
-" 针对以上几种颜色方案的个性配置 {{
+" 颜色主题方案的个性配置 {{
+" NOTE: 这部分配置必须放到 colorscheme theme_name 之后, 否则不起作用.
+
+if (bgtransparent == 1)
+  " 使 vim/nvim 背景透明.
+  if (g:colors_name != 'solarized' && g:colors_name == 'PaperColor')
+    " FIXME: 设置这条指令后, 对于 molokai 主题, 当打开 Go 类型文件时,
+    " 使用 vim 会有部分单词背景色是黑色, 而 nvim 不存在此问题.
+    hi Normal ctermbg=NONE guibg=NONE
+  endif
+
+  " 使 popup window 背景变透明.
+  hi Pmenu ctermbg=NONE guibg=NONE
+
+  if !has('nvim')
+    " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
+    " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
+    if (g:colors_name == 'dracula')
+      hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
+    endif
+
+    " 去掉颜色主题自带的行号背景色, 值为1时表示去掉行号背景色, 默认不启用.
+    " NOTE: nvim 不能设置此条目, 会造成行号颜色变为亮白色, 很不协调.
+    let linenr_bg_color=0
+    if (linenr_bg_color==1)
+      hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
+    endif
+  endif
+
+  " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
+  " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+  let linenr_colorscheme_custom=0
+  if (linenr_colorscheme_custom==1)
+    hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
+  endif
+endif
 
 " *** rigel ***
 if (g:colors_name == 'rigel')
@@ -1108,48 +1166,12 @@ if (g:colors_name == 'tender')
   let g:lightline.colorscheme = 'tender'
 endif
 
-" }}
-
-" 是否启用 Vim/Neovim 透明背景色, 1 为启用, 0 为禁用.
-let bgtransparent=1
-if (bgtransparent == 1)
-  " 使 vim/nvim 背景透明.
-  if (g:colors_name == 'solarized')
-    " 对于 solarized light 主题, 使用 hi Normal 的方式设置背景透明的方式,
-    " lightline 插件提供的状态栏的背景色还是 dark, 所以对于 solarized 主题,
-    " 通过其提供的特有指令还实现背景透明.
-    let g:solarized_termtrans = 1
-  else
-    " FIXME: 设置这条指令后, 对于 molokai 主题, 当打开 Go 类型文件时,
-    " 使用 vim 会有部分单词背景色是黑色, 而 nvim 不存在此问题.
-    hi Normal ctermbg=NONE guibg=NONE
-  endif
-
-  " 使 popup window 背景变透明.
-  hi Pmenu ctermbg=NONE guibg=NONE
-
-  if !has('nvim')
-    " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
-    " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
-    if (g:colors_name == 'dracula')
-      hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
-    endif
-
-    " 去掉颜色主题自带的行号背景色, 值为1时表示去掉行号背景色, 默认不启用.
-    " NOTE: nvim 不能设置此条目, 会造成行号颜色变为亮白色, 很不协调.
-    let linenr_bg_color=0
-    if (linenr_bg_color==1)
-      hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
-    endif
-  endif
-
-  " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
-  " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
-  let linenr_colorscheme_custom=0
-  if (linenr_colorscheme_custom==1)
-    hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
-  endif
+" *** papercolor ***
+if (g:colors_name == 'PaperColor')
+  let g:lightline.colorscheme = 'PaperColor'
 endif
+
+" }}
 
 " 设置提示列的颜色方案, 去掉默认的背景色;
 " 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,

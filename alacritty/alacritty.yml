@@ -192,7 +192,7 @@ schemes:
       white: "#828482"
     indexed_colors: []
 
-  # Colors (rigel - (https://github.com/Rigellute/rigel)
+  # Colors (rigel - https://github.com/Rigellute/rigel)
   rigel: &rigel
     primary:
       background: "0x002635"
@@ -468,19 +468,19 @@ schemes:
       foreground: "#383a42"
     cursor:
       text: CellBackground
-      cursor: "#526eff" # syntax-cursor-color
+      cursor: "#526eff"
     selection:
       text: CellForeground
-      background: "#e5e5e6" # syntax-selection-color
+      background: "#e5e5e6"
     normal:
-      black: "#696c77" # mono-2
-      red: "#e45649" # red 1
+      black: "#696c77"
+      red: "#e45649"
       green: "#50a14f"
-      yellow: "#c18401" # orange 2
+      yellow: "#c18401"
       blue: "#4078f2"
       magenta: "#a626a4"
       cyan: "#0184bc"
-      white: "#a0a1a7" # mono-3
+      white: "#a0a1a7"
 
   # Colors (One Dark - https://github.com/atom/atom/tree/master/packages/one-dark-syntax)
   one_dark: &one
@@ -489,19 +489,19 @@ schemes:
       foreground: "#abb2bf"
     cursor:
       text: CellBackground
-      cursor: "#528bff" # syntax-cursor-color
+      cursor: "#528bff"
     selection:
       text: CellForeground
-      background: "#3e4451" # syntax-selection-color
+      background: "#3e4451"
     normal:
-      black: "#5c6370" # mono-3
-      red: "#e06c75" # red 1
+      black: "#5c6370"
+      red: "#e06c75"
       green: "#98c379"
-      yellow: "#e5c07b" # orange 2
+      yellow: "#e5c07b"
       blue: "#61afef"
       magenta: "#c678dd"
       cyan: "#56b6c2"
-      white: "#828997" # mono-2
+      white: "#828997"
 
   # Colors (Iceberg Dark)
   iceberg_dark: &iceberg
@@ -551,6 +551,62 @@ schemes:
       cyan: "#327698"
       white: "#262a3f"
 
+  # Colors (PaperColor_Light - https://github.com/eendroroy/alacritty-theme/blob/master/themes/papercolor_light.yaml)
+  papercolor_light: &papercolor_light
+    primary:
+      background: "0xeeeeee"
+      foreground: "0x878787"
+    cursor:
+      text: "0xeeeeee"
+      cursor: "0x878787"
+    normal:
+      black: "0xeeeeee"
+      red: "0xaf0000"
+      green: "0x008700"
+      yellow: "0x5f8700"
+      blue: "0x0087af"
+      magenta: "0x878787"
+      cyan: "0x005f87"
+      white: "0x444444"
+    bright:
+      black: "0xbcbcbc"
+      red: "0xd70000"
+      green: "0xd70087"
+      yellow: "0x8700af"
+      blue: "0xd75f00"
+      magenta: "0xd75f00"
+      cyan: "0x005faf"
+      white: "0x005f87"
+
+  papercolor: &papercolor
+    primary:
+      background: "#161616"
+      foreground: "#e4e4e4"
+    cursor:
+      text: "#feffff"
+      cursor: "#ffb472"
+    normal:
+      black: "#a3a3a3"
+      red: "#e98885"
+      green: "#a3c38b"
+      yellow: "#ffc68d"
+      blue: "#a6cae2"
+      magenta: "#e7cdfb"
+      cyan: "#00a69f"
+      white: "#e4e4e4"
+    bright:
+      black: "#c8c8c8"
+      red: "#ffb2b0"
+      green: "#c8e2b9"
+      yellow: "#ffe1af"
+      blue: "#bddff7"
+      magenta: "#fce2ff"
+      cyan: "#0bbdb6"
+      white: "#feffff"
+    selection:
+      text: "#5963a2"
+      background: "#f6f6f6"
+
 # }}
 
 # 主题配置 {{
@@ -558,7 +614,8 @@ schemes:
 # 从 Color Schemes 中选则一个使用:
 #   rigel, dracula, molokai, jellybeans, base16-default-dark, nord, tender,
 #   gruvbox_dark, gruvbox_light, iceberg, iceberg_light,
-#   solarized_dark, solarized_light, one_dark, one_light
+#   solarized_dark, solarized_light, one_dark, one_light,
+#   papercolor_light
 colors: *dracula
 
 # 窗口样式配置.
