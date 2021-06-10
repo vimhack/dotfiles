@@ -1118,6 +1118,17 @@ if (g:colors_name == 'solarized')
   set notermguicolors
 
   let g:lightline.colorscheme = 'solarized'
+
+  " 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
+  " 所以这里可以使用 SpecialKey 来改变 tab 键和行尾空格的颜色样式,
+  " 从而方便我们能看到多余的空白字符.
+  " NOTE: & 表示获取选项 background 的值, 查看帮助文档 :help let-&
+  " ==# 表示字符串比较的时候大小写是敏感的, 查看帮助文档 :help ==#
+  if &background ==# 'light'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=NONE
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=NONE
+  endif
 endif
 
 " *** dracula ***
@@ -1181,6 +1192,11 @@ if (g:colors_name == 'PaperColor')
 endif
 
 " }}
+
+" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题;
+" 如果不配置这行, 我们将看不到多余的空白字符,
+" 对于 Go 类型文件来说, 也无法直观确认缩进是否是 tab 了.
+set list listchars=tab:>-,trail:-
 
 " 设置提示列的颜色方案, 去掉默认的背景色;
 " 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
@@ -1729,14 +1745,6 @@ set virtualedit=onemore
 " 当一行字符长度超过多少个字符时, 会自动换行, 注意会加上换行符;
 " 我这里配置这个的目的是解决 .vimrc 的注释内容超过80个字符就自动换行的问题.
 set textwidth=1000
-
-" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题.
-set list listchars=tab:>-,trail:-
-
-" 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
-" 所以这里使用 SpecialKey 来改变 tab 键和行尾空格的颜色样式,
-" 从而方便我们能看到多余的空白字符.
-hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
 
 " 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
 autocmd FileType * set colorcolumn=80
