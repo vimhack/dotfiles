@@ -153,7 +153,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 
 " molokai
-Plug 'tomasr/molokai'
+" 该版本解决了设置透明背景色时, 对于 Vim 部分关键字背景颜色没有变透明的问题,
+" Neovim 不存在此问题.
+Plug 'windvalley/molokai'
 
 " Atom theme: One Dark / Light
 Plug 'rakr/vim-one'
@@ -1097,8 +1099,6 @@ colorscheme dracula
 if (bgtransparent == 1)
   " 使 vim/nvim 背景透明.
   if (g:colors_name != 'solarized' && g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
-    " FIXME: 设置这条指令后, 对于 molokai 主题, 当打开 Go 类型文件时,
-    " 使用 vim 会有部分单词背景色是黑色, 而 nvim 不存在此问题.
     hi Normal ctermbg=NONE guibg=NONE
   endif
 
