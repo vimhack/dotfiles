@@ -1054,6 +1054,17 @@ else
   let g:PaperColor_Theme_Options.theme.default.allow_italic = 0
 endif
 
+" jellybeans 主题设置:
+" 是否禁用斜体字, 0 禁用, 1 启用.
+if has('nvim')
+  let g:jellybeans_use_term_italics = 1
+  let g:jellybeans_use_gui_italics = 1
+else
+  " Vim 不支持, 需要禁用.
+  let g:jellybeans_use_term_italics = 0
+  let g:jellybeans_use_gui_italics = 0
+endif
+
 " }}
 
 " 设置背景色为黑色或亮色, dark or light.
@@ -1101,7 +1112,7 @@ if (bgtransparent == 1)
       hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
     endif
 
-    " 去掉颜色主题自带的行号背景色, 值为1时表示去掉行号背景色, 默认不启用.
+    " 去掉颜色主题自带的行号背景色, 值为 1 时表示去掉行号背景色, 默认不启用.
     " NOTE: nvim 不能设置此条目, 会造成行号颜色变为亮白色, 很不协调.
     let linenr_bg_color=0
     if (linenr_bg_color==1)
@@ -1122,6 +1133,13 @@ if (g:colors_name == 'rigel')
   " 定制状态栏的主题颜色.
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=black guibg=NONE guifg=#00384d
+
+  hi ColorColumn cterm=NONE ctermbg=black guibg=#00384d
+
+  hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
+  hi Cursorcolumn cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
 endif
 
 " *** solarized ***
@@ -1176,11 +1194,15 @@ endif
 if (g:colors_name == 'jellybeans')
   let g:lightline.colorscheme = 'jellybeans'
 
-  if !has('nvim')
-    " 自定义 colorcolumn=80 列的颜色方案, jellybeans 默认的颜色太黑了;
-    " nvim 不能设置这个, 会导致 colorcolumn 对应的列消失, 暂时还没有去找原因.
-    hi ColorColumn ctermbg=236 guibg=NONE
-  endif
+  " FIXME: 对 nvim 无效.
+  hi SpecialKey ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
+
+  " 自定义 colorcolumn 列的颜色, jellybeans 默认的颜色太黑了;
+  " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
+  hi ColorColumn ctermbg=236 guibg=#303030
+
+  hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
+  hi Cursorcolumn cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
 endif
 
 " *** base16-default-dark ***
