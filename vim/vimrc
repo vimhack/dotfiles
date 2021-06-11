@@ -1252,10 +1252,19 @@ hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 " 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
 " NOTE: 必须放在颜色主题设置的后面才有效果.
 hi GitAddSign    guifg=SeaGreen ctermfg=2
-hi GitChangeSign guifg=DarkYellow ctermfg=3 
+hi GitChangeSign guifg=DarkYellow ctermfg=3
 hi GitDeleteSign guifg=DarkRed ctermfg=1
 hi GitTopDeleteSign guifg=Red ctermfg=1*
 hi GitChangeDeleteSign guifg=LightRed ctermfg=1*
+
+" 优化 ale 错误提示标识的颜色方案.
+if &background == 'dark'
+  hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=DarkRed guibg=NONE guifg=DarkRed
+  hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
+else
+  hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
+  hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=Yellow guibg=NONE guifg=Yellow
+endif
 
 " }}
 
