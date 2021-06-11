@@ -55,7 +55,8 @@ live_config_reload: true
 shell:
   program: /usr/local/bin/tmux
   args:
-    - -u # force UTF-8 in tmux
+    # force UTF-8 in tmux
+    - -u
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -555,18 +556,18 @@ schemes:
   # Colors (PaperColor_Light - https://github.com/eendroroy/alacritty-theme/blob/master/themes/papercolor_light.yaml)
   papercolor_light: &papercolor_light
     primary:
-      background: "0xeeeeee"
-      foreground: "0x878787"
+      background: &papercolor_light_bg "0xeeeeee"
+      foreground: &papercolor_light_fg "0x878787"
     cursor:
-      text: "0xeeeeee"
-      cursor: "0x878787"
+      text: *papercolor_light_bg
+      cursor: *papercolor_light_fg
     normal:
-      black: "0xeeeeee"
+      black: *papercolor_light_bg
       red: "0xaf0000"
       green: "0x008700"
       yellow: "0x5f8700"
       blue: "0x0087af"
-      magenta: "0x878787"
+      magenta: *papercolor_light_fg
       cyan: "0x005f87"
       white: "0x444444"
     bright:
@@ -581,32 +582,29 @@ schemes:
 
   papercolor: &papercolor
     primary:
-      background: "#161616"
-      foreground: "#e4e4e4"
+      background: &papercolor_bg "#1c1c1c"
+      foreground: &papercolor_fg "#d0d0d0"
     cursor:
-      text: "#feffff"
-      cursor: "#ffb472"
+      text: *papercolor_bg
+      cursor: *papercolor_fg
     normal:
-      black: "#a3a3a3"
-      red: "#e98885"
-      green: "#a3c38b"
-      yellow: "#ffc68d"
-      blue: "#a6cae2"
-      magenta: "#e7cdfb"
-      cyan: "#00a69f"
-      white: "#e4e4e4"
+      black: *papercolor_bg
+      red: "#af005f"
+      green: "#5faf00"
+      yellow: "#d7af5f"
+      blue: "#5fafd7"
+      magenta: "#808080"
+      cyan: "#d7875f"
+      white: *papercolor_fg
     bright:
-      black: "#c8c8c8"
-      red: "#ffb2b0"
-      green: "#c8e2b9"
-      yellow: "#ffe1af"
-      blue: "#bddff7"
-      magenta: "#fce2ff"
-      cyan: "#0bbdb6"
-      white: "#feffff"
-    selection:
-      text: "#5963a2"
-      background: "#f6f6f6"
+      black: "#585858"
+      red: "#5faf5f"
+      green: "#dfd700"
+      yellow: "#af87d7"
+      blue: "#ffaf00"
+      magenta: "#ff5faf"
+      cyan: "#00afaf"
+      white: "#5f8787"
 
 # }}
 
