@@ -1023,10 +1023,10 @@ if (bgtransparent == 1)
   endif
 endif
 
-" 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
-" from: https://github.com/dracula/vim/issues/219
-" NOTE: Vim 存在此问题, Neovim 不存在此问题.
 if !has('nvim')
+  " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
+  " from: https://github.com/dracula/vim/issues/219
+  " NOTE: Vim 存在此问题, Neovim 不存在此问题.
   let g:dracula_italic = 0
 endif
 
@@ -1134,12 +1134,24 @@ if (g:colors_name == 'rigel')
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
 
+  " 优化 SpecialKey 的颜色方案:
+  " 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
+  " 所以这里可以改变 tab 键和行尾空格的颜色样式, 从而方便我们能看到多余的空白字符.
+  " FIXME: 对 nvim 无效.
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=black guibg=NONE guifg=#00384d
 
+  " 优化 ColorColumn 列的颜色方案.
+  " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
   hi ColorColumn cterm=NONE ctermbg=black guibg=#00384d
 
+  " 优化光标所在行的颜色方案.
   hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
+
+  " 优化光标所在列的颜色方案.
   hi Cursorcolumn cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
+
+  " 优化光标所在行的行号的颜色方案.
+  hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white guibg=#00384d guifg=#afffff
 endif
 
 " *** solarized ***
@@ -1149,9 +1161,6 @@ if (g:colors_name == 'solarized')
 
   let g:lightline.colorscheme = 'solarized'
 
-  " 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
-  " 所以这里可以使用 SpecialKey 来改变 tab 键和行尾空格的颜色样式,
-  " 从而方便我们能看到多余的空白字符.
   " NOTE: & 表示获取选项 background 的值, 查看帮助文档 :help let-&
   " ==# 表示字符串比较的时候大小写是敏感的, 查看帮助文档 :help ==#
   if &background ==# 'light'
@@ -1194,11 +1203,8 @@ endif
 if (g:colors_name == 'jellybeans')
   let g:lightline.colorscheme = 'jellybeans'
 
-  " FIXME: 对 nvim 无效.
   hi SpecialKey ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
 
-  " 自定义 colorcolumn 列的颜色, jellybeans 默认的颜色太黑了;
-  " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
   hi ColorColumn ctermbg=236 guibg=#303030
 
   hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
@@ -1223,6 +1229,8 @@ endif
 " *** papercolor ***
 if (g:colors_name == 'PaperColor')
   let g:lightline.colorscheme = 'PaperColor'
+
+  hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
 endif
 
 " }}
