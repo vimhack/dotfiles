@@ -1025,12 +1025,14 @@ if (bgtransparent == 1)
   endif
 endif
 
+" dracula 主题配置.
 if !has('nvim')
   " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
   " from: https://github.com/dracula/vim/issues/219
   " NOTE: Vim 存在此问题, Neovim 不存在此问题.
   let g:dracula_italic = 0
 endif
+let g:dracula_bold=0
 
 " 调整 gruvbox 主题的颜色对比度.
 " from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
@@ -1173,6 +1175,8 @@ endif
 " *** dracula ***
 if (g:colors_name == 'dracula')
   let g:lightline.colorscheme = 'dracula'
+
+  hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
 endif
 
 " *** one ***
