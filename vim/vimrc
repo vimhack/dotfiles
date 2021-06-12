@@ -1136,11 +1136,12 @@ if (g:colors_name == 'rigel')
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
 
-  " 优化 SpecialKey 的颜色方案:
-  " 非可见字符 nbsp、tab、trail 是由 SpecialKey 高亮组来定义的,
-  " 所以这里可以改变 tab 键和行尾空格的颜色样式, 从而方便我们能看到多余的空白字符.
-  " FIXME: 对 nvim 无效.
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=black guibg=NONE guifg=#00384d
+  " 优化非可见字符 nbsp、tab、trail 的颜色方案:
+  " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
+  " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
+  " 但对于 Neavim, 则是由 Whitespace 高亮组定义的.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
 
   " 优化 ColorColumn 列的颜色方案.
   " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
@@ -1166,9 +1167,11 @@ if (g:colors_name == 'solarized')
   " NOTE: & 表示获取选项 background 的值, 查看帮助文档 :help let-&
   " ==# 表示字符串比较的时候大小写是敏感的, 查看帮助文档 :help ==#
   if &background ==# 'light'
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=NONE
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
   else
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=NONE
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=#4e4e4e
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=#4e4e4e
   endif
 endif
 
