@@ -8,7 +8,6 @@ Go, Python, OpenResty/Lua, Bash and JavaScript programming.
 - [Vim](https://github.com/vim/vim) or [Neovim](https://github.com/neovim/neovim)
 - [Tmux](https://github.com/tmux/tmux)
 - [Zsh](https://ohmyz.sh/)
-- [Ranger](https://github.com/ranger/ranger)
 - [Alacritty](https://github.com/alacritty/alacritty)
 
 ## 📀 Installation
@@ -20,7 +19,6 @@ Requirements:
 - [tmux 3.0+](https://github.com/tmux/tmux)
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 - [alacritty](https://github.com/alacritty/alacritty)
-- [ranger](https://github.com/ranger/ranger)
 
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
@@ -41,9 +39,6 @@ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
 # zsh
 ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
-
-# ranger
-ln -sf ~/.dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf
 
 # alacritty
 ln -sf ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
@@ -78,14 +73,16 @@ Current theme is 'dracula', you can change to follows:
 * solarized
 * one
 * iceberg
+* papercolor
 * gruvbox_light
 * solarized_light
 * one_light
 * iceberg_light
+* papercolor_light
 
-For example, change theme to 'iceberg_light':
+For example, change theme to 'papercolor_light':
 
-$ theme iceberg_light
+$ theme papercolor_light
 ```
 
 **Change font size of Alacritty:**
@@ -120,6 +117,14 @@ vim-bgtransparent
 Vim background transparent was enabled, to disable:
 
 $ vim-bgtransparent 0
+```
+
+**Print 256 colors in terminal:**
+
+```text
+colors_print
+
+rgb
 ```
 
 💡 Almost every dotfile has usage tips at the end of it for reference.
