@@ -996,6 +996,10 @@ endif
 " 自定义配置, 是否启用 Vim/Neovim 透明背景色, 1 为启用, 0 为禁用.
 let bgtransparent=1
 
+" 但 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
+" NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
+let popup_window_transparent=1
+
 " 颜色主题方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
 
@@ -1104,13 +1108,14 @@ if (bgtransparent == 1)
     hi Normal ctermbg=NONE guibg=NONE
   endif
 
-  " 使 popup window 背景变透明.
-  hi Pmenu ctermbg=NONE guibg=NONE
+  if (popup_window_transparent == 1)
+    hi Pmenu ctermbg=NONE guibg=NONE
+  endif
 
   if !has('nvim')
     " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
     " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
-    if (g:colors_name == 'dracula')
+    if (g:colors_name == 'dracula') && (popup_window_transparent == 1)
       hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
     endif
 
