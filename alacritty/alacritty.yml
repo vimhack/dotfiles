@@ -606,6 +606,81 @@ schemes:
       cyan: "#00afaf"
       white: "#5f8787"
 
+  # Colors (ayu_light)
+  ayu_light: &ayu_light
+    primary:
+      background: "0xfafafa"
+      foreground: "0x5c6773"
+    cursor:
+      text: "0x5c6773"
+      cursor: "0xff6a00"
+    normal:
+      black: "0x000000"
+      red: "0xff3333"
+      green: "0x86b300"
+      yellow: "0xf29718"
+      blue: "0x41a6d9"
+      magenta: "0xf07178"
+      cyan: "0x4dbf99"
+      white: "0xffffff"
+    bright:
+      black: "0x323232"
+      red: "0xff6565"
+      green: "0xb8e532"
+      yellow: "0xffc94a"
+      blue: "0x73d8ff"
+      magenta: "0xffa3aa"
+      cyan: "0x7ff1cb"
+      white: "0xffffff"
+
+  # Colors (Ayu Dark)
+  ayu: &ayu
+    primary:
+      background: "#0A0E14"
+      foreground: "#B3B1AD"
+    normal:
+      black: "#01060E"
+      red: "#EA6C73"
+      green: "#91B362"
+      yellow: "#F9AF4F"
+      blue: "#53BDFA"
+      magenta: "#FAE994"
+      cyan: "#90E1C6"
+      white: "#C7C7C7"
+    bright:
+      black: "#686868"
+      red: "#F07178"
+      green: "#C2D94C"
+      yellow: "#FFB454"
+      blue: "#59C2FF"
+      magenta: "#FFEE99"
+      cyan: "#95E6CB"
+      white: "#FFFFFF"
+
+  # Colors (Ayu Mirage)
+  ayu_mirage: &ayu_mirage
+    primary:
+      background: "#202734"
+      foreground: "#CBCCC6"
+    normal:
+      black: "#191E2A"
+      red: "#FF3333"
+      green: "#BAE67E"
+      yellow: "#FFA759"
+      blue: "#73D0FF"
+      magenta: "#FFD580"
+      cyan: "#95E6CB"
+      white: "#C7C7C7"
+    bright:
+      black: "#686868"
+      red: "#F27983"
+      green: "#A6CC70"
+      yellow: "#FFCC66"
+      blue: "#5CCFE6"
+      magenta: "#FFEE99"
+      cyan: "#95E6CB"
+      white: "#FFFFFF"
+
 # }}
 
 # 主题配置 {{

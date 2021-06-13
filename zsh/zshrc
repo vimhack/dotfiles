@@ -171,9 +171,10 @@ theme(){
     local themes=(
         # dark
         dracula molokai rigel jellybeans base16-default-dark nord tender
-        gruvbox solarized one iceberg papercolor
+        gruvbox solarized one iceberg papercolor ayu ayu_mirage
         # light
         gruvbox_light solarized_light one_light iceberg_light papercolor_light
+        ayu_light
     )
 
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
@@ -211,6 +212,18 @@ EOF
     }
 
     gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty
+
+    if [[ "${theme_name/_*}" = "ayu" ]]; then
+        gsed -i "/^colorscheme/s/^.*$/colorscheme ${theme_name/_*}/" $vimrc
+
+        if [[ "$theme_name" = "ayu" ]]; then
+            gsed -i "/^let ayucolor=/s/^.*$/let ayucolor='dark'/" $vimrc
+        else
+            gsed -i "/^let ayucolor=/s/^.*$/let ayucolor='${theme_name#ayu_}'/" $vimrc
+        fi
+
+        return
+    fi
 
     if echo $theme_name|grep -q "_light"; then
         gsed -i "/^colorscheme/s/^.*$/colorscheme ${theme_name/_light}/" $vimrc
