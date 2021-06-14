@@ -995,10 +995,18 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" 自定义配置, 是否启用 Vim/Neovim 透明背景色, 1 为启用, 0 为禁用.
-let bgtransparent=1
+" 自定义配置, 是否启用 Vim/Neovim 透明背景色.
+let transparent_file = expand('~/.vim/transparent.vim')
 
-" 但 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
+if filereadable(transparent_file)
+  exec 'source' transparent_file
+else
+  " 1 为启用 Vim/Neovim 背景透明, 0 为禁用.
+  let bgtransparent=1
+endif
+
+
+" 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let popup_window_transparent=1
 
@@ -1077,14 +1085,19 @@ endif
 
 " }}
 
-" 设置背景色为黑色或亮色, dark or light.
-set background=dark
+" 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
+" git仓库可以不被无用的变更信息干扰.
+let colorscheme_file = expand('~/.vim/colorscheme.vim')
 
-" ayu 颜色主题专用, 可选值: dark, mirage, light
-let ayucolor='dark'
+if filereadable(colorscheme_file)
+  exec 'source' colorscheme_file
+else
+  " 默认的背景色, dark or light.
+  set background=dark
 
-" 启用颜色主题方案.
-colorscheme dracula
+  " 默认颜色主题方案.
+  colorscheme dracula
+endif
 
 " 优秀的颜色主题方案:
 "   dracula: https://draculatheme.com/vim
@@ -1289,6 +1302,7 @@ else
   hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
   hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=Yellow guibg=NONE guifg=Yellow
 endif
+
 
 " }}
 

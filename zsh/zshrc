@@ -160,9 +160,11 @@ export PATH="/usr/local/opt/node@14/bin:$PATH"
 
 # --- Vim/Neovim & Alacritty 主题相关命令配置 {{
 
-# Vim 和 Alacritty 的配置文件.
+# Vim/Neovim 的颜色方案文件.
+vim_colorscheme_file=~/.vim/colorscheme.vim
+vim_transparent_file=~/.vim/transparent.vim
+# Alacritty 的配置文件.
 # NOTE: 尽量不要在这里写软连接文件, 应该写原始文件路径.
-vimrc=~/.dotfiles/vim/vimrc
 alacritty=~/.dotfiles/alacritty/alacritty.yml
 
 # Vim/Neovim 和 Alacritty 颜色方案主题切换命令.
@@ -213,24 +215,30 @@ EOF
 
     gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty
 
-    if [[ "${theme_name/_*}" = "ayu" ]]; then
-        gsed -i "/^colorscheme/s/^.*$/colorscheme ${theme_name/_*}/" $vimrc
-
-        if [[ "$theme_name" = "ayu" ]]; then
-            gsed -i "/^let ayucolor=/s/^.*$/let ayucolor='dark'/" $vimrc
-        else
-            gsed -i "/^let ayucolor=/s/^.*$/let ayucolor='${theme_name#ayu_}'/" $vimrc
-        fi
-
+    [[ "$theme_name" = "ayu" ]] && {
+        echo "let ayucolor='dark'
+colorscheme ayu" >$vim_colorscheme_file
         return
-    fi
+    }
+
+    [[ "$theme_name" = "ayu_mirage" ]] && {
+        echo "let ayucolor='mirage'
+colorscheme ayu" >$vim_colorscheme_file
+        return
+    }
+
+    [[ "$theme_name" = "ayu_light" ]] && {
+        echo "let ayucolor='light'
+colorscheme ayu" >$vim_colorscheme_file
+        return
+    }
 
     if echo $theme_name|grep -q "_light"; then
-        gsed -i "/^colorscheme/s/^.*$/colorscheme ${theme_name/_light}/" $vimrc
-        gsed -i "/^set background=/s/^.*$/set background=light/" $vimrc
+        echo "set background=light
+colorscheme ${theme_name/_light}" >$vim_colorscheme_file
     else
-        gsed -i "/^colorscheme/s/^.*$/colorscheme $theme_name/" $vimrc
-        gsed -i "/^set background=/s/^.*$/set background=dark/" $vimrc
+        echo "set background=dark
+colorscheme ${theme_name/_light}" >$vim_colorscheme_file
     fi
 }
 
@@ -290,7 +298,7 @@ vim-bgtransparent() {
     local value=$1
 
     if [[ "$value" != 1 ]] && [[ "$value" != 0 ]]; then
-        current_value=$(awk -F= '/^let bgtransparent=/{print $2}' $vimrc)
+        current_value=$(awk -F= '/^let bgtransparent=/{print $2}' $vim_transparent_file &>/dev/null)
 
         [[ "$current_value" = 1 ]] && {
             echo "Vim background transparent was enabled, to disable:
@@ -308,11 +316,18 @@ $ vim-bgtransparent 1
             return
         }
 
-        echo "value of 'bgtransparent' in $vimrc is not correct"
+        echo "value of 'bgtransparent' is default, to enable:
+
+$ vim-bgtransparent 1
+
+to disable:
+
+$ vim-bgtransparent 0"
+
         return 1
     fi
 
-    gsed -i "/^let bgtransparent/s/^.*$/let bgtransparent=$value/" $vimrc
+    echo "let bgtransparent=$value" >$vim_transparent_file
 }
 
 colors_print(){
