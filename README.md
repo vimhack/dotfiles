@@ -74,16 +74,21 @@ Current theme is 'dracula', you can change to follows:
 * one
 * iceberg
 * papercolor
+* ayu
+* ayu_mirage
 * gruvbox_light
 * solarized_light
 * one_light
 * iceberg_light
 * papercolor_light
+* ayu_light
 
-For example, change theme to 'papercolor_light':
+For example, change theme to 'ayu_light':
 
-$ theme papercolor_light
+$ theme ayu_light
 ```
+
+💡 Light colorschemes are good in the morning or at a place with natural light.
 
 **Change font size of Alacritty:**
 
