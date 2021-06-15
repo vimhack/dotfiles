@@ -692,6 +692,9 @@ schemes:
 #   papercolor_light
 colors: *dracula
 
+# 背景透明度配置, 取值范围: 0.0 到 1.0
+background_opacity: 0.9
+
 # 窗口样式配置.
 window:
   # Window decorations
@@ -719,9 +722,6 @@ window:
   #
   # Default: Windowed
   startup_mode: Maximized
-
-# 背景透明度配置, 取值范围: 0.0 到 1.0
-background_opacity: 0.9
 
 # 字体(Font)样式配置.
 font:

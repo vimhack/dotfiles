@@ -41,7 +41,7 @@ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 
 # alacritty
-ln -sf ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 ```
 

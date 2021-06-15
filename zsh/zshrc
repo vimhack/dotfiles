@@ -164,8 +164,9 @@ export PATH="/usr/local/opt/node@14/bin:$PATH"
 vim_colorscheme_file=~/.vim/colorscheme.vim
 vim_transparent_file=~/.vim/transparent.vim
 # Alacritty 的配置文件.
-# NOTE: 尽量不要在这里写软连接文件, 应该写原始文件路径.
-alacritty=~/.dotfiles/alacritty/alacritty.yml
+alacritty_conf=~/.config/alacritty/alacritty.yml
+# windvalley/dotfiles 仓库所在目录.
+dotfiles_dir=~/.dotfiles
 
 # Vim/Neovim 和 Alacritty 颜色方案主题切换命令.
 theme(){
@@ -180,7 +181,7 @@ theme(){
     )
 
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
-        current_theme=$(awk -F'*' '/^colors:/{print $2}' $alacritty)
+        current_theme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
 
         echo -e "Current theme is '$current_theme', you can change to follows:\n"
 
@@ -213,7 +214,8 @@ EOF
         return 2
     }
 
-    gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty
+    \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+    gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty_conf
 
     [[ "$theme_name" = "ayu" ]] && {
         echo "let ayucolor='dark'
@@ -247,7 +249,7 @@ opacity(){
     local value=$1
 
     [[ -z "$value" ]] && {
-        current_opacity=$(awk '/^background_opacity/{print $2}' $alacritty)
+        current_opacity=$(awk '/^background_opacity/{print $2}' $alacritty_conf)
 
         echo "Current opacity is '$current_opacity', you can change by:
 
@@ -265,7 +267,8 @@ $ opacity number
         return 3
     fi
 
-    gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty
+    \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+    gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty_conf
 }
 
 # Alacritty 终端字体大小调整命令.
@@ -273,7 +276,7 @@ font() {
     local value=$1
 
     [[ -z "$value" ]] && {
-        current_font_size=$(awk '/^  size:/{print $2}' $alacritty)
+        current_font_size=$(awk '/^  size:/{print $2}' $alacritty_conf)
 
         echo "Current font size is '$current_font_size', you can change by:
 
@@ -290,7 +293,8 @@ $ font number
         return 3
     fi
 
-    gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty
+    \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+    gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty_conf
 }
 
 # 开启或关闭 Vim 背景透明色, 参数为 1 表示开启, 参数为 0 表示关闭.
