@@ -332,21 +332,19 @@ vim-bgtransparent() {
     local value=$1
 
     if [[ "$value" != 1 ]] && [[ "$value" != 0 ]]; then
-        current_value=$(awk -F= '/^let bgtransparent=/{print $2}' $vim_transparent_file &>/dev/null)
+        current_value=$(awk -F= '/^let bgtransparent=/{print $2}' $vim_transparent_file 2>/dev/null)
 
         [[ "$current_value" = 1 ]] && {
             echo "Vim background transparent was enabled, to disable:
 
-$ vim-bgtransparent 0
-"
+$ vim-bgtransparent 0"
             return
         }
 
         [[ "$current_value" = 0 ]] && {
             echo "Vim background transparent was disabled, to enable:
 
-$ vim-bgtransparent 1
-"
+$ vim-bgtransparent 1"
             return
         }
 
