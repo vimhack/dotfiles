@@ -214,8 +214,18 @@ EOF
         return 2
     }
 
-    \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
-    gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty_conf
+    if [[ -f "$alacritty_conf" ]]; then
+        opacity=$(awk -F: '/^background_opacity/{print $2}' $alacritty_conf)
+        font_size=$(awk -F: '/  size:/{print $2}' $alacritty_conf)
+
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
+        gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty_conf
+        gsed -i "/^  size:/s/^.*$/  size: $font_size/" $alacritty_conf
+        gsed -i "/^background_opacity/s/^.*$/background_opacity: $opacity/" $alacritty_conf
+    else 
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
+        gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty_conf
+    fi
 
     [[ "$theme_name" = "ayu" ]] && {
         echo "let ayucolor='dark'
@@ -267,8 +277,18 @@ $ opacity number
         return 3
     fi
 
-    \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
-    gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty_conf
+    if [[ -f "$alacritty_conf" ]]; then
+        color=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
+        font_size=$(awk -F: '/  size:/{print $2}' $alacritty_conf)
+
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
+        gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty_conf
+        gsed -i "/^colors/s/^.*$/colors: *$color/" $alacritty_conf
+        gsed -i "/^  size:/s/^.*$/  size: $font_size/" $alacritty_conf
+    else
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+        gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty_conf
+    fi
 }
 
 # Alacritty 终端字体大小调整命令.
@@ -293,8 +313,18 @@ $ font number
         return 3
     fi
 
-    \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
-    gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty_conf
+    if [[ -f "$alacritty_conf" ]]; then
+        color=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
+        opacity=$(awk -F: '/^background_opacity:/{print $2}' $alacritty_conf)
+
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+        gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty_conf
+        gsed -i "/^colors/s/^.*$/colors: *$color/" $alacritty_conf
+        gsed -i "/^background_opacity:/s/^.*$/background_opacity: $opacity/" $alacritty_conf
+    else
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+        gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty_conf
+    fi
 }
 
 # 开启或关闭 Vim 背景透明色, 参数为 1 表示开启, 参数为 0 表示关闭.
