@@ -1734,7 +1734,7 @@ hi User4      ctermfg=235 ctermbg=109 guifg=#282828 guibg=#83a598
 
 function! NormalModeColor()
   " blue
-  hi statusline ctermfg=237 ctermbg=109 guifg=#83a598 guibg=#282828
+  hi statusline ctermfg=109 ctermbg=235 guifg=#83a598 guibg=#282828
   hi User3      ctermfg=235 ctermbg=72  guifg=#282828 guibg=#689d6a
   hi User4      ctermfg=235 ctermbg=109 guifg=#282828 guibg=#83a598
 endfunction
@@ -1771,6 +1771,8 @@ endfunction
 function! SetStatuslineColorVisual()
   set updatetime=0
   call VisualModeColor()
+  " keep the cursor from jumping the beginning of the current line when entering visual mode.
+  return ''
 endfunction
 
 function! ResetStatuslineColor()
@@ -1778,10 +1780,11 @@ function! ResetStatuslineColor()
   call NormalModeColor()
 endfunction
 
-vnoremap <silent> <expr>               <SID>SetStatuslineColorVisual SetStatuslineColorVisual()
-nnoremap <silent> <script> v v         <SID>SetStatuslineColorVisual
-nnoremap <silent> <script> V V         <SID>SetStatuslineColorVisual
-nnoremap <silent> <script> <C-v> <C-v> <SID>SetStatuslineColorVisual
+" https://stackoverflow.com/questions/15561132/run-command-when-vim-enters-visual-mode
+vnoremap <silent> <expr> <SID>SetStatuslineColorVisual SetStatuslineColorVisual()
+nnoremap <silent> <script> v v<SID>SetStatuslineColorVisual<left><right>
+nnoremap <silent> <script> V V<SID>SetStatuslineColorVisual<left><right>
+nnoremap <silent> <script> <C-v> <C-v><SID>SetStatuslineColorVisual<left><right>
 
 augroup CursorLineNrColorSwap
   autocmd!
