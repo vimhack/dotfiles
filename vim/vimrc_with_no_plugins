@@ -12,13 +12,13 @@
 
 " 安装方法 {{{
 "
-"   1. 全局安装
+"   * 全局安装
 "     1) Neovim
 "     curl --create-dirs -fLo /usr/share/nvim/sysinit.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
 "     2) Vim
 "     curl -fLo /etc/vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
 "
-"   2. 用户环境安装
+"   * 用户环境安装
 "     1) Neovim
 "     curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
 "     2) Vim
@@ -261,7 +261,7 @@ endif
 " }}}
 
 
-" 颜色主题 {{{
+" 颜色主题 gruvbox {{{
 
 " 代码高亮显示.
 syntax enable
@@ -286,7 +286,6 @@ let popup_window_transparent=1
 " 默认值: medium
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
-
 
 " gruvbox {{{
 " -----------------------------------------------------------------------------
@@ -1709,7 +1708,6 @@ endfunction
 
 " }}}
 
-
 if (bgtransparent == 1)
   " 使 vim/nvim 背景透明.
   hi Normal ctermbg=NONE guibg=NONE
@@ -1723,87 +1721,110 @@ endif
 " }}}
 
 
-" 状态栏定制 {{{
+" 状态栏定制 gruvbox {{{
+"
+" 颜色参考: https://github.com/morhetz/gruvbox
+
+" default
+hi statusline ctermfg=109 ctermbg=235 guifg=#83a598 guibg=#282828
+hi User1      ctermfg=250 ctermbg=237 guifg=#d5c4a1 guibg=#3c3836
+hi User2      ctermfg=250 ctermbg=239 guifg=#d5c4a1 guibg=#504945
+hi User3      ctermfg=235 ctermbg=72  guifg=#282828 guibg=#689d6a
+hi User4      ctermfg=235 ctermbg=109 guifg=#282828 guibg=#83a598
+
+function! NormalModeColor()
+  " blue
+  hi statusline ctermfg=237 ctermbg=109 guifg=#83a598 guibg=#282828
+  hi User3      ctermfg=235 ctermbg=72  guifg=#282828 guibg=#689d6a
+  hi User4      ctermfg=235 ctermbg=109 guifg=#282828 guibg=#83a598
+endfunction
+
+function! InsertModeColor()
+  " yellow
+  hi statusline ctermfg=172 ctermbg=235 guifg=#d79921 guibg=#282828
+  hi User3      ctermfg=235 ctermbg=208 guifg=#282828 guibg=#fe8019
+  hi User4      ctermfg=235 ctermbg=172 guifg=#282828 guibg=#d79921
+endfunction
+
+function! ReplaceModeColor()
+  " red
+  hi statusline ctermfg=167 ctermbg=235 guifg=#fb4934 guibg=#282828
+  hi User3      ctermfg=235 ctermbg=124 guifg=#282828 guibg=#cc241d
+  hi User4      ctermfg=235 ctermbg=167 guifg=#282828 guibg=#fb4934
+endfunction
+
+function! VisualModeColor()
+  " purple
+  hi statusline ctermfg=132 ctermbg=235 guifg=#b16286 guibg=#282828
+  hi User3      ctermfg=235 ctermbg=96  guifg=#282828 guibg=#8f3f71
+  hi User4      ctermfg=235 ctermbg=132 guifg=#282828 guibg=#b16286
+endfunction
 
 function! SetStatuslineColorInsert(mode)
-  " Insert mode: yellow
   if a:mode == "i"
-    hi statusline guifg=#d79921 guibg=#282828 ctermfg=172 ctermbg=235
-    hi User4 guibg=#d79921 guifg=#282828 ctermbg=172 ctermfg=235
-  " Replace mode: red
+    call InsertModeColor()
   elseif a:mode == "r"
-    hi statusline guifg=#fb4934 guibg=#282828 ctermfg=167 ctermbg=235
+    call ReplaceModeColor()
   endif
 endfunction
 
 function! SetStatuslineColorVisual()
   set updatetime=0
-  " visual mode: purple
-  hi statusline guifg=#b16286 guibg=#282828 ctermfg=132 ctermbg=235
+  call VisualModeColor()
 endfunction
 
 function! ResetStatuslineColor()
   set updatetime=100
-  " default: blue
-  hi statusline guifg=#83a598 guibg=#282828 ctermfg=237 ctermbg=109
-  hi User4 ctermfg=235 ctermbg=109 guibg=#83a598 guifg=#282828
+  call NormalModeColor()
 endfunction
 
-vnoremap <silent> <expr> <SID>SetStatuslineColorVisual SetStatuslineColorVisual()
-nnoremap <silent> <script> v v<SID>SetStatuslineColorVisual
-nnoremap <silent> <script> V V<SID>SetStatuslineColorVisual
-nnoremap <silent> <script> <C-v> <C-v><SID>SetStatuslineColorVisual
+vnoremap <silent> <expr>               <SID>SetStatuslineColorVisual SetStatuslineColorVisual()
+nnoremap <silent> <script> v v         <SID>SetStatuslineColorVisual
+nnoremap <silent> <script> V V         <SID>SetStatuslineColorVisual
+nnoremap <silent> <script> <C-v> <C-v> <SID>SetStatuslineColorVisual
 
 augroup CursorLineNrColorSwap
   autocmd!
   autocmd InsertEnter * call SetStatuslineColorInsert(v:insertmode)
   autocmd InsertLeave * call ResetStatuslineColor()
-  autocmd CursorHold * call ResetStatuslineColor()
+  autocmd CursorHold  * call ResetStatuslineColor()
 augroup END
 
-" default: blue
-hi statusline guifg=#83a598 guibg=#282828 ctermfg=109 ctermbg=235
-
 let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'Normal·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V·Line',
+    \ 'n'      : 'Normal',
+    \ 'no'     : 'Normal·Operator Pending',
+    \ 'v'      : 'Visual',
+    \ 'V'      : 'V·Line',
     \ "\<C-v>" : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
+    \ 's'      : 'Select',
+    \ 'S'      : 'S·Line',
     \ "\<C-S>" : 'S·Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'V·Replace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
+    \ 'i'      : 'Insert',
+    \ 'R'      : 'Replace',
+    \ 'Rv'     : 'V·Replace',
+    \ 'c'      : 'Command',
+    \ 'cv'     : 'Vim Ex',
+    \ 'ce'     : 'Ex',
+    \ 'r'      : 'Prompt',
+    \ 'rm'     : 'More',
+    \ 'r?'     : 'Confirm',
+    \ '!'      : 'Shell',
+    \ 't'      : 'Terminal'
+    \ }
 
 set laststatus=2
 set noshowmode
 
 set statusline=
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-set statusline+=%1*\ %<%F%m%r%h%w                        " File path, modified, readonly, helpfile, preview
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " Current Mode
+set statusline+=%1*\ %<%F%m%r%h%w                        " File Path, Modified, Readonly, Helpfile, Preview
 set statusline+=%=                                       " Right Side
-set statusline+=%2*\ \ %{&ff}                              " FileFormat (dos/unix..)
+set statusline+=%2*\ \ %{&ff}                            " File Format(dos/unix..)
 set statusline+=\ %2*│                                   " Separator
 set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
 set statusline+=\ %2*│                                   " Separator
 set statusline+=%2*\ %Y\                                 " FileType
-set statusline+=%3*\ %2p%%\                              " Percentage of document
-set statusline+=%4*\ %02l:%02v\ \                        " Line number : Column number
-
-hi User1 ctermfg=250 ctermbg=237 guibg=#3c3836 guifg=#d5c4a1
-hi User2 ctermfg=250 ctermbg=239 guibg=#504945 guifg=#d5c4a1
-hi User3 ctermfg=235 ctermbg=72 guibg=#689d6a guifg=#282828
-hi User4 ctermfg=235 ctermbg=109 guibg=#83a598 guifg=#282828
+set statusline+=%3*\ %2p%%\                              " Percentage of Document
+set statusline+=%4*\ %02l:%02v\ \                        " Line Number : Column Number
 
 " }}}
