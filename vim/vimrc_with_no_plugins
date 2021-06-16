@@ -275,7 +275,7 @@ endif
 set background=dark
 
 " 使 Vim/Neovim 背景透明, 1 为启用, 0 为禁用.
-let bgtransparent=1
+let bgtransparent=0
 
 " 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 let popup_window_transparent=1
@@ -1727,8 +1727,15 @@ endif
 
 " default
 hi statusline ctermfg=109 ctermbg=235 guifg=#83a598 guibg=#282828
-hi User1      ctermfg=250 ctermbg=237 guifg=#d5c4a1 guibg=#3c3836
-hi User2      ctermfg=250 ctermbg=239 guifg=#d5c4a1 guibg=#504945
+
+if &background == 'dark'
+  hi User1    ctermfg=250 ctermbg=237 guifg=#d5c4a1 guibg=#3c3836
+  hi User2    ctermfg=250 ctermbg=239 guifg=#d5c4a1 guibg=#504945
+else
+  hi User1    ctermfg=239 ctermbg=248 guifg=#504945 guibg=#bdae93
+  hi User2    ctermfg=241 ctermbg=250 guifg=#665c54 guibg=#d5c4a1
+endif
+
 hi User3      ctermfg=235 ctermbg=72  guifg=#282828 guibg=#689d6a
 hi User4      ctermfg=235 ctermbg=109 guifg=#282828 guibg=#83a598
 
@@ -1748,9 +1755,9 @@ endfunction
 
 function! ReplaceModeColor()
   " red
-  hi statusline ctermfg=167 ctermbg=235 guifg=#fb4934 guibg=#282828
-  hi User3      ctermfg=235 ctermbg=124 guifg=#282828 guibg=#cc241d
-  hi User4      ctermfg=235 ctermbg=167 guifg=#282828 guibg=#fb4934
+  hi statusline ctermfg=167 ctermbg=237 guifg=#fb4934 guibg=#3c3836
+  hi User3      ctermfg=237 ctermbg=124 guifg=#3c3836 guibg=#cc241d
+  hi User4      ctermfg=237 ctermbg=167 guifg=#3c3836 guibg=#fb4934
 endfunction
 
 function! VisualModeColor()
