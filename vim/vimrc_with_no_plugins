@@ -32,6 +32,9 @@
 " 关闭兼容模式, 也就是不再兼容 VI, 必需放在第一行.
 set nocompatible
 
+" 使 vim 类型文件代码块折叠.
+set sw=2 ts=2 sts=2 et tw=80 ft=vim fdm=marker
+"
 " 设置 Vim 内部使用的字符编码, 默认值 latin1 或者操作系统 $LANG 环境变量对应的编码.
 set encoding=utf-8
 
