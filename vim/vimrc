@@ -184,6 +184,7 @@ Plug 'jacoborus/tender.vim'
 " papercolor
 Plug 'NLKNguyen/papercolor-theme'
 
+" ayu
 Plug 'ayu-theme/ayu-vim'
 
 " ********************** 代码补全 ********************************************
@@ -1112,6 +1113,7 @@ endif
 "   nord: https://github.com/arcticicestudio/nord-vim
 "   tender: https://github.com/jacoborus/tender.vim
 "   papercolor: https://github.com/NLKNguyen/papercolor-theme
+"   ayu: https://github.com/ayu-theme/ayu-vim
 "
 " NOTE:
 "   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1300,9 +1302,9 @@ if &background == 'dark'
   hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
 else
   hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
-  hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=Yellow guibg=NONE guifg=Yellow
+  " color: orange
+  hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=208 guibg=NONE guifg=#ff8700
 endif
-
 
 " }}
 
