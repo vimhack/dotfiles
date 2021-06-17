@@ -1,0 +1,45 @@
+# gitconfig by @windvalley
+# https://raw.githubusercontent.com/windvalley/dotfiles/master/git/gitconfig
+
+
+# 安装:
+# wget -O ~/.gitconfig https://raw.githubusercontent.com/windvalley/dotfiles/master/git/gitconfig
+
+
+# 全局用户信息(--global)
+[user]
+	name = windvalley
+	email = i@sre.im
+    # 参见脚本: commit_sign_verified.sh
+	signingkey = 160D1A30727A4AED
+
+[http]
+	postBuffer = 524288000
+
+# git push 超过 100M .zip 文件方法:
+#   brew install git-lfs
+#   git lfs track "*.zip"
+#   git add .gitattributes
+#   git add somefile.zip
+#   git commit -m "Add big file"
+#   git push
+# git clone 超过 100M 仓库的方法:
+#   git lfs install --skip-repo
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+# commit 签名
+[commit]
+    # 参见脚本: commit_sign_verified.sh
+	gpgsign = true
+
+[core]
+    # 解决 Git 中 'Filename too long' 的错误.
+    longpaths = true  
+    # 在 Git 中会把非 ASCII 字符叫做 Unusual 字符,
+    # 这类字符在 Git 输出到终端的时候默认是用 8 进制转义字符输出的(防止乱码), 
+    # 但现在的终端多数都支持直接显示非 ASCII 字符, 所以可以关闭掉这个特性.
+    quotepath = off
