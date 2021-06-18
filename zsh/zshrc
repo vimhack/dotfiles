@@ -407,7 +407,7 @@ export GPG_TTY=$(tty)
 
 # fzf(https://github.com/junegunn/fzf)
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border'
-alias vimfzf="vim \$(fzf)"
+alias ff="vim \$(fzf)"
 
 # }}
 
