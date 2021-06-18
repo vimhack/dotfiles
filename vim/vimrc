@@ -331,6 +331,9 @@ Plug 'takac/vim-hardtime'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
 
+" 显示光标所在内容的 git commit 信息, 方便了解代码背景.
+Plug 'rhysd/git-messenger.vim'
+
 " ********************** 其他 ************************************************
 
 " 日历插件.
@@ -767,7 +770,6 @@ let g:EasyMotion_smartcase = 1
 
 " 搜索小写字母, 搜索结果大小写字母都包含, 但搜索大写字母时, 搜索结果仅包含大写字母.
 let g:EasyMotion_use_smartsign_us = 1
-"""""""""""""""""""""
 
 """""" Yggdroot/LeaderF
 " 需要在系统上提前安装 rg 命令: brew install rg
@@ -827,7 +829,6 @@ xnoremap rg :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
 
 " ,rg 搜索内容关闭后, 想再次搜索上次搜索的内容, normal 模式下按 rc 即可.
 noremap <Leader>rc :<C-U>Leaderf! rg --recall<CR>
-"""""""""""""""""""""
 
 """""" lyokha/vim-xkbswitch
 " doc: https://github.com/lyokha/vim-xkbswitch
@@ -860,7 +861,6 @@ let g:XkbSwitchNLayout = 'us'
 " 输入法从中文切换到英文有一定的延迟, 非常影响体验,
 " 此条指令解决这个问题, 可以将数字改的更小以或得更快的切换体验.
 set ttimeoutlen=25
-"""""""""""""""""""""
 
 """""" machakann/vim-highlightedyank
 " doc: https://github.com/machakann/vim-highlightedyank
@@ -871,7 +871,6 @@ let g:highlightedyank_highlight_duration = 1000
 
 " 解决个别主题或 terminal 配置下高亮不生效的问题, 一般可不配置此项.
 highlight HighlightedyankRegion cterm=reverse gui=reverse
-"""""""""""""""""""""
 
 """""" unblevable/quick-scope
 " doc: https://github.com/unblevable/quick-scope
@@ -889,7 +888,15 @@ let g:qs_lazy_highlight = 0
 " NOTE: 本行尾的空格不要去掉.
 nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10 
 
-"""""""""""""""""""""
+"""""" rhysd/git-messenger.vim
+" doc: https://github.com/rhysd/git-messenger.vim
+
+" 弹出 popup window 时, 自动将光标移动到 popup window, 如果设置为 v:false,
+" 则需要通过 ctrl ww 快捷键将光标移动到 popup window.
+let g:git_messenger_always_into_popup = v:true
+
+" 自定义 commit 时间显示的格式.
+let g:git_messenger_date_format = "%Y %b %d %X"
 
 " }}
 
@@ -2393,7 +2400,7 @@ endif
 " ** junegunn/gv.vim (https://github.com/junegunn/gv.vim)
 "                :GV  类似 :Git log.
 "               :GV!  这个只看当前文件的 git log.
-
+"
 " ** tpope/vim-surround (https://github.com/tpope/vim-surround)
 "               ysw"  使光标所在单词使用 " 包裹, 不包括光标前的字符.
 "              ysiw"  光标所在的完整单词使用 " 包裹, 包括光标前的字符.
@@ -2426,7 +2433,13 @@ endif
 "                ,tc  新建一个悬浮窗口.
 "                ,tk  关闭当前悬浮窗口.
 "                ,tn  切换到下一个悬浮窗口.
-"                ,ts 显示目前存在的悬浮窗口.
+"                ,ts  显示目前存在的悬浮窗口.
+"
+" ** rhysd/git-messenger.vim (https://github.com/rhysd/git-messenger.vim)
+"                ,gm  弹出窗口显示光标下代码的 commit 信息.
+"                o/O  当光标在弹出的窗口中时, 向后或向前翻阅 commit 历史.
+"                  ?  当光标在弹出的窗口中时, 查看可用指令的帮助文档.
+"                  q  关闭弹出的窗口.
 "
 " }}
 
