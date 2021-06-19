@@ -1016,7 +1016,7 @@ endif
 
 " 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
-let popup_window_transparent=1
+let popup_window_transparent=0
 
 " 颜色主题方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
