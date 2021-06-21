@@ -1013,7 +1013,6 @@ else
   let bgtransparent=1
 endif
 
-
 " 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let popup_window_transparent=0
@@ -1036,6 +1035,17 @@ let g:dracula_bold=0
 " 默认值: medium
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
+" 是否启用粗体字, 0 为禁用, 1 为启用.
+" 默认值: 1
+let g:gruvbox_bold = 1
+if has('nvim')
+  " 对于 neovim 开启斜体字.
+  let g:gruvbox_italic = 1
+  " 对于部分代码关键字是否启用斜体字, 默认值: 0
+  let g:gruvbox_italicize_strings = 1
+  " 注释内容是否启用斜体字, 默认值: 1
+  let g:gruvbox_italicize_comments = 1
+endif
 
 " 调整 solarized 主题的颜色对比度.
 " 可选值: normal, high, low
