@@ -57,6 +57,11 @@ shell:
   args:
     # force UTF-8 in tmux
     - -u
+    # NOTE: attach 的是已存在的 tmux session 名称,
+    # 目的是避免每次重新启动 alacritty 都创建新的 tmux session.
+    - attach
+    - -t
+    - dotfiles
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -807,7 +812,6 @@ key_bindings:
   # NOTE: 解决在使用Pinyin输入法中按 <Backspace> 键的时候删除已经输入的文字的问题.
   # from: https://github.com/alacritty/alacritty/issues/1606
   - { key: Back, action: ReceiveChar }
-
   # command 0  重置字体大小到配置文件中配置的大小.
   - { key: Key0, mods: Command, action: ResetFontSize }
   # command +  放大字体.
@@ -900,10 +904,15 @@ mouse:
 #        command q/w  关闭当前终端.
 #     command ctrl f  全屏显示终端.
 #        command f/b  向前或向后搜索.
+#   command option h  用来隐藏除了当前 alacritty 窗口外的其他所有系统窗口.
+#                     NOTE: alacritty 0.8.0 版本增加的此快捷键.
 #
 # *** 注意事项 ***
 #   1. vim 的 insert 模式下, 如果当前是拼音输入法, 快速的按 esc 是无法正常切换到 normal 模式的,
-#      按 esc 键要稍微停顿一下才可以, 或者直接按 ctrl [ 来代替 esc 键.
+#      按 esc 键要稍微停顿一下才可以, 或者连续按两次 esc,  或者直接按 ctrl [ 来代替 esc 键.
+#      NOTE: 经过测试, 这个问题是 alacritty 的问题, 和是否使用 tmux 无关.
+#      FIXME: iterm2 无此问题. 建议在此问题没解决之前, 在 insert 模式下先将输入法切换成英文,
+#             再按 esc 切换到 normal 模式.
 #
 
 # }}
