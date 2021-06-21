@@ -147,7 +147,8 @@ call plug#begin('~/.vim/plugged')
 " ********************** Vim 主题 ********************************************
 
 " solarized
-Plug 'altercation/vim-colors-solarized'
+" 该版本增加了 g:solarized_italic 选项, 供用户主动选择是否启用斜体字.
+Plug 'windvalley/vim-colors-solarized'
 
 " gruvbox
 Plug 'morhetz/gruvbox'
@@ -1021,7 +1022,7 @@ let popup_window_transparent=0
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
 
 " dracula 主题配置.
-if !has('nvim')
+if !has('nvim') && !has('gui_running')
   " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
   " from: https://github.com/dracula/vim/issues/219
   " NOTE: Vim 存在此问题, Neovim 不存在此问题.
@@ -1038,7 +1039,7 @@ let g:gruvbox_contrast_light = 'hard'
 " 是否启用粗体字, 0 为禁用, 1 为启用.
 " 默认值: 1
 let g:gruvbox_bold = 1
-if has('nvim')
+if has('nvim') || has('gui_running')
   " 对于 neovim 开启斜体字.
   let g:gruvbox_italic = 1
   " 对于部分代码关键字是否启用斜体字, 默认值: 0
@@ -1050,8 +1051,12 @@ endif
 " 调整 solarized 主题的颜色对比度.
 " 可选值: normal, high, low
 let g:solarized_contrast = 'high'
-" 禁用下划线.
+" 是否启用下划线.
 let g:solarized_underline = 0
+" 是否启用斜体字, 默认值: 0
+if has('nvim') || has('gui_running')
+  let g:solarized_italic = 1
+endif
 
 " papercolor 主题设置:
 " 是否允许部分 symbol 粗体字, 1 是允许, 0 是不允许.
@@ -1063,7 +1068,7 @@ let g:PaperColor_Theme_Options = {
   \   }
   \ }
 " 是否允许部分 symbol 斜体字, 1 是允许, 0 是不允许.
-if has('nvim')
+if has('nvim') || has('gui_running')
   let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
 else
   " vim 不支持斜体字, 需要禁用.
@@ -1072,7 +1077,7 @@ endif
 
 " jellybeans 主题设置:
 " 是否禁用斜体字, 0 禁用, 1 启用.
-if has('nvim')
+if has('nvim') || has('gui_running')
   let g:jellybeans_use_term_italics = 1
   let g:jellybeans_use_gui_italics = 1
 else
@@ -1112,7 +1117,6 @@ if filereadable(colorscheme_file)
 else
   " 默认的背景色, dark or light.
   set background=dark
-
   " 默认颜色主题方案.
   colorscheme dracula
 endif
