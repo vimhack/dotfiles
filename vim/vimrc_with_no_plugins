@@ -290,6 +290,20 @@ let popup_window_transparent=1
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
 
+" 是否启用粗体字, 0 为禁用, 1 为启用.
+" 默认值: 1
+let g:gruvbox_bold = 1
+
+" 对于 neovim 开启斜体字.
+if has('nvim') || has('gui_running')
+  " 是否启用斜体字, 默认值: 0
+  let g:gruvbox_italic = 1
+  " 对于部分代码关键字是否启用斜体字, 默认值: 0
+  let g:gruvbox_italicize_strings = 1
+  " 注释内容是否启用斜体字, 默认值: 1
+  let g:gruvbox_italicize_comments = 1
+endif
+
 " gruvbox {{{
 " -----------------------------------------------------------------------------
 " File: gruvbox.vim
