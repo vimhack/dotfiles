@@ -1058,6 +1058,11 @@ if has('nvim') || has('gui_running')
   let g:solarized_italic = 1
 endif
 
+" molokai 主题设置.
+if has('nvim') || has('gui_running')
+  let g:molokai_italic = 1
+endif
+
 " papercolor 主题设置:
 " 是否允许部分 symbol 粗体字, 1 是允许, 0 是不允许.
 let g:PaperColor_Theme_Options = {
