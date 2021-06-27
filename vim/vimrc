@@ -1018,6 +1018,24 @@ endif
 " NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let popup_window_transparent=0
 
+" 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的颜色主题, 可以使用此方法提供支持或优化.
+function! EnableItalic()
+  if has('nvim') || has('gui_running')
+    hi Comment cterm=italic gui=italic
+    hi Todo cterm=italic gui=italic
+    hi Folded cterm=italic gui=italic
+    hi Special cterm=italic gui=italic
+    hi String cterm=italic gui=italic
+    hi SpellCap cterm=italic gui=italic
+    hi htmlBoldItalic cterm=italic gui=italic
+    hi htmlBoldUnderlineItalic cterm=italic gui=italic
+    hi htmlUnderlineItalic cterm=italic gui=italic
+    hi htmlItalic cterm=italic gui=italic
+    hi vimCommentTitle cterm=italic gui=italic
+    hi markdownItalic cterm=italic gui=italic
+  endif
+endfunction
+
 " 颜色主题方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
 
@@ -1061,6 +1079,12 @@ endif
 " molokai 主题设置.
 if has('nvim') || has('gui_running')
   let g:molokai_italic = 1
+endif
+
+" nord 主题设置.
+if has('nvim') || has('gui_running')
+  let g:nord_italic = 1
+  let g:nord_italic_comments = 1
 endif
 
 " papercolor 主题设置:
@@ -1142,8 +1166,9 @@ endif
 "   ayu: https://github.com/ayu-theme/ayu-vim
 "
 " NOTE:
-"   1) 使用 Vim 主题, 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
+"   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
 "   2) dracula, molokai, jellybeans, base16-default-dark, nord, tender 主题没有 light 方案.
+"   3) base16-default-dark, rigel 等主题默认没有提供斜体字的特性, 我们可以通过自定义方法提供支持.
 "
 " 颜色主题方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之后, 否则不起作用.
@@ -1206,6 +1231,8 @@ if (g:colors_name == 'rigel')
 
   " 优化光标所在行的行号的颜色方案.
   hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white guibg=#00384d guifg=#afffff
+
+  call EnableItalic()
 endif
 
 " *** solarized ***
@@ -1224,6 +1251,8 @@ if (g:colors_name == 'solarized')
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=#4e4e4e
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=#4e4e4e
   endif
+
+  call EnableItalic()
 endif
 
 " *** dracula ***
@@ -1236,6 +1265,7 @@ endif
 " *** one ***
 if (g:colors_name == 'one')
   let g:lightline.colorscheme = 'one'
+  call EnableItalic()
 endif
 
 " *** molokai ***
@@ -1244,17 +1274,21 @@ if (g:colors_name == 'molokai')
   let g:rehash256 = 1
 
   let g:lightline.colorscheme = 'molokai'
+
+  call EnableItalic()
 endif
 
 " *** gruvbox ***
 " doc: https://github.com/morhetz/gruvbox/wiki/Configuration
 if (g:colors_name == 'gruvbox')
   let g:lightline.colorscheme = 'gruvbox'
+  call EnableItalic()
 endif
 
 " *** iceberg ***
 if (g:colors_name == 'iceberg')
   let g:lightline.colorscheme = 'iceberg'
+  call EnableItalic()
 endif
 
 " *** jellybeans ***
@@ -1267,21 +1301,28 @@ if (g:colors_name == 'jellybeans')
 
   hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
   hi Cursorcolumn cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
+
+  call EnableItalic()
 endif
 
 " *** base16-default-dark ***
 if (g:colors_name == 'base16-default-dark')
   let g:lightline.colorscheme = 'Tomorrow_Night'
+  call EnableItalic()
 endif
 
 " *** nord ***
 if (g:colors_name == 'nord')
   let g:lightline.colorscheme = 'nord'
+
+  " nord 默认提供的斜体字支持不够理想, 使用自定义方法增强.
+  call EnableItalic()
 endif
 
 " *** tender ***
 if (g:colors_name == 'tender')
   let g:lightline.colorscheme = 'tender'
+  call EnableItalic()
 endif
 
 " *** papercolor ***
@@ -1289,6 +1330,8 @@ if (g:colors_name == 'PaperColor')
   let g:lightline.colorscheme = 'PaperColor'
 
   hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
+
+  call EnableItalic()
 endif
 
 " *** ayu ***
@@ -1300,6 +1343,8 @@ if (g:colors_name == 'ayu')
   else
     let g:lightline.colorscheme = 'ayu_light'
   endif
+
+  call EnableItalic()
 endif
 
 " }}
