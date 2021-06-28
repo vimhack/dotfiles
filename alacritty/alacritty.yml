@@ -559,29 +559,29 @@ schemes:
   # Colors (ayu_light)
   ayu_light: &ayu_light
     primary:
-      background: "0xfafafa"
-      foreground: "0x5c6773"
+      background: "#fafafa"
+      foreground: "#5c6773"
     cursor:
-      text: "0x5c6773"
-      cursor: "0xff6a00"
+      text: "#5c6773"
+      cursor: "#ff6a00"
     normal:
-      black: "0x000000"
-      red: "0xff3333"
-      green: "0x86b300"
-      yellow: "0xf29718"
-      blue: "0x41a6d9"
-      magenta: "0xf07178"
-      cyan: "0x4dbf99"
-      white: "0xffffff"
+      black: "#000000"
+      red: "#ff005f"
+      green: "#86b300"
+      yellow: "#f29718"
+      blue: "#41a6d9"
+      magenta: "#f07178"
+      cyan: "#4dbf99"
+      white: "#7c6f64"
     bright:
-      black: "0x323232"
-      red: "0xff6565"
-      green: "0xb8e532"
-      yellow: "0xffc94a"
-      blue: "0x73d8ff"
-      magenta: "0xffa3aa"
-      cyan: "0x7ff1cb"
-      white: "0xffffff"
+      black: "#323232"
+      red: "#ff6565"
+      green: "#b8e532"
+      yellow: "#ffaf87"
+      blue: "#0087af"
+      magenta: "#ffa3aa"
+      cyan: "#00af87"
+      white: "#ffffff"
 
   # Colors (Ayu Dark)
   ayu: &ayu
@@ -637,9 +637,8 @@ schemes:
 
 # 从 Color Schemes 中选则一个使用:
 #   rigel, dracula, molokai, jellybeans, base16-default-dark, nord, tender,
-#   gruvbox_dark, gruvbox_light, iceberg, iceberg_light,
-#   solarized_dark, solarized_light, one_dark, one_light,
-#   papercolor_light
+#   gruvbox_dark, gruvbox_light, iceberg, iceberg_light, one_dark, one_light,
+#   papercolor, papercolor_light, ayu, ayu_mirage, ayu_light
 colors: *dracula
 
 # 背景透明度配置, 取值范围: 0.0 到 1.0
