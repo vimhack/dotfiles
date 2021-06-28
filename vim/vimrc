@@ -1006,7 +1006,6 @@ endif
 
 " 自定义配置, 是否启用 Vim/Neovim 透明背景色.
 let transparent_file = expand('~/.vim/transparent.vim')
-
 if filereadable(transparent_file)
   exec 'source' transparent_file
 else
@@ -1018,34 +1017,32 @@ endif
 " NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let popup_window_transparent=0
 
+" 解决 Vim 在 cterm 彩色终端下不支持斜体字的问题, Neovim 没有此问题.
+" 解决方法来源: https://rsapkf.xyz/blog/enabling-italics-vim-tmux
+" NOTE: ^[ 必须通过 <Ctrl-v><Esc> 敲出来才可以.
+set t_ZH=[3m
+set t_ZR=[23m
+
 " 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的颜色主题, 可以使用此方法提供支持或优化.
 function! EnableItalic()
-  if has('nvim') || has('gui_running')
-    hi Comment cterm=italic gui=italic
-    hi Todo cterm=italic gui=italic
-    hi Folded cterm=italic gui=italic
-    hi Special cterm=italic gui=italic
-    hi String cterm=italic gui=italic
-    hi SpellCap cterm=italic gui=italic
-    hi htmlBoldItalic cterm=italic gui=italic
-    hi htmlBoldUnderlineItalic cterm=italic gui=italic
-    hi htmlUnderlineItalic cterm=italic gui=italic
-    hi htmlItalic cterm=italic gui=italic
-    hi vimCommentTitle cterm=italic gui=italic
-    hi markdownItalic cterm=italic gui=italic
-  endif
+  hi Comment cterm=italic gui=italic
+  hi Todo cterm=italic gui=italic
+  hi Folded cterm=italic gui=italic
+  hi Special cterm=italic gui=italic
+  hi String cterm=italic gui=italic
+  hi SpellCap cterm=italic gui=italic
+  hi htmlBoldItalic cterm=italic gui=italic
+  hi htmlBoldUnderlineItalic cterm=italic gui=italic
+  hi htmlUnderlineItalic cterm=italic gui=italic
+  hi htmlItalic cterm=italic gui=italic
+  hi vimCommentTitle cterm=italic gui=italic
+  hi markdownItalic cterm=italic gui=italic
 endfunction
 
 " 颜色主题方案的个性配置 {{
 " NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
 
 " dracula 主题配置.
-if !has('nvim') && !has('gui_running')
-  " 解决启用 dracula 颜色方案时, 部分关键字被浅蓝色背景填充的问题.
-  " from: https://github.com/dracula/vim/issues/219
-  " NOTE: Vim 存在此问题, Neovim 不存在此问题.
-  let g:dracula_italic = 0
-endif
 let g:dracula_bold=0
 
 " 调整 gruvbox 主题的颜色对比度.
@@ -1054,41 +1051,32 @@ let g:dracula_bold=0
 " 默认值: medium
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
-" 是否启用粗体字, 0 为禁用, 1 为启用.
-" 默认值: 1
+" 是否启用粗体字, 0 为禁用, 1 为启用, 默认值: 1
 let g:gruvbox_bold = 1
-if has('nvim') || has('gui_running')
-  " 对于 neovim 开启斜体字.
-  let g:gruvbox_italic = 1
-  " 对于部分代码关键字是否启用斜体字, 默认值: 0
-  let g:gruvbox_italicize_strings = 1
-  " 注释内容是否启用斜体字, 默认值: 1
-  let g:gruvbox_italicize_comments = 1
-endif
+" 是否启用斜体字, 默认值: 0
+let g:gruvbox_italic = 1
+" 对于代码中的字符串是否启用斜体字, 默认值: 0
+let g:gruvbox_italicize_strings = 1
+" 注释内容是否启用斜体字, 默认值: 1
+let g:gruvbox_italicize_comments = 1
 
 " 调整 solarized 主题的颜色对比度.
 " 可选值: normal, high, low
 let g:solarized_contrast = 'high'
-" 是否启用下划线.
+" 是否启用下划线, 默认值: 1
 let g:solarized_underline = 0
 " 是否启用斜体字, 默认值: 0
-if has('nvim') || has('gui_running')
-  let g:solarized_italic = 1
-endif
+let g:solarized_italic = 1
 
 " molokai 主题设置.
-if has('nvim') || has('gui_running')
-  let g:molokai_italic = 1
-endif
+let g:molokai_italic = 1
 
 " nord 主题设置.
-if has('nvim') || has('gui_running')
-  let g:nord_italic = 1
-  let g:nord_italic_comments = 1
-endif
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
 
 " papercolor 主题设置:
-" 是否允许部分 symbol 粗体字, 1 是允许, 0 是不允许.
+" 是否允许粗体字, 1 是允许, 0 是不允许.
 let g:PaperColor_Theme_Options = {
   \  'theme': {
   \    'default': {
@@ -1096,29 +1084,18 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
-" 是否允许部分 symbol 斜体字, 1 是允许, 0 是不允许.
-if has('nvim') || has('gui_running')
-  let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
-else
-  " vim 不支持斜体字, 需要禁用.
-  let g:PaperColor_Theme_Options.theme.default.allow_italic = 0
-endif
+" 是否允许斜体字, 1 是允许, 0 是不允许.
+let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
 
 " jellybeans 主题设置:
 " 是否禁用斜体字, 0 禁用, 1 启用.
-if has('nvim') || has('gui_running')
-  let g:jellybeans_use_term_italics = 1
-  let g:jellybeans_use_gui_italics = 1
-else
-  " Vim 不支持, 需要禁用.
-  let g:jellybeans_use_term_italics = 0
-  let g:jellybeans_use_gui_italics = 0
-endif
+let g:jellybeans_use_term_italics = 1
+let g:jellybeans_use_gui_italics = 1
 
 if (bgtransparent == 1)
   " 对于 solarized light 主题, 使用 hi Normal 的方式设置背景透明的方式,
   " lightline 插件提供的状态栏的背景色还是 dark, 所以对于 solarized 主题,
-  " 通过其提供的特有指令还实现背景透明.
+  " 通过其提供的特有指令来实现背景透明.
   let g:solarized_termtrans = 1
 
   " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
@@ -1158,7 +1135,7 @@ endif
 "   molokai: https://github.com/tomasr/molokai
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
-"   base16-default-dark(tomorrow night): https://github.com/chriskempson/base16-vim
+"   base16-default-dark: https://github.com/chriskempson/base16-vim
 "   jellybeans: https://github.com/nanotech/jellybeans.vim
 "   nord: https://github.com/arcticicestudio/nord-vim
 "   tender: https://github.com/jacoborus/tender.vim
