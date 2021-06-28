@@ -146,10 +146,6 @@ call plug#begin('~/.vim/plugged')
 
 " ********************** Vim 主题 ********************************************
 
-" solarized
-" 该版本增加了 g:solarized_italic 选项, 供用户主动选择是否启用斜体字.
-Plug 'windvalley/vim-colors-solarized'
-
 " gruvbox
 Plug 'morhetz/gruvbox'
 
@@ -1060,14 +1056,6 @@ let g:gruvbox_italicize_strings = 1
 " 注释内容是否启用斜体字, 默认值: 1
 let g:gruvbox_italicize_comments = 1
 
-" 调整 solarized 主题的颜色对比度.
-" 可选值: normal, high, low
-let g:solarized_contrast = 'high'
-" 是否启用下划线, 默认值: 1
-let g:solarized_underline = 0
-" 是否启用斜体字, 默认值: 0
-let g:solarized_italic = 1
-
 " molokai 主题设置.
 let g:molokai_italic = 1
 
@@ -1093,11 +1081,6 @@ let g:jellybeans_use_term_italics = 1
 let g:jellybeans_use_gui_italics = 1
 
 if (bgtransparent == 1)
-  " 对于 solarized light 主题, 使用 hi Normal 的方式设置背景透明的方式,
-  " lightline 插件提供的状态栏的背景色还是 dark, 所以对于 solarized 主题,
-  " 通过其提供的特有指令来实现背景透明.
-  let g:solarized_termtrans = 1
-
   " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
   " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
   let g:PaperColor_Theme_Options.theme.default.transparent_background = 1
@@ -1131,7 +1114,6 @@ endif
 "   dracula: https://draculatheme.com/vim
 "   rigel: https://github.com/Rigellute/rigel
 "   gruvbox: https://github.com/morhetz/gruvbox
-"   solarized: https://github.com/altercation/vim-colors-solarized
 "   molokai: https://github.com/tomasr/molokai
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
@@ -1152,7 +1134,7 @@ endif
 
 if (bgtransparent == 1)
   " 使 vim/nvim 背景透明.
-  if (g:colors_name != 'solarized' && g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
+  if (g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
     hi Normal ctermbg=NONE guibg=NONE
   endif
 
@@ -1208,26 +1190,6 @@ if (g:colors_name == 'rigel')
 
   " 优化光标所在行的行号的颜色方案.
   hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white guibg=#00384d guifg=#afffff
-
-  call EnableItalic()
-endif
-
-" *** solarized ***
-if (g:colors_name == 'solarized')
-  " solarized 主题不支持 termguicolors 选项, 需要关闭, 否则色彩显示将出现混乱.
-  set notermguicolors
-
-  let g:lightline.colorscheme = 'solarized'
-
-  " NOTE: & 表示获取选项 background 的值, 查看帮助文档 :help let-&
-  " ==# 表示字符串比较的时候大小写是敏感的, 查看帮助文档 :help ==#
-  if &background ==# 'light'
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
-  else
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=#4e4e4e
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=239 guibg=NONE guifg=#4e4e4e
-  endif
 
   call EnableItalic()
 endif

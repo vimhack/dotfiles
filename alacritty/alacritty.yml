@@ -327,61 +327,6 @@ schemes:
       cyan: "#8FBCBB"
       white: "#ECEFF4"
 
-  # Colors (Solarized Light)
-  solarized_light: &solarized_light
-    primary:
-      background: "#fdf6e3"
-      foreground: "#657b83"
-    cursor:
-      text: "#fdf6e3"
-      cursor: "#657b83"
-    normal:
-      black: "#073642"
-      red: "#dc322f"
-      green: "#859900"
-      yellow: "#b58900"
-      blue: "#268bd2"
-      magenta: "#d33682"
-      cyan: "#2aa198"
-      white: "#eee8d5"
-    bright:
-      black: "#002b36"
-      red: "#cb4b16"
-      green: "#586e75"
-      yellow: "#657b83"
-      blue: "#839496"
-      magenta: "#6c71c4"
-      cyan: "#93a1a1"
-      white: "#fdf6e3"
-
-  # Colors (Solarized Dark)
-  solarized_dark: &solarized
-    primary:
-      background: "#002b36"
-      foreground: "#839496"
-    cursor:
-      text: "#002b36"
-      cursor: "#839496"
-    normal:
-      black: "#073642"
-      red: "#dc322f"
-      green: "#859900"
-      yellow: "#b58900"
-      blue: "#268bd2"
-      magenta: "#d33682"
-      cyan: "#2aa198"
-      white: "#eee8d5"
-    bright:
-      # NOTE: black 是命令行命令补全提示的字符的颜色, 如果看不清提示字符, 在这里修改颜色.
-      black: "#586e75"
-      red: "#cb4b16"
-      green: "#586e75"
-      yellow: "#657b83"
-      blue: "#839496"
-      magenta: "#6c71c4"
-      cyan: "#93a1a1"
-      white: "#fdf6e3"
-
   # Colors (Gruvbox light)
   gruvbox_light: &gruvbox_light
     primary:

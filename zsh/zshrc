@@ -174,9 +174,9 @@ theme(){
     local themes=(
         # dark
         dracula molokai rigel jellybeans base16-default-dark nord tender
-        gruvbox solarized one iceberg papercolor ayu ayu_mirage
+        gruvbox one iceberg papercolor ayu ayu_mirage
         # light
-        gruvbox_light solarized_light one_light iceberg_light papercolor_light
+        gruvbox_light one_light iceberg_light papercolor_light
         ayu_light
     )
 
