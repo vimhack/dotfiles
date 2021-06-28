@@ -70,14 +70,12 @@ Current theme is 'dracula', you can change to follows:
 * nord
 * tender
 * gruvbox
-* solarized
 * one
 * iceberg
 * papercolor
 * ayu
 * ayu_mirage
 * gruvbox_light
-* solarized_light
 * one_light
 * iceberg_light
 * papercolor_light
@@ -156,34 +154,6 @@ Opacity: `0.9`
 VimBgTransparent: `1`
 
 ![iceberg](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/iceberg.png)
-
-ColorScheme: `solarized`
-FontSize: `11`
-Opacity: `0.95`
-VimBgTransparent: `1`
-
-![solarized](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/solarized.png)
-
-ColorScheme: `one`
-FontSize: `11`
-Opacity: `1`
-VimBgTransparent: `1`
-
-![one](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/one.png)
-
-ColorScheme: `jellybeans`
-FontSize: `12`
-Opacity: `0.8`
-VimBgTransparent: `0`
-
-![jellybeans](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/jellybeans.png)
-
-ColorScheme: `molokai`
-FontSize: `12`
-Opacity: `0.9`
-VimBgTransparent: `1`
-
-![molokai](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/molokai.png)
 
 ## ⚖️ License
 
