@@ -80,6 +80,7 @@
 
 "      2) 替换你的当前 ~/.vimrc 文件
 "         wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"         wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
 
 "      3) 安装用于管理 Vim 插件的插件 vim-plug
 "         curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -94,6 +95,7 @@
 "
 "      2) 替换你的当前 ~/.config/nvim/init.vim 文件
 "         curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"         wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
 "
 "      3) 安装用于管理 Vim 插件的插件 vim-plug
 "         curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -674,6 +676,7 @@ call ale#Set('go_golangci_lint_package', 1)
 "      我这里暂不启用.
 "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
 "      所以不用重复添加.
+"   4) Go 目前使用 vim-go 插件来实现格式化, 这里暂时不用写: 'go': ['gofmt', 'goimports']
 let g:ale_fixers = {
     \    'python': ['black', 'add_blank_lines_for_python_control_statements'],
     \    'lua': ['trim_whitespace', 'remove_trailing_lines'],
@@ -1497,6 +1500,12 @@ map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
 let g:go_fmt_autosave = 1
 " 默认值: 1
 let g:go_imports_autosave = 1
+" 格式化Go代码每行的长度, 使不超过120个字符.
+" NOTE: 需要安装 golines, go get -u github.com/segmentio/golines
+let g:go_fmt_command = "golines"
+let g:go_fmt_options = {
+  \ 'golines': '-m 120',
+  \ }
 
 
 " *** 代码高效阅读 ***
