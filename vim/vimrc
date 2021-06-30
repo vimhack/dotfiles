@@ -136,9 +136,13 @@ let mapleader = ','
 
 " 插件安装 {{
 
-" 需要先安装用于管理 Vim 插件的插件: vim-plug
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 需要先安装用于管理 Vim/Neovim 插件的插件: vim-plug
+" 1) Vim
+"    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 2) Neovim
+"    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
+"       --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "
 " 下面每一个 Plug 对应一个 Vim 插件, 插件名称就是相应 github 项目名称,
 " 可通过访问 https://github.com/插件名称 来查看相关插件的详细使用文档;
@@ -242,7 +246,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " 集成 ranger 文件管理器.
 Plug 'francoiscabrol/ranger.vim'
 
-" 为目录树或LeaderF等插件显示文件类型.
+" 为目录树或 LeaderF 等插件显示文件类型.
 " NOTE:
 " 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为: Hack Nerd Font 或 Hack Nerd Font Mono;
 "    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
@@ -265,7 +269,7 @@ Plug 'Yggdroot/indentLine'
 " 搭建 Go 开发环境的 Vim 插件, 安装该插件的过程中,
 " 会自动安装该插件依赖的大量 Go 二进制工具;
 " 如果由于 Go 环境等问题导致自动安装失败,
-" 可后续通过 Vim 的 command-line 模式安装`:GoInstallBinaries`.
+" 可后续通过 command-line 模式安装 `:GoInstallBinaries`.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 """""""" openresty
@@ -341,10 +345,10 @@ Plug 'itchyny/calendar.vim'
 
 
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
-"    :PlugStatus  查看当前状态, 安装进度等;
-"    :PlugUpdate  更新所有插件, 建议定期更新所有插件;
-"    :PlugClean   卸载插件, 需要先在上面注释掉或删除相关插件,
-"                 然后重新打开此文件或 normal 模式下按 ,R 执行此命令;
+"    :PlugStatus   查看当前状态, 安装进度等;
+"    :PlugUpdate   更新所有插件, 建议定期更新所有插件;
+"    :PlugClean    卸载插件, 需要先在上面注释掉或删除相关插件,
+"                  然后重新打开此文件或 normal 模式下按 ,R 执行此命令;
 "    :PlugUpgrade  更新 vim-plug 本身.
 call plug#end()
 
@@ -374,7 +378,7 @@ call plug#end()
 "    :CocUninstall coc-json  卸载 Json language server.
 "                :CocUpdate  更新所有扩展.
 "          :CocList sources  列出当前已经有哪些代码补全的数据源.
-" ************************************************
+" ****************
 
 " *** 补全菜单的符号说明 ***
 "   [LS]  Language Server, 补全来自语言服务器.
@@ -456,9 +460,9 @@ function! SetupCommandAbbrs(from, to)
         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
 call SetupCommandAbbrs('C', 'CocConfig')
-" ****************************************************************************
+" ********************************
 
-" *** coc-translator
+" *** coc-translator ***
 " doc: https://github.com/voldikss/coc-translator
 " NOTE: 有可能被google翻译禁止使用其接口导致翻译失败报错.
 
@@ -471,11 +475,11 @@ vmap tse <Plug>(coc-translator-ev)
 " 将翻译结果替换掉光标下的单词.
 nmap tsr <Plug>(coc-translator-r)
 vmap tsr <Plug>(coc-translator-rv)
-" ******************
+" **********************
 
-" *** coc-css
+" *** coc-css ***
 autocmd FileType scss setl iskeyword+=@-@
-" ***********
+" ***************
 
 " 使用 tab 键触发补全, 选择补全.
 inoremap <silent><expr> <TAB>
@@ -547,7 +551,6 @@ nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
 " space p  重新列出上一次展示的 CocList.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-""""""""""""""""""""""""""
 
 " }}
 
@@ -641,18 +644,18 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 "      poetry shell
 "      poetry add pylint flake8 autoimport black isort -D
 let g:ale_linters = {
-    \    'go': ['golangci-lint', 'revive', 'gopls'],
-    \    'python': ['pylint', 'flake8'],
-    \    'lua': ['luac', 'luacheck'],
-    \    'sh': ['shellcheck', 'language_server'],
-    \    'javascript': ['eslint', 'standard'],
-    \    'vue': ['eslint', 'vls'],
-    \    'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
-    \    'yaml': ['yamllint'],
-    \    'json': ['jq', 'jsonlint'],
-    \    'jsonc': ['jq', 'jsonlint'],
-    \    'markdown': ['mdl', 'markdownlint', 'proselint', 'alex'],
-    \ }
+  \  'go': ['golangci-lint', 'revive', 'gopls'],
+  \  'python': ['pylint', 'flake8'],
+  \  'lua': ['luac', 'luacheck'],
+  \  'sh': ['shellcheck', 'language_server'],
+  \  'javascript': ['eslint', 'standard'],
+  \  'vue': ['eslint', 'vls'],
+  \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
+  \  'yaml': ['yamllint'],
+  \  'json': ['jq', 'jsonlint'],
+  \  'jsonc': ['jq', 'jsonlint'],
+  \  'markdown': ['mdl', 'markdownlint', 'proselint', 'alex'],
+  \ }
 
 " 覆盖掉 ~/.vim/plugged/ale/ale_linters/go/golangci_lint.vim 中的个别默认配置;
 " golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
@@ -678,17 +681,17 @@ call ale#Set('go_golangci_lint_package', 1)
 "      所以不用重复添加.
 "   4) Go 目前使用 vim-go 插件来实现格式化, 这里暂时不用写: 'go': ['gofmt', 'goimports']
 let g:ale_fixers = {
-    \    'python': ['black', 'add_blank_lines_for_python_control_statements'],
-    \    'lua': ['trim_whitespace', 'remove_trailing_lines'],
-    \    'sh': ['shfmt'],
-    \    'javascript': ['eslint', 'importjs'],
-    \    'vue': ['eslint'],
-    \    'html': ['prettier'],
-    \    'json': ['jq'],
-    \    'jsonc': ['jq'],
-    \    'yaml': ['prettier'],
-    \    'markdown': ['prettier'],
-    \ }
+  \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
+  \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
+  \  'sh': ['shfmt'],
+  \  'javascript': ['eslint', 'importjs'],
+  \  'vue': ['eslint'],
+  \  'html': ['prettier'],
+  \  'json': ['jq'],
+  \  'jsonc': ['jq'],
+  \  'yaml': ['prettier'],
+  \  'markdown': ['prettier'],
+  \ }
 
 " }}
 
@@ -915,7 +918,6 @@ set laststatus=2
 
 " 由于此插件已经帮我们美化显示了当前的 Vim 模式, 所以 Vim 自带的模式显示可以去除.
 set noshowmode
-"""""""""""""""""""""""""""
 
 """""" 'maximbaz/lightline-ale'
 " doc: https://github.com/maximbaz/lightline-ale
@@ -923,6 +925,7 @@ set noshowmode
 " 美化错误与警告等信息的显示图标.
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_ok = "\uf00c"
+
 " 以下三条指令的字符串值结尾多一个空格, 用来解决图标和数字重叠的问题.
 let g:lightline#ale#indicator_infos = "\uf129 "
 let g:lightline#ale#indicator_warnings = "\uf071 "
@@ -984,10 +987,10 @@ endfunction
 
 function! LightlineGitBlame() abort
   let blame = get(b:, 'coc_git_blame', '')
+
   " 窗口宽度大于120时, 状态栏才显示 git blame 信息.
   return winwidth(0) > 120 ? blame : ''
 endfunction
-"""""""""""""""""""""""""""
 
 " }}
 
@@ -998,22 +1001,22 @@ endfunction
 syntax enable
 
 " 如果当前 vim/neovim 版本支持 termguicolors, 则启用 24bit 真彩.
-" NOTE: 如果不启用这个配置, vim 背景颜色还是默认的黑色.
 if (has("termguicolors"))
   set termguicolors
 endif
 
-" 自定义配置, 是否启用 Vim/Neovim 透明背景色.
+" 是否启用 Vim/Neovim 透明背景色的功能, 从单独的配置文件读取相关变量值来控制;
+" 从单独的配置文件读取是为了变更时, 不会干扰到 dotfiles 仓库.
 let transparent_file = expand('~/.vim/transparent.vim')
 if filereadable(transparent_file)
   exec 'source' transparent_file
 else
-  " 1 为启用 Vim/Neovim 背景透明, 0 为禁用.
+  " 值为 1 表示启用 Vim/Neovim 背景透明, 0 为禁用.
   let bgtransparent=1
 endif
 
 " 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
-" NOTE: 会影响到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
+" NOTE: 变更效果涉及到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let popup_window_transparent=0
 
 " 解决 Vim 在 cterm 彩色终端下不支持斜体字的问题, Neovim 没有此问题.
@@ -1022,7 +1025,7 @@ let popup_window_transparent=0
 set t_ZH=[3m
 set t_ZR=[23m
 
-" 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的颜色主题, 可以使用此方法提供支持或优化.
+" 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的 colorscheme, 可以使用此方法提供支持或优化.
 function! EnableItalic()
   hi Comment cterm=italic gui=italic
   hi Todo cterm=italic gui=italic
@@ -1039,15 +1042,15 @@ function! EnableItalic()
 endfunction
 
 " 颜色主题方案的个性配置 {{
-" NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用.
+" NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用,
+"       因为 colorscheme 会调用这里设置的变量.
 
 " dracula 主题配置.
 let g:dracula_bold=0
 
 " 调整 gruvbox 主题的颜色对比度.
 " from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
-" 可选值: soft, medium, hard
-" 默认值: medium
+" 默认值: medium, 可选值: soft, medium, hard
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'hard'
 " 是否启用粗体字, 0 为禁用, 1 为启用, 默认值: 1
@@ -1101,7 +1104,7 @@ endif
 " }}
 
 " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
-" git仓库可以不被无用的变更信息干扰.
+" dotfiles git仓库可以不被无用的变更信息干扰.
 let colorscheme_file = expand('~/.vim/colorscheme.vim')
 
 if filereadable(colorscheme_file)
@@ -1221,7 +1224,6 @@ if (g:colors_name == 'molokai')
 endif
 
 " *** gruvbox ***
-" doc: https://github.com/morhetz/gruvbox/wiki/Configuration
 if (g:colors_name == 'gruvbox')
   let g:lightline.colorscheme = 'gruvbox'
   call EnableItalic()
@@ -1391,7 +1393,6 @@ let NERDTreeIgnore=['\.git$','\.pyc$','__pycache__','\.swp$']
 
 " 是否显示目录树的行号, 默认值: 0, 表示不显示.
 let NERDTreeShowLineNumbers=0
-"""""""""""""""""""
 
 """""" nerdtree-git-plugin
 let g:NERDTreeGitStatusIndicatorMapCustom = {
@@ -1406,7 +1407,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \   'Ignored'   : '☒',
     \   "Unknown"   : "?"
     \ }
-"""""""""""""""""""
 
 """""" majutsushi/tagbar
 " 显示或隐藏大纲视图的快捷键: `,e`
@@ -1426,7 +1426,6 @@ let g:tagbar_autopreview = 1
 " 根据 tag 的名称排序, 默认值: 1.
 " 设置为 0 表示禁用排序, 即按标签本身在代码文件中的位置排序.
 let g:tagbar_sort = 0
-"""""""""""""""""""
 
 """""" 'ryanoasis/vim-devicons'
 " doc: https://github.com/ryanoasis/vim-devicons
@@ -1441,7 +1440,6 @@ let g:webdevicons_enable = 1
 
 " 为 gvim/mvim(GUI) 设置字体和字号.
 set guifont=Hack_Nerd_Font:h12
-"""""""""""""""""""""""""""""""
 
 """""" 'Yggdroot/indentLine'
 " doc: https://github.com/Yggdroot/indentLine
@@ -1451,7 +1449,6 @@ set guifont=Hack_Nerd_Font:h12
 " NOTE: 如果 json 类型文件中无法显示双引号可能也是由此插件导致,
 " 把 json 和 jsonc 添加到下面列表中即可.
 let g:indentLine_fileTypeExclude = ['markdown']
-"""""""""""""""""""""""""""""""
 
 """""" 'voldikss/vim-floaterm'
 " doc: https://github.com/voldikss/vim-floaterm
@@ -1471,7 +1468,6 @@ let g:floaterm_keymap_next = '<Leader>tn'
 
 " 显示目前存在的悬浮窗口.
 let g:floaterm_keymap_show = '<Leader>ts'
-""""""""""""""""""""""""""""""
 
 """""" 'francoiscabrol/ranger.vim'
 " doc: https://github.com/francoiscabrol/ranger.vim
@@ -1483,7 +1479,6 @@ let g:ranger_map_keys = 0
 " ,r  打开 ranger, 选择文件后按 l 或 enter 以新建标签页的方式打开文件,
 " 如果文件已经打开了, 则直接跳转到相关的标签页.
 map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
-""""""""""""""""""""""""""""""
 
 " }}
 
@@ -1496,12 +1491,16 @@ map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
 " doc: https://github.com/fatih/vim-go
 
 " *** 代码自动格式化 ***
+
 " 默认值: 1
 let g:go_fmt_autosave = 1
+
 " 默认值: 1
 let g:go_imports_autosave = 1
+
 " 格式化Go代码每行的长度, 使不超过120个字符.
-" NOTE: 需要安装 golines, go get -u github.com/segmentio/golines
+" NOTE:
+" 需要安装 golines: go get -u github.com/segmentio/golines
 let g:go_fmt_command = "golines"
 let g:go_fmt_options = {
   \ 'golines': '-m 120',
@@ -1513,18 +1512,6 @@ let g:go_fmt_options = {
 " 使用 K 触发 :GoDoc 文档, 覆盖默认的 man, 默认值: 1, 表示启用;
 " 此处禁用, 这里使用 coc.nvim 的 K 映射.
 let g:go_doc_keywordprg_enabled = 0
-
-" ,d  上下分屏查看文档, 如果设置了 let g:go_doc_popup_window = 1, 则弹出浮窗.
-"au FileType go nmap <Leader>d <Plug>(go-doc)
-
-" ,dv  左右分屏查看光标所在函数等的文档,
-"      如果设置了let g:go_doc_popup_window = 1, 则弹出浮窗.
-"au FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
-
-" 查看光标下对象的文档的窗口大小. 默认值: 20
-"let g:go_doc_max_height = 20
-" 查看光标下的对象的文档的时候使用悬浮窗口替代新打开一个窗口. 默认值: 0
-"let g:go_doc_popup_window = 1
 
 " gr  在 location list 中列出哪些地方引用了光标所在的对象.
 " NOTE: coc-go 的 gr 表现的更好, 故注释掉不使用此配置.
@@ -1554,6 +1541,7 @@ let g:go_def_reuse_buffer = 1
 
 
 " *** 代码自动生成 ***
+
 " ,im  自动为光标下的类型生成指定接口的实现方法.
 au FileType go nmap <leader>im :GoImpl<CR>
 " ,ki  自动把光标所在的结构体字面量(仅有value没有key的情况)补充上字段.
@@ -1564,19 +1552,23 @@ au FileType go nmap <leader>fs :GoFillStruct<CR>
 au FileType go nmap <leader>ie :GoIfErr<CR>
 " ,at  为光标所在的结构体定义自动生成字段对应的tags.
 au FileType go nmap <leader>at :GoAddTags<CR>
+
 " 使用 :GoAddTags 时, 是否忽略未导出的结构体字段(即小写字段), 1 表示忽略. 默认值: 0
 let g:go_addtags_skip_unexported = 1
+
 " ,rn  级联的重命名光标下的标识符, 重命名后, 项目内的所有与其相关的地方全部会更新;
 "      由于 coc.nvim 的 ,rn 表现的更好, 注释此配置.
 "au FileType go nmap <leader>rn :GoRename<CR>
+
 " 新创建一个 .go 文件时, 是否自动使用模版内容填充, 默认值: 1
 let g:go_template_autocreate = 1
-" 始终仅自动生成 package pkgname 一行代码,
-" 将覆盖掉 let g:go_template_autocreate = 1 的作用, 默认值: 0
+" 是否仅自动生成 package pkgname 一行代码, 默认值: 0
+" NOTE: 将覆盖掉 let g:go_template_autocreate = 1 的作用.
 let g:go_template_use_pkg = 1
 
 
 " *** 运行当前 Go 文件 ***
+
 " ,gr  go run 当前的go文件.
 au FileType go nmap <leader>gr <Plug>(go-run)
 " ,gb  go build 当前的go文件, 不产生二进制文件, 只是检查是否可以成功build.
@@ -1588,6 +1580,7 @@ au FileType go nmap <leader>gc <Plug>(go-coverage)
 
 
 " *** 代码语法高亮 ***
+
 " 以下指令默认值都是0.
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
@@ -1604,12 +1597,12 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
+
 " 以下指令默认值都是1.
 let g:go_highlight_string_spellcheck = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 1
-""""""""""
 
 " }}
 
@@ -1645,6 +1638,7 @@ autocmd BufWritePost *.py call NoShabang(getline(1), expand("%:p"))
 " }}
 
 """""""" OpenResty/Lua {{
+
 func SetTitleForLua()
     " 自动获取文件名称, 不包含文件扩展名.
     let filename = expand('%:r')
@@ -1734,11 +1728,12 @@ function! s:isAtStartOfLine(mapping)
 endfunction
 
 inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+  \ <SID>isAtStartOfLine('\|\|') ?
+  \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+
 inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+  \ <SID>isAtStartOfLine('__') ?
+  \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 """"""" instant-markdown/vim-instant-markdown
 " doc: https://github.com/instant-markdown/vim-instant-markdown
@@ -1958,11 +1953,11 @@ endif
 " 比如 macOS/Windows/Linux 本地的 Vim 和本地的其他应用窗口之间,
 " 不包括远程连接的操作系统的 Vim 和本地应用的窗口之间.
 if has('clipboard')
-    if has('unnamedplus')
-        set clipboard=unnamed,unnamedplus " for Linux
-    else
-        set clipboard=unnamed " for macOS、Windows
-    endif
+  if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus " for Linux
+  else
+    set clipboard=unnamed " for macOS、Windows
+  endif
 endif
 
 " }}
