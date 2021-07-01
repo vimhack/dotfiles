@@ -150,7 +150,7 @@ let mapleader = ','
 call plug#begin('~/.vim/plugged')
 
 
-" ********************** Vim 主题 ********************************************
+" 颜色主题 {{
 
 " gruvbox
 Plug 'morhetz/gruvbox'
@@ -190,7 +190,9 @@ Plug 'NLKNguyen/papercolor-theme'
 " ayu
 Plug 'ayu-theme/ayu-vim'
 
-" ********************** 代码补全 ********************************************
+" }}
+
+" 代码补全 {{
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -205,12 +207,16 @@ Plug 'honza/vim-snippets'
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 
-" ********************** 代码检查 ********************************************
+" }}
+
+" 代码检查 {{
 
 " 代码静态检查与自动修复插件: ALE(Asynchronous Lint Engine)
 Plug 'dense-analysis/ale'
 
-" ********************** GUI *************************************************
+" }}
+
+" 目录树等 {{
 
 " 目录树窗口插件.
 Plug 'preservim/nerdtree'
@@ -263,7 +269,9 @@ Plug 'voldikss/vim-floaterm'
 " 显示缩进线插件.
 Plug 'Yggdroot/indentLine'
 
-" ********************** 编程语言 ********************************************
+" }}
+
+" 编程语言 {{
 
 """""""" Go
 " 搭建 Go 开发环境的 Vim 插件, 安装该插件的过程中,
@@ -294,7 +302,9 @@ Plug 'dhruvasagar/vim-table-mode'
 " toml 语法高亮插件.
 Plug 'cespare/vim-toml'
 
-" ********************** 效率相关 ********************************************
+" }}
+
+" 效率相关 {{
 
 " 代码注释插件.
 Plug 'preservim/nerdcommenter'
@@ -337,11 +347,14 @@ Plug 'skywind3000/asyncrun.vim'
 " 显示光标所在内容的 git commit 信息, 方便了解代码背景.
 Plug 'rhysd/git-messenger.vim'
 
-" ********************** 其他 ************************************************
+" 在文件内直接显示颜色代码所表示的颜色.
+" NOTE: 该插件需要操作系统有 Go 环境.
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " 日历插件.
-" doc: https://github.com/itchyny/calendar.vim
 Plug 'itchyny/calendar.vim'
+
+" }}
 
 
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
@@ -900,6 +913,50 @@ let g:git_messenger_always_into_popup = v:true
 
 " 自定义 commit 时间显示的格式.
 let g:git_messenger_date_format = "%Y %b %d %X"
+
+"""""" RRethy/vim-hexokinase
+
+" 显示或不显示颜色标识符的颜色.
+au FileType * nmap <leader>ys :HexokinaseToggle<CR>
+
+" 支持哪些展示颜色的方式.
+" 支持的展示方式: virtual,sign_column,background,backgroundfull,foreground,foregroundfull
+if has('nvim')
+  let g:Hexokinase_highlighters = [
+    \  'virtual',
+    \  'sign_column',
+    \  'foregroundfull',
+    \ ]
+else
+  let g:Hexokinase_highlighters = [
+    \  'sign_column',
+    \  'foregroundfull',
+    \ ]
+endif
+
+" 匹配哪些类型的颜色标识.
+" 支持颜色类型: full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names
+let g:Hexokinase_optInPatterns = [
+  \  'full_hex',
+  \  'triple_hex',
+  \  'rgb',
+  \  'rgba',
+  \  'hsl',
+  \  'hsla',
+  \ ]
+
+" 针对文件类型定制需要匹配的颜色类型.
+let g:Hexokinase_ftOptInPatterns = {
+  \  'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+  \  'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names'
+  \ }
+
+" 对哪些文件类型提供该插件提供的功能.
+" NOTE: 默认对所有文件都启用, 如果只想对部分文件类型启用, 则通过下面这条指令配置.
+"let g:Hexokinase_ftEnabled = ['css', 'html', 'javascript']
+
+" 对哪些文件类型禁用该插件提供的功能, 默认值空列表.
+let g:Hexokinase_ftDisabled = []
 
 " }}
 
@@ -2447,6 +2504,9 @@ endif
 "                o/O  当光标在弹出的窗口中时, 向后或向前翻阅 commit 历史.
 "                  ?  当光标在弹出的窗口中时, 查看可用指令的帮助文档.
 "                  q  关闭弹出的窗口.
+"
+" ** RRethy/vim-hexokinase (https://github.com/RRethy/vim-hexokinase)
+"                ,ys  显示或不显示颜色标识符的颜色.
 "
 " }}
 
