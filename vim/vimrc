@@ -692,8 +692,8 @@ call ale#Set('go_golangci_lint_package', 1)
 "      我这里暂不启用.
 "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
 "      所以不用重复添加.
-"   4) Go 目前使用 vim-go 插件来实现格式化, 这里暂时不用写: 'go': ['gofmt', 'goimports']
 let g:ale_fixers = {
+  \  'go': ['gofmt', 'goimports'],
   \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
   \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
   \  'sh': ['shfmt'],
@@ -1548,20 +1548,13 @@ map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
 " doc: https://github.com/fatih/vim-go
 
 " *** 代码自动格式化 ***
+" 使用 ale 插件来实现, 故禁用 vim-go 的相关功能.
 
 " 默认值: 1
-let g:go_fmt_autosave = 1
+let g:go_fmt_autosave = 0
 
 " 默认值: 1
-let g:go_imports_autosave = 1
-
-" 格式化Go代码每行的长度, 使不超过120个字符.
-" NOTE:
-" 需要安装 golines: go get -u github.com/segmentio/golines
-let g:go_fmt_command = "golines"
-let g:go_fmt_options = {
-  \ 'golines': '-m 120',
-  \ }
+let g:go_imports_autosave = 0
 
 
 " *** 代码高效阅读 ***
@@ -2060,15 +2053,34 @@ endif
 
 """""""""" 常用命令行 {{
 "
-" vim/nvim --version            可以查看到全局和用户级别的配置文件的加载顺序等信息.
-" vim -u NONE                   无插件方式运行 Vim.
-" vim -g 或 mvim 或 gvim        macOS 下运行 Vim 的图形界面模式, 需安装 macvim.
-" vim -V9myVim.log              将 Vim 运行的详细日志保存到 myVim.log 文件中.
-" vim --startuptime vim.log     记录带时间字段的启动日志.
-" vim -c 'normal 5G36|'         normal 模式下跳转到第 5 行第 36 列.
-" vimtutor                      Vim 自带的学习教程.
-" vim -e --cmd 'echo $VIM|quit' 查看 $VIM 对应的路径.
-" vim -e --cmd 'echo $VIMRUNTIME|quit'
+" vim/nvim --version                     可以查看到全局和用户级别的配置文件的加载顺序等信息.
+" vim -g 或 mvim 或 gvim                 macOS 下运行 Vim 的图形界面模式, 需安装 macvim.
+" vim -c 'normal 5G36|'                  normal 模式下跳转到第 5 行第 36 列.
+" vimtutor                               Vim 自带的学习教程.
+" vim -e --cmd 'echo $VIM|quit'          查看 $VIM 变量的值.
+" vim -e --cmd 'echo $VIMRUNTIME|quit'   查看 $VIMRUNTIME 变量的值.
+"
+" }}
+
+"""""""""" 性能优化 {{
+"
+" * 无插件方式运行 Vim.
+"    vim -u NONE
+"
+" * 将 Vim 运行的详细日志保存到 vim.log 文件中.
+"    vim -V9vim.log
+"
+" * 记录带时间字段的启动日志, 用于优化 vim 启动时间.
+"    vim --startuptime vim.log
+"
+" * 找出哪个插件拖慢了 Vim 的速度:
+"    :profile start profile.log
+"    :profile func *
+"    :profile file *
+"    At this point do slow actions (比如保存文件 :w 比较慢)
+"    :profile pause
+"    :q
+"    然后查看 profile.log 文件尾部的性能分析汇总部分即可.
 "
 " }}
 
@@ -2555,6 +2567,13 @@ endif
 "
 "   1. python-mode/python-mode  建议不要使用这个插件, 不太好用,
 "      文档显示方式很蹩脚, 会影响到 coc-jedi 的正常发挥, coc-jedi 足矣.
+"
+"   2. 如下 golines 配置不建议使用, 有时会严重拖慢保存文件的速度.
+"      格式化 Go 代码每行的长度, 使不超过 120 个字符:
+"      let g:go_fmt_command = "golines"
+"      let g:go_fmt_options = {
+"        \  'golines': '-m 120',
+"        \  }
 "
 " }}
 
