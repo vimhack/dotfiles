@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # change_github_commit_user.sh
 #
 # If your git repo have been committed with a wrong username and usermail,
@@ -8,24 +8,20 @@
 #    Change OLD_ADDR/CORRECT_NAME/CORRECT_EMAIL variables to yours, then:
 #    ./change_github_commit_user.sh your-reponame
 
-
 #set -n
 set -e
 set -u
-
 
 [[ -z "$1" ]] && {
     echo "Usage: $0 <repo_name>"
     exit 1
 }
 
-
 REPO_NAME="$1"
 REPO_ADDR="git@github.com:windvalley/${REPO_NAME}.git"
 OLD_EMAIL="xxx@xxx.com"
 CORRECT_NAME="windvalley"
 CORRECT_EMAIL="i@sre.im"
-
 
 git clone --bare "$REPO_ADDR"
 
@@ -47,6 +43,5 @@ git push --force --tags origin 'refs/heads/*'
 
 cd ..
 rm -rf "${REPO_NAME}".git
-
 
 exit 0

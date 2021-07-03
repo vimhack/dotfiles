@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# pre-commit
+
+LC_ALL=C
+
+color() {
+    local role=$1
+    shift
+    local str="$*"
+
+    case $role in
+    success | ok | green)
+        color=[32m
+        ;;
+    failure | fail | error | red)
+        color=[31m
+        ;;
+    warning | warn | yellow)
+        color=[33m
+        ;;
+    *)
+        color=[39m # default white color
+        ;;
+    esac
+
+    echo -e "\033$color$str\033[m"
+}
+
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+    against=HEAD
+else
+    # Initial commit: diff against an empty tree object
+    against=$(git hash-object -t tree /dev/null)
+fi
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+valid_branch_regex="^(master|develop)$|(feature|release|hotfix)\/[a-z0-9._-]+$"
+
+# Redirect output to stderr.
+exec 1>&2
+
+# 提交的文件名规范校验.
+[[ $(git diff --cached --name-only --diff-filter=A -z "$against" |
+    tr -d '[ -~]\0' | wc -c) -ne 0 ]] && {
+    cat <<EOF
+$(color error "Error: Attempt to add a non-ASCII file name.")
+
+This can cause problems if you want to work with people on other platforms.
+
+To be portable it is advisable to rename the file.
+EOF
+
+    exit 1
+}
+
+# 提交的文件内容非法空白符号校验.
+git diff-index --check --cached "$against" -- || exit 1
+
+# 提交的分支名称规范校验.
+[[ ! $local_branch =~ $valid_branch_regex ]] && {
+    cat <<EOF
+There is something wrong with your branch name.
+
+Branch names in this project must fit the follow regex:
+
+    $(color red "$valid_branch_regex")
+
+You should rename your branch to a valid name and try again.
+EOF
+
+    exit 1
+}
+
+exit 0

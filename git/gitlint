@@ -1,0 +1,3 @@
+--subject-regex=^(revert: )?(feat|fix|perf|style|refactor|test|ci|docs|chore)(\(.+\))?: [^A-Z].*[^.]$
+--subject-maxlen=70
+--body-regex=^([^\r\n]{0,72}(\r?\n|$))*$

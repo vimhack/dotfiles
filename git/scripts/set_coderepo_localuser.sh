@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # set_coderepo_localuser.sh
 #
 # To make a distinction between github user and gitlab user.
