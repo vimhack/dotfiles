@@ -269,6 +269,9 @@ Plug 'voldikss/vim-floaterm'
 " 显示缩进线插件.
 Plug 'Yggdroot/indentLine'
 
+" Vim 屏保 Matrix.
+Plug 'uguu-org/vim-matrix-screensaver'
+
 " }}
 
 " 编程语言 {{
@@ -1547,6 +1550,12 @@ let g:ranger_map_keys = 0
 " 如果文件已经打开了, 则直接跳转到相关的标签页.
 map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
 
+"""""" 'uguu-org/vim-matrix-screensaver'
+" doc: https://github.com/uguu-org/vim-matrix-screensaver
+
+" 在当前 Vim 窗口启用 Matrix 屏幕保护.
+nmap <leader>m :Matrix<CR>
+
 " }}
 
 
@@ -2597,6 +2606,10 @@ endif
 " ** RRethy/vim-hexokinase (https://github.com/RRethy/vim-hexokinase)
 "                ,ys  显示或不显示颜色标识符的颜色.
 "
+" ** uguu-org/vim-matrix-screensaver (https://github.com/uguu-org/vim-matrix-screensaver)
+"            :Matrix  在当前窗口启用类似黑客帝国的 Vim 屏幕保护, 按任意键退出屏保.
+"                 ,m  同上.
+
 " }}
 
 """""""""" 实例练习 {{
