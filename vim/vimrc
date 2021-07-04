@@ -926,6 +926,7 @@ let g:git_messenger_always_into_popup = v:true
 let g:git_messenger_date_format = "%Y %b %d %X"
 
 """""" RRethy/vim-hexokinase
+" doc: https://github.com/RRethy/vim-hexokinase
 
 " 显示或不显示颜色标识符的颜色.
 au FileType * nmap <leader>ys :HexokinaseToggle<CR>
@@ -1967,14 +1968,31 @@ vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 
 " insert 模式下移动光标的快捷键:
-"   `ctrl f` 右, `ctrl b` 左, `ctrl p` 上, `ctrl n` 下,
-"   `ctrl a` 行首, `ctrl e` 行尾.
+" ctrl p 上, ctrl n 下,ctrl f 右, ctrl b 左;
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
+" ctrl a 行首, ctrl e 行尾.
+" NOTE: 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a
 imap <C-a> <Home>
 imap <C-e> <End>
+
+" normal/visual 模式下, 按 0 光标将回到当前行的第一个非空字符,
+"               如果光标已经在第一个非空字符, 则回到行首.
+" insert 模式下, 按 ctrl a 光标将回到当前行的第一个非空字符,
+"        如果光标已经在第一个非空字符, 则回到行首.
+function! GoToFirstNonBlankOrFirstColumn()
+  let cur_col = col('.')
+  normal! ^
+  if cur_col != 1 && cur_col == col('.')
+    normal! 0
+  endif
+  return ''
+endfunction
+nnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
+vnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
+inoremap <silent> <C-a> <C-R>=GoToFirstNonBlankOrFirstColumn()<CR>
 
 " ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候, 从默认的每次移动1行改为3行.
 noremap <C-e> 3<C-e>
