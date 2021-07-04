@@ -1988,12 +1988,76 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " 默认情况下, 操作记录只在本次编辑时有效, 一旦编辑结束、文件关闭, 操作历史就消失了;
 " 打开这个设置, 可以在文件关闭后, 操作记录保留在一个文件里面继续存在.
 " 这意味着, 重新打开一个文件, 可以撤销上一次编辑时的操作;
-" 撤消文件是跟原文件保存在一起的隐藏文件, 文件名以 .un~ 开头. 
+" 撤消文件是跟原文件保存在一起的隐藏文件, 文件名以 .un~ 开头.
 set undofile
 set undodir=~/.vim/undo
 if !isdirectory(&undodir)
   call mkdir(&undodir, 'p', 0700)
 endif
+
+" Undo Warnings {{
+"
+" from: https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/undowarnings.vim
+"
+" 此段代码的作用:
+" 在希望通过 undofile 的配置来无限制的对曾经的编辑进行撤销,
+" 同时还希望在退回打开文件的状态之前能有一个提醒.
+"
+
+" Vim global plugin adding warnings to persistent undo
+" Last change:  Tue Jun 19 17:25:10 EST 2012
+" Maintainer:	Damian Conway
+" License:	This file is placed in the public domain.
+
+" If already loaded, we're done...
+if exists("loaded_undowarnings")
+  finish
+endif
+let loaded_undowarnings = 1
+
+" Preserve external compatibility options, then enable full vim compatibility...
+let s:save_cpo = &cpo
+set cpo&vim
+
+"=====[ INTERFACE ]==================
+
+" Remap the undo key to warn about stepping back into a buffer's pre-history...
+nnoremap <expr> u  VerifyUndo()
+
+" =====[ IMPLEMENTATION ]==================
+"
+" Track each buffer's starting position in the undo history...
+augroup UndoWarnings
+  autocmd!
+  autocmd BufReadPost,BufNewFile * :call Rememberundo_start()
+augroup END
+
+function! Rememberundo_start ()
+  let b:undo_start = exists('b:undo_start') ? b:undo_start : undotree().seq_cur
+endfunction
+
+function! VerifyUndo ()
+  " Nothing to verify if can't undo into previous sesssion...
+  if !exists('*undotree')
+    return 'u'
+  endif
+
+  " Are we back at the start of this session (but still with undos possible)???
+  let undo_now = undotree().seq_cur
+
+  " If so, check whether to undo into pre-history...
+  if undo_now > 0 && undo_now == b:undo_start
+    return confirm('',"Undo into previous session? (&Yes\n&No)",1) == 1 ? "\<C-L>u" : "\<C-L>"
+  " Otherwise, always undo...
+  else
+    return 'u'
+  endif
+endfunction
+
+" Restore previous external compatibility options
+let &cpo = s:save_cpo
+
+" }}
 
 " normal 模式下的 nyy 复制(n为数字), 或进入 visual 模式下选择内容后的 y 复制,
 " 除了可以将复制的内容粘贴(使用 p)到其他 Vim 实例,
