@@ -496,9 +496,9 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " 使用 tab 键触发补全, 选择补全.
 inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -507,7 +507,7 @@ endfunction
 
 " 使用 <CR>(回车键) 来自动选择补全条目的第一条并格式化代码.
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
 " 实际上并不会用到这里设置的快捷键.
@@ -546,12 +546,18 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " 使用 <C-d> 和 <C-u> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
 " 比如在查看较长的文档时出现了滚动条的场景下使用.
 let lines_count=5
-nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1, lines_count) : "\<C-d>"
-nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0, lines_count) : "\<C-u>"
-inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1, lines_count) : "\<C-d>"
-vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0, lines_count) : "\<C-u>"
+nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ?
+  \ coc#float#scroll(1, lines_count) : "\<C-d>"
+nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ?
+  \ coc#float#scroll(0, lines_count) : "\<C-u>"
+inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ?
+  \ "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ?
+  \ "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ?
+  \ coc#float#scroll(1, lines_count) : "\<C-d>"
+vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ?
+  \ coc#float#scroll(0, lines_count) : "\<C-u>"
 
 " *** CocList 相关命令快捷键映射 ***
 " NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
@@ -735,6 +741,7 @@ let g:hardtime_maxcount = 2
 " 解决 vue 类型文件的代码注释问题.
 " from: https://github.com/posva/vim-vue#how-can-i-use-nerdcommenter-in-vue-files
 let g:ft = ''
+
 function! NERDCommenter_before()
   if &ft == 'vue'
     let g:ft = 'vue'
@@ -747,6 +754,7 @@ function! NERDCommenter_before()
     endif
   endif
 endfunction
+
 function! NERDCommenter_after()
   if g:ft == 'vue'
     setf vue
@@ -991,40 +999,41 @@ let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline = {}
 
 let g:lightline.component_expand = {
-    \  'linter_checking': 'lightline#ale#checking',
-    \  'linter_infos': 'lightline#ale#infos',
-    \  'linter_warnings': 'lightline#ale#warnings',
-    \  'linter_errors': 'lightline#ale#errors',
-    \  'linter_ok': 'lightline#ale#ok',
-    \ }
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_infos': 'lightline#ale#infos',
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
+  \ }
 
 let g:lightline.component_type = {
-    \  'linter_checking': 'right',
-    \  'linter_infos': 'right',
-    \  'linter_warnings': 'warning',
-    \  'linter_errors': 'error',
-    \  'linter_ok': 'right',
-    \ }
+  \  'linter_checking': 'right',
+  \  'linter_infos': 'right',
+  \  'linter_warnings': 'warning',
+  \  'linter_errors': 'error',
+  \  'linter_ok': 'right',
+  \ }
 
 " 已从 left 中去除 cocstatus, 可选择性加入.
 let g:lightline.active = {
-    \  'left': [ [ 'mode', 'paste' ],
-    \            [ 'git', 'bgit', 'method', 'readonly', 'filename', 'modified' ],
-    \  ],
-    \  'right': [ [ 'lineinfo' ],
-    \             [ 'percent' ],
-    \             [ 'fileformat', 'fileencoding', 'filetype' ],
-    \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
-    \             [ 'blame' ],
-    \  ],
-    \ }
+  \  'left': [ [ 'mode', 'paste' ],
+  \            [ 'git', 'bgit', 'method', 'readonly', 'filename', 'modified' ],
+  \  ],
+  \  'right': [ [ 'lineinfo' ],
+  \             [ 'percent' ],
+  \             [ 'fileformat', 'fileencoding', 'filetype' ],
+  \             [ 'linter_checking', 'linter_errors', 'linter_warnings',
+  \               'linter_infos', 'linter_ok' ],
+  \             [ 'blame' ],
+  \  ],
+  \ }
 
 let g:lightline.component_function = {
-   \  'cocstatus': 'coc#status',
-   \  'git': 'LightlineGitStatus',
-   \  'bgit': 'LightlineBufferGitStatus',
-   \  'blame': 'LightlineGitBlame',
-   \ }
+  \  'cocstatus': 'coc#status',
+  \  'git': 'LightlineGitStatus',
+  \  'bgit': 'LightlineBufferGitStatus',
+  \  'blame': 'LightlineGitBlame',
+  \ }
 
 " doc: https://github.com/neoclide/coc-git
 "   *  表示 git 仓库内容有变更;
@@ -1415,7 +1424,8 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 "autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
 " 如果文件都退出了, 只剩目录树窗口的情况下自动退出 Vim.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree')
+  \ && b:NERDTree.isTabTree() | quit | endif
 
 " 每新打开一个标签页都显示当前已存在的目录树窗口.
 " NOTE:
@@ -1774,7 +1784,8 @@ function! s:isAtStartOfLine(mapping)
   let text_before_cursor = getline('.')[0 : col('.')-1]
   let mapping_pattern = '\V' . escape(a:mapping, '\')
   let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
-  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?')
+    \ . '\s*\v' . mapping_pattern . '\v$')
 endfunction
 
 inoreabbrev <expr> <bar><bar>
@@ -1917,10 +1928,12 @@ autocmd FileType * set colorcolumn=80
 " ,R  变更配置文件后不需要退出, 直接使用此命令进行 reload 生效.
 if has('nvim')
   noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
-  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
+  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>
+    \:exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
 else
   noremap <silent> <leader>E :sp ~/.vimrc<CR>
-  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '~/.vimrc reloaded'"<CR>
+  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>
+    \:exe ":echo '~/.vimrc reloaded'"<CR>
 endif
 
 " 多窗口之间上下左右移动的快捷键重新映射.
