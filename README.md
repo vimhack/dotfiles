@@ -135,25 +135,32 @@ rgb
 ## 🔮 Show
 
 ColorScheme: `dracula`
-FontSize: `11`
+FontSize: `12`
 Opacity: `0.9`
 VimBgTransparent: `1`
 
-![dracula](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/dracula.png)
+![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png)
 
 ColorScheme: `gruvbox`
-FontSize: `11`
-Opacity: `0.95`
-VimBgTransparent: `1`
-
-![gruvbox](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/gruvbox.png)
-
-ColorScheme: `iceberg`
-FontSize: `11`
+FontSize: `12`
 Opacity: `0.9`
 VimBgTransparent: `1`
 
-![iceberg](https://raw.githubusercontent.com/windvalley/dotfiles/main/images/iceberg.png)
+![gruvbox](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/gruvbox.png)
+
+ColorScheme: `iceberg`
+FontSize: `12`
+Opacity: `0.9`
+VimBgTransparent: `1`
+
+![iceberg](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/iceberg.png)
+
+ColorScheme: `base16-default-dark`
+FontSize: `12`
+Opacity: `0.9`
+VimBgTransparent: `1`
+
+![base16-default-dark](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/base16-default-dark.png)
 
 ## ⚖️ License
 
