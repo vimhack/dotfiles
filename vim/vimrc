@@ -175,7 +175,7 @@ Plug 'cocopon/iceberg.vim'
 " jellybeans
 Plug 'nanotech/jellybeans.vim'
 
-" tomorrow night
+" base16-default-dark
 Plug 'chriskempson/base16-vim'
 
 " nord
@@ -1335,7 +1335,12 @@ endif
 
 " *** base16-default-dark ***
 if (g:colors_name == 'base16-default-dark')
-  let g:lightline.colorscheme = 'Tomorrow_Night'
+  let g:lightline.colorscheme = 'apprentice'
+
+  " cterm=NONE 用来去掉默认的粗体显示.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
   call EnableItalic()
 endif
 
