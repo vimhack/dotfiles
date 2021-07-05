@@ -357,6 +357,10 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " 日历插件.
 Plug 'itchyny/calendar.vim'
 
+" Vim 作者 Bram 写的一个小游戏, 用于演示 Vim8.2 的几个新功能.
+" NOTE: :Kill 启动游戏, 按说明玩既可, 只支持 Vim8.2+, 不支持 Neovim.
+Plug 'vim/killersheep'
+
 " }}
 
 
@@ -2139,7 +2143,7 @@ endif
 "set t_ti= t_te=
 
 " 打开英语单词的拼写检查.
-"set spell spelllang=en_us
+"set spell spelllang=en,cjk
 
 " 覆盖掉默认的拼写检查设置, 不启用拼写检查.
 "autocmd VimEnter * set nospell
