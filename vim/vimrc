@@ -439,33 +439,33 @@ set shortmess+=c
 "   coc-gocode: 为 Go 提供代码片段补全的数据库.
 "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
 let g:coc_global_extensions = [
-    \ 'coc-json',
-    \ 'coc-git',
-    \ 'coc-go',
-    \ 'coc-gocode',
-    \ 'coc-rls',
-    \ 'coc-clangd',
-    \ 'coc-jedi',
-    \ 'coc-java',
-    \ 'coc-sh',
-    \ 'coc-perl',
-    \ 'coc-tsserver',
-    \ 'coc-css',
-    \ 'coc-cssmodules',
-    \ 'coc-emmet',
-    \ 'coc-html',
-    \ 'coc-vetur',
-    \ 'coc-sql',
-    \ 'coc-toml',
-    \ 'coc-yaml',
-    \ 'coc-xml',
-    \ 'coc-vimlsp',
-    \ 'coc-snippets',
-    \ 'coc-ultisnips',
-    \ 'coc-emoji',
-    \ 'coc-swagger',
-    \ 'coc-translator',
-    \ ]
+  \ 'coc-json',
+  \ 'coc-git',
+  \ 'coc-go',
+  \ 'coc-gocode',
+  \ 'coc-rls',
+  \ 'coc-clangd',
+  \ 'coc-jedi',
+  \ 'coc-java',
+  \ 'coc-sh',
+  \ 'coc-perl',
+  \ 'coc-tsserver',
+  \ 'coc-css',
+  \ 'coc-cssmodules',
+  \ 'coc-emmet',
+  \ 'coc-html',
+  \ 'coc-vetur',
+  \ 'coc-sql',
+  \ 'coc-toml',
+  \ 'coc-yaml',
+  \ 'coc-xml',
+  \ 'coc-vimlsp',
+  \ 'coc-snippets',
+  \ 'coc-ultisnips',
+  \ 'coc-emoji',
+  \ 'coc-swagger',
+  \ 'coc-translator',
+  \ ]
 " *************************
 
 " *** ~/.vim/coc-settings.json ***
@@ -475,9 +475,9 @@ let g:coc_global_extensions = [
 
 " :C  打开 ~/.vim/coc-settings.json 配置文件.
 function! SetupCommandAbbrs(from, to)
-    exec 'cnoreabbrev <expr> '.a:from
-        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
-        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+  exec 'cnoreabbrev <expr> '.a:from
+    \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+    \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
 call SetupCommandAbbrs('C', 'CocConfig')
 " ********************************
@@ -621,8 +621,8 @@ let g:ale_keep_list_window_open = 0
 
 " 退出文件时, 如果仅剩错误信息窗口, 则其也一同退出(loclist).
 augroup CloseLoclistWindowGroup
-    autocmd!
-    autocmd QuitPre * if empty(&buftype) | lclose | endif
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
 " 新打开文件时是否自动 lint, 默认值: 1
@@ -727,11 +727,11 @@ let g:ale_fixers = {
 """""" takac/vim-hardtime
 " doc: https://github.com/takac/vim-hardtime
 
-" 是否使每一个窗口 buffer 都应用此插件功能, 默认值: 0.
+" 是否使每一个窗口 buffer 都应用此插件功能, 默认值: 0
 let g:hardtime_default_on = 1
 
 " 连续按 jklh 等命令时, 每次按键的超时时间, 默认值: 1000毫秒.
-let g:hardtime_timeout = 1000
+let g:hardtime_timeout = 500
 
 " 启用 hardtime 模式后, 是否进行模式已启用的提示, 默认值: 0, 表示不提示.
 let g:hardtime_showmsg = 1
@@ -739,8 +739,8 @@ let g:hardtime_showmsg = 1
 " 是否允许连续按2个不同的简单指令, 比如 jh, 默认值: 0, 表示不允许.
 let g:hardtime_allow_different_key = 1
 
-" 允许连续按几次简单命令, 默认值: 1.
-let g:hardtime_maxcount = 2
+" 允许连续按几次简单命令, 默认值: 1
+let g:hardtime_maxcount = 3
 
 """""" preservim/nerdcommenter
 " doc: https://github.com/preservim/nerdcommenter
@@ -848,7 +848,7 @@ noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 " 显示当前文件去除空行之外的所有行.
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
-" 从 normal 模式下按 ,rg 进入 command-line 模式下,
+" normal 模式下按 ,rg 进入 command-line 模式下,
 " 然后输入要搜索的文本(支持正则表达式), 回车即可显示此项目内包含此文本的文件列表;
 " 在弹出的结果窗口中, 按 gi 可以将光标移动到输入框, 可以继续输入内容缩小结果列表,
 " 然后按 tab 进入结果列表中, 按 j/k 上下选择, 选择一个文件后,
@@ -916,8 +916,9 @@ let g:qs_lazy_highlight = 0
 " doc: https://github.com/skywind3000/asyncrun.vim
 
 " ,ar  在 command-line 模式下输入要异步执行的命令, 并在当前窗口底部输出执行结果.
-" NOTE: 本行尾的空格不要去掉.
-nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10 
+" NOTE: 这里使用 exec 包装一层, 是为了不让行尾空格直接暴露出来,
+" 所以通过使用 exec 的方式, 就可以将原来行尾的空格包裹起来了.
+exec "nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10 "
 
 """""" rhysd/git-messenger.vim
 " doc: https://github.com/rhysd/git-messenger.vim
@@ -1074,7 +1075,8 @@ endfunction
 " 代码高亮显示.
 syntax enable
 
-" 如果当前 vim/neovim 版本支持 termguicolors, 则启用 24bit 真彩.
+" 如果当前 vim/neovim 版本支持 termguicolors, 则启用 24bit 真彩;
+" 启用 termguicolors 后, 将使用 guifg/guibg 配置的色彩方案.
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -1120,6 +1122,9 @@ endfunction
 "       因为 colorscheme 会调用这里设置的变量.
 
 " dracula 主题配置.
+" 是否启用斜体字, 默认值: 1
+let g:dracula_italic=1
+" 是否启用粗体字, 默认值: 1
 let g:dracula_bold=0
 
 " 调整 gruvbox 主题的颜色对比度.
@@ -1251,10 +1256,10 @@ if (g:colors_name == 'rigel')
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
 
-  " 优化非可见字符 nbsp、tab、trail 的颜色方案:
+  " 优化非可见字符 nbsp, tab, trail 等的颜色方案:
   " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
   " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
-  " 但对于 Neavim, 则是由 Whitespace 高亮组定义的.
+  " 但对于 Neovim, 则是由 Whitespace 高亮组定义的.
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
 
@@ -1279,6 +1284,11 @@ if (g:colors_name == 'dracula')
   let g:lightline.colorscheme = 'dracula'
 
   hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
+
+  " 优化 Vim 的非可见字符的颜色方案.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
+  " 优化 Neovim 的非可见字符的颜色方案.
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
 endif
 
 " *** one ***
@@ -1471,17 +1481,17 @@ let NERDTreeShowLineNumbers=0
 
 """""" nerdtree-git-plugin
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \   "Modified"  : "✹",
-    \   "Staged"    : "✚",
-    \   "Untracked" : "✭",
-    \   "Renamed"   : "➜",
-    \   "Unmerged"  : "═",
-    \   "Deleted"   : "✖",
-    \   "Dirty"     : "✗",
-    \   "Clean"     : "✔︎",
-    \   'Ignored'   : '☒',
-    \   "Unknown"   : "?"
-    \ }
+  \  "Modified"  : "✹",
+  \  "Staged"    : "✚",
+  \  "Untracked" : "✭",
+  \  "Renamed"   : "➜",
+  \  "Unmerged"  : "═",
+  \  "Deleted"   : "✖",
+  \  "Dirty"     : "✗",
+  \  "Clean"     : "✔︎",
+  \  'Ignored'   : '☒',
+  \  "Unknown"   : "?"
+  \ }
 
 """""" majutsushi/tagbar
 " 显示或隐藏大纲视图的快捷键: `,e`
@@ -1687,16 +1697,16 @@ autocmd BufNewFile,BufRead requirements*.txt set ft=python
 
 " 新建 .py 结尾的文件时, 自动输入一些内容
 func SetTitleForPython()
-    call setline(1, "\#!/usr/bin/env python3")
-    call setline(2, "\"\"\"")
-    call setline(3, "Author: windvalley")  " 改成你自己的名字
-    call setline(4, "Created Time: ".strftime("%Y-%m-%d %H:%M:%S"))
-    call setline(5, "\"\"\"")
-    normal G
-    normal o
-    normal o
-    " 为新创建的 .py 文件自动赋予可执行权限
-    au BufWritePost *.py silent !chmod a+x <afile>
+  call setline(1, "\#!/usr/bin/env python3")
+  call setline(2, "\"\"\"")
+  call setline(3, "Author: windvalley")  " 改成你自己的名字
+  call setline(4, "Created Time: ".strftime("%Y-%m-%d %H:%M:%S"))
+  call setline(5, "\"\"\"")
+  normal G
+  normal o
+  normal o
+  " 为新创建的 .py 文件自动赋予可执行权限
+  au BufWritePost *.py silent !chmod a+x <afile>
 endfunc
 autocmd bufnewfile *.py call SetTitleForPython()
 
@@ -1714,21 +1724,21 @@ autocmd BufWritePost *.py call NoShabang(getline(1), expand("%:p"))
 """""""" OpenResty/Lua {{
 
 func SetTitleForLua()
-    " 自动获取文件名称, 不包含文件扩展名.
-    let filename = expand('%:r')
-    let lua_module_name = join(["_M.name = \"", filename, "\""], "")
+  " 自动获取文件名称, 不包含文件扩展名.
+  let filename = expand('%:r')
+  let lua_module_name = join(["_M.name = \"", filename, "\""], "")
 
-    call setline(1, "local ngx = require \"ngx\"")
-    call setline(2, "")
-    call setline(3, "")
-    call setline(4, "local _M = {}")
-    call setline(5, "")
-    call setline(6, "_M._VERSION = 0.1")
-    call setline(7, lua_module_name)
-    call setline(8, "")
-    normal G
-    normal o
-    normal o
+  call setline(1, "local ngx = require \"ngx\"")
+  call setline(2, "")
+  call setline(3, "")
+  call setline(4, "local _M = {}")
+  call setline(5, "")
+  call setline(6, "_M._VERSION = 0.1")
+  call setline(7, lua_module_name)
+  call setline(8, "")
+  normal G
+  normal o
+  normal o
 endfunc
 autocmd bufnewfile *.lua call SetTitleForLua()
 
@@ -1766,19 +1776,19 @@ let g:user_emmet_leader_key='<C-y>'
 """""""" Shell {{
 
 func SetTitleForShell()
-    let current_filename = expand('%:t')
-    call setline(1, "\#!/usr/bin/env bash")
-    call setline(2, "# " . current_filename)
-    call setline(3, "#")
-    " 改成你自己的名字
-    "call setline(4, "# Author: windvalley")
-    "call setline(5, "# Created Time: ".strftime("%Y-%m-%d %H:%M:%S"))
-    call setline(4, "")
-    normal G
-    normal o
-    normal o
-    " 为新创建的 .sh 文件自动赋予可执行权限
-    au BufWritePost *.sh silent !chmod a+x <afile>
+  let current_filename = expand('%:t')
+  call setline(1, "\#!/usr/bin/env bash")
+  call setline(2, "# " . current_filename)
+  call setline(3, "#")
+  " 改成你自己的名字
+  "call setline(4, "# Author: windvalley")
+  "call setline(5, "# Created Time: ".strftime("%Y-%m-%d %H:%M:%S"))
+  call setline(4, "")
+  normal G
+  normal o
+  normal o
+  " 为新创建的 .sh 文件自动赋予可执行权限
+  au BufWritePost *.sh silent !chmod a+x <afile>
 endfunc
 autocmd bufnewfile *.sh call SetTitleForShell()
 
@@ -1840,9 +1850,9 @@ set number relativenumber
 
 " 使查看帮助文档的窗口也显示相对行号.
 augroup vim help
-    autocmd!
-    autocmd FileType help setlocal number
-    autocmd FileType help setlocal relativenumber
+  autocmd!
+  autocmd FileType help setlocal number
+  autocmd FileType help setlocal relativenumber
 augroup END
 
 " 显示当前光标所在的行号和列号.
@@ -2016,8 +2026,8 @@ vnoremap > >gv
 
 " 重新打开文件时, 光标恢复在上次离开时的位置.
 augroup resCur
-    autocmd!
-    autocmd BufReadPost * call setpos(".", getpos("'\""))
+  autocmd!
+  autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
 " insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题,
@@ -2570,15 +2580,17 @@ endif
 "                 ,e  打开右侧大纲窗口.
 "
 " ** tpope/vim-fugitive (https://github.com/tpope/vim-fugitive)
-"           :Gstatus
-"        :Git status  类似 git status.
-"              :Glog
+"      :Git/:Gstatus  git status
+"        :Git status  git status
+"              :Glog  git log
 "           :Git log  类似 git log, 光标移动到一个 commit 行,
 "                     然后按 o 或 O 或 enter, 打开 commit 详细内容浏览,
 "                     q 退出浏览窗口, ctrl o/i 来回跳转.
-"            :Gblame
-"         :Git blame  类似 git blame.
-"          :Git diff  类似 git diff.
+"            :Gblame  git blame
+"         :Git blame  git blame
+"             :Gdiff  水平分屏比较当前文件与暂存区版本的区别.
+"            :Gvdiff  垂直分屏比较当前文件与暂存区版本的区别, 这个更好用一点.
+"          :Git diff  git diff
 "                     等等, 都可以直接在 Vim 的 command-line 模式运行.
 "
 " ** junegunn/gv.vim (https://github.com/junegunn/gv.vim)
