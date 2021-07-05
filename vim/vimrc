@@ -1359,6 +1359,10 @@ if (g:colors_name == 'PaperColor')
 
   hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
 
+  " cterm=NONE 用来去掉默认的粗体显示.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
   call EnableItalic()
 endif
 
