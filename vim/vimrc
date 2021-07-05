@@ -1076,8 +1076,15 @@ endfunction
 syntax enable
 
 " 如果当前 vim/neovim 版本支持 termguicolors, 则启用 24bit 真彩;
-" 启用 termguicolors 后, 将使用 guifg/guibg 配置的色彩方案.
-if (has("termguicolors"))
+" 启用 termguicolors 后, 将使用 guifg/guibg 配置的色彩方案,
+" 也就是说在色彩方面把终端当图形界面一样看待.
+"
+" for Linux/Unix
+if has ('termguicolors') && ($COLORTERM == 'truecolor' || $COLORTERM == '24bit')
+  set termguicolors
+endif
+" for Windows
+if has('vcon')
   set termguicolors
 endif
 
