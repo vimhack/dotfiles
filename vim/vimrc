@@ -354,6 +354,9 @@ Plug 'rhysd/git-messenger.vim'
 " NOTE: 该插件需要操作系统有 Go 环境.
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
+" 自己对配色方案进行调整时, 可使用此工具获取光标下当前配色方案的详细信息.
+Plug 'vim-scripts/SyntaxAttr.vim'
+
 " 日历插件.
 Plug 'itchyny/calendar.vim'
 
@@ -730,8 +733,8 @@ let g:ale_fixers = {
 " 是否使每一个窗口 buffer 都应用此插件功能, 默认值: 0
 let g:hardtime_default_on = 1
 
-" 连续按 jklh 等命令时, 每次按键的超时时间, 默认值: 1000毫秒.
-let g:hardtime_timeout = 500
+" 连续按 jklh 等命令时, 禁止连续按的超时时间, 默认值: 1000毫秒.
+let g:hardtime_timeout = 600
 
 " 启用 hardtime 模式后, 是否进行模式已启用的提示, 默认值: 0, 表示不提示.
 let g:hardtime_showmsg = 1
@@ -974,6 +977,17 @@ let g:Hexokinase_ftOptInPatterns = {
 
 " 对哪些文件类型禁用该插件提供的功能, 默认值空列表.
 let g:Hexokinase_ftDisabled = []
+
+"""""" vim-scripts/SyntaxAttr.vim
+" doc: https://github.com/vim-scripts/SyntaxAttr.vim
+
+" ,a  显示光标所在的语法高亮详情, 便于调试配色方案.
+"
+" 举例:
+"    group: goComment->Comment guifg=#585858(#585858) gui=italic
+"    如上结果表示, 光标所在属于 goComment 语法加亮组, 并且被链接到了 Comment 加亮组,
+"    guifg 和 gui 是加亮组的值, guifg 表示前景色, gui 表示特殊效果.
+nnoremap <Leader>a :call SyntaxAttr()<CR>
 
 " }}
 
@@ -2655,6 +2669,9 @@ endif
 "
 " ** RRethy/vim-hexokinase (https://github.com/RRethy/vim-hexokinase)
 "                ,ys  显示或不显示颜色标识符的颜色.
+"
+" ** vim-scripts/SyntaxAttr.vim (https://github.com/vim-scripts/SyntaxAttr.vim)
+"                 ,a  显示光标所在的语法高亮详情, 便于调试配色方案.
 "
 " ** uguu-org/vim-matrix-screensaver (https://github.com/uguu-org/vim-matrix-screensaver)
 "            :Matrix  在当前窗口启用类似黑客帝国的 Vim 屏幕保护, 按任意键退出屏保.
