@@ -185,6 +185,9 @@ Plug 'jacoborus/tender.vim'
 " rigel
 Plug 'Rigellute/rigel'
 
+" onehalf
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
 " molokai
 " 该版本解决了设置透明背景色时, 对于 Vim 部分关键字背景颜色没有变透明的问题,
 " Neovim 不存在此问题.
@@ -1229,6 +1232,7 @@ endif
 "   tender: https://github.com/jacoborus/tender.vim
 "   papercolor: https://github.com/NLKNguyen/papercolor-theme
 "   ayu: https://github.com/ayu-theme/ayu-vim
+"   onehalf: https://github.com/sonph/onehalf
 "
 " NOTE:
 "   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1402,6 +1406,12 @@ if (g:colors_name == 'ayu')
     let g:lightline.colorscheme = 'ayu_light'
   endif
 
+  call EnableItalic()
+endif
+
+" *** onehalf ***
+if (g:colors_name == 'onehalfdark') || (g:colors_name == 'onehalflight')
+  let g:lightline.colorscheme = 'onehalfdark'
   call EnableItalic()
 endif
 
