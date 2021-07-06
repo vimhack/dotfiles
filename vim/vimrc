@@ -155,19 +155,11 @@ call plug#begin('~/.vim/plugged')
 " gruvbox
 Plug 'morhetz/gruvbox'
 
-" molokai
-" 该版本解决了设置透明背景色时, 对于 Vim 部分关键字背景颜色没有变透明的问题,
-" Neovim 不存在此问题.
-Plug 'windvalley/molokai'
-
-" Atom theme: One Dark / Light
-Plug 'rakr/vim-one'
-
 " dracula
 Plug 'dracula/vim', { 'as': 'dracula' }
 
-" rigel
-Plug 'Rigellute/rigel'
+" one: from Atom theme
+Plug 'rakr/vim-one'
 
 " iceberg
 Plug 'cocopon/iceberg.vim'
@@ -181,14 +173,22 @@ Plug 'chriskempson/base16-vim'
 " nord
 Plug 'arcticicestudio/nord-vim'
 
-" tender
-Plug 'jacoborus/tender.vim'
-
 " papercolor
 Plug 'NLKNguyen/papercolor-theme'
 
 " ayu
 Plug 'ayu-theme/ayu-vim'
+
+" tender
+Plug 'jacoborus/tender.vim'
+
+" rigel
+Plug 'Rigellute/rigel'
+
+" molokai
+" 该版本解决了设置透明背景色时, 对于 Vim 部分关键字背景颜色没有变透明的问题,
+" Neovim 不存在此问题.
+Plug 'windvalley/molokai'
 
 " }}
 
@@ -521,7 +521,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
 " 实际上并不会用到这里设置的快捷键.
-let g:UltiSnipsExpandTrigger="<Leader>,,,f"
+let g:UltiSnipsExpandTrigger="<leader>,,,f"
 
 " gd  跳转到定义处.
 nmap <silent> gd <Plug>(coc-definition)
@@ -776,20 +776,20 @@ endfunction
 " doc: https://github.com/easymotion/vim-easymotion
 
 " 标记所有窗口的单词.
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+nmap <leader>w <Plug>(easymotion-overwin-w)
 " 仅标记当前窗口的单词.
-"map  <Leader>w <Plug>(easymotion-bd-w)
+"map  <leader>w <Plug>(easymotion-bd-w)
 
 " 标记所有窗口的所有行首字符.
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+nmap <leader>L <Plug>(easymotion-overwin-line)
 " 标记当前窗口的所有行首字符.
-"map <Leader>L <Plug>(easymotion-bd-jk)
+"map <leader>L <Plug>(easymotion-bd-jk)
 
 " 标记当前行光标右侧的字符.
-map <Leader>l <Plug>(easymotion-lineforward)
+map <leader>l <Plug>(easymotion-lineforward)
 
 " 标记当前行光标左侧的字符.
-map <Leader>h <Plug>(easymotion-linebackward)
+map <leader>h <Plug>(easymotion-linebackward)
 
 " 输入1个目标字符即可高亮定位, 支持多窗口同时定位.
 nmap s <Plug>(easymotion-overwin-f)
@@ -856,13 +856,13 @@ noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 " 在弹出的结果窗口中, 按 gi 可以将光标移动到输入框, 可以继续输入内容缩小结果列表,
 " 然后按 tab 进入结果列表中, 按 j/k 上下选择, 选择一个文件后,
 " 按 t 将以新建标签页的方式打开选择的文件.
-noremap <Leader>rg :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+noremap <leader>rg :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 " visual 模式下选择文本后, 按 rg 在整个项目内搜索选择的文本, 显示搜索结果.
 xnoremap rg :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 
 " ,rg 搜索内容关闭后, 想再次搜索上次搜索的内容, normal 模式下按 rc 即可.
-noremap <Leader>rc :<C-U>Leaderf! rg --recall<CR>
+noremap <leader>rc :<C-U>Leaderf! rg --recall<CR>
 
 """""" lyokha/vim-xkbswitch
 " doc: https://github.com/lyokha/vim-xkbswitch
@@ -987,7 +987,7 @@ let g:Hexokinase_ftDisabled = []
 "    group: goComment->Comment guifg=#585858(#585858) gui=italic
 "    如上结果表示, 光标所在属于 goComment 语法加亮组, 并且被链接到了 Comment 加亮组,
 "    guifg 和 gui 是加亮组的值, guifg 表示前景色, gui 表示特殊效果.
-nnoremap <Leader>a :call SyntaxAttr()<CR>
+nnoremap <leader>a :call SyntaxAttr()<CR>
 
 " }}
 
@@ -1381,7 +1381,7 @@ endif
 
 " *** papercolor ***
 if (g:colors_name == 'PaperColor')
-  let g:lightline.colorscheme = 'PaperColor'
+  let g:lightline.colorscheme = 'apprentice'
 
   hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
 
@@ -1444,7 +1444,7 @@ endif
 " doc: https://github.com/preservim/nerdtree
 
 " ,t  normal 模式下显示或隐藏目录树的快捷键.
-nnoremap <Leader>x :NERDTreeToggle<CR>
+nnoremap <leader>x :NERDTreeToggle<CR>
 
 " 目录树显示在左侧还是右侧.
 " 可选值: 'right', 'left', 默认值: 'left'
@@ -1570,19 +1570,19 @@ let g:indentLine_fileTypeExclude = ['markdown']
 " FIXME: 使用 Vim 的情况, floaterm 的颜色方案和 Vim 的不一致, 使用 Neovim 无此问题.
 
 " 显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
-let g:floaterm_keymap_toggle = '<Leader>t'
+let g:floaterm_keymap_toggle = '<leader>t'
 
 " 新建一个悬浮窗口.
-let g:floaterm_keymap_new = '<Leader>tc'
+let g:floaterm_keymap_new = '<leader>tc'
 
 " 关闭当前悬浮窗口.
-let g:floaterm_keymap_kill = '<Leader>tk'
+let g:floaterm_keymap_kill = '<leader>tk'
 
 " 切换到下一个悬浮窗口.
-let g:floaterm_keymap_next = '<Leader>tn'
+let g:floaterm_keymap_next = '<leader>tn'
 
 " 显示目前存在的悬浮窗口.
-let g:floaterm_keymap_show = '<Leader>ts'
+let g:floaterm_keymap_show = '<leader>ts'
 
 """""" 'francoiscabrol/ranger.vim'
 " doc: https://github.com/francoiscabrol/ranger.vim
@@ -1634,7 +1634,7 @@ let g:go_doc_keywordprg_enabled = 0
 " ,cl  在 location list 中列出哪些地方调用了光标所在的函数.
 au FileType go nmap <leader>cl :GoCallers<CR>
 " ,s  查看光标所在的类型实现了哪些接口, 注意光标只能在类型或类型的方法上.
-au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <leader>s <Plug>(go-implements)
 
 " NOTE:
 "   Go 跳转到光标所在函数定义处的4种方式均由 vim-go 插件提供, 和 YCM 配置无关.
