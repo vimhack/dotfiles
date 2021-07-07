@@ -1413,6 +1413,9 @@ endif
 if (g:colors_name == 'onehalfdark')
   let g:lightline.colorscheme = 'onehalfdark'
 
+  " 此主题默认弹窗是 light 的, 这里改成 dark.
+  hi Pmenu guibg=#282c34 guifg=#dcdfe4
+
   " for Vim
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
   " for Neovim
