@@ -183,7 +183,7 @@ theme(){
     if [[ "$theme_name" = "list" ]] || [[ "$theme_name" = "" ]]; then
         current_theme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
 
-        echo -e "Current theme is '$current_theme', you can change to follows:\n"
+        echo -e "The current theme is '$current_theme', and it can be changed to one of the following list:\n"
 
         for i in ${themes[@]};do
             [[ "$i" != "$current_theme" ]] && {

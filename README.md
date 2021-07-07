@@ -61,7 +61,7 @@ git pull
 ```text
 theme
 
-Current theme is 'dracula', you can change to follows:
+The current theme is 'dracula', and it can be changed to one of the following list:
 
 * molokai
 * rigel
@@ -75,15 +75,17 @@ Current theme is 'dracula', you can change to follows:
 * papercolor
 * ayu
 * ayu_mirage
+* onehalfdark
 * gruvbox_light
 * one_light
 * iceberg_light
 * papercolor_light
 * ayu_light
+* onehalflight
 
-For example, change theme to 'ayu_light':
+For example, change theme to 'onehalflight':
 
-$ theme ayu_light
+$ theme onehalflight
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
