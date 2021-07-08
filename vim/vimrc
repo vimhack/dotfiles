@@ -2088,8 +2088,7 @@ augroup resCur
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
 
-" insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题,
-" 比如按 backspace 键无反应.
+" insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题, 比如按 backspace 键无反应.
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 
@@ -2171,7 +2170,7 @@ let &cpo = s:save_cpo
 
 " }}
 
-" normal 模式下的 nyy 复制(n为数字), 或进入 visual 模式下选择内容后的 y 复制,
+" normal 模式下的 nyy 复制(n 为数字), 或进入 visual 模式下选择内容后的 y 复制,
 " 除了可以将复制的内容粘贴(使用 p)到其他 Vim 实例,
 " 还可以将内容粘贴(command v)到系统的其他任何可输入窗口.
 "
@@ -2185,6 +2184,13 @@ if has('clipboard')
     set clipboard=unnamed " for macOS、Windows
   endif
 endif
+
+" ctrl s  在 normal/insert 模式下打开/关闭英文的拼写检查.
+" NOTE:
+"   1) 有了 spell 后的 ! 就可以支持 toggle 了, 也就是既支持打开又支持关闭;
+"   2) <C-o> 和 :setlocal 之间不能有空格.
+nmap <silent> <C-s> :setlocal spell! spelllang=en,cjk<CR>
+imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 
 " }}
 
@@ -2209,9 +2215,6 @@ endif
 
 " 退出文件后, 屏幕依然显示该文件内容.
 "set t_ti= t_te=
-
-" 打开英语单词的拼写检查.
-"set spell spelllang=en,cjk
 
 " 覆盖掉默认的拼写检查设置, 不启用拼写检查.
 "autocmd VimEnter * set nospell
@@ -2489,6 +2492,7 @@ endif
 "                 ,R  文件 ~/.vimrc 发生变化后, 正在编辑的文件不需要退出,
 "                     通过该快捷键即可重新加载 Vim 配置文件, 使变更马上生效.
 "                 ,E  上下分屏方式打开 ~/.vimrc 文件.
+"             ctrl s  normal/insert 模式下, 打开/关闭英文拼写检查.
 
 " }}
 
