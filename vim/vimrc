@@ -82,10 +82,7 @@
 "         wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
 "         wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
 
-"      3) 安装用于管理 Vim 插件的插件 vim-plug
-"         curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-"      4) 安装 vimrc 中已配置的 Vim 插件
+"      3) 安装 vimrc 中已配置的 Vim 插件
 "         vim +PlugInstall +qa
 "
 "    2. Neovim
@@ -97,11 +94,8 @@
 "         curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
 "         wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
 "
-"      3) 安装用于管理 Vim 插件的插件 vim-plug
-"         curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
-"      4) 安装已配置的 Vim 插件
-"         vim +PlugInstall +qa
+"      3) 安装已配置的 Vim 插件
+"         nvim +PlugInstall +qa
 
 " }}
 
@@ -136,17 +130,37 @@ let mapleader = ','
 
 " 插件安装 {{
 
-" 需要先安装用于管理 Vim/Neovim 插件的插件: vim-plug
-" 1) Vim
-"    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" 2) Neovim
-"    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
-"       --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
-" 下面每一个 Plug 对应一个 Vim 插件, 插件名称就是相应 github 项目名称,
-" 可通过访问 https://github.com/插件名称 来查看相关插件的详细使用文档;
-" 也可以通过 command-line 模式 :help 插件名称 来查看相关插件文档.
+" vim-plug {{
+" 自动安装用于管理 Vim/Neovim 众多插件的插件: vim-plug
+
+if has('nvim')
+  if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+    " 安装完 vim-plug 插件后, 自动清除下面的 echo 信息.
+    set shortmess=aO
+
+    echo "Downloading 'junegunn/vim-plug' to ~/.config/nvim/autoload/ for managing plugins, 
+      \ please wait..."
+
+    silent !curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  endif
+else
+  if !filereadable(expand('~/.vim/autoload/plug.vim'))
+    " NOTE: 和如上 Neovim 不一样, Vim 这里不能直接使用 echo "",
+    "   需要使用 silent !echo "" 的方式, 否则会提示如下交互信息:
+    "   'Press ENTER or type command to continue'
+    silent !echo "Downloading 'junegunn/vim-plug' to ~/.vim/autoload/ for managing plugins,
+      \ please wait..."
+
+    silent !curl -sfLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  endif
+endif
+
+" }}
+
+" 安装 vim/neovim 插件的起始部分,
+" 可通过 command-line 模式 :help 插件名称 来查看相关插件的帮助文档.
 call plug#begin('~/.vim/plugged')
 
 
@@ -2011,11 +2025,11 @@ autocmd FileType * set colorcolumn=80
 if has('nvim')
   noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
   noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>
-    \:exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
+    \ :exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
 else
   noremap <silent> <leader>E :sp ~/.vimrc<CR>
   noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>
-    \:exe ":echo '~/.vimrc reloaded'"<CR>
+    \ :exe ":echo '~/.vimrc reloaded'"<CR>
 endif
 
 " 多窗口之间上下左右移动的快捷键重新映射.
