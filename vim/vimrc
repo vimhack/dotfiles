@@ -130,9 +130,10 @@ let mapleader = ','
 
 " 插件安装 {{
 
-" vim-plug {{
-" 自动安装用于管理 Vim/Neovim 众多插件的插件: vim-plug
+" vim-plug 安装与配置 {{
+" doc: https://github.com/junegunn/vim-plug
 
+" 自动安装用于管理 Vim/Neovim 众多插件的插件: vim-plug
 if has('nvim')
   if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
     " 安装完 vim-plug 插件后, 自动清除下面的 echo 信息.
@@ -157,12 +158,17 @@ else
   endif
 endif
 
+" 启动 Vim/Neovim 时如果发现有配置了但还未安装的插件, 则自动安装.
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+
 " }}
 
-" 安装 vim/neovim 插件的起始部分,
+" 开始安装 Vim/Neovim 的众多插件,
 " 可通过 command-line 模式 :help 插件名称 来查看相关插件的帮助文档.
 call plug#begin('~/.vim/plugged')
-
 
 " 颜色主题 {{
 
@@ -382,7 +388,6 @@ Plug 'itchyny/calendar.vim'
 Plug 'vim/killersheep'
 
 " }}
-
 
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
 "    :PlugStatus   查看当前状态, 安装进度等;
