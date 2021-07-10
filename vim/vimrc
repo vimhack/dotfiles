@@ -13,89 +13,100 @@
 " 安装步骤 {{
 
 " 一. 安装 Vim 及依赖
+"
 "    1. macOS 系统
-"    # 用于目录树文件图标显示的依赖安装
-"    brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 "
-"    # 从 insert 切换到 normal 模式时自动切换输入法功能需要的系统依赖安装
-"    git clone https://github.com/myshov/xkbswitch-macosx.git
-"    cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
-"    git clone https://github.com/myshov/libxkbswitch-macosx
-"    cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
+"      1) 依赖安装
 "
-"    # 安装相关依赖
-"    brew install cmake python mono go nodejs yarn
-"    brew install ctags rg
+"      # 用于目录树文件图标显示的依赖安装
+"      brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 "
-"    1) Vim
-"    brew install macvim
+"      # 从 insert 切换到 normal 模式时自动切换输入法功能需要的系统依赖安装
+"      git clone https://github.com/myshov/xkbswitch-macosx.git
+"      cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
+"      git clone https://github.com/myshov/libxkbswitch-macosx
+"      cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
 "
-"    2) Neovim
-"    brew install neovim
-"    pip3 install neovim
+"      # 安装其他依赖
+"      brew install cmake python mono go nodejs yarn
+"      brew install ctags rg
+"
+"      2) Vim
+"
+"      brew install macvim
+"
+"      3) Neovim
+"
+"      brew install neovim
+"      pip3 install neovim
 "
 "    2. Linux 系统
-"    # 用于目录树文件图标显示
-"    mkdir -p ~/.local/share/fonts
-"    cd ~/.local/share/fonts && \
-"       curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" \
-"       https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 "
-"    1) Vim
-"    sudo yum -y remove vim-common vim-enhanced vim-filesystem
-"    sudo yum -y install gcc-c++ make ncurses ncurses-devel python3 ctags git
-"    sudo yum -y install epel-release && yum -y install golang
-"    # https://www.mono-project.com/download/stable/#download-lin-centos
-"    sudo yum -y install mono-devel
-"    curl -fsSL https://rpm.nodesource.com/setup_15.x | bash -
-"    sudo yum -y install nodejs  # node & npm
-"    sudo yum -y install tcl-devel ruby ruby-devel lua lua-devel luajit luajit-devel \
-"       python3 python3-devel perl perl-devel perl-ExtUtils-ParseXS perl-ExtUtils-XSpp \
-"       perl-ExtUtils-CBuilder perl-ExtUtils-Embed
-"    git clone https://github.com/vim/vim.git
-"    cd vim
-"    ./configure --with-features=huge --enable-multibyte --enable-python3interp \
-"       --enable-rubyinterp --enable-perlinterp --enable-luainterp
-"    make && sudo make install
+"      1) 依赖安装
 "
-"    2) Neovim
-"    # https://github.com/neovim/neovim/releases
-"    sudo yum install -y neovim python3 nodejs
+"      # 用于目录树文件图标显示
+"      mkdir -p ~/.local/share/fonts
+"      cd ~/.local/share/fonts && \
+"         curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" \
+"         https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+"
+"      2) Vim
+"
+"      sudo yum -y remove vim-common vim-enhanced vim-filesystem
+"      sudo yum -y install gcc-c++ make ncurses ncurses-devel python3 ctags git
+"      sudo yum -y install epel-release && yum -y install golang
+"
+"      # https://www.mono-project.com/download/stable/#download-lin-centos
+"      sudo yum -y install mono-devel
+"      curl -fsSL https://rpm.nodesource.com/setup_15.x | bash -
+"      sudo yum -y install nodejs  # node & npm
+"      sudo yum -y install tcl-devel ruby ruby-devel lua lua-devel luajit luajit-devel \
+"         python3 python3-devel perl perl-devel perl-ExtUtils-ParseXS perl-ExtUtils-XSpp \
+"         perl-ExtUtils-CBuilder perl-ExtUtils-Embed
+"
+"      git clone https://github.com/vim/vim.git
+"      cd vim
+"      ./configure --with-features=huge --enable-multibyte --enable-python3interp \
+"         --enable-rubyinterp --enable-perlinterp --enable-luainterp
+"      make && sudo make install
+"
+"      3) Neovim
+"
+"      # https://github.com/neovim/neovim/releases
+"      sudo yum install -y neovim python3 nodejs
+"
+" 二. 配置步骤
+"
+"    1. Vim
+"
+"      1) 备份原配置文件 ~/.vimrc
+"         mv ~/.vimrc ~/.vimrc.$(date +%F_%T)
 
-" 二. 注意事项
+"      2) 替换你的当前 ~/.vimrc 文件
+"         curl -sfLo ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"         curl --create-dirs -sfLo ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+
+"    2. Neovim
+"
+"      1) 备份原配置文件 ~/.config/nvim/init.vim
+"         mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.$(date +%F_%T)
+"
+"      2) 替换你的当前 ~/.config/nvim/init.vim 文件
+"         curl --create-dirs -sfLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+"         curl -sfLo ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+"
+" 三. 注意事项
+"
 "    * Vim 版本要求在 8.2+, 可通过 vim --version 查看.
 "    * Neovim 版本要求在 0.4.0+, 可通过 nvim --version 查看.
 "    * 对于 Vim, 为了支持 python3 和复制粘贴的便利, 需要 Vim 支持 python3 和 clipboard,
 "      可通过`vim --version|grep -Eo '\+python3|\+clipboard'`查看是否有相关输出,
 "      没有的话请重新编译安装.
-"    * 本配置文件默认集成了 Go 开发插件 vim-go, 需要系统已经有 Go 环境,
-"      并配置 Go 代理解决墙的问题.
+"    * 本配置文件默认集成了 Go 开发插件 vim-go, 需要系统已经有 Go 环境.
 "    * macOS 和 Linux 系统可正常使用, Windows 系统未测试.
-
-" 三. 配置步骤
-"    1. Vim
-"      1) 备份原有的 ~/.vimrc 和 ~/.vim/ 等相关文件和目录
-"         mv ~/.vimrc ~/.vimrc.$(date +%F_%T)
-"         mv ~/.vim ~/.vim.$(date +%F_%T)
-
-"      2) 替换你的当前 ~/.vimrc 文件
-"         wget -O ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
-"         wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
-
-"      3) 安装 vimrc 中已配置的 Vim 插件
-"         vim +PlugInstall +qa
-"
-"    2. Neovim
-"      1) 备份原有的 ~/.config/nvim/init.vim 和 ~/.vim/ 等相关文件和目录
-"         mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.$(date +%F_%T)
-"         mv ~/.vim ~/.vim.$(date +%F_%T)
-"
-"      2) 替换你的当前 ~/.config/nvim/init.vim 文件
-"         curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
-"         wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
-"
-"      3) 安装已配置的 Vim 插件
-"         nvim +PlugInstall +qa
+"    * 按配置步骤配置完成后, 第一次打开 vim 或 nvim 会自动安装插件管理工具以及配置的众多插件,
+"      安装完成后, 重新打开 vim/nvim 即可.
+"    * Vim 和 Neovim 可同时安装在操作系统中, 共享 ~/.vim/ 目录下的插件.
 
 " }}
 
