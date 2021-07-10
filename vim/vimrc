@@ -398,6 +398,9 @@ Plug 'itchyny/calendar.vim'
 " NOTE: :Kill 启动游戏, 按说明玩既可, 只支持 Vim8.2+, 不支持 Neovim.
 Plug 'vim/killersheep'
 
+" normal 模式下移动光标所在行, visual 模式下移动选择的行.
+Plug 'matze/vim-move'
+
 " }}
 
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
@@ -1024,6 +1027,17 @@ let g:Hexokinase_ftDisabled = []
 "    如上结果表示, 光标所在属于 goComment 语法加亮组, 并且被链接到了 Comment 加亮组,
 "    guifg 和 gui 是加亮组的值, guifg 表示前景色, gui 表示特殊效果.
 nnoremap <leader>a :call SyntaxAttr()<CR>
+
+"""""" matze/vim-move
+" doc: https://github.com/matze/vim-move
+"
+" [n] ctrl k/j/h/l   normal 模式下将光标所在行向上/向下移动 n 行,
+"                    或将光标所在字符向左/向右移动 n 个字符;
+"                    visual 模式下将选择的内容向上/向下移动 n 行,
+"                    或将选择的内容块向左/向右移动 n 个字符.
+
+" 将默认的 alt 键改为 ctrl 键.
+let g:move_key_modifier = 'C'
 
 " }}
 
@@ -2059,12 +2073,6 @@ else
     \ :exe ":echo '~/.vimrc reloaded'"<CR>
 endif
 
-" 多窗口之间上下左右移动的快捷键重新映射.
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
 " 解决中文乱码问题.
 let $LANG='en'
 set langmenu=en
@@ -2265,6 +2273,12 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 
 " 出错时, 发出视觉提示, 通常是屏幕闪烁.
 "set visualbell
+
+" 多窗口之间上下左右移动的快捷键重新映射, 由于和 vim-move 插件的按键重合, 故暂不使用.
+"noremap <C-h> <C-w>h
+"noremap <C-j> <C-w>j
+"noremap <C-k> <C-w>k
+"noremap <C-l> <C-w>l
 
 " }}
 
@@ -2529,7 +2543,6 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 "           ctrl a/e  insert 模式下跳转到行首/行尾, ctrl a 会跳转到行首第一个非空字符,
 "                     再按一次跳转到行首.
 "      , )/]/}/"/'/`  将 visual 模式下选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
-"       ctrl j/k/h/l  光标移动到 下面/上面/左边/右边 的窗口.
 "                 ,R  文件 ~/.vimrc 发生变化后, 正在编辑的文件不需要退出,
 "                     通过该快捷键即可重新加载 Vim 配置文件, 使变更马上生效.
 "                 ,E  上下分屏方式打开 ~/.vimrc 文件.
@@ -2606,7 +2619,7 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 "             [n],cy  添加注释并复制被被注释的部分.
 "             [n],cA  跳转到该行结尾添加注释符号，并进入 insert 模式.
 "
-"** skywind3000/asyncrun.vim (https://github.com/skywind3000/asyncrun.vim)
+" ** skywind3000/asyncrun.vim (https://github.com/skywind3000/asyncrun.vim)
 "                ,ar  command-line 模式下异步运行命令, 并在当前窗口底部输出执行结果.
 "
 " ** fatih/vim-go (https://github.com/fatih/vim-go/wiki/Tutorial)
@@ -2729,7 +2742,14 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 " ** uguu-org/vim-matrix-screensaver (https://github.com/uguu-org/vim-matrix-screensaver)
 "            :Matrix  在当前窗口启用类似黑客帝国的 Vim 屏幕保护, 按任意键退出屏保.
 "                 ,m  同上.
-
+"
+" ** matze/vim-move (https://github.com/matze/vim-move)
+"
+"   [n] ctrl k/j/h/l  normal 模式下将光标所在行向上/向下移动 n 行,
+"                     或将光标所在字符向左/向右移动 n 个字符;
+"                     visual 模式下将选择的内容向上/向下移动 n 行,
+"                     或将选择的内容块向左/向右移动 n 个字符.
+"
 " }}
 
 """""""""" 实例练习 {{
