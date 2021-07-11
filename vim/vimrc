@@ -179,6 +179,7 @@ autocmd VimEnter *
 
 " 开始安装 Vim/Neovim 的众多插件,
 " 可通过 command-line 模式 :help 插件名称 来查看相关插件的帮助文档.
+" NOTE: 如果没有特别说明, 如下所有插件对 Vim 和 Neovim 均支持.
 call plug#begin('~/.vim/plugged')
 
 " 颜色主题 {{
@@ -400,6 +401,9 @@ Plug 'vim/killersheep'
 
 " normal 模式下移动光标所在行, visual 模式下移动选择的行.
 Plug 'matze/vim-move'
+
+" 将代码从多行转换为单行或将单行转行为多行.
+Plug 'AndrewRadev/splitjoin.vim'
 
 " }}
 
@@ -2602,13 +2606,13 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 "                ESC  退出多光标模式.
 "
 " ** easymotion/vim-easymotion (https://github.com/easymotion/vim-easymotion)
-"                ,s  按此快捷键后, 再输入一个光标要跳转到的字符 x,
-"                    你会发现 x 变成了另外一个字符 g, 你直接输入 g 即可完成跳转.
-"                ,w  标记所有窗口的单词.
-"                ,L  标记所有窗口的所有行首字符.
-"                ,l  标记当前行光标右侧的字符.
-"                ,h  标记当前行光标左侧的字符.
-"                 s  输入1个目标字符即可高亮定位, 支持多窗口同时定位.
+"                 ,s  按此快捷键后, 再输入一个光标要跳转到的字符 x,
+"                     你会发现 x 变成了另外一个字符 g, 你直接输入 g 即可完成跳转.
+"                 ,w  标记所有窗口的单词.
+"                 ,L  标记所有窗口的所有行首字符.
+"                 ,l  标记当前行光标右侧的字符.
+"                 ,h  标记当前行光标左侧的字符.
+"                  s  输入1个目标字符即可高亮定位, 支持多窗口同时定位.
 "
 " ** preservim/nerdcommenter (https://github.com/preservim/nerdcommenter)
 "       [n],c<space>  注释或取消注释光标所在行,
@@ -2749,6 +2753,10 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 "                     或将光标所在字符向左/向右移动 n 个字符;
 "                     visual 模式下将选择的内容向上/向下移动 n 行,
 "                     或将选择的内容块向左/向右移动 n 个字符.
+"
+" ** AndrewRadev/splitjoin.vim (https://github.com/AndrewRadev/splitjoin.vim)
+"                 gS  将单行代码拆分成多行.
+"                 gJ  将多行代码合并成单行.
 "
 " }}
 
