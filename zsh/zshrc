@@ -267,8 +267,8 @@ $ opacity number
 
 * number should between 0.0 and 1.0"
 
-    return 1
-}
+        return 1
+    }
 
     [[ "$#" -gt 1 ]] && { echo Usage example: opacity 0.6; return 2; }
 
@@ -304,8 +304,9 @@ $ font number
 
 * number should between 1.0 and  200.0"
 
-    return 1
-}
+        return 1
+    }
+
     [[ "$#" -gt 1 ]] && { echo Usage example: font 12.0; return 2; }
 
     if  [[ "$value" -lt 1 ]] || [[ "$value" -gt 200 ]]; then
@@ -403,6 +404,7 @@ alias mv='mv -i'
 # 列出正在监听的tcp连接.
 alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
 
+# 用于 git commit 的签名.
 export GPG_TTY=$(tty)
 
 # fzf(https://github.com/junegunn/fzf)
@@ -454,7 +456,7 @@ alias ff="vim \$(fzf)"
 #                font 12  将 alacritty 终端的字体大小设置为 12.
 #  vim-bgtransparent 1/0  打开或关闭 Vim 背景透明色.
 #                t/o/f/v  theme, opacity, font, vim-bgtransparent 的 alias 命令.
-#                 vimfzf  通过 fzf 搜索文件并用 vim 打开.
+#                     ff  通过 fzf 搜索文件并用 vim 打开.
 #               lsof_tcp  查看当前监听的端口信息.
 
 # }}
