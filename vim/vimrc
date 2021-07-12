@@ -1166,10 +1166,10 @@ if filereadable(transparent_file)
   exec 'source' transparent_file
 else
   " 值为 1 表示启用 Vim/Neovim 背景透明, 0 为禁用.
-  let bgtransparent=1
+  let g:bgtransparent=1
 endif
 
-" 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
+" 当 g:bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 变更效果涉及到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let popup_window_transparent=0
 
@@ -1243,7 +1243,7 @@ let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
 let g:jellybeans_use_term_italics = 1
 let g:jellybeans_use_gui_italics = 1
 
-if (bgtransparent == 1)
+if (g:bgtransparent == 1)
   " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
   " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
   let g:PaperColor_Theme_Options.theme.default.transparent_background = 1
@@ -1304,7 +1304,7 @@ endif
 
 " 防止还没安装主题插件的时候打开 Vim/Neovim 报错.
 if exists('g:colors_name')
-  if (bgtransparent == 1)
+  if (g:bgtransparent == 1)
     " 使 vim/nvim 背景透明.
     if (g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
       hi Normal ctermbg=NONE guibg=NONE
@@ -1539,6 +1539,21 @@ else
   " color: orange
   hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=208 guibg=NONE guifg=#ff8700
 endif
+
+" ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
+nnoremap <silent> <leader>b :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+" ,v  normal 模式下, 在背景透明和不透明之间切换.
+function! ToggleBGTransparent()
+  if g:bgtransparent == 1
+    let &background = &background
+    let g:bgtransparent = 0
+  else
+    hi Normal guibg=NONE ctermbg=NONE
+    let g:bgtransparent = 1
+  endif
+endfunction
+nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
 
 " }}
 
@@ -2606,6 +2621,8 @@ endif
 "                     使变更马上生效.
 "                 ,E  上下分屏方式打开 ~/.vimrc 或 ~/.config/nvim/init.vim 文件.
 "             ctrl s  normal/insert 模式下, 打开/关闭英文拼写检查.
+"                 ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
+"                 ,v  normal 模式下, 在背景是透明和不透明之间切换.
 
 " }}
 
