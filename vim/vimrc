@@ -2245,6 +2245,12 @@ endif
 nmap <silent> <C-s> :setlocal spell! spelllang=en,cjk<CR>
 imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 
+" 从额外的本地配置文件(如果存在的话)加载配置.
+let vimrc_local='~/.vimrc.local'
+if filereadable(expand(vimrc_local))
+  exec 'source' vimrc_local
+endif
+
 " }}
 
 
