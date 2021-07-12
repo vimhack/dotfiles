@@ -225,6 +225,9 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 " Neovim 不存在此问题.
 Plug 'windvalley/molokai'
 
+" vadelma
+Plug 'windvalley/vadelma'
+
 " }}
 
 " 代码补全 {{
@@ -1289,6 +1292,7 @@ endif
 "   papercolor: https://github.com/NLKNguyen/papercolor-theme
 "   ayu: https://github.com/ayu-theme/ayu-vim
 "   onehalf: https://github.com/sonph/onehalf
+"   vadelma: https://github.com/windvalley/vadelma
 "
 " NOTE:
 "   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1487,6 +1491,20 @@ if exists('g:colors_name')
 
     " for Vim
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e4e4e4
+
+    call EnableItalic()
+  endif
+
+  " *** vadelma ***
+  if (g:colors_name == 'vadelma')
+    let g:lightline.colorscheme = 'vadelma'
+
+    " for Vim
+    if &background == 'dark'
+      hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+    else
+      hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#dadada
+    endif
 
     call EnableItalic()
   endif
