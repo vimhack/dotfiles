@@ -2092,16 +2092,42 @@ vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 
-" insert 模式下移动光标的快捷键:
-" ctrl p 上, ctrl n 下,ctrl f 右, ctrl b 左;
+" insert 模式下使用 emacs 键位.
+" 光标移动:
+"   ctrl p 上, ctrl n 下, ctrl b 左, ctrl f 右;
+"   ctrl a 行首, ctrl e 行尾;
+"   esc b 向左一个单词, esc f 向右一个单词.
+" NOTE: 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
-" ctrl a 行首, ctrl e 行尾.
-" NOTE: 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a
-imap <C-a> <Home>
-imap <C-e> <End>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <Esc>b <S-Left>
+inoremap <Esc>f <S-Right>
+" 编辑动作:
+"   ctrl d 向右删除一个字符.
+"   ctrl h 向左删除一个字符.
+"   ctrl w 向左删除一个单词.
+inoremap <C-d> <Del>
+
+" command-line 模式下使用 emacs 键位, :h emacs-keys 
+" 光标移动:
+"   ctrl a 移动到行首, ctrl e 移动到行尾;
+"   ctrl b 向左移动一个字符, ctrl f 向右移动一个字符;
+"   esc b 向左移动一个单词, esc f 向右移动一个单词.
+cnoremap <C-a>  <Home>
+cnoremap <C-e>  <End>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+" 编辑动作:
+"   ctrl d 删除光标右侧字符;
+"   ctrl h 删除光标左侧字符;
+"   ctrl w 删除光标左侧一个单词.
+cnoremap <C-d>  <Del>
 
 " normal/visual 模式下, 按 0 光标将回到当前行的第一个非空字符,
 "               如果光标已经在第一个非空字符, 则回到行首.
@@ -2549,13 +2575,18 @@ endif
 "
 " ** 不依赖插件的自定义配置提供的功能:
 "                  Y  这个命令默认是复制整行的意思, 这里更改为复制光标位置到行结尾的内容.
-"          ctrl bfpn  insert 模式下左右上下移动光标.
-"           ctrl a/e  insert 模式下跳转到行首/行尾, ctrl a 会跳转到行首第一个非空字符,
-"                     再按一次跳转到行首.
+"       ctrl b/f/p/n  insert 模式下左右上下移动光标, 或
+"                     command-line 模式下向左/向右移动光标, 向上或向下翻阅历史命令.
+"           ctrl a/e  insert/command-line 模式下跳转到行首/行尾,
+"                     ctrl a 会跳转到行首第一个非空字符, 再按一次跳转到行首.
+"            esc b/f  insert/command-line 模式下向左或向右移动一个单词.
+"           ctrl h/d  insert/command-line 模式下向左或向右删除一个字符.
+"             ctrl w  insert/command-line 模式下向左删除一个单词.
 "      , )/]/}/"/'/`  将 visual 模式下选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
-"                 ,R  文件 ~/.vimrc 发生变化后, 正在编辑的文件不需要退出,
-"                     通过该快捷键即可重新加载 Vim 配置文件, 使变更马上生效.
-"                 ,E  上下分屏方式打开 ~/.vimrc 文件.
+"                 ,R  文件 ~/.vimrc 或 ~/.config/nvim/init.vim 发生变化后,
+"                     正在编辑的文件不需要退出, 通过该快捷键即可重新加载该配置文件,
+"                     使变更马上生效.
+"                 ,E  上下分屏方式打开 ~/.vimrc 或 ~/.config/nvim/init.vim 文件.
 "             ctrl s  normal/insert 模式下, 打开/关闭英文拼写检查.
 
 " }}
