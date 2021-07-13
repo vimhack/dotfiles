@@ -1541,13 +1541,10 @@ function! OneAfter()
 endfunction
 
 function! MolokaiAfter()
-  let g:molokai_original = 1
-  let g:rehash256 = 1
   let g:lightline.colorscheme = 'molokai'
 
-  " cterm=NONE 表示用来去掉默认的粗体显示.
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  " for Neovim, 通过 cterm=NONE 来去掉默认的粗体显示.
+  hi Whitespace cterm=NONE guibg=NONE guifg=#465457
 
   call EnableItalic()
 endfunction
