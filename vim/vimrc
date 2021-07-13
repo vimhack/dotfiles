@@ -1142,6 +1142,27 @@ endfunction
 
 
 " 主题定制 {{
+"
+" 优秀的颜色主题方案:
+"   dracula: https://draculatheme.com/vim
+"   rigel: https://github.com/Rigellute/rigel
+"   gruvbox: https://github.com/morhetz/gruvbox
+"   molokai: https://github.com/tomasr/molokai
+"   one: https://github.com/rakr/vim-one
+"   iceberg: https://github.com/cocopon/iceberg.vim
+"   base16-default-dark: https://github.com/chriskempson/base16-vim
+"   jellybeans: https://github.com/nanotech/jellybeans.vim
+"   nord: https://github.com/arcticicestudio/nord-vim
+"   tender: https://github.com/jacoborus/tender.vim
+"   papercolor: https://github.com/NLKNguyen/papercolor-theme
+"   ayu: https://github.com/ayu-theme/ayu-vim
+"   onehalf: https://github.com/sonph/onehalf
+"   vadelma: https://github.com/windvalley/vadelma
+"
+" NOTE:
+"   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
+"   2) dracula, molokai, jellybeans, base16-default-dark, nord, tender 主题没有 light 方案.
+"   3) base16-default-dark, rigel 等主题默认没有提供斜体字的特性, 我们可以通过自定义方法提供支持.
 
 " 代码高亮显示.
 syntax enable
@@ -1171,7 +1192,7 @@ endif
 
 " 当 g:bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 变更效果涉及到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
-let popup_window_transparent=0
+let g:popup_window_transparent=0
 
 " 解决 Vim 在 cterm 彩色终端下不支持斜体字的问题, Neovim 没有此问题.
 " 解决方法来源: https://rsapkf.xyz/blog/enabling-italics-vim-tmux
@@ -1179,7 +1200,16 @@ let popup_window_transparent=0
 set t_ZH=[3m
 set t_ZR=[23m
 
-" 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的 colorscheme, 可以使用此方法提供支持或优化.
+" colorschemes 优化方法集合 {{
+"
+" NOTE:
+"   方法结尾是 Before 的代表需要放在 colorscheme 指令之前执行;
+"   方法结尾是 After 的代表需要放在 colorscheme 指令之后执行.
+
+" 通用方法 {{
+
+" 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的 colorscheme,
+" 可以使用此方法提供支持或优化.
 function! EnableItalic()
   hi Comment cterm=italic gui=italic
   hi Todo cterm=italic gui=italic
@@ -1195,70 +1225,400 @@ function! EnableItalic()
   hi markdownItalic cterm=italic gui=italic
 endfunction
 
-" 颜色主题方案的个性配置 {{
-" NOTE: 这部分配置必须放到 colorscheme theme_name 之前, 否则不起作用,
-"       因为 colorscheme 会调用这里设置的变量.
-
-" dracula 主题配置.
-" 是否启用斜体字, 默认值: 1
-let g:dracula_italic=1
-" 是否启用粗体字, 默认值: 1
-let g:dracula_bold=0
-
-" 调整 gruvbox 主题的颜色对比度.
-" from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
-" 默认值: medium, 可选值: soft, medium, hard
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_contrast_light = 'hard'
-" 是否启用粗体字, 0 为禁用, 1 为启用, 默认值: 1
-let g:gruvbox_bold = 1
-" 是否启用斜体字, 默认值: 0
-let g:gruvbox_italic = 1
-" 对于代码中的字符串是否启用斜体字, 默认值: 0
-let g:gruvbox_italicize_strings = 1
-" 注释内容是否启用斜体字, 默认值: 1
-let g:gruvbox_italicize_comments = 1
-
-" molokai 主题设置.
-let g:molokai_italic = 1
-
-" nord 主题设置.
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
-
-" papercolor 主题设置:
-" 是否允许粗体字, 1 是允许, 0 是不允许.
-let g:PaperColor_Theme_Options = {
-  \  'theme': {
-  \    'default': {
-  \      'allow_bold': 0,
-  \     }
-  \   }
-  \ }
-" 是否允许斜体字, 1 是允许, 0 是不允许.
-let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
-
-" jellybeans 主题设置:
-" 是否禁用斜体字, 0 禁用, 1 启用.
-let g:jellybeans_use_term_italics = 1
-let g:jellybeans_use_gui_italics = 1
-
-if (g:bgtransparent == 1)
-  " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
-  " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
-  let g:PaperColor_Theme_Options.theme.default.transparent_background = 1
-
-  " 对于 jellybeans 主题, 使用 hi Normal 的方式设置背景透明的方式,
-  " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
-  let g:jellybeans_overrides = {
-  \  'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-  \ }
-  if has('termguicolors') && &termguicolors
-    let g:jellybeans_overrides['background']['guibg'] = 'none'
+" 重新加载 lightline 状态栏的方法.
+" FIXME:
+"   1) onehalfdark 和 onehalflight 之间切换无法切换 lightline 颜色.
+function! LightlineReload()
+  if g:colors_name =~# 'gruvbox'
+    execute "source " . g:plug_home . "/gruvbox/autoload/lightline/colorscheme/gruvbox.vim"
+  elseif g:colors_name =~# 'iceberg'
+    execute "source " . g:plug_home . "/iceberg.vim/autoload/lightline/colorscheme/iceberg.vim"
+  elseif g:colors_name =~# 'one'
+    execute "source " . g:plug_home . "/lightline.vim/autoload/lightline/colorscheme/one.vim"
+  elseif g:colors_name =~# 'vadelma'
+    execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
+  elseif g:colors_name =~# 'PaperColor'
+    " 使用 vadelma 的 lightline 配色更舒服.
+    execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
   endif
-endif
+
+  windo call lightline#colorscheme()
+endfunction
+
+" 设置背景透明的方法, 需要放到 colorscheme 指令之后执行.
+function! BGTransparentAfter()
+  if (g:bgtransparent == 1)
+    if (g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
+      " 使 vim/nvim 背景透明.
+      hi Normal ctermbg=NONE guibg=NONE
+    endif
+
+    if (g:popup_window_transparent == 1)
+      " 使悬浮窗口透明.
+      hi Pmenu ctermbg=NONE guibg=NONE
+    endif
+
+    " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
+    " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+    let linenr_colorscheme_custom=0
+    if (linenr_colorscheme_custom==1)
+      hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
+    endif
+  endif
+endfunction
+
+" 在背景是 dark 和 light 之间切换的方法.
+function! ToggleBGColor()
+  " 对于不支持切换背景色的 colorschemes 直接忽略.
+  if g:colors_name == 'ayu' ||
+    \ g:colors_name == 'dracula' ||
+    \ g:colors_name == 'jellybeans' ||
+    \ g:colors_name == 'molokai' ||
+    \ g:colors_name == 'rigel' ||
+    \ g:colors_name == 'tender' ||
+    \ g:colors_name == 'nord' ||
+    \ g:colors_name == 'base16-default-dark'
+    return
+  endif
+
+  " onehalfdark 和 onehalflight 不使用 background 选项来控制背景色, 需要单独配置.
+  if g:colors_name == 'onehalfdark'
+    colorscheme onehalflight
+    call OnehalflightAfter()
+  elseif g:colors_name == 'onehalflight'
+    colorscheme onehalfdark
+    call OnehalfdarkAfter()
+  else
+    " 其他主题设置切换背景颜色.
+    let &background = ( &background ==# 'dark'? 'light' : 'dark' )
+  endif
+
+  if g:colors_name == 'PaperColor'
+    let g:PaperColor_Theme_Options.theme.default.transparent_background = 0
+    execute 'colorscheme ' . g:colors_name
+    call PaperColorAfter()
+  endif
+
+  " 重载 lightline 状态栏, 使其颜色随着背景色改变.
+  call LightlineReload()
+
+  " 解决从透明背景的场景切换背景颜色后, 需要连续按两次 ,v 才能切换成背景透明的问题.
+  let g:bgtransparent = 0
+endfunction
+
+" 在背景透明和不透明之间切换的方法.
+function! ToggleBGTransparent()
+  if g:bgtransparent == 1
+    let &background = &background
+    let g:bgtransparent = 0
+
+    if g:colors_name == 'PaperColor'
+      call PaperColorBefore()
+      execute 'colorscheme ' . g:colors_name
+      call PaperColorAfter()
+    elseif g:colors_name == 'jellybeans'
+      let g:jellybeans_overrides = {}
+      call JellybeansBefore()
+      execute 'colorscheme ' . g:colors_name
+      call JellybeansAfter()
+    elseif g:colors_name == 'rigel'
+      call RigelAfter()
+    elseif g:colors_name == 'dracula'
+      call DraculaAfter()
+    elseif g:colors_name == 'molokai'
+      call MolokaiBefore()
+      execute 'colorscheme ' . g:colors_name
+      call MolokaiAfter()
+    elseif g:colors_name == 'base16-default-dark'
+      call Base16DefaultDarkAfter()
+    elseif g:colors_name == 'onehalfdark'
+      call OnehalfdarkAfter()
+    elseif g:colors_name == 'onehalflight'
+      call OnehalflightAfter()
+    endif
+  else
+    hi Normal guibg=NONE ctermbg=NONE
+    let g:bgtransparent = 1
+
+    if g:colors_name == 'jellybeans'
+      call JellybeansBefore()
+      execute 'colorscheme ' . g:colors_name
+      call JellybeansAfter()
+    elseif g:colors_name == 'PaperColor'
+      call PaperColorBefore()
+      execute 'colorscheme ' . g:colors_name
+      call PaperColorAfter()
+    endif
+  endif
+endfunction
 
 " }}
+
+" 需要放置到 colorscheme 指令之前的主题优化方法 {{
+
+function! NordBefore()
+  let g:nord_italic = 1
+  let g:nord_italic_comments = 1
+endfunction
+
+function! MolokaiBefore()
+  " 需要设置成 0, 否则对于 vim, 当背景是透明时部分关键字背景是黑色的.
+  let g:molokai_italic = 0
+endfunction
+
+function! GruvboxBefore()
+  " 调整 gruvbox 主题的颜色对比度.
+  " from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
+  " 默认值: medium, 可选值: soft, medium, hard
+  let g:gruvbox_contrast_dark = 'medium'
+  let g:gruvbox_contrast_light = 'hard'
+
+  " 是否启用粗体字, 0 为禁用, 1 为启用, 默认值: 1
+  let g:gruvbox_bold = 1
+
+  " 是否启用斜体字, 默认值: 0
+  let g:gruvbox_italic = 1
+
+  " 对于代码中的字符串是否启用斜体字, 默认值: 0
+  let g:gruvbox_italicize_strings = 1
+
+  " 注释内容是否启用斜体字, 默认值: 1
+  let g:gruvbox_italicize_comments = 1
+endfunction
+
+function! DraculaBefore()
+  " 是否启用斜体字, 默认值: 1
+  let g:dracula_italic=1
+
+  " 是否启用粗体字, 默认值: 1
+  let g:dracula_bold=0
+endfunction
+
+function! JellybeansBefore()
+  " 是否禁用斜体字, 0 禁用, 1 启用.
+  let g:jellybeans_use_term_italics = 1
+  let g:jellybeans_use_gui_italics = 1
+
+ if (g:bgtransparent == 1)
+    " 对于 jellybeans 主题, 使用 hi Normal 的方式设置背景透明的方式,
+    " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
+    let g:jellybeans_overrides = {
+    \  'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+    \ }
+    if has('termguicolors') && &termguicolors
+      let g:jellybeans_overrides['background']['guibg'] = 'none'
+    endif
+  endif
+endfunction
+
+function! PaperColorBefore()
+  " papercolor 主题设置:
+  " 是否允许粗体字, 1 是允许, 0 是不允许.
+  let g:PaperColor_Theme_Options = {
+    \  'theme': {
+    \    'default': {
+    \      'allow_bold': 0,
+    \     }
+    \   }
+    \ }
+  " 是否允许斜体字, 1 是允许, 0 是不允许.
+  let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
+
+  if (g:bgtransparent == 1)
+    " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
+    " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
+    let g:PaperColor_Theme_Options.theme.default.transparent_background = 1
+  endif
+endfunction
+
+" }}
+
+" 需要放置到 colorscheme 指令之后的主题优化方法 {{
+
+function! VadelmaAfter()
+  let g:lightline.colorscheme = 'vadelma'
+
+  " for Vim
+  if &background == 'dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=253 guibg=NONE guifg=#dadada
+  endif
+
+  call EnableItalic()
+endfunc
+
+function! PaperColorAfter()
+  let g:lightline.colorscheme = 'vadelma'
+
+  if &background == 'dark'
+    " 光标所在行的行号颜色.
+    hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
+
+    " cterm=NONE 表示用来去掉默认的粗体显示.
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  else
+    " for nvim only
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+  endif
+
+  call EnableItalic()
+endfunction
+
+function! JellybeansAfter()
+    let g:lightline.colorscheme = 'jellybeans'
+
+    hi SpecialKey ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
+
+    hi ColorColumn ctermbg=236 guibg=#303030
+
+    hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
+    hi Cursorcolumn cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
+
+    call EnableItalic()
+endfunction
+
+function! Base16DefaultDarkAfter()
+  let g:lightline.colorscheme = 'apprentice'
+
+  " cterm=NONE 表示用来去掉默认的粗体显示.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
+  call EnableItalic()
+endfunction
+
+function! DraculaAfter()
+  " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
+  " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
+  if !has('nvim') && (g:colors_name == 'dracula') && (g:popup_window_transparent == 1)
+    hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
+  endif
+
+  let g:lightline.colorscheme = 'dracula'
+
+  hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
+
+  " 优化 Vim 的非可见字符的颜色方案.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
+  " 优化 Neovim 的非可见字符的颜色方案.
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
+endfunction
+
+function! RigelAfter()
+  " 定制状态栏的主题颜色.
+  let g:rigel_lightline = 1
+  let g:lightline.colorscheme = 'rigel'
+
+  " 优化非可见字符 nbsp, tab, trail 等的颜色方案:
+  " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
+  " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
+  " 但对于 Neovim, 则是由 Whitespace 高亮组定义的.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
+  " 优化 ColorColumn 列的颜色方案.
+  " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
+  hi ColorColumn cterm=NONE ctermbg=black guibg=#00384d
+
+  " 优化光标所在行的颜色方案.
+  hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
+
+  " 优化光标所在列的颜色方案.
+  hi Cursorcolumn cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
+
+  " 优化光标所在行的行号的颜色方案.
+  hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white guibg=#00384d guifg=#afffff
+
+  call EnableItalic()
+endfunction
+
+function! OneAfter()
+  let g:lightline.colorscheme = 'one'
+  call EnableItalic()
+endfunction
+
+function! MolokaiAfter()
+  let g:molokai_original = 1
+  let g:rehash256 = 1
+  let g:lightline.colorscheme = 'molokai'
+
+  " cterm=NONE 表示用来去掉默认的粗体显示.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
+  call EnableItalic()
+endfunction
+
+function! GruvboxAfter()
+  let g:lightline.colorscheme = 'gruvbox'
+  call EnableItalic()
+endfunction
+
+function! IcebergAfter()
+  let g:lightline.colorscheme = 'iceberg'
+  call EnableItalic()
+endfunction
+
+function! NordAfter()
+  let g:lightline.colorscheme = 'nord'
+  " nord 默认提供的斜体字支持不够理想, 使用自定义方法增强.
+  call EnableItalic()
+endfunction
+
+function! TenderAfter()
+  let g:lightline.colorscheme = 'tender'
+  call EnableItalic()
+endfunction
+
+function! AyuAfter()
+  if (g:ayucolor == 'dark')
+    let g:lightline.colorscheme = 'ayu_dark'
+  elseif (g:ayucolor == 'mirage')
+    let g:lightline.colorscheme = 'ayu_mirage'
+  else
+    let g:lightline.colorscheme = 'ayu_light'
+  endif
+
+  call EnableItalic()
+endfunction
+
+function! OnehalfdarkAfter()
+  let g:lightline.colorscheme = 'onehalfdark'
+
+  " 此主题默认弹窗是 light 的, 这里改成 dark.
+  hi Pmenu guibg=#282c34 guifg=#dcdfe4
+
+  " for Vim
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  " for Neovim
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
+  call EnableItalic()
+endfunction
+
+function! OnehalflightAfter()
+  let g:lightline.colorscheme = 'one'
+
+  " for Vim
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e4e4e4
+
+  call EnableItalic()
+endfunction
+
+" }}
+
+" }}
+
+" colorscheme 指令之前执行的主题优化方法.
+call GruvboxBefore()
+call DraculaBefore()
+call NordBefore()
+call MolokaiBefore()
+call PaperColorBefore()
+call JellybeansBefore()
 
 " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
 " dotfiles git仓库可以不被无用的变更信息干扰.
@@ -1278,239 +1638,50 @@ else
   endtry
 endif
 
-" 优秀的颜色主题方案:
-"   dracula: https://draculatheme.com/vim
-"   rigel: https://github.com/Rigellute/rigel
-"   gruvbox: https://github.com/morhetz/gruvbox
-"   molokai: https://github.com/tomasr/molokai
-"   one: https://github.com/rakr/vim-one
-"   iceberg: https://github.com/cocopon/iceberg.vim
-"   base16-default-dark: https://github.com/chriskempson/base16-vim
-"   jellybeans: https://github.com/nanotech/jellybeans.vim
-"   nord: https://github.com/arcticicestudio/nord-vim
-"   tender: https://github.com/jacoborus/tender.vim
-"   papercolor: https://github.com/NLKNguyen/papercolor-theme
-"   ayu: https://github.com/ayu-theme/ayu-vim
-"   onehalf: https://github.com/sonph/onehalf
-"   vadelma: https://github.com/windvalley/vadelma
-"
-" NOTE:
-"   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
-"   2) dracula, molokai, jellybeans, base16-default-dark, nord, tender 主题没有 light 方案.
-"   3) base16-default-dark, rigel 等主题默认没有提供斜体字的特性, 我们可以通过自定义方法提供支持.
-"
-" 颜色主题方案的个性配置 {{
-" NOTE: 这部分配置必须放到 colorscheme theme_name 之后, 否则不起作用.
-
-" 防止还没安装主题插件的时候打开 Vim/Neovim 报错.
+" colorscheme 指令之后执行的主题优化方法.
 if exists('g:colors_name')
-  if (g:bgtransparent == 1)
-    " 使 vim/nvim 背景透明.
-    if (g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
-      hi Normal ctermbg=NONE guibg=NONE
-    endif
+  call BGTransparentAfter()
 
-    if (popup_window_transparent == 1)
-      hi Pmenu ctermbg=NONE guibg=NONE
-    endif
-
-    if !has('nvim')
-      " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
-      " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
-      if (g:colors_name == 'dracula') && (popup_window_transparent == 1)
-        hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
-      endif
-
-      " 去掉颜色主题自带的行号背景色, 值为 1 时表示去掉行号背景色, 默认不启用.
-      " NOTE: nvim 不能设置此条目, 会造成行号颜色变为亮白色, 很不协调.
-      let linenr_bg_color=0
-      if (linenr_bg_color==1)
-        hi LineNr cterm=NONE ctermbg=NONE guibg=NONE guifg=NONE
-      endif
-    endif
-
-    " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
-    " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
-    let linenr_colorscheme_custom=0
-    if (linenr_colorscheme_custom==1)
-      hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
-    endif
-  endif
-
-  " *** rigel ***
   if (g:colors_name == 'rigel')
-    " 定制状态栏的主题颜色.
-    let g:rigel_lightline = 1
-    let g:lightline.colorscheme = 'rigel'
-
-    " 优化非可见字符 nbsp, tab, trail 等的颜色方案:
-    " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
-    " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
-    " 但对于 Neovim, 则是由 Whitespace 高亮组定义的.
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-
-    " 优化 ColorColumn 列的颜色方案.
-    " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
-    hi ColorColumn cterm=NONE ctermbg=black guibg=#00384d
-
-    " 优化光标所在行的颜色方案.
-    hi CursorLine cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
-
-    " 优化光标所在列的颜色方案.
-    hi Cursorcolumn cterm=NONE ctermbg=black ctermfg=NONE guibg=#00384d guifg=NONE
-
-    " 优化光标所在行的行号的颜色方案.
-    hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white guibg=#00384d guifg=#afffff
-
-    call EnableItalic()
-  endif
-
-  " *** dracula ***
-  if (g:colors_name == 'dracula')
-    let g:lightline.colorscheme = 'dracula'
-
-    hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
-
-    " 优化 Vim 的非可见字符的颜色方案.
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
-    " 优化 Neovim 的非可见字符的颜色方案.
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
-  endif
-
-  " *** one ***
-  if (g:colors_name == 'one')
-    let g:lightline.colorscheme = 'one'
-    call EnableItalic()
-  endif
-
-  " *** molokai ***
-  if (g:colors_name == 'molokai')
-    let g:molokai_original = 1
-    let g:rehash256 = 1
-
-    let g:lightline.colorscheme = 'molokai'
-
-    call EnableItalic()
-  endif
-
-  " *** gruvbox ***
-  if (g:colors_name == 'gruvbox')
-    let g:lightline.colorscheme = 'gruvbox'
-    call EnableItalic()
-  endif
-
-  " *** iceberg ***
-  if (g:colors_name == 'iceberg')
-    let g:lightline.colorscheme = 'iceberg'
-    call EnableItalic()
-  endif
-
-  " *** jellybeans ***
-  if (g:colors_name == 'jellybeans')
-    let g:lightline.colorscheme = 'jellybeans'
-
-    hi SpecialKey ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
-
-    hi ColorColumn ctermbg=236 guibg=#303030
-
-    hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
-    hi Cursorcolumn cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
-
-    call EnableItalic()
-  endif
-
-  " *** base16-default-dark ***
-  if (g:colors_name == 'base16-default-dark')
-    let g:lightline.colorscheme = 'apprentice'
-
-    " cterm=NONE 用来去掉默认的粗体显示.
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-
-    call EnableItalic()
-  endif
-
-  " *** nord ***
-  if (g:colors_name == 'nord')
-    let g:lightline.colorscheme = 'nord'
-  
-    " nord 默认提供的斜体字支持不够理想, 使用自定义方法增强.
-    call EnableItalic()
-  endif
-  
-  " *** tender ***
-  if (g:colors_name == 'tender')
-    let g:lightline.colorscheme = 'tender'
-    call EnableItalic()
-  endif
-
-  " *** papercolor ***
-  if (g:colors_name == 'PaperColor')
-    let g:lightline.colorscheme = 'apprentice'
-
-    hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
-
-    " cterm=NONE 用来去掉默认的粗体显示.
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-
-    call EnableItalic()
-  endif
-
-  " *** ayu ***
-  if (g:colors_name == 'ayu')
-    if (ayucolor == 'dark')
-      let g:lightline.colorscheme = 'ayu_dark'
-    elseif (ayucolor == 'mirage')
-      let g:lightline.colorscheme = 'ayu_mirage'
-    else
-      let g:lightline.colorscheme = 'ayu_light'
-    endif
-
-    call EnableItalic()
-  endif
-
-  " *** onehalf ***
-  if (g:colors_name == 'onehalfdark')
-    let g:lightline.colorscheme = 'onehalfdark'
-
-    " 此主题默认弹窗是 light 的, 这里改成 dark.
-    hi Pmenu guibg=#282c34 guifg=#dcdfe4
-
-    " for Vim
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-    " for Neovim
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-
-    call EnableItalic()
-  endif
-
-  if (g:colors_name == 'onehalflight')
-    let g:lightline.colorscheme = 'one'
-
-    " for Vim
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e4e4e4
-
-    call EnableItalic()
-  endif
-
-  " *** vadelma ***
-  if (g:colors_name == 'vadelma')
-    let g:lightline.colorscheme = 'vadelma'
-
-    " for Vim
-    if &background == 'dark'
-      hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-    else
-      hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#dadada
-    endif
-
-    call EnableItalic()
+    call RigelAfter()
+  elseif (g:colors_name == 'dracula')
+    call DraculaAfter()
+  elseif (g:colors_name == 'one')
+    call OneAfter()
+  elseif (g:colors_name == 'molokai')
+    call MolokaiAfter()
+  elseif (g:colors_name == 'gruvbox')
+    call GruvboxAfter()
+  elseif (g:colors_name == 'iceberg')
+    call IcebergAfter()
+  elseif (g:colors_name == 'jellybeans')
+    call JellybeansAfter()
+  elseif (g:colors_name == 'base16-default-dark')
+    call Base16DefaultDarkAfter()
+  elseif (g:colors_name == 'nord')
+    call NordAfter()
+  elseif (g:colors_name == 'tender')
+    call TenderAfter()
+  elseif (g:colors_name == 'PaperColor')
+    call PaperColorAfter()
+  elseif (g:colors_name == 'ayu')
+    " 解决在 AyuAfter 函数内找不到 ayucolor 变量的问题.
+    let g:ayucolor = ayucolor
+    call AyuAfter()
+  elseif (g:colors_name == 'onehalfdark')
+    call OnehalfdarkAfter()
+  elseif (g:colors_name == 'onehalflight')
+    call OnehalflightAfter()
+  elseif (g:colors_name == 'vadelma')
+    call VadelmaAfter()
   endif
 endif
 
-" }}
+" ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
+nnoremap <silent> <leader>b :call ToggleBGColor()<CR>
+
+" ,v  normal 模式下, 在背景透明和不透明之间切换.
+nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
 
 " tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题;
 " 如果不配置这行, 我们将看不到多余的空白字符,
@@ -1539,21 +1710,6 @@ else
   " color: orange
   hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=208 guibg=NONE guifg=#ff8700
 endif
-
-" ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
-nnoremap <silent> <leader>b :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-" ,v  normal 模式下, 在背景透明和不透明之间切换.
-function! ToggleBGTransparent()
-  if g:bgtransparent == 1
-    let &background = &background
-    let g:bgtransparent = 0
-  else
-    hi Normal guibg=NONE ctermbg=NONE
-    let g:bgtransparent = 1
-  endif
-endfunction
-nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
 
 " }}
 
