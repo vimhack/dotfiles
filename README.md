@@ -15,7 +15,7 @@ Go, Python, OpenResty/Lua, Bash and JavaScript programming.
 Requirements:
 
 - [vim 8.2+](https://github.com/vim/vim) or
-  [Neovim 0.4.0+](https://github.com/neovim/neovim)
+  [neovim 0.4.0+](https://github.com/neovim/neovim)
 - [tmux 3.0+](https://github.com/tmux/tmux)
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 - [alacritty](https://github.com/alacritty/alacritty)
@@ -76,16 +76,18 @@ The current theme is 'dracula', and it can be changed to one of the following li
 * ayu
 * ayu_mirage
 * onehalfdark
+* vadelma
 * gruvbox_light
 * one_light
 * iceberg_light
 * papercolor_light
 * ayu_light
 * onehalflight
+* vadelma_light
 
-For example, change theme to 'onehalflight':
+For example, change theme to 'vadelma_light':
 
-$ theme onehalflight
+$ theme vadelma_light
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
