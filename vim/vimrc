@@ -1295,6 +1295,8 @@ function! ToggleBGColor()
     let g:PaperColor_Theme_Options.theme.default.transparent_background = 0
     execute 'colorscheme ' . g:colors_name
     call PaperColorAfter()
+  elseif g:colors_name == 'vadelma'
+    call VadelmaAfter()
   endif
 
   " 重载 lightline 状态栏, 使其颜色随着背景色改变.
@@ -1323,6 +1325,8 @@ function! ToggleBGTransparent()
       call RigelAfter()
     elseif g:colors_name == 'dracula'
       call DraculaAfter()
+    elseif g:colors_name == 'vadelma'
+      call VadelmaAfter()
     elseif g:colors_name == 'molokai'
       call MolokaiBefore()
       execute 'colorscheme ' . g:colors_name
