@@ -150,7 +150,7 @@ if has('nvim')
     " 安装完 vim-plug 插件后, 自动清除下面的 echo 信息.
     set shortmess=aO
 
-    echo "Downloading 'junegunn/vim-plug' to ~/.config/nvim/autoload/ for managing plugins, 
+    echo "Downloading 'junegunn/vim-plug' to ~/.config/nvim/autoload/ for managing plugins,
       \ please wait..."
 
     silent !curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -353,10 +353,10 @@ Plug 'preservim/nerdcommenter'
 " 光标高效跳转插件.
 Plug 'easymotion/vim-easymotion'
 
-" 使用指定符号(比如 ' 等)包围光标所在单词,
-"    `ys2w"`, 表示从光标位置开始的2个单词使用 " 包围;
-"    `ds"`, normal 模式下删除光标周围的双引号 ";
-"    `cs"'`, normal 模式下把光标所在周围的双引号 " 替换为单引号 '.
+" 使用指定符号包围光标所在单词, 比如:
+" ys2w"  表示从光标位置开始的 2 个单词使用双引号包围.
+"   ds"  normal 模式下删除光标周围的双引号.
+"  cs"'  normal 模式下把光标所在周围的双引号替换为单引号.
 Plug 'tpope/vim-surround'
 
 " 多光标批量操作文本对象插件.
@@ -405,7 +405,7 @@ Plug 'vim/killersheep'
 " normal 模式下移动光标所在行, visual 模式下移动选择的行.
 Plug 'matze/vim-move'
 
-" 将代码从多行转换为单行或将单行转行为多行.
+" 将代码从多行转换为单行或将单行转换为多行.
 Plug 'AndrewRadev/splitjoin.vim'
 
 " }}
@@ -766,6 +766,7 @@ let g:ale_fixers = {
   \  'jsonc': ['jq'],
   \  'yaml': ['prettier'],
   \  'markdown': ['prettier'],
+  \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
   \ }
 
 " }}
@@ -1678,6 +1679,7 @@ endif
 nnoremap <silent> <leader>b :call ToggleBGColor()<CR>
 
 " ,v  normal 模式下, 在背景透明和不透明之间切换.
+" NOTE: terminal 需要设置透明度, Vim 才能看到切换效果.
 nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
 
 " tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题;
@@ -2140,6 +2142,14 @@ let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
 " }}
 
+""""""" Vim/Neovim {{
+
+" 缩进大小改为 2 个空格, insert 模式下将 tab 扩展为 2 个空格,
+" 此时, 如果想打印 tab 本身的话, 需要按 ctrl v tab
+au FileType vim setlocal expandtab ts=2 sw=2 sts=2
+
+" }}
+
 " }}
 
 
@@ -2147,16 +2157,6 @@ let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
 " 显示行号.
 set nu
-
-" 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
-set number relativenumber
-
-" 使查看帮助文档的窗口也显示相对行号.
-augroup vim help
-  autocmd!
-  autocmd FileType help setlocal number
-  autocmd FileType help setlocal relativenumber
-augroup END
 
 " 显示当前光标所在的行号和列号.
 set ruler
@@ -2190,14 +2190,18 @@ set showmatch
 " normal 模式下显示输入的 Vim 命令.
 set showcmd
 
-" 一个 tab 显示几个空格长度, 默认是8个空格, 这里改为4个空格.
+" 一个 tab 显示几个空格长度, 默认是 8 个空格, 这里改为 4 个空格.
 set ts=4
 
 " 将 tab 缩进用空格来表示, 提高效率.
 set expandtab
 
-" insert 模式下按退格键的时候退回缩进的长度为4个空格, 默认是退回一个空格.
+" insert 模式下按退格键的时候退回缩进的长度为 4 个空格, 默认是退回一个空格.
 set softtabstop=4
+
+" normal 模式下 shift >> 和 shift << 或
+" visual 模式下 shift > 和 shift < 每次缩进4个空格, 默认是8个空格.
+set shiftwidth=4
 
 " 启用智能缩进, 按回车键后自动缩进,
 " 注意启用此模式后, 粘贴代码时要先 :set paste
@@ -2224,11 +2228,6 @@ set nobackup
 " 出错时不要发出响声.
 set noerrorbells
 
-" command-line 模式下, 操作指令按下 tab 键自动补全:
-" 第1次按下 tab, 会显示所有匹配的操作指令的清单, 第2次按下 tab, 会依次选择各个指令.
-set wildmenu
-set wildmode=longest:list,full
-
 " 打字的时候隐藏鼠标光标.
 set mousehide
 
@@ -2240,11 +2239,8 @@ set autoread
 set virtualedit=onemore
 
 " 当一行字符长度超过多少个字符时, 会自动换行, 注意会加上换行符;
-" 我这里配置这个的目的是解决 .vimrc 的注释内容超过80个字符就自动换行的问题.
+" 我这里配置这个的目的是解决 .vimrc 的注释内容超过 80 个字符就自动换行的问题.
 set textwidth=1000
-
-" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
-autocmd FileType * set colorcolumn=80
 
 " }}
 
@@ -2268,6 +2264,19 @@ let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
+
+" 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
+set number relativenumber
+
+" 使查看帮助文档的窗口也显示相对行号.
+augroup vim help
+  autocmd!
+  autocmd FileType help setlocal number
+  autocmd FileType help setlocal relativenumber
+augroup END
+
+" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
+autocmd FileType * set colorcolumn=80
 
 " visual 模式下选择内容, 然后通过按 ,) 或 ,] 或 ,} 或 ," 或 ,' 或 ,`
 " 将选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
@@ -2298,7 +2307,7 @@ inoremap <Esc>f <S-Right>
 "   ctrl w 向左删除一个单词.
 inoremap <C-d> <Del>
 
-" command-line 模式下使用 emacs 键位, :h emacs-keys 
+" command-line 模式下使用 emacs 键位, :h emacs-keys
 " 光标移动:
 "   ctrl a 移动到行首, ctrl e 移动到行尾;
 "   ctrl b 向左移动一个字符, ctrl f 向右移动一个字符;
@@ -2338,10 +2347,6 @@ noremap <C-y> 3<C-y>
 " normal 模式下, 使用Y复制当前行光标之后的内容, 和C和D用法统一起来.
 nnoremap Y y$
 
-" normal 模式下 shift >> 和 shift << 或
-" visual 模式下 shift > 和 shift < 每次缩进4个空格, 默认是8个空格.
-set shiftwidth=4
-
 " visual 模式下进行 shift > 和 shift < 缩进操作时,
 " 使不退出 visual 模式, 这样可方便执行多行的连续缩进.
 vnoremap < <gv
@@ -2352,6 +2357,11 @@ augroup resCur
   autocmd!
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup END
+
+" command-line 模式下, 操作指令按下 tab 键自动补全:
+" 第 1 次按下 tab, 会显示所有匹配的操作指令的清单, 第 2 次按下 tab, 会依次选择各个指令.
+set wildmenu
+set wildmode=longest:list,full
 
 " insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题, 比如按 backspace 键无反应.
 set backspace=indent,eol,start
@@ -2478,7 +2488,7 @@ endif
 " 不是真正的加换行符的换行.
 "set nowrap
 
-" 保存文件时自动去除行尾空格, 注意已经通过ale配置, 此条注释不再使用.
+" 保存文件时自动去除行尾空格, 注意已经通过 ale 配置, 此条注释不再使用.
 "autocmd BufWritePre *.sh,*.lua,*.js,*.html,*.vue,*.toml,*.yaml,*.yml :%s/\s\+$//e
 
 " 退出 insert 模式时指定类型的文件将自动保存.
