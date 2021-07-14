@@ -127,9 +127,6 @@ set history=1000
 " 默认值: 4000(毫秒)
 set updatetime=100
 
-" 解决使用 vim 在部分情况下从 insert 切换到 normal 时出现卡顿的情况.
-set ttimeoutlen=5
-
 " 打开文件类型检测, 允许插件文件载入, 允许缩进文件载入.
 filetype plugin indent on
 
@@ -941,7 +938,7 @@ let g:XkbSwitchNLayout = 'us'
 " 默认情况下, 从 insert 模式切换到 normal 模式,
 " 输入法从中文切换到英文有一定的延迟, 非常影响体验,
 " 此条指令解决这个问题, 可以将数字改的更小以或得更快的切换体验.
-set ttimeoutlen=25
+set ttimeoutlen=5
 
 """""" machakann/vim-highlightedyank
 " doc: https://github.com/machakann/vim-highlightedyank
@@ -2291,7 +2288,6 @@ vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 " 光标移动:
 "   ctrl p 上, ctrl n 下, ctrl b 左, ctrl f 右;
 "   ctrl a 行首, ctrl e 行尾;
-"   esc b 向左一个单词, esc f 向右一个单词.
 " NOTE: 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
@@ -2299,8 +2295,6 @@ inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
-inoremap <Esc>b <S-Left>
-inoremap <Esc>f <S-Right>
 " 编辑动作:
 "   ctrl d 向右删除一个字符.
 "   ctrl h 向左删除一个字符.
@@ -2311,13 +2305,10 @@ inoremap <C-d> <Del>
 " 光标移动:
 "   ctrl a 移动到行首, ctrl e 移动到行尾;
 "   ctrl b 向左移动一个字符, ctrl f 向右移动一个字符;
-"   esc b 向左移动一个单词, esc f 向右移动一个单词.
 cnoremap <C-a>  <Home>
 cnoremap <C-e>  <End>
 cnoremap <C-b>  <Left>
 cnoremap <C-f>  <Right>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
 " 编辑动作:
 "   ctrl d 删除光标右侧字符;
 "   ctrl h 删除光标左侧字符;
@@ -3047,6 +3038,11 @@ endif
 "      let g:go_fmt_options = {
 "        \  'golines': '-m 120',
 "        \  }
+"
+"   3. 不要拿 <Esc> 键做快捷键映射, 会拖慢从 insert 模式切换到 normal 模式的速度,
+"      查看 insert 模式下当前有哪些和 <Esc> 有关的映射 :verbose imap <Esc>, 结果如下:
+"      inoremap <Esc>b <S-Left>
+"      inoremap <Esc>f <S-Right>
 "
 " }}
 
