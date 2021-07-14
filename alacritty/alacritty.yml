@@ -935,6 +935,7 @@ mouse:
 # 使用技巧 {{
 
 # *** 快捷键 ***
+#
 #             ctrl l  清除状态栏上的 alacritty 发出的警告信息.
 #      command +/-/0  放大或缩小或重置字体大小.
 #          command h  隐藏当前终端.
@@ -945,13 +946,13 @@ mouse:
 #        command f/b  向前或向后搜索.
 #   command option h  用来隐藏除了当前 alacritty 窗口外的其他所有系统窗口.
 #                     NOTE: alacritty 0.8.0 版本增加的此快捷键.
-#
+
 # *** 注意事项 ***
+#
 #   1. vim 的 insert 模式下, 如果当前是拼音输入法, 快速的按 esc 是无法正常切换到 normal 模式的,
 #      按 esc 键要稍微停顿一下才可以, 或者连续按两次 esc,  或者直接按 ctrl [ 来代替 esc 键.
 #      NOTE: 经过测试, 这个问题是 alacritty 的问题, 和是否使用 tmux 无关.
-#      FIXME: iterm2 无此问题. 建议在此问题没解决之前, 在 insert 模式下先将输入法切换成英文,
-#             再按 esc 切换到 normal 模式.
+#      FIXME: iterm2 无此问题. 建议在此问题没解决之前, 使用 ctrl [ 代替 esc 键.
 #
 
 # }}
