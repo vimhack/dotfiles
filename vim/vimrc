@@ -2147,6 +2147,12 @@ au FileType vim setlocal expandtab ts=2 sw=2 sts=2
 
 " }}
 
+""""""" Yaml {{
+
+au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
+
+" }}
+
 " }}
 
 
