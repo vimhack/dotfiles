@@ -2165,6 +2165,9 @@ au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 " 显示行号.
 set nu
 
+" 显示相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
+set relativenumber
+
 " 显示当前光标所在的行号和列号.
 set ruler
 
@@ -2187,9 +2190,6 @@ set cursorline
 
 " 突出显示当前列.
 set cursorcolumn
-
-" 一行内容超过终端宽度时是否折行, 默认就是折行.
-set wrap
 
 " 显示括号匹配.
 set showmatch
@@ -2238,30 +2238,41 @@ set noerrorbells
 " 打字的时候隐藏鼠标光标.
 set mousehide
 
-" 打开文件监视, 在修改内容后保存文件, 如果文件已经被其他 Vim 实例打开, 则会进行提示,
-" 如果忽略提示强制进行保存, 则其他 Vim 实例打开的此文件也会同步变更.
+" 在修改内容后保存文件, 如果文件同时已经被其他 Vim 实例打开,
+" 则其他 Vim 实例打开的此文件也会自动同步变更.
 set autoread
+au FocusGained,BufEnter * checktime
 
 " normal 模式下允许光标移动到最后一个字符的右边.
 set virtualedit=onemore
 
-" 当一行字符长度超过多少个字符时, 会自动换行, 注意会加上换行符;
-" 我这里配置这个的目的是解决 .vimrc 的注释内容超过 80 个字符就自动换行的问题.
-set textwidth=1000
+" 一行内容超过终端宽度时进行折行显示.
+set wrap
+
+" 当一行字符长度超过多少个字符时, 会自动折行显示, 注意会加上换行符.
+set lbr
+set textwidth=500
+
+" 基于性能考虑, 执行宏命令的时候不进行 redraw 动作.
+set lazyredraw
 
 " }}
 
 
 " 自定义配置 {{
 
-" ,E  上下分屏方式打开 vim 或 nvim 的配置文件;
-" ,R  变更配置文件后不需要退出, 直接使用此命令进行 reload 生效.
+" ,E  打开 vim 或 nvim 的配置文件.
 if has('nvim')
-  noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
+  noremap <silent> <leader>E :e! ~/.config/nvim/init.vim<CR>
+else
+  noremap <silent> <leader>E :e! ~/.vimrc<CR>
+endif
+
+" ,R  变更配置文件后不需要退出再打开文件, 直接使用此命令进行 reload 生效.
+if has('nvim')
   noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>
     \ :exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
 else
-  noremap <silent> <leader>E :sp ~/.vimrc<CR>
   noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>
     \ :exe ":echo '~/.vimrc reloaded'"<CR>
 endif
@@ -2271,9 +2282,6 @@ let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-
-" 设置相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
-set number relativenumber
 
 " 使查看帮助文档的窗口也显示相对行号.
 augroup vim help
@@ -2363,6 +2371,14 @@ augroup END
 " 第 1 次按下 tab, 会显示所有匹配的操作指令的清单, 第 2 次按下 tab, 会依次选择各个指令.
 set wildmenu
 set wildmode=longest:list,full
+
+" 忽略无用的编译类等文件.
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+  set wildignore+=.git\*,.hg\*,.svn\*
+else
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
 
 " insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题, 比如按 backspace 键无反应.
 set backspace=indent,eol,start
@@ -2765,6 +2781,7 @@ endif
 "                 q/  normal 模式下, 按快捷键 q/ 将会打开命令行窗口并显示向下搜索的历史记录.
 "                 q?  normal 模式下, 按快捷键 q? 将会打开命令行窗口并显示向上搜索的历史记录.
 "                 z=  当你拼写一个不熟悉的英文单词时, 可以使用此快捷键给出建议列表.
+"                     NOTE: 需要打开英文拼写检查.
 "               "ayy  将当前行拷贝到寄存器 a, a 也可以是其他字符, yy 动作也可以是其他拷贝动作.
 "                "ap  将寄存器 a 中的内容粘贴到光标所在处, 我们可以拷贝不同内容到不同的寄存器,
 "                     粘贴时分别选择相应的寄存器的内容进行粘贴.
