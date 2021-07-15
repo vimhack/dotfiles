@@ -53,16 +53,13 @@ live_config_reload: true
 
 # 打开 alacritty 终端时自动进入 tmux 终端.
 shell:
-  program: /usr/local/bin/tmux
+  program: /bin/zsh
   args:
-    # force UTF-8 in tmux
-    - -u
+    - -c
     # NOTE: 每次打开 alacritty, 都进入到名为 dotfiles 的 session,
-    # 如果该 session 不存在则自动创建, 如果存在则直接复用,
-    # 目的是避免每次重新启动 alacritty 都创建新的 tmux session.
-    - new
-    - -t
-    - dotfiles
+    # 如果该 session 不存在则自动创建(并自动新建3个window), 如果存在则直接复用,
+    # 目的是避免每次重新启动 alacritty 都创建新的 tmux session 导致 session 过多.
+    - "/usr/local/bin/tmux attach -t dotfiles || /usr/local/bin/tmux new -s dotfiles -n 'vim' ';' splitw -h ';' neww -n 'tmux' ';' splitw -h ';' neww -n 'alacritty' ';' splitw -h"
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
