@@ -336,20 +336,19 @@ vim-bgtransparent() {
         current_value=$(awk -F= '/^let g:bgtransparent=/{print $2}' $vim_transparent_file 2>/dev/null)
 
         [[ "$current_value" = 1 ]] && {
-            echo "Vim background transparent was enabled, to disable:
-
+            echo "Vim background transparency is currently enabled, to disable:
 $ vim-bgtransparent 0"
             return
         }
 
         [[ "$current_value" = 0 ]] && {
-            echo "Vim background transparent was disabled, to enable:
+            echo "Vim background transparency is currently disabled, to enable:
 
 $ vim-bgtransparent 1"
             return
         }
 
-    echo "value of 'bgtransparent' is default(0 or 1), to enable:
+    echo "Vim background transparency is in default value(0 or 1), to enable:
 
 $ vim-bgtransparent 1
 
