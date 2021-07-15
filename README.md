@@ -18,7 +18,7 @@ Requirements:
   [neovim 0.4.0+](https://github.com/neovim/neovim)
 - [tmux 3.0+](https://github.com/tmux/tmux)
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-- [alacritty](https://github.com/alacritty/alacritty)
+- [alacritty 0.8.0+](https://github.com/alacritty/alacritty)
 
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
@@ -88,6 +88,10 @@ The current theme is 'dracula', and it can be changed to one of the following li
 For example, change theme to 'vadelma_light':
 
 $ theme vadelma_light
+
+or
+
+$ t vadelma_light
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
@@ -101,6 +105,10 @@ Current font size is '12.0', you can change by:
 
 $ font number
 
+or
+
+$ f number
+
 * number should between 1.0 and  200.0
 ```
 
@@ -113,28 +121,67 @@ Current opacity is '0.9', you can change by:
 
 $ opacity number
 
+or
+
+$ o number
+
 * number should between 0.0 and 1.0
 ```
 
-**Toggle Vim/Neovim transparent background color:**
+**Toggle Vim/Neovim background transparency in terminal command line:**
 
 ```text
 vim-bgtransparent
 
-Vim background transparent was enabled, to disable:
+Vim background transparency is currently enabled, to disable:
 
 $ vim-bgtransparent 0
+
+or
+
+$ v 0
 ```
 
-**Print 256 colors in terminal:**
+**Toggle Vim/Neovim background color(light or dark) in Vim Normal Mode:**
 
 ```text
-colors_print
-
-rgb
+,b
 ```
 
-💡 Almost every dotfile has usage tips at the end of it for reference.
+💡 Support colorschemes:
+
+- `gruvbox`
+- `gruvbox_light`
+- `iceberg`
+- `iceberg_light`
+- `one`
+- `one_light`
+- `papercolor`
+- `papercolor_light`
+- `vadelma`
+- `vadelma_light`
+- `onehalfdark`
+- `onehalflight`
+
+**Toggle Vim/Neovim background transparency in Vim Normal Mode:**
+
+```text
+,v
+```
+
+💡 Opacity of Alacritty(terminal) should be less than 1.
+
+**Print 256 colors on terminal:**
+
+```text
+$ c
+
+$ rgb
+```
+
+**NOTE:**
+
+_Almost every dotfile has usage tips at the end of it for reference._
 
 ## 🔮 Show
 
