@@ -1518,8 +1518,8 @@ function! RigelAfter()
   " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
   " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
   " 但对于 Neovim, 则是由 Whitespace 高亮组定义的.
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
 
   " 优化 ColorColumn 列的颜色方案.
   " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
