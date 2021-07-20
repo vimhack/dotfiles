@@ -728,12 +728,19 @@ let g:ale_linters = {
 
 " 使用 try 的方式捕获并忽略错误, 来实现消除第一次使用此配置文件时的没用报错信息.
 try
+  " golangci-lint 配置:
   " 覆盖掉 ~/.vim/plugged/ale/ale_linters/go/golangci_lint.vim 中的个别默认配置;
   " golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
   call ale#Set('go_golangci_lint_options', '')
   " golangci-lint run 命令以包为单位进行检查,
   " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
   call ale#Set('go_golangci_lint_package', 1)
+
+  " yamllint 配置:
+  " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
+  call ale#Set('yaml_yamllint_options', '-d "{extends: relaxed, rules: {
+    \ line-length: {max: 200},
+    \ }}"')
 catch /Unknown function: ale#Set/
 endtry
 
