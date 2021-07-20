@@ -1267,7 +1267,7 @@ endfunction
 
 " 在背景是 dark 和 light 之间切换的方法.
 function! ToggleBGColor()
-  " 对于不支持切换背景色的 colorschemes 直接忽略.
+  " 对于不支持切换背景色的 colorschemes, 给出提示信息.
   if g:colors_name == 'ayu' ||
     \ g:colors_name == 'dracula' ||
     \ g:colors_name == 'jellybeans' ||
@@ -1276,10 +1276,12 @@ function! ToggleBGColor()
     \ g:colors_name == 'tender' ||
     \ g:colors_name == 'nord' ||
     \ g:colors_name == 'base16-default-dark'
+
+    echo g:colors_name . " has no light colorscheme"
     return
   endif
 
-  " onehalfdark 和 onehalflight 不使用 background 选项来控制背景色, 需要单独配置.
+  " 由于 onehalfdark 和 onehalflight 不使用 background 选项来控制背景色, 故需单独配置.
   if g:colors_name == 'onehalfdark'
     colorscheme onehalflight
     call OnehalflightAfter()
