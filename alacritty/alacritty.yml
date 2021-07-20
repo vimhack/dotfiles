@@ -5,9 +5,9 @@
 #
 # NOTE:
 #   1. 查看折叠内容的方法:
-#      za: normal 模式下按`za`, 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
-#          在打开的折叠内部任意处按`za`, 也会关闭折叠.
-#      zA: 是`za`的递归操作, 是针对嵌套折叠的场景.
+#      za: normal 模式下按 za, 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
+#          在打开的折叠内部任意处按 za, 也会关闭折叠.
+#      zA: 是 za 的递归操作, 是针对嵌套折叠的场景.
 #
 #   2. Alacritty 官方原始配置文件:
 #      https://raw.githubusercontent.com/alacritty/alacritty/master/alacritty.yml
@@ -59,7 +59,10 @@ shell:
     # NOTE: 每次打开 alacritty, 都进入到名为 dotfiles 的 session,
     # 如果该 session 不存在则自动创建(并自动新建3个window), 如果存在则直接复用,
     # 目的是避免每次重新启动 alacritty 都创建新的 tmux session 导致 session 过多.
-    - "/usr/local/bin/tmux attach -t dotfiles || /usr/local/bin/tmux new -s dotfiles -n 'vim' ';' splitw -h ';' neww -n 'tmux' ';' splitw -h ';' neww -n 'alacritty' ';' splitw -h"
+    - /usr/local/bin/tmux attach -t dotfiles ||
+      /usr/local/bin/tmux new -s dotfiles -n 'vim' ';' splitw -h ';'
+      neww -n 'tmux' ';' splitw -h ';'
+      neww -n 'alacritty' ';' splitw -h
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -107,30 +110,6 @@ debug:
 
 # doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
 schemes:
-  # Colors (Tender)
-  tender: &tender
-    primary:
-      background: "#282828"
-      foreground: "#eeeeee"
-    normal:
-      black: "#282828"
-      red: "#f43753"
-      green: "#c9d05c"
-      yellow: "#ffc24b"
-      blue: "#b3deef"
-      magenta: "#d3b987"
-      cyan: "#73cef4"
-      white: "#eeeeee"
-    bright:
-      black: "#4c4c4c"
-      red: "#f43753"
-      green: "#c9d05c"
-      yellow: "#ffc24b"
-      blue: "#b3deef"
-      magenta: "#d3b987"
-      cyan: "#73cef4"
-      white: "#feffff"
-
   # Default colors (Tomorrow Night)
   base16-default-dark: &base16-default-dark
     primary:
@@ -196,7 +175,30 @@ schemes:
       white: "#828482"
     indexed_colors: []
 
-  # Colors (rigel - https://github.com/Rigellute/rigel)
+  tender: &tender
+    primary:
+      background: "#282828"
+      foreground: "#eeeeee"
+    normal:
+      black: "#282828"
+      red: "#f43753"
+      green: "#c9d05c"
+      yellow: "#ffc24b"
+      blue: "#b3deef"
+      magenta: "#d3b987"
+      cyan: "#73cef4"
+      white: "#eeeeee"
+    bright:
+      black: "#4c4c4c"
+      red: "#f43753"
+      green: "#c9d05c"
+      yellow: "#ffc24b"
+      blue: "#b3deef"
+      magenta: "#d3b987"
+      cyan: "#73cef4"
+      white: "#feffff"
+
+  # https://github.com/Rigellute/rigel
   rigel: &rigel
     primary:
       background: "0x002635"
@@ -223,7 +225,6 @@ schemes:
       text: "0x002635"
       cursor: "0xffcc1b"
 
-  # Colors (Dracula)
   dracula: &dracula
     primary:
       background: "#282a36"
@@ -247,7 +248,6 @@ schemes:
       cyan: "#9aedfe"
       white: "#e6e6e6"
 
-  # Colors (Molokai)
   molokai: &molokai
     primary:
       background: "#1B1D1E"
@@ -271,7 +271,6 @@ schemes:
       cyan: "#66D9EF"
       white: "#F8F8F2"
 
-  # Colors (Jellybeans)
   jellybeans: &jellybeans
     primary:
       background: "#161616"
@@ -301,7 +300,6 @@ schemes:
       text: "#5963a2"
       background: "#f6f6f6"
 
-  # Colors (Nord)
   nord: &nord
     primary:
       background: "#2E3440"
@@ -325,12 +323,11 @@ schemes:
       cyan: "#8FBCBB"
       white: "#ECEFF4"
 
-  # Colors (Gruvbox light)
   gruvbox_light: &gruvbox_light
     primary:
       # hard contrast: background = '#f9f5d7'
-      background: "#fbf1c7"
       # soft contrast: background = '#f2e5bc'
+      background: "#fbf1c7"
       foreground: "#3c3836"
     normal:
       black: "#fbf1c7"
@@ -351,12 +348,11 @@ schemes:
       cyan: "#427b58"
       white: "#3c3836"
 
-  # Colors (Gruvbox dark)
   gruvbox_dark: &gruvbox
     primary:
       # hard contrast background - '#1d2021'
-      background: &gruvbox_dark_bg "#282828"
       # soft contrast background - '#32302f'
+      background: &gruvbox_dark_bg "#282828"
       foreground: "#fbf1c7"
       bright_foreground: "#f9f5d7"
       dim_foreground: "#f2e5bc"
@@ -366,19 +362,19 @@ schemes:
     vi_mode_cursor:
       text: CellBackground
       cursor: CellForeground
-    # search:
-    #   matches:
-    #     foreground: '#000000'
-    #     background: '#ffffff'
-    #   focused_match:
-    #    foreground: CellBackground
-    #    background: CellForeground
-    #   bar:
-    #     background: ''
-    #     foreground: ''
-    # line_indicator:
-    #   foreground: None
-    #   background: None
+      search:
+        matches:
+          foreground: "#000000"
+          background: "#ffffff"
+        focused_match:
+          foreground: CellBackground
+          background: CellForeground
+        bar:
+          background: ""
+          foreground: ""
+      line_indicator:
+        foreground: None
+        background: None
     selection:
       text: CellBackground
       background: CellForeground
@@ -409,9 +405,9 @@ schemes:
       magenta: "#8f3f71"
       cyan: "#427b58"
       white: "#928374"
-    # indexed_colors: []
+      indexed_colors: []
 
-  # Colors (One Light - https://github.com/atom/atom/tree/master/packages/one-light-syntax)
+  # https://github.com/atom/atom/tree/master/packages/one-light-syntax
   one_light: &one_light
     primary:
       background: "#fafafa"
@@ -432,7 +428,7 @@ schemes:
       cyan: "#0184bc"
       white: "#a0a1a7"
 
-  # Colors (One Dark - https://github.com/atom/atom/tree/master/packages/one-dark-syntax)
+  # https://github.com/atom/atom/tree/master/packages/one-dark-syntax
   one_dark: &one
     primary:
       background: "#282c34"
@@ -453,7 +449,6 @@ schemes:
       cyan: "#56b6c2"
       white: "#828997"
 
-  # Colors (Iceberg Dark)
   iceberg_dark: &iceberg
     primary:
       background: "#161821"
@@ -477,7 +472,6 @@ schemes:
       cyan: "#95c4ce"
       white: "#d2d4de"
 
-  # Colors (Iceberg Light)
   iceberg_light: &iceberg_light
     primary:
       background: "#e8e9ec"
@@ -501,7 +495,7 @@ schemes:
       cyan: "#327698"
       white: "#262a3f"
 
-  # Colors (PaperColor_Light - https://github.com/eendroroy/alacritty-theme/blob/master/themes/papercolor_light.yaml)
+  # https://github.com/eendroroy/alacritty-theme/blob/master/themes/papercolor_light.yaml
   papercolor_light: &papercolor_light
     primary:
       background: &papercolor_light_bg "0xeeeeee"
@@ -554,7 +548,6 @@ schemes:
       cyan: "#00afaf"
       white: "#5f8787"
 
-  # Colors (ayu_light)
   ayu_light: &ayu_light
     primary:
       background: "#fafafa"
@@ -581,7 +574,6 @@ schemes:
       cyan: "#00af87"
       white: "#ffffff"
 
-  # Colors (Ayu Dark)
   ayu: &ayu
     primary:
       background: "#0A0E14"
@@ -605,7 +597,6 @@ schemes:
       cyan: "#95E6CB"
       white: "#FFFFFF"
 
-  # Colors (Ayu Mirage)
   ayu_mirage: &ayu_mirage
     primary:
       background: "#202734"
@@ -629,7 +620,7 @@ schemes:
       cyan: "#95E6CB"
       white: "#FFFFFF"
 
-  # Colors (One Half Light - https://github.com/sonph/onehalf/tree/master/alacritty)
+  # https://github.com/sonph/onehalf/tree/master/alacritty
   onehalflight: &onehalflight
     primary:
       background: "0xfafafa"
@@ -653,7 +644,6 @@ schemes:
       cyan: "0x0997b3"
       white: "0xfafafa"
 
-  # Colors (One Half Dark)
   onehalfdark: &onehalfdark
     primary:
       background: "0x282c34"
