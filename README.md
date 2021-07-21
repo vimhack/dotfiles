@@ -30,7 +30,7 @@ git clone https://github.com/windvalley/dotfiles.git ~/.dotfiles
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
 
-# nvim
+# neovim
 mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
@@ -56,7 +56,7 @@ git pull
 
 ## 📜 Tips
 
-**Change colorscheme of Vim/Neovim and Alacritty:**
+**Change colorscheme of Vim/Neovim and Alacritty in terminal command line:**
 
 ```text
 theme
@@ -96,7 +96,15 @@ $ t vadelma_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-**Change font size of Alacritty:**
+**Change colorscheme of Vim/Neovim and Alacritty randomly with hot key:**
+
+```text
+ctrl a v
+```
+
+💡 `ctrl a` is the tmux prefix key.
+
+**Change font size of Alacritty in terminal command line:**
 
 ```text
 font
@@ -112,7 +120,7 @@ $ f number
 * number should between 1.0 and  200.0
 ```
 
-**Change opacity of Alacritty:**
+**Change opacity of Alacritty in terminal command line:**
 
 ```text
 opacity
@@ -171,7 +179,7 @@ $ v 0
 
 💡 Opacity of Alacritty(terminal) should be less than 1.
 
-**Print 256 colors on terminal:**
+**Print 256 colors in terminal command line:**
 
 ```text
 $ c
