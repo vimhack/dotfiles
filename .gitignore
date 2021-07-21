@@ -1,3 +1,4 @@
 *.sw*
 .DS_Store
 TODO.md
+.opacity.alacritty.last
