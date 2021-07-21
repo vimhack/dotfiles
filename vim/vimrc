@@ -738,9 +738,12 @@ try
 
   " yamllint 配置:
   " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
-  call ale#Set('yaml_yamllint_options', '-d "{extends: relaxed, rules: {
-    \ line-length: {max: 200},
-    \ }}"')
+  call ale#Set('yaml_yamllint_options', '-d "{
+    \ extends: relaxed,
+    \ rules: {
+    \   line-length: {max: 200},
+    \ },
+    \ }"')
 catch /Unknown function: ale#Set/
 endtry
 
