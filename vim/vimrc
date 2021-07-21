@@ -1233,6 +1233,34 @@ function! EnableItalic()
   hi markdownItalic cterm=italic gui=italic
 endfunction
 
+" 设置提示列的颜色方案, 去掉默认的背景色,
+" 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
+" coc-git 扩展的文件变化信息也会出现在此列.
+function! SignColumnHi()
+  hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+endfunction
+
+" 优化 ale 错误提示标识的颜色方案.
+function! ALESignHi()
+  if &background == 'dark'
+    hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=DarkRed guibg=NONE guifg=DarkRed
+    hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
+  else
+    hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
+    hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=208 guibg=NONE guifg=#ff8700
+  endif
+endfunction
+
+" 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
+" NOTE: 必须放在颜色主题设置的后面才有效果.
+function! GitSignHi()
+  hi GitAddSign    guifg=SeaGreen ctermfg=2
+  hi GitChangeSign guifg=DarkYellow ctermfg=3
+  hi GitDeleteSign guifg=DarkRed ctermfg=1
+  hi GitTopDeleteSign guifg=Red ctermfg=1*
+  hi GitChangeDeleteSign guifg=LightRed ctermfg=1*
+endfunction
+
 " 重新加载 lightline 状态栏的方法.
 " FIXME:
 "   1) onehalfdark 和 onehalflight 之间切换无法切换 lightline 颜色.
@@ -1362,6 +1390,7 @@ function! ToggleBGTransparent()
       call PaperColorBefore()
       execute 'colorscheme ' . g:colors_name
       call PaperColorAfter()
+      call SignColumnHi()
     endif
   endif
 endfunction
@@ -1688,40 +1717,21 @@ if exists('g:colors_name')
   endif
 endif
 
+" 设置提示列的颜色方案.
+call SignColumnHi()
+
+" 优化 ale 错误提示标识的颜色方案.
+call ALESignHi()
+
+" 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
+call GitSignHi()
+
 " ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 nnoremap <silent> <leader>b :call ToggleBGColor()<CR>
 
 " ,v  normal 模式下, 在背景透明和不透明之间切换.
 " NOTE: terminal 需要设置透明度, Vim 才能看到切换效果.
 nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
-
-" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题;
-" 如果不配置这行, 我们将看不到多余的空白字符,
-" 对于 Go 类型文件来说, 也无法直观确认缩进是否是 tab 了.
-set list listchars=tab:>-,trail:-
-
-" 设置提示列的颜色方案, 去掉默认的背景色;
-" 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
-" coc-git 扩展的文件变化信息也会出现在此列.
-hi SignColumn cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
-
-" 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
-" NOTE: 必须放在颜色主题设置的后面才有效果.
-hi GitAddSign    guifg=SeaGreen ctermfg=2
-hi GitChangeSign guifg=DarkYellow ctermfg=3
-hi GitDeleteSign guifg=DarkRed ctermfg=1
-hi GitTopDeleteSign guifg=Red ctermfg=1*
-hi GitChangeDeleteSign guifg=LightRed ctermfg=1*
-
-" 优化 ale 错误提示标识的颜色方案.
-if &background == 'dark'
-  hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=DarkRed guibg=NONE guifg=DarkRed
-  hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
-else
-  hi ALEErrorSign cterm=NONE ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
-  " color: orange
-  hi ALEWarningSign cterm=NONE ctermbg=NONE ctermfg=208 guibg=NONE guifg=#ff8700
-endif
 
 " }}
 
@@ -2304,6 +2314,11 @@ augroup END
 
 " 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
 autocmd FileType * set colorcolumn=80
+
+" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题,
+" 如果不配置这行, 我们将看不到多余的空白字符,
+" 对于 Go 类型文件来说, 也无法直观确认缩进是否是 tab 了.
+set list listchars=tab:>-,trail:-
 
 " visual 模式下选择内容, 然后通过按 ,) 或 ,] 或 ,} 或 ," 或 ,' 或 ,`
 " 将选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
