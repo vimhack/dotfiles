@@ -656,7 +656,7 @@ let g:ale_set_loclist = 0
 
 " 如果 location list 不为空, 是否打开一个独立的窗口显示其信息, 默认值: 0
 let g:ale_open_list = 0
-" 错误信息窗口的高度, 在 g:ale_open_list 设置为1时才有效果, 默认值: 10
+" 错误信息窗口的高度, 在 g:ale_open_list 设置为 1 时才有效果, 默认值: 10
 let g:ale_list_window_size = 5
 
 " 错误或警告信息全部修复后, 是否保留错误信息窗口, 1 表示保留, 默认值: 0
@@ -698,7 +698,7 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 "
 "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
 "      我们这里使用 standard 风格: eslint --init
-"      或 vue create project-demo(需要选择手动配置, 选择standard风格),
+"      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
 "      将配置生成到 package.json 的 eslintConfig 字段.
 "
 "   4) prettier 配置文件, 项目根目录下的 .prettierrc.json:
@@ -707,7 +707,7 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 "        "semi": false
 "      }
 "
-"   5) 对于Python项目, 如果使用虚拟环境, 需要在虚拟环境下安装相关 linter 工具,
+"   5) 对于 Python 项目, 如果使用虚拟环境, 需要在虚拟环境下安装相关 linter 工具,
 "      拿 Python 的依赖管理工具 poetry 举例:
 "      poetry init
 "      poetry shell
@@ -723,29 +723,29 @@ let g:ale_linters = {
   \  'yaml': ['yamllint'],
   \  'json': ['jq', 'jsonlint'],
   \  'jsonc': ['jq', 'jsonlint'],
-  \  'markdown': ['mdl', 'markdownlint', 'proselint', 'alex'],
+  \  'markdown': ['markdownlint'],
   \ }
 
-" 使用 try 的方式捕获并忽略错误, 来实现消除第一次使用此配置文件时的没用报错信息.
-try
-  " golangci-lint 配置:
-  " 覆盖掉 ~/.vim/plugged/ale/ale_linters/go/golangci_lint.vim 中的个别默认配置;
-  " golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
-  call ale#Set('go_golangci_lint_options', '')
-  " golangci-lint run 命令以包为单位进行检查,
-  " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
-  call ale#Set('go_golangci_lint_package', 1)
+" golangci-lint 配置:
+" 指定可执行文件的具体名称.
+let g:ale_go_golangci_lint_executable = 'golangci-lint'
+" golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
+let g:ale_go_golangci_lint_options = ''
+" golangci-lint run 命令以包为单位进行检查,
+" 解决默认以文件方式检查时的 typecheck 错误误报的问题.
+let g:ale_go_golangci_lint_package = 1
 
-  " yamllint 配置:
-  " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
-  call ale#Set('yaml_yamllint_options', '-d "{
-    \ extends: relaxed,
-    \ rules: {
-    \   line-length: {max: 200},
-    \ },
-    \ }"')
-catch /Unknown function: ale#Set/
-endtry
+" yamllint 配置:
+" doc: https://yamllint.readthedocs.io/en/stable/configuration.html
+" 指定可执行文件的具体名称.
+let g:ale_yaml_yamllint_executable = 'yamllint'
+" 配置参数.
+let g:ale_yaml_yamllint_options = '-d "{
+  \ extends: relaxed,
+  \ rules: {
+  \   line-length: {max: 200},
+  \ },
+  \ }"'
 
 " 针对不同语言的自动修复功能.
 "    需要安装相关的命令行工具:
