@@ -6,8 +6,8 @@
 #
 # NOTE:
 #   查看折叠内容的方法:
-#      za: normal 模式下按 za , 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
-#          在打开的折叠内部任意处按 za , 也会关闭折叠.
+#      za: normal 模式下按 za, 表示当光标在关闭折叠上时打开之, 在打开折叠上时关闭之;
+#          在打开的折叠内部任意处按 za, 也会关闭折叠.
 #      zA: 是 za 的递归操作, 是针对嵌套折叠的场景.
 
 
@@ -58,7 +58,19 @@ ZSH_THEME="ys"
 # extract:  ~/.oh-my-zsh/plugins/extract/README.md
 # web-search: ~/.oh-my-zsh/plugins/web-search/README.md
 # emoji: ~/.oh-my-zsh/plugins/emoji/README.md
-plugins=(vi-mode tmux git z history brew extract web-search emoji zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+    vi-mode
+    tmux
+    git
+    z
+    history
+    brew
+    extract
+    web-search
+    emoji
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,7 +80,7 @@ export LANG=en_US.UTF-8
 # 专门用来解决 ranger.vim 乱码的问题.
 export LC_ALL=en_US.UTF-8
 
-# 默认的编辑器, git、crontab等会默认使用.
+# 默认的编辑器, git、crontab 等会默认使用.
 export EDITOR=nvim
 
 # }}
@@ -107,66 +119,72 @@ gsed -i '/^#Host github.com/{s/^#//;n;s/^#//}' ~/.ssh/config"
 #   brew install protoc-gen-go
 
 GOPATH=$HOME/go
+
 GOBIN=$GOPATH/bin
 
-# on  开启 Go Modules 特性, 使 Go 编译器忽略 $GOPATH 和 vender 文件夹, 只根据 go.mod 下载依赖;
-# off  关闭 Go Modules 特性, 使 Go 编译器依旧在 $GOPATH 和 vender 文件夹来查找依赖;
-# auto  当源码在 $GOPATH/src 目录下, 并且项目目录下没有 go.mod 文件时, 关闭 Go Modules 特性, 其他情况下均开启.
-# Go 1.14+ 版本后 auto 为默认值.
+# 可选值:
+#     on  开启 Go Modules 特性, 使 Go 编译器忽略 $GOPATH 和 vender 文件夹, 只根据 go.mod 下载依赖;
+#    off  关闭 Go Modules 特性, 使 Go 编译器依旧在 $GOPATH 和 vender 文件夹来查找依赖;
+#   auto  当源码在 $GOPATH/src 目录下, 并且项目目录下没有 go.mod 文件时,
+#         关闭 Go Modules 特性, 其他情况下均开启.
+# NOTE: Go 1.14+ 版本后 auto 为默认值.
 GO111MODULE=auto
+
 # 下载 Go 包的代理服务器, direct 的作用是当代理服务器上没有要下载的包, 则直接从原始地址下载.
 GOPROXY=https://goproxy.cn,direct
+
 # 下载 Go 包时, 如果包地址是这里配置的地址, 则不走设置的代理服务器, 直接从这里配置的地址下载;
 # 一般这里配置公司内部配置的私有 Go 包仓库;
 # Go 1.13+ 开始支持.
 GOPRIVATE=
-# 默认值: sum.golang.org, 是一个 Web 服务器, 用来查询依赖包指定版本的哈希值, 确保拉取到的 Go 包未经过篡改;
-# 如果不需要校验, 则设置为 off.
+
+# 默认值: sum.golang.org, 是一个 Web 服务器, 用来查询依赖包指定版本的哈希值,
+# 确保拉取到的 Go 包未经过篡改, 如果不需要校验, 则设置为 off.
 GOSUMDB=sum.golang.org
 
 PATH="$GOBIN:$PATH"
 
 export GOPATH GOBIN GOPROXY GOPRIVATE GOSUMDB PATH
 
-# gf 框架命令行工具(https://github.com/gogf/gf)
-alias gf=gf
-# ****************
-
 # ****** Python3 ******
-ln -sf /usr/local/opt/python3/bin/python3 /usr/local/opt/python3/bin/python
+# brew install python3
+# brew install poetry
 
+# python
 export PATH="/usr/local/opt/python3/bin:$PATH"
-
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
-# *********************
 
 # ****** Lua ******
+# brew install lua@5.3
+
 # lua 指定使用 5.3 版本.
-ln -sf /usr/local/Cellar/lua/5.3.5_1/bin/lua /usr/local/bin/lua
+ln -sf /usr/local/Cellar/lua@5.3/5.3.6/bin/lua /usr/local/bin/lua &>/dev/null
 
 # luarocks 指定使用 lua 的 5.3 版本.
 alias luarocks="luarocks  --lua-dir=/usr/local/opt/lua@5.3"
 
 export PATH=$HOME/.luarocks/bin:$PATH
-# *****************
 
 # ****** node ******
+# brew install node@14
+
 export PATH="/usr/local/opt/node@14/bin:$PATH"
-# ******************
 
 # }}
 
 
 # --- Vim/Neovim & Alacritty 主题相关命令配置 {{
 
+# windvalley/dotfiles 仓库所在目录.
+dotfiles_dir=~/.dotfiles
+
 # Vim/Neovim 的颜色方案文件.
 vim_colorscheme_file=~/.vim/colorscheme.vim
 vim_transparent_file=~/.vim/transparent.vim
+
 # Alacritty 的配置文件.
 alacritty_conf=~/.config/alacritty/alacritty.yml
-# windvalley/dotfiles 仓库所在目录.
-dotfiles_dir=~/.dotfiles
 
 # Vim/Neovim 和 Alacritty 颜色方案主题切换命令.
 theme(){
@@ -222,7 +240,7 @@ EOF
         gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty_conf
         gsed -i "/^  size:/s/^.*$/  size: $font_size/" $alacritty_conf
         gsed -i "/^background_opacity/s/^.*$/background_opacity: $opacity/" $alacritty_conf
-    else 
+    else
         \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
         gsed -i "/^colors/s/^.*$/colors: *$theme_name/" $alacritty_conf
     fi
@@ -286,7 +304,7 @@ $ opacity number
         gsed -i "/^colors/s/^.*$/colors: *$color/" $alacritty_conf
         gsed -i "/^  size:/s/^.*$/  size: $font_size/" $alacritty_conf
     else
-        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
         gsed -i "/^background_opacity/s/^.*$/background_opacity: $value/" $alacritty_conf
     fi
 }
@@ -318,12 +336,12 @@ $ font number
         color=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
         opacity=$(awk -F: '/^background_opacity:/{print $2}' $alacritty_conf)
 
-        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
         gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty_conf
         gsed -i "/^colors/s/^.*$/colors: *$color/" $alacritty_conf
         gsed -i "/^background_opacity:/s/^.*$/background_opacity: $opacity/" $alacritty_conf
     else
-        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf 
+        \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
         gsed -i "/^  size:/s/^.*$/  size: $value/" $alacritty_conf
     fi
 }
@@ -435,7 +453,7 @@ alias ff="vim \$(fzf)"
 #             google key  打开浏览器使用 google 搜索 key.
 #               bing key  打开浏览器使用 bing 搜索 key.
 #              baidu key  打开浏览器使用 baidu 搜索 key.
-#      stackoverflow key  打开浏览器使用 stackoverflow 搜索 key. 
+#      stackoverflow key  打开浏览器使用 stackoverflow 搜索 key.
 #
 # *** git 插件 (~/.oh-my-zsh/plugins/git/README.md)
 #                    gst  git status
