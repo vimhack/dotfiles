@@ -136,6 +136,14 @@ $ o number
 * number should between 0.0 and 1.0
 ```
 
+**Toggle transparency of Alacritty with hot key:**
+
+```text
+ctrl a o
+```
+
+💡 `ctrl a` is the tmux prefix key.
+
 **Toggle Vim/Neovim background transparency in terminal command line:**
 
 ```text
@@ -179,9 +187,21 @@ $ v 0
 
 💡 Opacity of Alacritty(terminal) should be less than 1.
 
+**Toggle status bar of Tmux with hot key:**
+
+```text
+ctrl a b
+```
+
+💡 `ctrl a` is the tmux prefix key.
+
 **Print 256 colors in terminal command line:**
 
 ```text
+$ colors_print
+
+or
+
 $ c
 
 $ rgb
