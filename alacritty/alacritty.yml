@@ -45,6 +45,8 @@ env:
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
+  # 解决找不到 tmux 等部分命令的问题.
+  PATH: /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # Live config reload (changes require restart)
 # 配置变更是否实时生效.
@@ -59,8 +61,8 @@ shell:
     # NOTE: 每次打开 alacritty, 都进入到名为 dotfiles 的 session,
     # 如果该 session 不存在则自动创建(并自动新建3个window), 如果存在则直接复用,
     # 目的是避免每次重新启动 alacritty 都创建新的 tmux session 导致 session 过多.
-    - /usr/local/bin/tmux attach -t dotfiles ||
-      /usr/local/bin/tmux new -s dotfiles -n 'vim' ';' splitw -h ';'
+    - tmux attach -t dotfiles ||
+      tmux new -s dotfiles -n 'vim' ';' splitw -h ';'
       neww -n 'tmux' ';' splitw -h ';'
       neww -n 'alacritty' ';' splitw -h
 
