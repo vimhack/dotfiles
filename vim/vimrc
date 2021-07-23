@@ -717,6 +717,7 @@ let g:ale_linters = {
   \  'python': ['pylint', 'flake8'],
   \  'lua': ['luac', 'luacheck'],
   \  'sh': ['shellcheck', 'language_server'],
+  \  'zsh': ['shellcheck', 'language_server'],
   \  'javascript': ['eslint', 'standard'],
   \  'vue': ['eslint', 'vls'],
   \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
@@ -774,6 +775,8 @@ let g:ale_fixers = {
   \  'yaml': ['prettier'],
   \  'markdown': ['prettier'],
   \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
+  \  'zsh': ['trim_whitespace', 'remove_trailing_lines'],
+  \  'tmux': ['trim_whitespace', 'remove_trailing_lines'],
   \ }
 
 " }}
