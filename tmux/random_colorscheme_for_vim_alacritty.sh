@@ -3,14 +3,14 @@
 #
 # Change colorscheme for vim and alacritty randomly.
 
+# windvalley/dotfiles 仓库所在目录.
+dotfiles_dir=~/.dotfiles
+
 # Vim/Neovim 的颜色方案文件.
 vim_colorscheme_file=~/.vim/colorscheme.vim
 
 # Alacritty 的配置文件.
 alacritty_conf=~/.config/alacritty/alacritty.yml
-
-# windvalley/dotfiles 仓库所在目录.
-dotfiles_dir=~/.dotfiles
 
 themes=(
     # dark
@@ -21,10 +21,15 @@ themes=(
     ayu_light onehalflight vadelma_light
 )
 
-theme_name=${themes[$RANDOM % ${#themes[@]}]}
+current_theme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
+
+# shellcheck disable=SC2206,SC2207,SC2068,SC2086
+themes_del_current_theme=($(echo ${themes[@]} | xargs -n1 | grep -vw $current_theme | xargs))
+
+theme_name=${themes_del_current_theme[$RANDOM % ${#themes_del_current_theme[@]}]}
 
 if [[ -f "$alacritty_conf" ]]; then
-    opacity=$(awk -F: '/^background_opacity/{print $2}' $alacritty_conf)
+    opacity=$(awk '/^background_opacity/{print $NF}' $alacritty_conf)
     font_size=$(awk -F: '/  size:/{print $2}' $alacritty_conf)
 
     \cp $dotfiles_dir/alacritty/alacritty.yml $alacritty_conf
