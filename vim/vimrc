@@ -1126,6 +1126,11 @@ let g:lightline.component_function = {
   \  'blame': 'LightlineGitBlame',
   \ }
 
+" 如果状态栏内容过多, 从右侧砍掉部分内容.
+let g:lightline.component = {
+  \  'lineinfo': '%3l:%-2v%<',
+  \ }
+
 " doc: https://github.com/neoclide/coc-git
 "   *  表示 git 仓库内容有变更;
 "   x  表示 git 仓库内容有冲突;
