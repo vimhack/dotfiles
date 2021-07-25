@@ -96,14 +96,6 @@ $ t vadelma_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-**Change colorscheme of Vim/Neovim and Alacritty randomly with hot key:**
-
-```text
-ctrl a v
-```
-
-💡 `ctrl a` is the tmux prefix key.
-
 **Change font size of Alacritty in terminal command line:**
 
 ```text
@@ -136,14 +128,6 @@ $ o number
 * number should between 0.0 and 1.0
 ```
 
-**Toggle transparency of Alacritty with hot key:**
-
-```text
-ctrl a o
-```
-
-💡 `ctrl a` is the tmux prefix key.
-
 **Toggle Vim/Neovim background transparency in terminal command line:**
 
 ```text
@@ -156,6 +140,18 @@ $ vim-bgtransparent 0
 or
 
 $ v 0
+```
+
+**Print 256 colors in terminal command line:**
+
+```text
+$ colors_print
+
+or
+
+$ c
+
+$ rgb
 ```
 
 **Toggle Vim/Neovim background color(light or dark) in Vim Normal Mode:**
@@ -187,25 +183,37 @@ $ v 0
 
 💡 Opacity of Alacritty(terminal) should be less than 1.
 
+**Change colorscheme of Vim/Neovim and Alacritty randomly with hot key:**
+
+```text
+ctrl a v
+```
+
+**Toggle transparency of Alacritty with hot key:**
+
+```text
+ctrl a o
+```
+
+**Increase transparency of Alacritty with hot key:**
+
+```text
+ctrl a ctrl k
+```
+
+**Decrease transparency of Alacritty with hot key:**
+
+```text
+ctrl a ctrl j
+```
+
 **Toggle status bar of Tmux with hot key:**
 
 ```text
 ctrl a b
 ```
 
-💡 `ctrl a` is the tmux prefix key.
-
-**Print 256 colors in terminal command line:**
-
-```text
-$ colors_print
-
-or
-
-$ c
-
-$ rgb
-```
+💡 `ctrl a` aboves is the tmux prefix key.
 
 **NOTE:**
 
