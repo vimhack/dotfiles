@@ -405,6 +405,12 @@ Plug 'matze/vim-move'
 " 将代码从多行转换为单行或将单行转换为多行.
 Plug 'AndrewRadev/splitjoin.vim'
 
+if has('nvim')
+  " 配合 chrome/firefox 的 firenvim 浏览器插件,
+  " 可在浏览器网站页面的文本输入框内自动使用 nvim 编辑文本.
+  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+endif
+
 " }}
 
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
@@ -1769,8 +1775,9 @@ let NERDTreeMinimalUI=1
 let NERDTreeMinimalMenu=0
 
 " 运行 Vim 时, 后面不接任何文件的情况, 自动打开目录树窗口.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" NOTE: 如果使用了 firenvim 插件, 不建议启用此条配置.
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
 " 运行 Vim 的时候自动打开目录树. 如果 vim 后面接了文件, 则将光标自动移动到文件窗口.
 " NOTE: 如果使用 tmux, 不建议启用此条配置.
