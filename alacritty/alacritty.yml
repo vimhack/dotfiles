@@ -22,6 +22,43 @@
 #
 #   3. 私密配置, 非必需
 #      wget -O ~/.alacritty_private.yml https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty_private.conf
+#
+#   4. 安装几种好看的字体
+#      git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
+#      cd nerd-fonts/patched-fonts
+#
+#      1) Hack Nerd Font
+#         cp Hack/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      2) Iosevka Nerd Font
+#         cp Iosevka/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      3) FantasqueSansMono Nerd Font
+#         cp FantasqueSansMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      4) FiraCode Nerd Font
+#         cp FiraCode/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      5) JetBrainsMono Nerd Font
+#         cp JetBrainsMono/Ligatures/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      6) CodeNewRoman Nerd Font
+#         cp CodeNewRoman/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
+#      7) Hasklug Nerd Font
+#         cp Hasklig/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
+#      8) GoMono Nerd Font
+#         cp Go-Mono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      9) mononoki Nerd Font
+#         cp Mononoki/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#     10) Cousine Nerd Font
+#         cp Cousine/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#     11) DaddyTimeMono Nerd Font
+#         cp DaddyTimeMono/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#     12) SpaceMono Nerd Font
+#         cp SpaceMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#     13) BlexMono Nerd Font
+#         cp IBMPlexMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#     14) SauceCodePro Nerd Font
+#         cp SourceCodePro/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#     15) CaskaydiaCove Nerd Font
+#         cp CascadiaCode/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
+#     16) DejaVuSansMono Nerd Font
+#         cp DejaVuSansMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
 
 # }}
 
@@ -766,10 +803,10 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
 
-    # The `style` can be specified to pick a specific face.
-    style: Regular
+    # NOTE: 为了兼容部分字体没有 Regular 导致报错的问题, 这里需要注释掉.
+    #style: Regular
 
   # Bold font face
   bold:
@@ -777,7 +814,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -788,7 +825,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -799,7 +836,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
