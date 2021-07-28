@@ -96,18 +96,48 @@ $ t vadelma_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-**Change font size of Alacritty in terminal command line:**
+**Change font of Alacritty in terminal command line:**
 
 ```text
-font
+The current font is 'Hack', and it can be changed to one of the following list:
 
-Current font size is '12.0', you can change by:
+* Iosevka
+* FantasqueSansMono
+* FiraCode
+* JetBrainsMono
+* CodeNewRoman
+* Hasklug
+* GoMono
+* mononoki
+* Cousine
+* DaddyTimeMono
+* SpaceMono
+* BlexMono
+* SauceCodePro
+* CaskaydiaCove
+* DejaVuSansMono
 
-$ font number
+For example, change font to 'DejaVuSansMono':
+
+$ font DejaVuSansMono
 
 or
 
-$ f number
+$ f DejaVuSansMono
+```
+
+**Change font size of Alacritty in terminal command line:**
+
+```text
+font-size
+
+Current font size is '12.0', you can change by:
+
+$ font-size number
+
+or
+
+$ fs number
 
 * number should between 1.0 and  200.0
 ```
