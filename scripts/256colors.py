@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
 https://gist.githubusercontent.com/WoLpH/8b6f697ecc06318004728b8c0127d9b3/raw/250eb2e3f2acca1c51aa52adf611ec0380291e8a/colortest.py
+
+for zshrc
 """
 
 from __future__ import print_function

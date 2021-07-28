@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# colors_print.sh
+#
+
+colors_print() {
+    local column=18
+
+    echo -e "background colors:\n"
+
+    for i in {0..255}; do
+        printf '\e[48;5;%dm%3d ' "$i" "$i"
+        (((i + 3) % "$column")) || printf '\e[0m\n'
+    done
+
+    printf '\e[0m\n\n\n'
+
+    echo -e "foreground colors:\n"
+
+    for i in {0..255}; do
+        printf '\e[38;5;%dm%3d ' "$i" "$i"
+        (((i + 3) % "$column")) || printf '\e[0m\n'
+    done | sed 's/%//'
+}
+
+colors_print
+
+exit 0

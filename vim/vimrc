@@ -1204,12 +1204,12 @@ endif
 
 " 是否启用 Vim/Neovim 透明背景色的功能, 从单独的配置文件读取相关变量值来控制;
 " 从单独的配置文件读取是为了变更时, 不会干扰到 dotfiles 仓库.
-let transparent_file = expand('~/.vim/transparent.vim')
-if filereadable(transparent_file)
-  exec 'source' transparent_file
+let transparency_file = expand('~/.vim/transparency.vim')
+if filereadable(transparency_file)
+  exec 'source' transparency_file
 else
   " 值为 1 表示启用 Vim/Neovim 背景透明, 0 为禁用.
-  let g:bgtransparent=1
+  let g:bgtransparency=1
 endif
 
 " 当 g:bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
@@ -1297,7 +1297,7 @@ endfunction
 
 " 设置背景透明的方法, 需要放到 colorscheme 指令之后执行.
 function! BGTransparentAfter()
-  if (g:bgtransparent == 1)
+  if (g:bgtransparency == 1)
     if (g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
       " 使 vim/nvim 背景透明.
       hi Normal ctermbg=NONE guibg=NONE
@@ -1357,14 +1357,14 @@ function! ToggleBGColor()
   call LightlineReload()
 
   " 解决从透明背景的场景切换背景颜色后, 需要连续按两次 ,v 才能切换成背景透明的问题.
-  let g:bgtransparent = 0
+  let g:bgtransparency = 0
 endfunction
 
 " 在背景透明和不透明之间切换的方法.
 function! ToggleBGTransparent()
-  if g:bgtransparent == 1
+  if g:bgtransparency == 1
     let &background = &background
-    let g:bgtransparent = 0
+    let g:bgtransparency = 0
 
     if g:colors_name == 'PaperColor'
       call PaperColorBefore()
@@ -1394,7 +1394,7 @@ function! ToggleBGTransparent()
     endif
   else
     hi Normal guibg=NONE ctermbg=NONE
-    let g:bgtransparent = 1
+    let g:bgtransparency = 1
 
     if g:colors_name == 'jellybeans'
       call JellybeansBefore()
@@ -1456,7 +1456,7 @@ function! JellybeansBefore()
   let g:jellybeans_use_term_italics = 1
   let g:jellybeans_use_gui_italics = 1
 
- if (g:bgtransparent == 1)
+ if (g:bgtransparency == 1)
     " 对于 jellybeans 主题, 使用 hi Normal 的方式设置背景透明的方式,
     " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
     let g:jellybeans_overrides = {
@@ -1481,7 +1481,7 @@ function! PaperColorBefore()
   " 是否允许斜体字, 1 是允许, 0 是不允许.
   let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
 
-  if (g:bgtransparent == 1)
+  if (g:bgtransparency == 1)
     " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
     " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
     let g:PaperColor_Theme_Options.theme.default.transparent_background = 1

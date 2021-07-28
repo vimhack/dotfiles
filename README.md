@@ -161,11 +161,11 @@ $ o number
 **Toggle Vim/Neovim background transparency in terminal command line:**
 
 ```text
-vim-bgtransparent
+vim-bgtransparency
 
 Vim background transparency is currently enabled, to disable:
 
-$ vim-bgtransparent 0
+$ vim-bgtransparency 0
 
 or
 
@@ -254,28 +254,28 @@ _Almost every dotfile has usage tips at the end of it for reference._
 ColorScheme: `dracula`
 FontSize: `12`
 Opacity: `0.9`
-VimBgTransparent: `1`
+VimBgTransparency: `1`
 
 ![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png)
 
 ColorScheme: `gruvbox`
 FontSize: `12`
 Opacity: `0.9`
-VimBgTransparent: `1`
+VimBgTransparency: `1`
 
 ![gruvbox](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/gruvbox.png)
 
 ColorScheme: `iceberg`
 FontSize: `12`
 Opacity: `0.9`
-VimBgTransparent: `1`
+VimBgTransparency: `1`
 
 ![iceberg](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/iceberg.png)
 
 ColorScheme: `base16-default-dark`
 FontSize: `12`
 Opacity: `0.9`
-VimBgTransparent: `1`
+VimBgTransparency: `1`
 
 ![base16-default-dark](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/base16-default-dark.png)
 
