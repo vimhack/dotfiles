@@ -58,14 +58,14 @@ colorscheme ayu" >$vim_colorscheme_file
 elif [[ "$to_theme" = "ayu_light" ]]; then
     echo "let ayucolor='light'
 colorscheme ayu" >$vim_colorscheme_file
-fi
-
-if echo "$to_theme" | grep -q "_light"; then
-    echo "set background=light
-colorscheme ${to_theme/_light/}" >$vim_colorscheme_file
 else
-    echo "set background=dark
+    if echo "$to_theme" | grep -q "_light"; then
+        echo "set background=light
 colorscheme ${to_theme/_light/}" >$vim_colorscheme_file
+    else
+        echo "set background=dark
+colorscheme ${to_theme/_light/}" >$vim_colorscheme_file
+    fi
 fi
 
 exit 0
