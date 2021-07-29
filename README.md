@@ -219,6 +219,12 @@ $ rgb
 ctrl a v
 ```
 
+**Change font of Alacritty randomly with hot key:**
+
+```text
+ctrl a f
+```
+
 **Toggle transparency of Alacritty with hot key:**
 
 ```text
