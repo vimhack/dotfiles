@@ -171,12 +171,17 @@ export PATH=$HOME/.luarocks/bin:$PATH
 
 export PATH="/usr/local/opt/node@14/bin:$PATH"
 
+# ****** ruby ******
+# brew install ruby
+
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
 # }}
 
 
 # --- Vim/Neovim & Alacritty 主题相关命令配置 {{
 
-alias theme="~/.dotfiles/scripts/theme.sh"
+alias colorscheme="~/.dotfiles/scripts/colorscheme.sh"
 alias font="~/.dotfiles/scripts/font.sh"
 alias opacity="~/.dotfiles/scripts/opacity.sh"
 alias font-size="~/.dotfiles/scripts/font_size.sh"
@@ -184,7 +189,7 @@ alias vim-bgtransparency="~/.dotfiles/scripts/vim_bgtransparency.sh"
 alias colors-print="~/.dotfiles/scripts/colors_print.sh"
 alias rgb="~/.dotfiles/scripts/256colors.py"
 
-alias t=theme
+alias cs=colorscheme
 alias f=font
 alias o=opacity
 alias fs=font-size
@@ -256,7 +261,7 @@ alias ff="vim \$(fzf)"
 #            opacity 0.8  将 alacritty 终端的背景透明度设置为80%, 数字越小, 透明度越大.
 #          font FiraCode  将 alacritty 终端的字体切换为 FiraCode.
 #           font-size 12  将 alacritty 终端的字体大小设置为 12.
-#  vim-bgtransparent 1/0  打开或关闭 Vim 背景透明色.
+# vim-bgtransparency 1/0  打开或关闭 Vim 背景透明色.
 #             t/o/f/fs/v  theme, opacity, font, font-size, vim-bgtransparent 的 alias 命令.
 #                     ff  通过 fzf 搜索文件并用 vim 打开.
 #               lsof_tcp  查看当前监听的端口信息.

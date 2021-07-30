@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # font.sh
 #
-# Alacritty 字体切换命令.
+# Switch font for Alacritty.
 #
 # for zshrc
 
@@ -11,13 +11,13 @@ cd "$script_dir" || exit 1
 
 source env.sh
 
-font_name=$1
+to_font=$1
 
-if [[ "$font_name" = "list" ]] || [[ "$font_name" = "" ]]; then
-    echo -e "The current font is '$current_font', and it can be changed to one of the following list:\n"
+if [[ "$to_font" = "list" ]] || [[ "$to_font" = "" ]]; then
+    echo -e "The current font is '$current_font_and_style', and it can be changed to one of the following list:\n"
 
     for i in ${fonts[*]}; do
-        [[ "$i" != "$current_font" ]] && {
+        [[ "$i" != "$current_font_and_style" ]] && {
             echo "* $i"
             example_font=$i
         }
@@ -34,19 +34,19 @@ fi
 
 exist_flag=1
 for i in ${fonts[*]}; do
-    [[ "$i" = "$font_name" ]] && {
+    [[ "$i" = "$to_font" ]] && {
         exist_flag=0
         break
     }
 done
 
 [[ "$exist_flag" -eq 1 ]] && {
-    echo "no such font: \"$font_name\""
+    echo "no such font: '$to_font'"
     exit 1
 }
 
 update_config_for_alacritty
 
-gsed -i "/ family:/s/^.*$/    family: $font_name Nerd Font/" $alacritty_conf
+change_font_for_alacritty "$to_font"
 
 exit 0

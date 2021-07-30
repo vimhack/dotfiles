@@ -805,7 +805,7 @@ font:
     #   - (Windows) Consolas
     family: Hack Nerd Font
 
-    # NOTE: 为了兼容部分字体没有 Regular 导致报错的问题, 这里需要注释掉.
+    # NOTE: 不要手动改动这里, 脚本会自动匹配并改动这里.
     #style: Regular
 
   # Bold font face

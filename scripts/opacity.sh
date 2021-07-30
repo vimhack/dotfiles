@@ -1,15 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # opacity.sh
 #
-# Alacritty 终端背景透明度调整命令.
+# Alacritty terminal background transparency adjustment.
 #
 # for zshrc
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-cd "$script_dir" || exit 1
+script_dir=$(cd "$(dirname $0)" && pwd)
 
-source env.sh
+source $script_dir/env.sh
 
 to_opacity=$1
 
@@ -37,6 +36,6 @@ fi
 
 update_config_for_alacritty
 
-gsed -i "/^background_opacity/s/^.*$/background_opacity: $to_opacity/" $alacritty_conf
+change_opacity_for_alacritty "$to_opacity"
 
 exit 0

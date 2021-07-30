@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # font_size.sh
 #
-# Alacritty 终端字体大小调整命令.
+# Change font size of Alacritty.
 #
 # for zshrc
 
@@ -18,7 +18,7 @@ to_font_size=$1
 
 $ font-size number
 
-* number should between 1.0 and  200.0"
+* number must between 1.0 and  200.0"
 
     exit 0
 }
