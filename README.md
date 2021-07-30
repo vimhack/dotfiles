@@ -1,7 +1,9 @@
 # Windvalley's dotfiles 🍀
 
-This is my personal development environment focusing on
-Go, Python, OpenResty/Lua, Bash and JavaScript programming.
+`Windvalley/dotfiles` is a Fantastic Development Environment
+build with Vim/Neovim, Tmux, Zsh, Alacritty and other related great open source softwares.
+
+The supported platforms are macOS and Linux.
 
 ## 💝 Powers
 
@@ -10,21 +12,17 @@ Go, Python, OpenResty/Lua, Bash and JavaScript programming.
 - [Zsh](https://ohmyz.sh/)
 - [Alacritty](https://github.com/alacritty/alacritty)
 
-## 📀 Installation
+## 📦 Requirements Installation
 
-Requirements:
+See [here](REQUIREMENTS.md).
 
-- [vim 8.2+](https://github.com/vim/vim) or
-  [neovim 0.4.0+](https://github.com/neovim/neovim)
-- [tmux 3.0+](https://github.com/tmux/tmux)
-- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-- [alacritty 0.8.0+](https://github.com/alacritty/alacritty)
+## 📀 Dotfiles Installation
 
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
 
 ```bash
-git clone https://github.com/windvalley/dotfiles.git ~/.dotfiles
+git clone --depth=1 https://github.com/windvalley/dotfiles.git ~/.dotfiles
 
 # vim
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
@@ -45,7 +43,12 @@ cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 ```
 
-💡 You can go to the beginning of each dotfile to view the detailed installation steps.
+Then open or reopen the alacritty,
+if it is the first time to run, you may need to wait a while,
+because the tmux plugins are automatically installed in the background.
+
+In addition, when you run vim/nvim for the first time,
+the vim/nvim will automatically install all the configured vim plugins.
 
 To update:
 
@@ -54,14 +57,16 @@ cd ~/.dotfiles
 git pull
 ```
 
+Enjoy it😘
+
 ## 📜 Tips
 
 **Change colorscheme of Vim/Neovim and Alacritty in terminal command line:**
 
 ```text
-theme
+colorscheme
 
-The current theme is 'dracula', and it can be changed to one of the following list:
+The current colorscheme is 'dracula', and it can be changed to one of the following list:
 
 * molokai
 * rigel
@@ -85,13 +90,13 @@ The current theme is 'dracula', and it can be changed to one of the following li
 * onehalflight
 * vadelma_light
 
-For example, change theme to 'vadelma_light':
+For example, change colorscheme to 'vadelma_light':
 
-$ theme vadelma_light
+$ colorscheme vadelma_light
 
 or
 
-$ t vadelma_light
+$ cs vadelma_light
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
@@ -99,31 +104,65 @@ $ t vadelma_light
 **Change font of Alacritty in terminal command line:**
 
 ```text
-The current font is 'Hack', and it can be changed to one of the following list:
+The current font is 'Hack_Regular', and it can be changed to one of the following list:
 
-* Iosevka
-* FantasqueSansMono
-* FiraCode
-* JetBrainsMono
-* CodeNewRoman
-* Hasklug
-* GoMono
-* mononoki
-* Cousine
-* DaddyTimeMono
-* SpaceMono
-* BlexMono
-* SauceCodePro
-* CaskaydiaCove
-* DejaVuSansMono
+* Hack_Italic
+* Iosevka_Thin
+* Iosevka_Extralight
+* Iosevka_Light
+* Iosevka_Regular
+* Iosevka_Oblique
+* Iosevka_Italic
+* FantasqueSansMono_Regular
+* FantasqueSansMono_Italic
+* FiraCode_Light
+* FiraCode_Regular
+* FiraCode_Retina
+* JetBrainsMono_Thin
+* JetBrainsMono_ExtraLight
+* JetBrainsMono_Light
+* JetBrainsMono_Regular
+* JetBrainsMono_Medium
+* JetBrainsMono_Italic
+* CodeNewRoman_Book
+* CodeNewRoman_Italic
+* Hasklug_ExtraLight
+* Hasklug_Light
+* Hasklug_Regular
+* Hasklug_Medium
+* GoMono_Book
+* GoMono_Italic
+* mononoki_Regular
+* mononoki_Italic
+* Cousine_Regular
+* Cousine_Italic
+* DaddyTimeMono_Book
+* SpaceMono_Regular
+* SpaceMono_Italic
+* BlexMono_Thin
+* BlexMono_ExtraLight
+* BlexMono_Light
+* BlexMono_Book
+* BlexMono_Italic
+* SauceCodePro_ExtraLight
+* SauceCodePro_Light
+* SauceCodePro_Regular
+* SauceCodePro_Italic
+* CaskaydiaCove_ExtraLight
+* CaskaydiaCove_Light
+* CaskaydiaCove_Regular
+* DejaVuSansMono_Book
+* DejaVuSansMono_Oblique
+* Hurmit_light
+* Hurmit_medium
 
-For example, change font to 'DejaVuSansMono':
+For example, change font to 'Hurmit_medium':
 
-$ font DejaVuSansMono
+$ font Hurmit_medium
 
 or
 
-$ f DejaVuSansMono
+$ f Hurmit_medium
 ```
 
 **Change font size of Alacritty in terminal command line:**
@@ -131,7 +170,7 @@ $ f DejaVuSansMono
 ```text
 font-size
 
-Current font size is '12.0', you can change by:
+Current font size is '12.0', and it can be changed by:
 
 $ font-size number
 
@@ -139,7 +178,7 @@ or
 
 $ fs number
 
-* number should between 1.0 and  200.0
+* number must between 1.0 and  200.0
 ```
 
 **Change opacity of Alacritty in terminal command line:**
@@ -147,7 +186,7 @@ $ fs number
 ```text
 opacity
 
-Current opacity is '0.9', you can change by:
+Current opacity is '0.9', and it can be changed by:
 
 $ opacity number
 
@@ -155,7 +194,7 @@ or
 
 $ o number
 
-* number should between 0.0 and 1.0
+* number must between 0.0 and 1.0
 ```
 
 **Toggle Vim/Neovim background transparency in terminal command line:**
@@ -175,7 +214,7 @@ $ v 0
 **Print 256 colors in terminal command line:**
 
 ```text
-$ colors_print
+$ colors-print
 
 or
 
