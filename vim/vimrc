@@ -742,6 +742,10 @@ let g:ale_go_golangci_lint_options = ''
 " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
 let g:ale_go_golangci_lint_package = 1
 
+" flake8 配置:
+" 指定允许的 Python 代码每行最大字符数, 默认值 79.
+let g:ale_python_flake8_options = '--max-line-length 120'
+
 " yamllint 配置:
 " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
 " 指定可执行文件的具体名称.
