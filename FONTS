@@ -1,17 +1,19 @@
+# Fonts for Alacritty
+#
 # rule: font family _ font style
+#
+# NOTE: 
+# The font style is best not to use 'italic', 'bold' and 'bold italic'.
 
 Hack_Regular
-Hack_Italic
 
 Iosevka_Thin
 Iosevka_Extralight
 Iosevka_Light
 Iosevka_Regular
 Iosevka_Oblique
-Iosevka_Italic
 
 FantasqueSansMono_Regular
-FantasqueSansMono_Italic
 
 FiraCode_Light
 FiraCode_Regular
@@ -22,10 +24,8 @@ JetBrainsMono_ExtraLight
 JetBrainsMono_Light
 JetBrainsMono_Regular
 JetBrainsMono_Medium
-JetBrainsMono_Italic
 
 CodeNewRoman_Book
-CodeNewRoman_Italic
 
 Hasklug_ExtraLight
 Hasklug_Light
@@ -33,29 +33,23 @@ Hasklug_Regular
 Hasklug_Medium
 
 GoMono_Book
-GoMono_Italic
 
 mononoki_Regular
-mononoki_Italic
 
 Cousine_Regular
-Cousine_Italic
 
 DaddyTimeMono_Book
 
 SpaceMono_Regular
-SpaceMono_Italic
 
 BlexMono_Thin
 BlexMono_ExtraLight
 BlexMono_Light
 BlexMono_Book
-BlexMono_Italic
 
 SauceCodePro_ExtraLight
 SauceCodePro_Light
 SauceCodePro_Regular
-SauceCodePro_Italic
 
 CaskaydiaCove_ExtraLight
 CaskaydiaCove_Light

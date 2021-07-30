@@ -5,11 +5,10 @@
 #
 # for zshrc
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-cd "$script_dir" || exit 1
+script_dir=$(cd "$(dirname $0)" && pwd)
 
-source env.sh
+source $script_dir/env.sh
 
 to_font_size=$1
 
@@ -35,6 +34,6 @@ fi
 
 update_config_for_alacritty
 
-gsed -i "/^  size:/s/^.*$/  size: $to_font_size/" $alacritty_conf
+change_font_size_for_alacritty "$to_font_size"
 
 exit 0

@@ -2,22 +2,20 @@
 # env.sh
 #
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-
 # windvalley/dotfiles root dir
-dotfiles_dir=${script_dir%/*}
+dotfiles_dir=~/.dotfiles
+
+# fonts file for Alacritty
+fonts_file=$dotfiles_dir/FONTS
+
+# colorschemes file for Alacritty and Vim/Neovim
+colorschemes_file=$dotfiles_dir/COLORSCHEMES
 
 vim_colorscheme_file=~/.vim/colorscheme.vim
 
 vim_transparency_file=~/.vim/transparency.vim
 
 alacritty_conf=~/.config/alacritty/alacritty.yml
-
-# fonts file for Alacritty
-fonts_file=$dotfiles_dir/FONTS
-
-# colorschemes file for  Alacritty and Vim/Neovim
-colorschemes_file=$dotfiles_dir/COLORSCHEMES
 
 # last opacity value of Alacritty
 last_opacity_file=~/.config/alacritty/.opacity.last
@@ -69,18 +67,29 @@ update_config_for_alacritty() {
 
     gsed -i "/^colors/s/^.*$/colors: *$current_colorscheme/" $alacritty_conf
     gsed -i "/ family:/s/^.*$/    family: $current_font Nerd Font/" $alacritty_conf
+    gsed -i "s/#style: Regular$/style: $current_font_style/" $alacritty_conf
     gsed -i "/^  size:/s/^.*$/  size: $current_font_size/" $alacritty_conf
     gsed -i "/^background_opacity/s/^.*$/background_opacity: $current_opacity/" $alacritty_conf
 }
 
 change_font_for_alacritty() {
-    local to_font=$1
+    local to_font_and_style=$1
 
-    font=$(echo "$to_font" | awk -F_ '{print $1}')
-    style=$(echo "$to_font" | awk -F_ '{print $2}')
+    to_font=$(echo "$to_font_and_style" | awk -F_ '{print $1}')
+    to_style=$(echo "$to_font_and_style" | awk -F_ '{print $2}')
 
-    gsed -i "/ family:/s/^.*$/    family: $font Nerd Font/" $alacritty_conf
-    gsed -i "s/#style: Regular$/style: $style/" $alacritty_conf
+    style_line_number=$(grep -n "style: $current_font_style$" $alacritty_conf |
+        head -1 | awk -F: '{print $1}')
+
+    gsed -i "${style_line_number}s/style: $current_font_style$/#style: $to_style/" $alacritty_conf
+
+    gsed -i "/ family:/s/^.*$/    family: $to_font Nerd Font/" $alacritty_conf
+    gsed -i "${style_line_number}s/#//" $alacritty_conf
+}
+
+change_font_size_for_alacritty() {
+    local to_font_size=$1
+    gsed -i "/^  size:/s/^.*$/  size: $to_font_size/" $alacritty_conf
 }
 
 change_colorscheme_for_alacritty_vim() {
