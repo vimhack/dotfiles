@@ -2,11 +2,11 @@
 
 Install requirements for windvalley/dotfiles.
 
-## For MacOS(OSX)
+## For MacOS
 
 ### Vim/Neovim
 
-**Vim 8.2+ and [neovim 0.4.0+](https://github.com/neovim/neovim)**
+- Vim 8.2+ and [Neovim 0.4.0+](https://github.com/neovim/neovim)
 
 ```bash
 brew install cmake python poetry mono go ruby lua@5.3 nodejs yarn ctags rg
@@ -17,17 +17,17 @@ brew install neovim
 pip3 install neovim
 ```
 
-**xkbswitch-macosx**
+- xkbswitch-macosx
 
 ```bash
-git clone https://github.com/myshov/xkbswitch-macosx.git
+git clone --depth=1 https://github.com/myshov/xkbswitch-macosx.git
 cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
 
-git clone https://github.com/myshov/libxkbswitch-macosx
+git clone --depth=1 https://github.com/myshov/libxkbswitch-macosx
 cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
 ```
 
-**ale linters**
+- ale linters
 
 ```bash
 brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
@@ -45,7 +45,7 @@ go get -u github.com/mgechev/revive
 sudo gem install mdl
 ```
 
-**ale fixers**
+- ale fixers
 
 ```bash
 npm install -g prettier importjs lua-fmt
@@ -55,36 +55,50 @@ go get mvdan.cc/sh/v3/cmd/shfmt
 
 ### Tmux
 
-[tmux 3.0+](https://github.com/tmux/tmux)
+- [tmux 3.0+](https://github.com/tmux/tmux)
 
 ```bash
 brew install tmux
+```
 
-# for tmux status bar
+- iStats
+
+```bash
+# For showing cpu temperature and fan speed in the tmux status bar.
 sudo gem install iStats
 ```
 
 ### Zsh
 
-[oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+- zsh-autosuggestions
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+```bash
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions \
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+```
+
+- zsh-syntax-highlighting
+
+```bash
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
 ### Alacritty
 
-[alacritty 0.8.0+](https://github.com/alacritty/alacritty)
+- [alacritty 0.8.0+](https://github.com/alacritty/alacritty)
 
 ```bash
 brew install alacritty
 ```
 
-Install fonts for Alacritty and Vim/Neovim:
+- Install fonts
 
 ```bash
 git clone --depth=1 https://github.com/ryanoasis/nerd-fonts

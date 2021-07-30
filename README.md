@@ -1,9 +1,10 @@
 # Windvalley's dotfiles 🍀
 
-`Windvalley/dotfiles` is a Fantastic Development Environment
-build with Vim/Neovim, Tmux, Zsh, Alacritty and other related great open source softwares.
+Windvalley/dotfiles is a Fantastic Development Environment,
+built with Vim/Neovim, Tmux, Zsh, Alacritty
+and many other related excellent open source softwares.
 
-The supported platforms are macOS and Linux.
+The supported platforms currently are macOS and Linux.
 
 ## 💝 Powers
 
