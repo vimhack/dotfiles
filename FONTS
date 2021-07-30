@@ -3,7 +3,7 @@
 # rule: font family _ font style
 #
 # NOTE: 
-# The font style is best not to use 'italic', 'bold' and 'bold italic'.
+# The font style listed here is best not to use 'Italic', 'Bold'.
 
 Hack_Regular
 

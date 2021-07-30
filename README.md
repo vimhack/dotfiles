@@ -105,17 +105,15 @@ $ cs vadelma_light
 **Change font of Alacritty in terminal command line:**
 
 ```text
-The current font is 'Hack_Regular', and it can be changed to one of the following list:
+The current font is 'SauceCodePro_Light', and it can be changed to one of the following list:
 
-* Hack_Italic
+* Hack_Regular
 * Iosevka_Thin
 * Iosevka_Extralight
 * Iosevka_Light
 * Iosevka_Regular
 * Iosevka_Oblique
-* Iosevka_Italic
 * FantasqueSansMono_Regular
-* FantasqueSansMono_Italic
 * FiraCode_Light
 * FiraCode_Regular
 * FiraCode_Retina
@@ -124,31 +122,22 @@ The current font is 'Hack_Regular', and it can be changed to one of the followin
 * JetBrainsMono_Light
 * JetBrainsMono_Regular
 * JetBrainsMono_Medium
-* JetBrainsMono_Italic
 * CodeNewRoman_Book
-* CodeNewRoman_Italic
 * Hasklug_ExtraLight
 * Hasklug_Light
 * Hasklug_Regular
 * Hasklug_Medium
 * GoMono_Book
-* GoMono_Italic
 * mononoki_Regular
-* mononoki_Italic
 * Cousine_Regular
-* Cousine_Italic
 * DaddyTimeMono_Book
 * SpaceMono_Regular
-* SpaceMono_Italic
 * BlexMono_Thin
 * BlexMono_ExtraLight
 * BlexMono_Light
 * BlexMono_Book
-* BlexMono_Italic
 * SauceCodePro_ExtraLight
-* SauceCodePro_Light
 * SauceCodePro_Regular
-* SauceCodePro_Italic
 * CaskaydiaCove_ExtraLight
 * CaskaydiaCove_Light
 * CaskaydiaCove_Regular
@@ -160,10 +149,6 @@ The current font is 'Hack_Regular', and it can be changed to one of the followin
 For example, change font to 'Hurmit_medium':
 
 $ font Hurmit_medium
-
-or
-
-$ f Hurmit_medium
 ```
 
 **Change font size of Alacritty in terminal command line:**
