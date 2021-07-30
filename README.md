@@ -23,6 +23,7 @@ To install, run the following from your terminal:
 (please backup your existing dotfiles first)
 
 ```bash
+# Clone windvalley/dotfiles, please make sure the target directory is '~/.dotfiles'
 git clone --depth=1 https://github.com/windvalley/dotfiles.git ~/.dotfiles
 
 # vim
@@ -40,16 +41,17 @@ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 
 # alacritty
-cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
+\cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+\cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 ```
 
 Then open or reopen the alacritty,
 if it is the first time to run, you may need to wait a while,
 because the tmux plugins are automatically installed in the background.
 
-In addition, when you run vim/nvim for the first time,
-the vim/nvim will automatically install all the configured vim plugins.
+In addition, when vim or nvim is started,
+if there are vim plugins that have been configured but not yet installed,
+they will be installed automatically.
 
 To update:
 
@@ -105,6 +107,8 @@ $ cs vadelma_light
 **Change font of Alacritty in terminal command line:**
 
 ```text
+font
+
 The current font is 'SauceCodePro_Light', and it can be changed to one of the following list:
 
 * Hack_Regular
@@ -172,7 +176,7 @@ $ fs number
 ```text
 opacity
 
-Current opacity is '0.9', and it can be changed by:
+Current opacity is '0.90', and it can be changed by:
 
 $ opacity number
 
@@ -180,7 +184,7 @@ or
 
 $ o number
 
-* number must between 0.0 and 1.0
+* number must between 0.00 and 1.00
 ```
 
 **Toggle Vim/Neovim background transparency in terminal command line:**
@@ -236,7 +240,7 @@ $ rgb
 ,v
 ```
 
-💡 Opacity of Alacritty(terminal) should be less than 1.
+💡 Opacity of Alacritty(terminal) must be less than 1.
 
 **Change colorscheme of Vim/Neovim and Alacritty randomly with hot key:**
 
