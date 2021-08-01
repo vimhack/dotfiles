@@ -19,7 +19,7 @@ to_opacity=$1
 
 $ opacity number
 
-* number must between 0.0 and 1.0"
+* number must between 0.00 and 1.00"
 
     exit 0
 }
