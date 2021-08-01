@@ -287,32 +287,20 @@ _Almost every dotfile has usage tips at the end of it for reference._
 ## 🔮 Show
 
 ColorScheme: `dracula`
-FontSize: `12`
-Opacity: `0.9`
+Font: `DaddyTimeMono_Book`
+FontSize: `12.0`
+Opacity: `0.90`
 VimBgTransparency: `1`
 
 ![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png)
 
-ColorScheme: `gruvbox`
-FontSize: `12`
-Opacity: `0.9`
+ColorScheme: `ayu`
+Font: `SauceCodePro_ExtraLight`
+FontSize: `11.5`
+Opacity: `0.90`
 VimBgTransparency: `1`
 
-![gruvbox](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/gruvbox.png)
-
-ColorScheme: `iceberg`
-FontSize: `12`
-Opacity: `0.9`
-VimBgTransparency: `1`
-
-![iceberg](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/iceberg.png)
-
-ColorScheme: `base16-default-dark`
-FontSize: `12`
-Opacity: `0.9`
-VimBgTransparency: `1`
-
-![base16-default-dark](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/base16-default-dark.png)
+![ayu](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/ayu.png)
 
 ## ⚖️ License
 
