@@ -13,8 +13,6 @@ source $script_dir/env.sh
 to_opacity=$1
 
 [[ -z "$to_opacity" ]] && {
-    current_opacity=$(awk '/^background_opacity/{print $NF}' $alacritty_conf)
-
     echo "Current opacity is '$current_opacity', and it can be changed by:
 
 $ opacity number
@@ -30,7 +28,7 @@ $ opacity number
 }
 
 if [[ "$to_opacity" -lt 0 ]] || [[ "$to_opacity" -gt 1 ]]; then
-    echo "opacity must between 0.0 and 1.0"
+    echo "opacity must between 0.00 and 1.00"
     exit 1
 fi
 
