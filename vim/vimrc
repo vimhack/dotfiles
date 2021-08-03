@@ -10,7 +10,7 @@
 "    zA: 是 za 的递归操作, 是针对嵌套折叠的场景.
 
 
-" 安装步骤 {{
+" 安装步骤  Installation {{
 
 " 一. 安装 Vim 及依赖
 "
@@ -111,7 +111,7 @@
 " }}
 
 
-" 基础环境 {{
+" 基础环境  Basic Configuration {{
 
 " 关闭兼容模式, 也就是不再兼容 VI, 必需放在第一行.
 set nocompatible
@@ -136,7 +136,7 @@ let mapleader = ','
 " }}
 
 
-" 插件安装 {{
+" 插件安装  Plugins Installation {{
 
 " vim-plug 安装与配置 {{
 " doc: https://github.com/junegunn/vim-plug
@@ -179,7 +179,7 @@ autocmd VimEnter *
 " NOTE: 如果没有特别说明, 如下所有插件对 Vim 和 Neovim 均支持.
 call plug#begin('~/.vim/plugged')
 
-" 颜色主题 {{
+" 颜色主题  Colorschemes {{
 
 " gruvbox
 Plug 'morhetz/gruvbox'
@@ -227,7 +227,7 @@ Plug 'windvalley/vadelma'
 
 " }}
 
-" 代码补全 {{
+" 代码补全  Code Completion {{
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -244,14 +244,14 @@ Plug 'neoclide/coc-neco'
 
 " }}
 
-" 代码检查 {{
+" 代码检查  Code Static Check {{
 
 " 代码静态检查与自动修复插件: ALE(Asynchronous Lint Engine)
 Plug 'dense-analysis/ale'
 
 " }}
 
-" 目录树等 {{
+" 目录树等  UI Interface {{
 
 " 目录树窗口插件.
 Plug 'preservim/nerdtree'
@@ -309,7 +309,7 @@ Plug 'uguu-org/vim-matrix-screensaver'
 
 " }}
 
-" 编程语言 {{
+" 编程语言  Programming Language {{
 
 """""""" Go
 " 搭建 Go 开发环境的 Vim 插件, 安装该插件的过程中,
@@ -342,7 +342,7 @@ Plug 'cespare/vim-toml'
 
 " }}
 
-" 效率相关 {{
+" 效率相关  Efficiency Related {{
 
 " 代码注释插件.
 Plug 'preservim/nerdcommenter'
@@ -424,7 +424,7 @@ call plug#end()
 " }}
 
 
-" 代码自动补全 {{
+" 代码自动补全  Code Completion {{
 
 """""""" neoclide/coc.nvim
 " CoC 的全称是: Conqure of Completion
@@ -630,7 +630,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " }}
 
 
-" 代码静态检查 {{
+" 代码静态检查  Code Static Check {{
 
 " ale 用于替代 syntastic 插件.
 " NOTE: :ALEInfo  用于查看当前文件的语法检查配置情况,
@@ -792,7 +792,7 @@ let g:ale_fixers = {
 " }}
 
 
-" 效率相关 {{
+" 效率相关  Configuration of Efficiency Related Plugins {{
 
 """""" takac/vim-hardtime
 " doc: https://github.com/takac/vim-hardtime
@@ -1070,7 +1070,7 @@ let g:move_key_modifier = 'C'
 " }}
 
 
-" 状态栏定制 {{
+" 状态栏定制  Statusline Customization {{
 
 """""" itchyny/lightline.vim
 " doc: https://github.com/itchyny/lightline.vim
@@ -1167,7 +1167,7 @@ endfunction
 " }}
 
 
-" 主题定制 {{
+" 主题定制  Colorscheme Customization {{
 "
 " 优秀的颜色主题方案:
 "   dracula: https://draculatheme.com/vim
@@ -1754,7 +1754,7 @@ nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
 " }}
 
 
-" 目录树等图形接口 {{
+" 目录树等图形接口  UI Interface {{
 
 """""" preservim/nerdtree
 " doc: https://github.com/preservim/nerdtree
@@ -1921,7 +1921,7 @@ nmap <leader>m :Matrix<CR>
 " }}
 
 
-" 编程语言 {{
+" 编程语言  Programming Language {{
 
 """""""" Go {{
 
@@ -2201,7 +2201,7 @@ au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 " }}
 
 
-" 常用原生选项 {{
+" 常用原生选项  Native Configuration {{
 
 " 显示行号.
 set nu
@@ -2300,7 +2300,7 @@ set lazyredraw
 " }}
 
 
-" 自定义配置 {{
+" 自定义配置  Custom Configuration {{
 
 " ,E  打开 vim 或 nvim 的配置文件.
 if has('nvim')
@@ -2539,7 +2539,7 @@ endif
 " }}
 
 
-" 备用配置 {{
+" 备用配置  Stand-by Configuration {{
 
 " 将 sign 列合并到行号列, 会影响到 [n]k/j 快速跳转到指定行, 所以不建议开启此配置.
 "set signcolumn=number
@@ -2578,7 +2578,7 @@ endif
 " }}
 
 
-" Vim/Neovim 使用技巧 {{
+" Vim/Neovim 使用技巧  Tips {{
 
 """""""""" 常用命令行 {{
 "
