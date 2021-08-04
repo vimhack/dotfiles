@@ -1612,6 +1612,14 @@ endfunction
 
 function! GruvboxAfter()
   let g:lightline.colorscheme = 'gruvbox'
+
+  if !has('nvim')
+    " 解决使用 vim 打开 markdown 类型文件, 部分内容背景颜色是黑色的问题.
+    " 比如: **example**
+    hi HtmlBold gui=bold guibg=NONE guifg=#ebdbb2
+    hi Todo gui=italic guibg=NONE guifg=#ebdbb2
+  endif
+
   call EnableItalic()
 endfunction
 
