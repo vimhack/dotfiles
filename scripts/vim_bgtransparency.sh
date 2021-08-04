@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # vim_bgtransparency.sh
 #
 # Turn on or off the transparency of the Vim background.
@@ -6,11 +6,9 @@
 #
 # for zshrc
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+script_dir=$(cd "$(dirname $0)" && pwd)
 
-cd "$script_dir" || exit 1
-
-source env.sh
+source $script_dir/env.sh
 
 to_value=$1
 

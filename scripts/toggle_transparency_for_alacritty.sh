@@ -1,13 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # toggle_transparency_for_alacritty.sh
 #
 # for tmux.conf
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+script_dir=$(cd "$(dirname $0)" && pwd)
 
-cd "$script_dir" || exit 1
-
-source env.sh
+source $script_dir/env.sh
 
 update_config_for_alacritty
 

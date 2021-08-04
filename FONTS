@@ -1,62 +1,13 @@
 # Fonts for Alacritty
 #
-# rule: font family _ font style
+# Rule: FontFamily_RegularStyle::BoldStyle::ItalicStyle::BoldItalicStyle
 #
-# NOTE: 
-# The font style listed here is best not to use 'Italic', 'Bold'.
 
-Hack_Regular
+VictorMono_Thin::Medium::Thin Italic::Medium Italic
+VictorMono_ExtraLight::Medium::ExtraLight Italic::Medium Italic
+VictorMono_Light::SemiBold::Light Italic::SemiBold Italic
+VictorMono_Regular::Bold::Italic::Bold Italic
 
-Iosevka_Thin
-Iosevka_Extralight
-Iosevka_Light
-Iosevka_Regular
-Iosevka_Oblique
+Hack_Regular::Bold::Italic::Bold Italic
 
-FantasqueSansMono_Regular
 
-FiraCode_Light
-FiraCode_Regular
-FiraCode_Retina
-
-JetBrainsMono_Thin
-JetBrainsMono_ExtraLight
-JetBrainsMono_Light
-JetBrainsMono_Regular
-JetBrainsMono_Medium
-
-CodeNewRoman_Book
-
-Hasklug_ExtraLight
-Hasklug_Light
-Hasklug_Regular
-Hasklug_Medium
-
-GoMono_Book
-
-mononoki_Regular
-
-Cousine_Regular
-
-DaddyTimeMono_Book
-
-SpaceMono_Regular
-
-BlexMono_Thin
-BlexMono_ExtraLight
-BlexMono_Light
-BlexMono_Book
-
-SauceCodePro_ExtraLight
-SauceCodePro_Light
-SauceCodePro_Regular
-
-CaskaydiaCove_ExtraLight
-CaskaydiaCove_Light
-CaskaydiaCove_Regular
-
-DejaVuSansMono_Book
-DejaVuSansMono_Oblique
-
-Hurmit_light
-Hurmit_medium

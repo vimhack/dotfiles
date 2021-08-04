@@ -1,20 +1,20 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # random_font_for_alacritty.sh
 #
 # Change font of alacritty randomly.
 #
 # for tmux.conf
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+script_dir=$(cd "$(dirname $0)" && pwd)
 
-cd "$script_dir" || exit 1
+source $script_dir/env.sh
 
-source env.sh
+to_font=${fonts_without_current_font[$RANDOM % ${#fonts_without_current_font[@]}+1]}
 
-to_font=${fonts_without_current_font[$RANDOM % ${#fonts_without_current_font[@]}]}
+to_font_fullname=$(grep "^$to_font::" $fonts_file)
 
 update_config_for_alacritty
 
-change_font_for_alacritty "$to_font"
+change_font_for_alacritty "$to_font_fullname"
 
 exit 0

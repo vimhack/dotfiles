@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # env.sh
 #
 
@@ -31,7 +31,7 @@ opacity_step=0.05
 colorschemes=($(grep -Ev '#|//|"|^$' "$colorschemes_file" | xargs))
 
 # shellcheck disable=SC2207
-fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | xargs))
+fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | awk -F:: '{print $1}' | xargs))
 
 [[ ! -f "$alacritty_conf" ]] && {
     \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf
@@ -40,15 +40,21 @@ fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | xargs))
 # shellcheck disable=SC2206,SC2207,SC2068,SC2086,SC2034
 current_colorscheme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
 current_opacity=$(awk '/^background_opacity/{print $NF}' $alacritty_conf)
-current_font=$(awk '/ family:/{print $(NF-2)}' $alacritty_conf | head -1)
 current_font_size=$(awk '/  size:/{print $NF}' $alacritty_conf)
-current_font_style=$(grep 'style:' $alacritty_conf | head -1 | awk '{print $NF}')
-current_font_and_style=${current_font}_$current_font_style
+
+current_font_family=$(awk '/ family:/{print $(NF-2)}' $alacritty_conf | head -1)
+current_font_styles=$(grep -n "    style:" $alacritty_conf | awk -F: '{print $1"_"$NF}' | sed 's/ //')
+current_font_regular_style=$(echo "$current_font_styles" | awk -F_ '{print $2}' | head -1)
+current_font=${current_font_family}_$current_font_regular_style
+
+colorschemes_without_current_colorscheme=(
+    $(echo ${colorschemes[@]} | xargs -n1 | grep -vw $current_colorscheme | xargs)
+)
 
 # shellcheck disable=SC2207,SC2068,SC2086,SC2034
 fonts_without_current_font=(
     $(
-        echo ${fonts[@]} | xargs -n1 | grep -vw $current_font_and_style | xargs
+        echo ${fonts[@]} | xargs -n1 | grep -vw $current_font | xargs
     )
 )
 
@@ -66,25 +72,42 @@ update_config_for_alacritty() {
     \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf
 
     gsed -i "/^colors/s/^.*$/colors: *$current_colorscheme/" $alacritty_conf
-    gsed -i "/ family:/s/^.*$/    family: $current_font Nerd Font/" $alacritty_conf
-    gsed -i "s/#style: Regular$/style: $current_font_style/" $alacritty_conf
     gsed -i "/^  size:/s/^.*$/  size: $current_font_size/" $alacritty_conf
     gsed -i "/^background_opacity/s/^.*$/background_opacity: $current_opacity/" $alacritty_conf
+
+    gsed -i "/^    style:/s/style:/#style:/" $alacritty_conf
+    gsed -i "/ family:/s/^.*$/    family: $current_font_family Nerd Font/" $alacritty_conf
+
+    while read -r line; do
+        line_number=$(echo "$line" | awk -F_ '{print $1}')
+        style=$(echo "$line" | awk -F_ '{print $2}')
+
+        gsed -i "${line_number}s/^.*$/    style: $style/" $alacritty_conf
+    done <<<"$current_font_styles"
 }
 
 change_font_for_alacritty() {
-    local to_font_and_style=$1
+    local to_font_fullname=$1
 
-    to_font=$(echo "$to_font_and_style" | awk -F_ '{print $1}')
-    to_style=$(echo "$to_font_and_style" | awk -F_ '{print $2}')
+    to_font_family=$(echo "$to_font_fullname" | awk -F_ '{print $1}')
+    to_font_styles=$(echo "$to_font_fullname" | awk -F_ '{print $2}')
+    regular_style=$(echo $to_font_styles | awk -F:: '{print $1}')
+    bold_style=$(echo $to_font_styles | awk -F:: '{print $2}')
+    italic_style=$(echo $to_font_styles | awk -F:: '{print $3}')
+    bold_italic_style=$(echo $to_font_styles | awk -F:: '{print $4}')
 
-    style_line_number=$(grep -n "style: $current_font_style$" $alacritty_conf |
-        head -1 | awk -F: '{print $1}')
+    styles_line_numbers=$(echo $current_font_styles | awk -F_ '{print $1}' | xargs)
 
-    gsed -i "${style_line_number}s/style: $current_font_style$/#style: $to_style/" $alacritty_conf
+    read -r regular_style_ln bold_style_ln italic_style_ln bold_italic_style_ln <<<$styles_line_numbers
 
-    gsed -i "/ family:/s/^.*$/    family: $to_font Nerd Font/" $alacritty_conf
-    gsed -i "${style_line_number}s/#//" $alacritty_conf
+    gsed -i "/^    style:/s/style:/#style:/" $alacritty_conf
+
+    gsed -i "/ family:/s/^.*$/    family: $to_font_family Nerd Font/" $alacritty_conf
+
+    gsed -i "${regular_style_ln}s/^.*$/    style: $regular_style/" $alacritty_conf
+    gsed -i "${bold_style_ln}s/^.*$/    style: $bold_style/" $alacritty_conf
+    gsed -i "${italic_style_ln}s/^.*$/    style: $italic_style/" $alacritty_conf
+    gsed -i "${bold_italic_style_ln}s/^.*$/    style: $bold_italic_style/" $alacritty_conf
 }
 
 change_font_size_for_alacritty() {
