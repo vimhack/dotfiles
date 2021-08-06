@@ -23,42 +23,18 @@
 #   3. 私密配置, 非必需
 #      wget -O ~/.alacritty_private.yml https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty_private.conf
 #
-#   4. 安装几种好看的字体
+#   4. 安装一些好看的字体
 #      git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
-#      cd nerd-fonts/patched-fonts
 #
-#      1) Hack Nerd Font
-#         cp Hack/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#      2) Iosevka Nerd Font
-#         cp Iosevka/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#      3) FantasqueSansMono Nerd Font
-#         cp FantasqueSansMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#      4) FiraCode Nerd Font
-#         cp FiraCode/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#      5) JetBrainsMono Nerd Font
-#         cp JetBrainsMono/Ligatures/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#      6) CodeNewRoman Nerd Font
-#         cp CodeNewRoman/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
-#      7) Hasklug Nerd Font
-#         cp Hasklig/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
-#      8) GoMono Nerd Font
-#         cp Go-Mono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#      9) mononoki Nerd Font
-#         cp Mononoki/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#     10) Cousine Nerd Font
-#         cp Cousine/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#     11) DaddyTimeMono Nerd Font
-#         cp DaddyTimeMono/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#     12) SpaceMono Nerd Font
-#         cp SpaceMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#     13) BlexMono Nerd Font
-#         cp IBMPlexMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#     14) SauceCodePro Nerd Font
-#         cp SourceCodePro/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-#     15) CaskaydiaCove Nerd Font
-#         cp CascadiaCode/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
-#     16) DejaVuSansMono Nerd Font
-#         cp DejaVuSansMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
+#      # 给字体打图标补丁.
+#      cd nerd-fonts/bin/scripts
+#      ./gotta-patch-em-all-font-patcher\!.sh Hack
+#
+#      # 安装字体到 ~/Library/Fonts/NerdFonts/ 目录下.
+#      cd ../../
+#      ./install.sh Hack
+#
+#      可按如上方式安装想要的字体, 比如: VictorMono, RobotoMono 等.
 
 # }}
 
@@ -805,8 +781,8 @@ font:
     #   - (Windows) Consolas
     family: Hack Nerd Font
 
-    # NOTE: 不要手动改动这里, 脚本会自动匹配并改动这里.
-    #style: Regular
+    # The `style` can be specified to pick a specific face.
+    style: Regular
 
   # Bold font face
   bold:
