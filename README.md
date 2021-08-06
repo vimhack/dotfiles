@@ -109,50 +109,53 @@ $ cs vadelma_light
 ```text
 font
 
-The current font is 'SauceCodePro_Light', and it can be changed to one of the following list:
+The current font is 'Hasklug_Light', and it can be changed to one of the following list:
 
 * Hack_Regular
-* Iosevka_Thin
-* Iosevka_Extralight
-* Iosevka_Light
-* Iosevka_Regular
-* Iosevka_Oblique
-* FantasqueSansMono_Regular
-* FiraCode_Light
-* FiraCode_Regular
-* FiraCode_Retina
-* JetBrainsMono_Thin
-* JetBrainsMono_ExtraLight
-* JetBrainsMono_Light
+* BlexMono_Book
+* BlexMono_Light
+* BlexMono_ExtraLight
+* BlexMono_Thin
+* SauceCodePro_Regular
+* SauceCodePro_Light
+* SauceCodePro_ExtraLight
 * JetBrainsMono_Regular
-* JetBrainsMono_Medium
-* CodeNewRoman_Book
-* Hasklug_ExtraLight
-* Hasklug_Light
+* JetBrainsMono_Light
+* JetBrainsMono_ExtraLight
+* JetBrainsMono_Thin
+* RobotoMono_Regular
+* RobotoMono_Light
+* RobotoMono_Thin
 * Hasklug_Regular
-* Hasklug_Medium
+* Hasklug_ExtraLight
+* VictorMono_Regular
+* VictorMono_Light
+* VictorMono_ExtraLight
+* VictorMono_Thin
+* FantasqueSansMono_Regular
+* LiterationMono_Book
+* Lekton_Regular
+* DejaVuSansMono_Book
 * GoMono_Book
 * mononoki_Regular
 * Cousine_Regular
-* DaddyTimeMono_Book
 * SpaceMono_Regular
-* BlexMono_Thin
-* BlexMono_ExtraLight
-* BlexMono_Light
-* BlexMono_Book
-* SauceCodePro_ExtraLight
-* SauceCodePro_Regular
-* CaskaydiaCove_ExtraLight
-* CaskaydiaCove_Light
+* UbuntuMono_Regular
+* CodeNewRoman_Book
 * CaskaydiaCove_Regular
-* DejaVuSansMono_Book
-* DejaVuSansMono_Oblique
+* CaskaydiaCove_Light
+* CaskaydiaCove_SemiLight
+* CaskaydiaCove_ExtraLight
+* FiraCode_Regular
+* FiraCode_Light
 * Hurmit_light
-* Hurmit_medium
+* DaddyTimeMono_Book
+* OpenDyslexicMono_Regular
+* Monofur_Book
 
-For example, change font to 'Hurmit_medium':
+For example, change font to 'Monofur_Book':
 
-$ font Hurmit_medium
+$ font Monofur_Book
 ```
 
 **Change font size of Alacritty in terminal command line:**
