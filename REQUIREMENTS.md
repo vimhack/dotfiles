@@ -101,27 +101,11 @@ brew install alacritty
 - Install fonts
 
 ```bash
-git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
+git clone --depth=1 https://github.com/windvalley/nerd-fonts-patched.git
 
-cd nerd-fonts/patched-fonts
+cd nerd-fonts-patched/patched-fonts
 
-\cp Hack/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp Iosevka/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp FantasqueSansMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp FiraCode/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp JetBrainsMono/Ligatures/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp CodeNewRoman/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
-\cp Hasklig/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
-\cp Go-Mono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp Mononoki/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp Cousine/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp DaddyTimeMono/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp SpaceMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp IBMPlexMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp SourceCodePro/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp CascadiaCode/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
-\cp DejaVuSansMono/*/complete/*Nerd\ Font\ Complete.ttf ~/Library/Fonts
-\cp Hermit/*/complete/*Nerd\ Font\ Complete.otf ~/Library/Fonts
+./install.sh
 ```
 
 ## For Linux
