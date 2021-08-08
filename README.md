@@ -289,21 +289,29 @@ _Almost every dotfile has usage tips at the end of it for reference._
 
 ## 🔮 Show
 
+ColorScheme: `gruvbox`
+Opacity: `0.9`
+Font: `Hasklug_Light`
+FontSize: `12`
+VimBgTransparency: `1`
+
+![gruvbox](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/gruvbox.png)
+
 ColorScheme: `dracula`
-Font: `DaddyTimeMono_Book`
-FontSize: `12.0`
-Opacity: `0.90`
+Opacity: `1.0`
+Font: `Hurmit_light`
+FontSize: `11`
 VimBgTransparency: `1`
 
 ![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png)
 
-ColorScheme: `ayu`
-Font: `SauceCodePro_ExtraLight`
+ColorScheme: `papercolor`
+Opacity: `0.85`
+Font: `Lekton_Regular`
 FontSize: `11.5`
-Opacity: `0.90`
 VimBgTransparency: `1`
 
-![ayu](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/ayu.png)
+![papercolor](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/papercolor.png)
 
 ## ⚖️ License
 
