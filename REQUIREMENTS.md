@@ -103,7 +103,7 @@ brew install alacritty
 ```bash
 git clone --depth=1 https://github.com/windvalley/nerd-fonts-patched.git
 
-cd nerd-fonts-patched/patched-fonts
+cd nerd-fonts-patched
 
 ./install.sh
 ```
