@@ -41,14 +41,16 @@ fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | awk -F:: '{print $1}' | xargs))
 # shellcheck disable=SC2206,SC2207,SC2068,SC2086,SC2034
 current_colorscheme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
 current_opacity=$(awk '/^background_opacity/{print $NF}' $alacritty_conf)
-current_font_size=$(awk '/  size:/{print $NF}' $alacritty_conf)
+current_font_size=$(awk '/^  size:/{print $NF}' $alacritty_conf)
 
 current_offset_x=$(gsed -n  '/^  offset:$/{N;N;p}' $alacritty_conf|awk '/x:/{print $NF}')
 current_offset_y=$(gsed -n  '/^  offset:$/{N;N;p}' $alacritty_conf|awk '/y:/{print $NF}')
 
-current_font_family=$(awk '/ family:/{print $(NF-2)}' $alacritty_conf | head -1)
-current_font_styles=$(grep -n "    style:" $alacritty_conf | awk -F: '{print $1"_"$NF}' | sed 's/ //')
-current_font_regular_style=$(echo "$current_font_styles" | awk -F_ '{print $2}' | head -1)
+current_font_family=$(awk '/^    family:/{print $(NF-2)}' $alacritty_conf | head -1)
+current_font_styles=$(grep "^    style:" $alacritty_conf |awk -F: '{print $NF}' | sed 's/ //')
+current_font_styles_linenr=$(grep -n "^    style:" $dotfiles_dir/alacritty/alacritty.yml |
+    awk -F: '{print $1}' | xargs)
+current_font_regular_style=$(echo "$current_font_styles" | head -1)
 current_font=${current_font_family}_$current_font_regular_style
 
 colorschemes_without_current_colorscheme=(
@@ -75,23 +77,21 @@ last_opacity=$(cat $last_opacity_file)
 update_config_for_alacritty() {
     \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf_temp
 
-    font_style_sed_pattern=""
-    while read -r line; do
-        line_number=$(echo "$line" | awk -F_ '{print $1}')
-        style=$(echo "$line" | awk -F_ '{print $2}')
+    regular_style=$(echo $current_font_styles | sed -n 1p)
+    bold_style=$(echo $current_font_styles | sed -n 2p)
+    italic_style=$(echo $current_font_styles | sed -n 3p)
+    bold_italic_style=$(echo $current_font_styles | sed -n 4p)
 
-        if [[ -z "$font_style_sed_pattern" ]]; then
-            font_style_sed_pattern="${line_number}s/^.*$/    style: $style/"
-        else
-            font_style_sed_pattern=$font_style_sed_pattern";${line_number}s/^.*$/    style: $style/"
-        fi
-    done <<<"$current_font_styles"
+    read -r regular_style_ln bold_style_ln italic_style_ln bold_italic_style_ln <<<$current_font_styles_linenr
 
     gsed -i "/^colors/s/^.*$/colors: *$current_colorscheme/;
         /^  size:/s/^.*$/  size: $current_font_size/;
         /^background_opacity/s/^.*$/background_opacity: $current_opacity/;
         / family:/s/^.*$/    family: $current_font_family Nerd Font/;
-        $font_style_sed_pattern;
+        ${regular_style_ln}s/^.*$/    style: $regular_style/;
+        ${bold_style_ln}s/^.*$/    style: $bold_style/;
+        ${italic_style_ln}s/^.*$/    style: $italic_style/;
+        ${bold_italic_style_ln}s/^.*$/    style: $bold_italic_style/;
         /^  offset:$/{N;N;s/^.*$/  offset:\n    x: $current_offset_x\n    y: $current_offset_y/}" $alacritty_conf_temp
 
     \cp $alacritty_conf_temp $alacritty_conf
@@ -110,9 +110,7 @@ change_font_for_alacritty() {
     italic_style=$(echo $to_font_styles | awk -F:: '{print $3}')
     bold_italic_style=$(echo $to_font_styles | awk -F:: '{print $4}')
 
-    styles_line_numbers=$(echo $current_font_styles | awk -F_ '{print $1}' | xargs)
-
-    read -r regular_style_ln bold_style_ln italic_style_ln bold_italic_style_ln <<<$styles_line_numbers
+    read -r regular_style_ln bold_style_ln italic_style_ln bold_italic_style_ln <<<$current_font_styles_linenr
 
     gsed -i "/ family:/s/^.*$/    family: $to_font_family Nerd Font/;
         ${regular_style_ln}s/^.*$/    style: $regular_style/;
