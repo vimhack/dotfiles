@@ -16,6 +16,7 @@ vim_colorscheme_file=~/.vim/colorscheme.vim
 vim_transparency_file=~/.vim/transparency.vim
 
 alacritty_conf=~/.config/alacritty/alacritty.yml
+alacritty_conf_temp=~/.config/alacritty/.alacritty.yml.temp
 
 # last opacity value of Alacritty
 last_opacity_file=~/.config/alacritty/.opacity.last
@@ -72,22 +73,28 @@ fonts_without_current_font=(
 last_opacity=$(cat $last_opacity_file)
 
 update_config_for_alacritty() {
-    \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf
+    \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf_temp
 
-    gsed -i "/^colors/s/^.*$/colors: *$current_colorscheme/" $alacritty_conf
-    gsed -i "/^  size:/s/^.*$/  size: $current_font_size/" $alacritty_conf
-    gsed -i "/^background_opacity/s/^.*$/background_opacity: $current_opacity/" $alacritty_conf
-
-    gsed -i "/^    style:/s/style:/#style:/" $alacritty_conf
-    gsed -i "/ family:/s/^.*$/    family: $current_font_family Nerd Font/" $alacritty_conf
-    gsed -i  "/^  offset:$/{N;N;s/^.*$/  offset:\n    x: $current_offset_x\n    y: $current_offset_y/}" $alacritty_conf
-
+    font_style_sed_pattern=""
     while read -r line; do
         line_number=$(echo "$line" | awk -F_ '{print $1}')
         style=$(echo "$line" | awk -F_ '{print $2}')
 
-        gsed -i "${line_number}s/^.*$/    style: $style/" $alacritty_conf
+        if [[ -z "$font_style_sed_pattern" ]]; then
+            font_style_sed_pattern="${line_number}s/^.*$/    style: $style/"
+        else
+            font_style_sed_pattern=$font_style_sed_pattern";${line_number}s/^.*$/    style: $style/"
+        fi
     done <<<"$current_font_styles"
+
+    gsed -i "/^colors/s/^.*$/colors: *$current_colorscheme/;
+        /^  size:/s/^.*$/  size: $current_font_size/;
+        /^background_opacity/s/^.*$/background_opacity: $current_opacity/;
+        / family:/s/^.*$/    family: $current_font_family Nerd Font/;
+        $font_style_sed_pattern;
+        /^  offset:$/{N;N;s/^.*$/  offset:\n    x: $current_offset_x\n    y: $current_offset_y/}" $alacritty_conf_temp
+
+    \cp $alacritty_conf_temp $alacritty_conf
 }
 
 change_font_for_alacritty() {
@@ -107,15 +114,12 @@ change_font_for_alacritty() {
 
     read -r regular_style_ln bold_style_ln italic_style_ln bold_italic_style_ln <<<$styles_line_numbers
 
-    gsed -i "/^    style:/s/style:/#style:/" $alacritty_conf
-
-    gsed -i "/ family:/s/^.*$/    family: $to_font_family Nerd Font/" $alacritty_conf
-
-    gsed -i "${regular_style_ln}s/^.*$/    style: $regular_style/" $alacritty_conf
-    gsed -i "${bold_style_ln}s/^.*$/    style: $bold_style/" $alacritty_conf
-    gsed -i "${italic_style_ln}s/^.*$/    style: $italic_style/" $alacritty_conf
-    gsed -i "${bold_italic_style_ln}s/^.*$/    style: $bold_italic_style/" $alacritty_conf
-    gsed -i "/^  offset:$/{N;N;s/^.*$/  offset:\n    x: $offset_x\n    y: $offset_y/}" $alacritty_conf
+    gsed -i "/ family:/s/^.*$/    family: $to_font_family Nerd Font/;
+        ${regular_style_ln}s/^.*$/    style: $regular_style/;
+        ${bold_style_ln}s/^.*$/    style: $bold_style/;
+        ${italic_style_ln}s/^.*$/    style: $italic_style/;
+        ${bold_italic_style_ln}s/^.*$/    style: $bold_italic_style/;
+        /^  offset:$/{N;N;s/^.*$/  offset:\n    x: $offset_x\n    y: $offset_y/}" $alacritty_conf
 }
 
 change_font_size_for_alacritty() {
