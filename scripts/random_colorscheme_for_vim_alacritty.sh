@@ -9,7 +9,8 @@ script_dir=$(cd "$(dirname $0)" && pwd)
 
 source $script_dir/env.sh
 
-to_colorscheme=${colorschemes_without_current_colorscheme[$RANDOM % ${#colorschemes_without_current_colorscheme[@]}]}
+to_colorscheme_index=$(($RANDOM % ${#colorschemes_without_current_colorscheme[@]}))
+to_colorscheme=${colorschemes_without_current_colorscheme[$to_colorscheme_index+1]}
 
 update_config_for_alacritty
 
