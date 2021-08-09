@@ -6,7 +6,9 @@
 #   ./install.sh
 #
 # Rule:
-#   FontFamily_RegularStyle::BoldStyle::ItalicStyle::BoldItalicStyle
+#   FontFamily_RegularStyle::BoldStyle::ItalicStyle::BoldItalicStyle::OffsetX_OffsetY
+#
+# OffsetX can be thought of as modifying the letter spacing, and OffsetY as modifying the line spacing.
 
 
 # Hack:
@@ -14,54 +16,54 @@
 # Bold
 # Italic
 # Bold Italic
-Hack_Regular::Bold::Italic::Bold Italic
+Hack_Regular::Bold::Italic::Bold Italic::0_0
 
 # BlexMono:
 # Book, Light, ExtraLight, Thin
 # Bold, SemiBold, Medium, Text
 # Italic, Light Italic, ExtraLight Italic, Thin Italic
 # Bold Italic, SemiBold Italic, Medium Italic, Text Italic
-BlexMono_Book::Bold::Italic::Bold Italic
-BlexMono_Light::Text::Light Italic::Text Italic
-BlexMono_ExtraLight::Book::ExtraLight Italic::Book Italic
-BlexMono_Thin::Light::Thin Italic::Light Italic
+BlexMono_Book::Bold::Italic::Bold Italic::0_0
+BlexMono_Light::Text::Light Italic::Text Italic::0_0
+BlexMono_ExtraLight::Book::ExtraLight Italic::Book Italic::0_0
+BlexMono_Thin::Light::Thin Italic::Light Italic::0_0
 
 # SauceCodePro:
 # Regular, Light, ExtraLight
 # Black, Bold, Semibold, Medium
 # Italic, Light Italic, ExtraLight Italic
 # Black Italic, Bold Italic, Semibold Italic, Medium Italic
-SauceCodePro_Regular::Bold::Italic::Bold Italic
-SauceCodePro_Light::Medium::Light Italic::Medium Italic
-SauceCodePro_ExtraLight::Regular::ExtraLight Italic::Italic
+SauceCodePro_Regular::Bold::Italic::Bold Italic::0_0
+SauceCodePro_Light::Medium::Light Italic::Medium Italic::0_0
+SauceCodePro_ExtraLight::Regular::ExtraLight Italic::Italic::0_0
 
 # JetBrainsMono:
 # Regular, Light, ExtraLight, Thin
 # ExtraBold, Bold, Medium
 # Italic, Light Italic, ExtraLight Italic, Thin Italic
 # ExtraBold Italic, Bold Italic, Medium Italic
-JetBrainsMono_Regular::Bold::Italic::Bold Italic
-JetBrainsMono_Light::Bold::Light Italic::Bold Italic
-JetBrainsMono_ExtraLight::Medium::ExtraLight Italic::Medium Italic
-JetBrainsMono_Thin::Regular::Thin Italic::Regular Italic
+JetBrainsMono_Regular::Bold::Italic::Bold Italic::0_0
+JetBrainsMono_Light::Bold::Light Italic::Bold Italic::0_0
+JetBrainsMono_ExtraLight::Medium::ExtraLight Italic::Medium Italic::0_0
+JetBrainsMono_Thin::Regular::Thin Italic::Regular Italic::0_0
 
 # RobotoMono:
 # Regular, Light, Thin
 # Bold, Medium
 # Italic, Light Italic, Thin Italic
 # Bold Italic, Medium Italic
-RobotoMono_Regular::Bold::Italic::Bold Italic
-RobotoMono_Light::Medium::Light Italic::Medium Italic
-RobotoMono_Thin::Light::Thin Italic::Light Italic
+RobotoMono_Regular::Bold::Italic::Bold Italic::0_0
+RobotoMono_Light::Medium::Light Italic::Medium Italic::0_0
+RobotoMono_Thin::Light::Thin Italic::Light Italic::0_0
 
 # Hasklug:
 # Regular, Light, ExtraLight
 # Black, Bold, Semibold, Medium
 # Italic, Light Italic, ExtraLight Italic
 # Black Italic, Bold Italic, Semibold Italic, Medium Italic
-Hasklug_Regular::Bold::Italic::Bold Italic
-Hasklug_Light::Medium::Light Italic::Medium Italic
-Hasklug_ExtraLight::Regular::ExtraLight Italic::Italic
+Hasklug_Regular::Bold::Italic::Bold Italic::0_0
+Hasklug_Light::Medium::Light Italic::Medium Italic::0_0
+Hasklug_ExtraLight::Regular::ExtraLight Italic::Italic::0_0
 
 # VictorMono:
 # Regular, Light, ExtraLight, Thin
@@ -70,118 +72,118 @@ Hasklug_ExtraLight::Regular::ExtraLight Italic::Italic
 # Oblique, Light Oblique, ExtraLight Oblique, Thin Oblique
 # Bold Italic, SemiBold Italic, Medium Italic
 # Bold Oblique, SemiBold Oblique, Medium Oblique
-VictorMono_Regular::Bold::Oblique::Bold Oblique
-VictorMono_Light::SemiBold::Light Oblique::SemiBold Oblique
-VictorMono_ExtraLight::Medium::ExtraLight Oblique::Medium Oblique
-VictorMono_Thin::Regular::Thin Oblique::Oblique
+VictorMono_Regular::Bold::Oblique::Bold Oblique::0_0
+VictorMono_Light::SemiBold::Light Oblique::SemiBold Oblique::0_0
+VictorMono_ExtraLight::Medium::ExtraLight Oblique::Medium Oblique::0_0
+VictorMono_Thin::Regular::Thin Oblique::Oblique::0_0
 # Or
-#VictorMono_Regular::Bold::Italic::Bold Italic
-#VictorMono_Light::SemiBold::Light Italic::SemiBold Italic
-#VictorMono_ExtraLight::Medium::ExtraLight Italic::Medium Italic
-#VictorMono_Thin::Regular::Thin Italic::Italic
+#VictorMono_Regular::Bold::Italic::Bold Italic::0_0
+#VictorMono_Light::SemiBold::Light Italic::SemiBold Italic::0_0
+#VictorMono_ExtraLight::Medium::ExtraLight Italic::Medium Italic::0_0
+#VictorMono_Thin::Regular::Thin Italic::Italic::0_0
 
 # FantasqueSansMono:
 # Regular
 # Bold
 # Italic
 # Bold Italic
-FantasqueSansMono_Regular::Bold::Italic::Bold Italic
+FantasqueSansMono_Regular::Bold::Italic::Bold Italic::0_0
 
 # LiterationMono:
 # Book
 # Bold
 # Italic
 # Bold Italic
-LiterationMono_Book::Bold::Italic::Bold Italic
+LiterationMono_Book::Bold::Italic::Bold Italic::0_0
 
 # Lekton:
 # Regular
 # Bold
 # Italic
-Lekton_Regular::Bold::Italic::Bold
+Lekton_Regular::Bold::Italic::Bold::0_0
 
 # DejaVuSansMono:
 # Book
 # Bold
 # Oblique
 # Bold Oblique
-DejaVuSansMono_Book::Bold::Oblique::Bold Oblique
+DejaVuSansMono_Book::Bold::Oblique::Bold Oblique::0_0
 
 # GoMono:
 # Book
 # Bold
 # Italic
 # Bold Italic
-GoMono_Book::Bold::Italic::Bold Italic
+GoMono_Book::Bold::Italic::Bold Italic::0_0
 
 # mononoki:
 # Regular
 # Bold
 # Italic
 # Bold Italic
-mononoki_Regular::Bold::Italic::Bold Italic
+mononoki_Regular::Bold::Italic::Bold Italic::0_0
 
 # Cousine:
 # Regular
 # Bold
 # Italic
 # Bold Italic
-Cousine_Regular::Bold::Italic::Bold Italic
+Cousine_Regular::Bold::Italic::Bold Italic::0_0
 
 # SpaceMono:
 # Regular
 # Bold
 # Italic
 # Bold Italic
-SpaceMono_Regular::Bold::Italic::Bold Italic
+SpaceMono_Regular::Bold::Italic::Bold Italic::0_0
 
 # UbuntuMono:
 # Regular
 # Bold
 # Italic
 # Bold Italic
-UbuntuMono_Regular::Bold::Italic::Bold Italic
+UbuntuMono_Regular::Bold::Italic::Bold Italic::0_0
 
 # CodeNewRoman:
 # Book
 # Bold
 # Italic
-CodeNewRoman_Book::Bold::Italic::Bold
+CodeNewRoman_Book::Bold::Italic::Bold::0_0
 
 # CaskaydiaCove:
 # Regular, Light, SemiLight, ExtraLight
 # Bold, SemiBold
 # NOTE: no italic style
-CaskaydiaCove_Regular::Bold::SemiBold::Bold
-CaskaydiaCove_Light::SemiBold::Regular::Bold
-CaskaydiaCove_SemiLight::SemiBold::Regular::Bold
-CaskaydiaCove_ExtraLight::Regular::Light::SemiBold
+CaskaydiaCove_Regular::Bold::SemiBold::Bold::0_0
+CaskaydiaCove_Light::SemiBold::Regular::Bold::0_0
+CaskaydiaCove_SemiLight::SemiBold::Regular::Bold::0_0
+CaskaydiaCove_ExtraLight::Regular::Light::SemiBold::0_0
 
 # FiraCode:
 # Regular, Light
 # Bold, SemiBold, Medium, Retina
 # NOTE: no italic style
-FiraCode_Regular::Medium::Retina::SemiBold
-FiraCode_Light::Retina::Light::Medium
+FiraCode_Regular::Medium::Retina::SemiBold::0_0
+FiraCode_Light::Retina::Light::Medium::0_0
 
 # Huimit:
 # light
 # bold, medium
 # NOTE: no italic style
-Hurmit_light::medium::light::bold
+Hurmit_light::medium::light::bold::0_0
 
 # DaddyTimeMono:
 # Book
 # NOTE: no italic and bold style
-DaddyTimeMono_Book::Book::Book::Book
+DaddyTimeMono_Book::Book::Book::Book::0_0
 
 # OpenDyslexicMono:
 # Regular
 # NOTE: no italic and bold style
-OpenDyslexicMono_Regular::Regular::Regular::Regular
+OpenDyslexicMono_Regular::Regular::Regular::Regular::-3_-8
 
 # Monofur:
 # Book
 # NOTE: no italic and bold style
-Monofur_Book::Book::Book::Book
+Monofur_Book::Book::Book::Book::0_0
 
