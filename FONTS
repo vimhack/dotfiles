@@ -82,6 +82,14 @@ VictorMono_Thin::Regular::Thin Oblique::Oblique::0_0
 #VictorMono_ExtraLight::Medium::ExtraLight Italic::Medium Italic::0_0
 #VictorMono_Thin::Regular::Thin Italic::Italic::0_0
 
+# Iosevka:
+# Regular, Light, ExtraLight, Thin
+# Heavy, Bold, Medium
+# Italic, Oblique
+# Heavy Italic, Bold Italic, Medium Italic, Heavy Oblique, Bold Oblique, Medium Oblique
+Iosevka_Regular::Medium::Italic::Medium Italic::0_0
+Iosevka_Oblique::Medium::Oblique::Medium Oblique::0_0
+
 # FantasqueSansMono:
 # Regular
 # Bold
@@ -135,7 +143,7 @@ Cousine_Regular::Bold::Italic::Bold Italic::0_0
 # Bold
 # Italic
 # Bold Italic
-SpaceMono_Regular::Bold::Italic::Bold Italic::0_0
+SpaceMono_Regular::Bold::Italic::Bold Italic::-1_-3
 
 # UbuntuMono:
 # Regular
@@ -186,4 +194,38 @@ OpenDyslexicMono_Regular::Regular::Regular::Regular::-3_-8
 # Book
 # NOTE: no italic and bold style
 Monofur_Book::Book::Book::Book::0_0
+
+# TerminessTTF:
+# Medium
+# Bold
+# Italic
+# Bold Italic
+TerminessTTF_Medium::Bold::Italic::Bold Italic::0_0
+
+# ShureTechMono:
+# Regular
+ShureTechMono_Regular::Regular::Regular::Regular::0_0
+
+# ProFontIIx:
+# Book
+ProFontIIx_Book::Book::Book::Book::0_0
+
+# InconsolataLGC:
+# Medium
+# Bold
+# Italic
+# Bold Italic
+InconsolataLGC_Medium::Bold::Italic::Bold Italic::0_0
+
+# iMWritingMonoS_Regular:
+# Regular
+# Bold
+# Italic
+# Bold Italic
+iMWritingMonoS_Regular::Bold::Italic::Bold Italic::0_0
+
+# GohuFont:
+# Medium, uni-14
+GohuFont_Medium::Medium::Medium::Medium::0_0
+GohuFont_uni-14::uni-14::uni-14::uni-14::0_0
 
