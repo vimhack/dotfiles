@@ -225,6 +225,9 @@ Plug 'windvalley/molokai'
 " vadelma
 Plug 'windvalley/vadelma'
 
+" pencil
+Plug 'preservim/vim-colors-pencil'
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1184,6 +1187,7 @@ endfunction
 "   ayu: https://github.com/ayu-theme/ayu-vim
 "   onehalf: https://github.com/sonph/onehalf
 "   vadelma: https://github.com/windvalley/vadelma
+"   pencil: https://github.com/preservim/vim-colors-pencil
 "
 " NOTE:
 "   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1492,6 +1496,15 @@ function! PaperColorBefore()
   endif
 endfunction
 
+function! PencilBefore()
+  " 0=low (def), 1=high
+  let g:pencil_higher_contrast_ui = 0
+  " 0=blue (def), 1=normal
+  let g:pencil_neutral_headings = 1
+  " 0=gray (def), 1=normal
+  let g:pencil_neutral_code_bg = 0
+endfunction
+
 " }}
 
 " 需要放置到 colorscheme 指令之后的主题优化方法 {{
@@ -1674,6 +1687,18 @@ function! OnehalflightAfter()
   call EnableItalic()
 endfunction
 
+function! PencilAfter()
+  let g:lightline.colorscheme = 'one'
+  call EnableItalic()
+
+  " for Vim
+  if &background == 'light'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e0e0e0
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
+  endif
+endfunction
+
 " }}
 
 " }}
@@ -1685,6 +1710,7 @@ call NordBefore()
 call MolokaiBefore()
 call PaperColorBefore()
 call JellybeansBefore()
+call PencilBefore()
 
 " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
 " dotfiles git仓库可以不被无用的变更信息干扰.
@@ -1740,6 +1766,8 @@ if exists('g:colors_name')
     call OnehalflightAfter()
   elseif (g:colors_name == 'vadelma')
     call VadelmaAfter()
+  elseif (g:colors_name == 'pencil')
+    call PencilAfter()
   endif
 endif
 
@@ -2899,6 +2927,7 @@ endif
 "                 rg  visual 模式下选择文本后, 按 rg 在整个项目内搜索选择的文本, 显示搜索结果.
 "                ,rc  ,rg/rg 搜索内容关闭后, 想再次搜索上次搜索的内容,
 "                     normal 模式下按 ,rc 即可.
+"
 " ** francoiscabrol/ranger.vim (https://github.com/francoiscabrol/ranger.vim)
 "                 ,r  打开 ranger, 选择文件后按 enter 或 l 以新建标签页的方式打开文件,
 "                     如果文件已经打开了, 则直接跳转到相关标签页.
@@ -3055,7 +3084,6 @@ endif
 "                 ,m  同上.
 "
 " ** matze/vim-move (https://github.com/matze/vim-move)
-"
 "   [n] ctrl k/j/h/l  normal 模式下将光标所在行向上/向下移动 n 行,
 "                     或将光标所在字符向左/向右移动 n 个字符;
 "                     visual 模式下将选择的内容向上/向下移动 n 行,
@@ -3111,7 +3139,7 @@ endif
 """""""""" 注意事项 {{
 "
 "   1. python-mode/python-mode  建议不要使用这个插件, 不太好用,
-"      文档显示方式很蹩脚, 会影响到 coc-jedi 的正常发挥, coc-jedi 足矣.
+"      文档显示方式很蹩脚, 会影响到 coc-jedi 的正常发挥, 使用 coc-jedi 就可以了.
 "
 "   2. 如下 golines 配置不建议使用, 有时会严重拖慢保存文件的速度.
 "      格式化 Go 代码每行的长度, 使不超过 120 个字符:
