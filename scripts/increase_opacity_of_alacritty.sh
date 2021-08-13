@@ -11,6 +11,8 @@ to_opacity=0$(echo "scale=2;$current_opacity+$opacity_step" | bc)
 
 [[ $to_opacity -gt 1 ]] && exit 0
 
+[[ $to_opacity = 01.00 ]] && to_opacity=1.0
+
 update_config_for_alacritty
 
 change_opacity_for_alacritty "$to_opacity"
