@@ -1255,6 +1255,28 @@ function! EnableItalic()
   hi markdownItalic cterm=italic gui=italic
 endfunction
 
+" 支持粗体的方法.
+function! EnableBold()
+  hi Function cterm=bold gui=bold
+  hi Title cterm=bold gui=bold
+  hi htmlBold cterm=bold gui=bold
+  hi markdownBold cterm=bold gui=bold
+
+  hi! link zshFunction Function
+
+  if (g:colors_name == 'PaperColor')
+    hi goFunction cterm=bold gui=bold
+    hi pythonFunction cterm=bold gui=bold
+    hi shFunction cterm=bold gui=bold
+    hi! link zshFunction shFunction
+    hi Type cterm=NONE gui=NONE
+  elseif (g:colors_name == 'one')
+    hi pythonFunction cterm=bold gui=bold
+  elseif (g:colors_name == 'pencil')
+    hi Function cterm=bold guifg=#008EC4 gui=bold
+  endif
+endfunction
+
 " 设置提示列的颜色方案, 去掉默认的背景色,
 " 比如 ale 插件的代码静态检查的错误或警告信息就会出现在此列,
 " coc-git 扩展的文件变化信息也会出现在此列.
@@ -1456,7 +1478,7 @@ function! DraculaBefore()
   let g:dracula_italic=1
 
   " 是否启用粗体字, 默认值: 1
-  let g:dracula_bold=0
+  let g:dracula_bold=1
 endfunction
 
 function! JellybeansBefore()
@@ -1520,6 +1542,7 @@ function! VadelmaAfter()
   endif
 
   call EnableItalic()
+  call EnableBold()
 endfunc
 
 function! PaperColorAfter()
@@ -1538,6 +1561,7 @@ function! PaperColorAfter()
   endif
 
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! JellybeansAfter()
@@ -1552,6 +1576,7 @@ function! JellybeansAfter()
     hi Cursorcolumn cterm=NONE ctermbg=236 ctermfg=NONE guibg=#303030 guifg=NONE
 
     call EnableItalic()
+    call EnableBold()
 endfunction
 
 function! Base16DefaultDarkAfter()
@@ -1562,6 +1587,7 @@ function! Base16DefaultDarkAfter()
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
 
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! DraculaAfter()
@@ -1607,11 +1633,13 @@ function! RigelAfter()
   hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=white guibg=#00384d guifg=#afffff
 
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! OneAfter()
   let g:lightline.colorscheme = 'one'
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! MolokaiAfter()
@@ -1621,6 +1649,7 @@ function! MolokaiAfter()
   hi Whitespace cterm=NONE guibg=NONE guifg=#465457
 
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! GruvboxAfter()
@@ -1639,17 +1668,20 @@ endfunction
 function! IcebergAfter()
   let g:lightline.colorscheme = 'iceberg'
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! NordAfter()
   let g:lightline.colorscheme = 'nord'
   " nord 默认提供的斜体字支持不够理想, 使用自定义方法增强.
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! TenderAfter()
   let g:lightline.colorscheme = 'tender'
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! AyuAfter()
@@ -1662,6 +1694,7 @@ function! AyuAfter()
   endif
 
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! OnehalfdarkAfter()
@@ -1676,6 +1709,7 @@ function! OnehalfdarkAfter()
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
 
   call EnableItalic()
+  call EnableBold()
 endfunction
 
 function! OnehalflightAfter()
@@ -1689,7 +1723,6 @@ endfunction
 
 function! PencilAfter()
   let g:lightline.colorscheme = 'one'
-  call EnableItalic()
 
   " for Vim
   if &background == 'light'
@@ -1697,6 +1730,9 @@ function! PencilAfter()
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
   endif
+
+  call EnableItalic()
+  call EnableBold()
 endfunction
 
 " }}
