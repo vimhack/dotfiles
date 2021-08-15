@@ -125,8 +125,8 @@ debug:
 
 # doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
 schemes:
-  # Default colors (Tomorrow Night)
-  base16-default-dark: &base16-default-dark
+  # Default colors
+  base16: &base16
     primary:
       background: "#1d1f21"
       foreground: "#c5c8c6"
@@ -636,7 +636,7 @@ schemes:
       white: "#FFFFFF"
 
   # https://github.com/sonph/onehalf/tree/master/alacritty
-  onehalflight: &onehalflight
+  onehalf_light: &onehalf_light
     primary:
       background: "0xfafafa"
       foreground: "0x383a42"
@@ -659,7 +659,7 @@ schemes:
       cyan: "0x0997b3"
       white: "0xfafafa"
 
-  onehalfdark: &onehalfdark
+  onehalf: &onehalf
     primary:
       background: "0x282c34"
       foreground: "0xdcdfe4"

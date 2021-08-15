@@ -23,7 +23,7 @@ To install, run the following from your terminal:
 (please backup your existing dotfiles first)
 
 ```bash
-# Clone windvalley/dotfiles, please make sure the target directory is '~/.dotfiles'
+# Make sure the target directory is '~/.dotfiles'
 git clone --depth=1 https://github.com/windvalley/dotfiles.git ~/.dotfiles
 
 # vim
@@ -74,7 +74,7 @@ The current colorscheme is 'dracula', and it can be changed to one of the follow
 * molokai
 * rigel
 * jellybeans
-* base16-default-dark
+* base16
 * nord
 * tender
 * gruvbox
@@ -83,14 +83,14 @@ The current colorscheme is 'dracula', and it can be changed to one of the follow
 * papercolor
 * ayu
 * ayu_mirage
-* onehalfdark
+* onehalf
 * vadelma
 * gruvbox_light
 * one_light
 * iceberg_light
 * papercolor_light
 * ayu_light
-* onehalflight
+* onehalf_light
 * vadelma_light
 
 For example, change colorscheme to 'vadelma_light':
@@ -234,8 +234,8 @@ $ rgb
 - `papercolor_light`
 - `vadelma`
 - `vadelma_light`
-- `onehalfdark`
-- `onehalflight`
+- `onehalf`
+- `onehalf_light`
 
 **Toggle Vim/Neovim background transparency in Vim Normal Mode:**
 

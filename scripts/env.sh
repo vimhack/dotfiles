@@ -139,6 +139,10 @@ change_colorscheme_for_alacritty_vim() {
 
     gsed -i "/^colors/s/^.*$/colors: *$to_colorscheme/" $alacritty_conf
 
+    [[ "$to_colorscheme" = "base16" ]] && to_colorscheme="base16-default-dark"
+    [[ "$to_colorscheme" = "onehalf" ]] && to_colorscheme="onehalfdark"
+    [[ "$to_colorscheme" = "onehalf_light" ]] && to_colorscheme="onehalflight"
+
     if [[ "$to_colorscheme" = "ayu" ]]; then
         echo "let ayucolor='dark'
 colorscheme ayu" >$vim_colorscheme_file
