@@ -774,6 +774,29 @@ schemes:
       cyan: "#4fb8cc"
       white: "#f1f1f1"
 
+  github_light: &github_light
+    primary:
+      background: "#F8F8FF"
+      foreground: "#33374c"
+    normal:
+      black: "#dcdfe7"
+      red: "#cc517a"
+      green: "#668e3d"
+      yellow: "#c57339"
+      blue: "#2d539e"
+      magenta: "#7759b4"
+      cyan: "#3f83a6"
+      white: "#33374c"
+    bright:
+      black: "#8389a3"
+      red: "#cc3768"
+      green: "#598030"
+      yellow: "#b6662d"
+      blue: "#22478e"
+      magenta: "#6845ad"
+      cyan: "#327698"
+      white: "#262a3f"
+
 # }}
 
 # 主题配置 {{

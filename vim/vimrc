@@ -228,6 +228,9 @@ Plug 'windvalley/vadelma'
 " pencil
 Plug 'preservim/vim-colors-pencil'
 
+" github light
+Plug 'endel/vim-github-colorscheme'
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1188,6 +1191,7 @@ endfunction
 "   onehalf: https://github.com/sonph/onehalf
 "   vadelma: https://github.com/windvalley/vadelma
 "   pencil: https://github.com/preservim/vim-colors-pencil
+"   github_light: https://github.com/endel/vim-github-colorscheme
 "
 " NOTE:
 "   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1325,31 +1329,42 @@ function! LightlineReload()
   windo call lightline#colorscheme()
 endfunction
 
+function! BackgroundTransparency()
+  " 使 vim/nvim 背景透明.
+  hi! Normal ctermbg=NONE guibg=NONE
+
+  " 解决没有文字内容的底部区域无法使背景透明的问题.
+  " NOTE: 不能对所有 colorscheme 都使用这种方式, 会对配色造成干扰, 比如 gruvbox.
+  if g:colors_name == 'github' ||
+    \ g:colors_name == 'jellybeans' ||
+    \ g:colors_name == 'PaperColor'
+
+    hi! NonText ctermbg=NONE guibg=NONE
+  endif
+
+  if (g:popup_window_transparent == 1)
+    " 使悬浮窗口透明.
+    hi Pmenu ctermbg=NONE guibg=NONE
+  endif
+
+  " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
+  " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
+  let linenr_colorscheme_custom=0
+  if (linenr_colorscheme_custom==1)
+    hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
+  endif
+endfunction
+
 " 设置背景透明的方法, 需要放到 colorscheme 指令之后执行.
 function! BGTransparentAfter()
   if (g:bgtransparency == 1)
-    if (g:colors_name != 'PaperColor' && g:colors_name != 'jellybeans')
-      " 使 vim/nvim 背景透明.
-      hi Normal ctermbg=NONE guibg=NONE
-    endif
-
-    if (g:popup_window_transparent == 1)
-      " 使悬浮窗口透明.
-      hi Pmenu ctermbg=NONE guibg=NONE
-    endif
-
-    " 自定义行号颜色, 使所有颜色主题使用相同行号颜色方案, 默认不启用.
-    " NOTE: Vim 识别三种不同的终端, term 黑白终端, cterm 彩色终端, gui Gvim 窗口.
-    let linenr_colorscheme_custom=0
-    if (linenr_colorscheme_custom==1)
-      hi LineNr cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=NONE
-    endif
+    call BackgroundTransparency()
   endif
 endfunction
 
 " 在背景是 dark 和 light 之间切换的方法.
 function! ToggleBGColor()
-  " 对于不支持切换背景色的 colorschemes, 给出提示信息.
+  " 对于不支持切换背景色为 light 的 colorschemes, 给出提示信息.
   if g:colors_name == 'ayu' ||
     \ g:colors_name == 'dracula' ||
     \ g:colors_name == 'jellybeans' ||
@@ -1360,6 +1375,12 @@ function! ToggleBGColor()
     \ g:colors_name == 'base16-default-dark'
 
     echo g:colors_name . " has no light colorscheme"
+    return
+  endif
+
+  " 对于不支持切换背景色为 dark 的 colorschemes, 给出提示信息.
+  if g:colors_name == 'github'
+    echo g:colors_name . " has no dark colorscheme"
     return
   endif
 
@@ -1421,21 +1442,12 @@ function! ToggleBGTransparent()
       call OnehalfdarkAfter()
     elseif g:colors_name == 'onehalflight'
       call OnehalflightAfter()
+    elseif g:colors_name == 'github'
+      call GithubAfter()
     endif
   else
-    hi Normal guibg=NONE ctermbg=NONE
+    call BackgroundTransparency()
     let g:bgtransparency = 1
-
-    if g:colors_name == 'jellybeans'
-      call JellybeansBefore()
-      execute 'colorscheme ' . g:colors_name
-      call JellybeansAfter()
-    elseif g:colors_name == 'PaperColor'
-      call PaperColorBefore()
-      execute 'colorscheme ' . g:colors_name
-      call PaperColorAfter()
-      call SignColumnHi()
-    endif
   endif
 endfunction
 
@@ -1485,17 +1497,6 @@ function! JellybeansBefore()
   " 是否禁用斜体字, 0 禁用, 1 启用.
   let g:jellybeans_use_term_italics = 1
   let g:jellybeans_use_gui_italics = 1
-
- if (g:bgtransparency == 1)
-    " 对于 jellybeans 主题, 使用 hi Normal 的方式设置背景透明的方式,
-    " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
-    let g:jellybeans_overrides = {
-    \  'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
-    \ }
-    if has('termguicolors') && &termguicolors
-      let g:jellybeans_overrides['background']['guibg'] = 'none'
-    endif
-  endif
 endfunction
 
 function! PaperColorBefore()
@@ -1510,12 +1511,6 @@ function! PaperColorBefore()
     \ }
   " 是否允许斜体字, 1 是允许, 0 是不允许.
   let g:PaperColor_Theme_Options.theme.default.allow_italic = 1
-
-  if (g:bgtransparency == 1)
-    " 对于 papercolor 主题, 使用 hi Normal 的方式设置背景透明的方式,
-    " 存在内容最后一行后的背景不透明的问题, 所以使用该主题自身的指令实现.
-    let g:PaperColor_Theme_Options.theme.default.transparent_background = 1
-  endif
 endfunction
 
 function! PencilBefore()
@@ -1735,6 +1730,21 @@ function! PencilAfter()
   call EnableBold()
 endfunction
 
+function! GithubAfter()
+  let g:lightline.colorscheme = 'one'
+
+  " 使底部的无文本区域的颜色方案和 Normal 一致.
+  hi! link NonText Normal
+
+  " for Vim
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+  " for Neovim
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
+
 " }}
 
 " }}
@@ -1804,6 +1814,8 @@ if exists('g:colors_name')
     call VadelmaAfter()
   elseif (g:colors_name == 'pencil')
     call PencilAfter()
+  elseif (g:colors_name == 'github')
+    call GithubAfter()
   endif
 endif
 
