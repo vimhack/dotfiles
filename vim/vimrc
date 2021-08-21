@@ -228,8 +228,8 @@ Plug 'windvalley/vadelma'
 " pencil
 Plug 'preservim/vim-colors-pencil'
 
-" github light
-Plug 'endel/vim-github-colorscheme'
+" github dark
+Plug 'cormacrelf/vim-colors-github'
 
 " }}
 
@@ -1191,7 +1191,7 @@ endfunction
 "   onehalf: https://github.com/sonph/onehalf
 "   vadelma: https://github.com/windvalley/vadelma
 "   pencil: https://github.com/preservim/vim-colors-pencil
-"   github_light: https://github.com/endel/vim-github-colorscheme
+"   github: https://github.com/cormacrelf/vim-colors-github
 "
 " NOTE:
 "   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1324,6 +1324,8 @@ function! LightlineReload()
   elseif g:colors_name =~# 'PaperColor'
     " 使用 vadelma 的 lightline 配色更舒服.
     execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
+  elseif g:colors_name =~# 'github'
+    execute 'source ' . g:plug_home . '/vim-colors-github/autoload/lightline/colorscheme/github.vim'
   endif
 
   windo call lightline#colorscheme()
@@ -1379,10 +1381,10 @@ function! ToggleBGColor()
   endif
 
   " 对于不支持切换背景色为 dark 的 colorschemes, 给出提示信息.
-  if g:colors_name == 'github'
-    echo g:colors_name . " has no dark colorscheme"
-    return
-  endif
+  "if g:colors_name == ''
+    "echo g:colors_name . " has no dark colorscheme"
+    "return
+  "endif
 
   " 由于 onehalfdark 和 onehalflight 不使用 background 选项来控制背景色, 故需单独配置.
   if g:colors_name == 'onehalfdark'
@@ -1402,6 +1404,8 @@ function! ToggleBGColor()
     call PaperColorAfter()
   elseif g:colors_name == 'vadelma'
     call VadelmaAfter()
+  elseif g:colors_name == 'github'
+    call GithubAfter()
   endif
 
   " 重载 lightline 状态栏, 使其颜色随着背景色改变.
@@ -1520,6 +1524,11 @@ function! PencilBefore()
   let g:pencil_neutral_headings = 1
   " 0=gray (def), 1=normal
   let g:pencil_neutral_code_bg = 0
+endfunction
+
+function! GithubBefore()
+  " 使 github_light 的白色背景看上去更灰一些.
+  let g:github_colors_soft = 1
 endfunction
 
 " }}
@@ -1731,15 +1740,22 @@ function! PencilAfter()
 endfunction
 
 function! GithubAfter()
-  let g:lightline.colorscheme = 'one'
+  let g:lightline.colorscheme = 'github'
 
-  " 使底部的无文本区域的颜色方案和 Normal 一致.
-  hi! link NonText Normal
+  " 去掉文件尾部没有内容的区域的颜色设置.
+  hi EndOfBuffer ctermbg=NONE guibg=NONE
 
-  " for Vim
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
-  " for Neovim
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+  if &background == 'dark'
+    " for Vim
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#41484f
+    " for Neovim
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#41484f
+  else
+    " for Vim
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    " for Neovim
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+  endif
 
   call EnableItalic()
   call EnableBold()
@@ -1757,6 +1773,7 @@ call MolokaiBefore()
 call PaperColorBefore()
 call JellybeansBefore()
 call PencilBefore()
+call GithubBefore()
 
 " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
 " dotfiles git仓库可以不被无用的变更信息干扰.
@@ -1780,41 +1797,41 @@ endif
 if exists('g:colors_name')
   call BGTransparentAfter()
 
-  if (g:colors_name == 'rigel')
+  if g:colors_name == 'rigel'
     call RigelAfter()
-  elseif (g:colors_name == 'dracula')
+  elseif g:colors_name == 'dracula'
     call DraculaAfter()
-  elseif (g:colors_name == 'one')
     call OneAfter()
-  elseif (g:colors_name == 'molokai')
+  elseif g:colors_name == 'one'
+  elseif g:colors_name == 'molokai'
     call MolokaiAfter()
-  elseif (g:colors_name == 'gruvbox')
+  elseif g:colors_name == 'gruvbox'
     call GruvboxAfter()
-  elseif (g:colors_name == 'iceberg')
+  elseif g:colors_name == 'iceberg'
     call IcebergAfter()
-  elseif (g:colors_name == 'jellybeans')
+  elseif g:colors_name == 'jellybeans'
     call JellybeansAfter()
-  elseif (g:colors_name == 'base16-default-dark')
+  elseif g:colors_name == 'base16-default-dark'
     call Base16DefaultDarkAfter()
-  elseif (g:colors_name == 'nord')
+  elseif g:colors_name == 'nord'
     call NordAfter()
-  elseif (g:colors_name == 'tender')
+  elseif g:colors_name == 'tender'
     call TenderAfter()
-  elseif (g:colors_name == 'PaperColor')
+  elseif g:colors_name == 'PaperColor'
     call PaperColorAfter()
-  elseif (g:colors_name == 'ayu')
+  elseif g:colors_name == 'ayu'
     " 解决在 AyuAfter 函数内找不到 ayucolor 变量的问题.
     let g:ayucolor = ayucolor
     call AyuAfter()
-  elseif (g:colors_name == 'onehalfdark')
+  elseif g:colors_name == 'onehalfdark'
     call OnehalfdarkAfter()
-  elseif (g:colors_name == 'onehalflight')
+  elseif g:colors_name == 'onehalflight'
     call OnehalflightAfter()
-  elseif (g:colors_name == 'vadelma')
+  elseif g:colors_name == 'vadelma'
     call VadelmaAfter()
-  elseif (g:colors_name == 'pencil')
+  elseif g:colors_name == 'pencil'
     call PencilAfter()
-  elseif (g:colors_name == 'github')
+  elseif g:colors_name == 'github'
     call GithubAfter()
   endif
 endif

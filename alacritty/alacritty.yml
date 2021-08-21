@@ -768,7 +768,7 @@ schemes:
       black: "#808080"
       red: "#fb007a"
       green: "#5fd7af"
-      yellow: "#f3e430"
+      yellow: "#f4e430"
       blue: "#20bbfc"
       magenta: "#6855de"
       cyan: "#4fb8cc"
@@ -776,14 +776,14 @@ schemes:
 
   github_light: &github_light
     primary:
-      background: "#F8F8FF"
-      foreground: "#33374c"
+      background: "#f6f8fa"
+      foreground: "#24292e"
     normal:
       black: "#dcdfe7"
       red: "#cc517a"
       green: "#668e3d"
-      yellow: "#c57339"
-      blue: "#2d539e"
+      yellow: "#f18338"
+      blue: "#669cc2"
       magenta: "#7759b4"
       cyan: "#3f83a6"
       white: "#33374c"
@@ -797,14 +797,34 @@ schemes:
       cyan: "#327698"
       white: "#262a3f"
 
+  github: &github
+    primary:
+      background: "#24292e"
+      foreground: "#d2d4de"
+    normal:
+      black: "#161821"
+      red: "#d73a49"
+      green: "#59b36f"
+      yellow: "#f18338"
+      blue: "#669cc2"
+      magenta: "#8b71c1"
+      cyan: "#00afaf"
+      white: "#f1f8ff"
+    bright:
+      black: "#6b7089"
+      red: "#e98989"
+      green: "#c0ca8e"
+      yellow: "#e9b189"
+      blue: "#91acd1"
+      magenta: "#ada0d3"
+      cyan: "#95c4ce"
+      white: "#d2d4de"
+
 # }}
 
 # 主题配置 {{
 
-# 从 Color Schemes 中选则一个使用:
-#   rigel, dracula, molokai, jellybeans, base16-default-dark, nord, tender,
-#   gruvbox_dark, gruvbox_light, iceberg, iceberg_light, one_dark, one_light,
-#   papercolor, papercolor_light, ayu, ayu_mirage, ayu_light
+# 从 Color Schemes 中选则一个使用.
 colors: *dracula
 
 # 背景透明度配置, 取值范围: 0.0 到 1.0
