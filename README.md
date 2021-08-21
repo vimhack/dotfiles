@@ -69,8 +69,9 @@ Enjoy it😘
 ```text
 colorscheme
 
-The current colorscheme is 'dracula', and it can be changed to one of the following list:
+The current colorscheme is 'github', and it can be changed to one of the following list:
 
+* dracula
 * molokai
 * rigel
 * jellybeans
@@ -85,6 +86,7 @@ The current colorscheme is 'dracula', and it can be changed to one of the follow
 * ayu_mirage
 * onehalf
 * vadelma
+* pencil
 * gruvbox_light
 * one_light
 * iceberg_light
@@ -92,14 +94,12 @@ The current colorscheme is 'dracula', and it can be changed to one of the follow
 * ayu_light
 * onehalf_light
 * vadelma_light
+* pencil_light
+* github_light
 
-For example, change colorscheme to 'vadelma_light':
+For example, change colorscheme to 'github_light':
 
-$ colorscheme vadelma_light
-
-or
-
-$ cs vadelma_light
+$ colorscheme github_light
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
@@ -224,6 +224,8 @@ $ rgb
 
 💡 Support colorschemes:
 
+- `github`
+- `github_light`
 - `gruvbox`
 - `gruvbox_light`
 - `iceberg`
@@ -236,6 +238,8 @@ $ rgb
 - `vadelma_light`
 - `onehalf`
 - `onehalf_light`
+- `pencil`
+- `pencil_light`
 
 **Toggle Vim/Neovim background transparency in Vim Normal Mode:**
 
