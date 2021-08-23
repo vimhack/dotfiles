@@ -1606,9 +1606,9 @@ function! DraculaAfter()
   hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
 
   " 优化 Vim 的非可见字符的颜色方案.
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
   " 优化 Neovim 的非可见字符的颜色方案.
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#6272a4
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
 endfunction
 
 function! RigelAfter()
@@ -1801,8 +1801,8 @@ if exists('g:colors_name')
     call RigelAfter()
   elseif g:colors_name == 'dracula'
     call DraculaAfter()
-    call OneAfter()
   elseif g:colors_name == 'one'
+    call OneAfter()
   elseif g:colors_name == 'molokai'
     call MolokaiAfter()
   elseif g:colors_name == 'gruvbox'
@@ -2038,6 +2038,8 @@ let g:go_fmt_autosave = 0
 " 默认值: 1
 let g:go_imports_autosave = 0
 
+" 显示缩进线.
+autocmd FileType go set list lcs=tab:\¦\ " 注意结尾又一个空格.
 
 " *** 代码高效阅读 ***
 
@@ -2435,10 +2437,13 @@ augroup END
 " 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
 autocmd FileType * set colorcolumn=80
 
-" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现规范问题,
-" 如果不配置这行, 我们将看不到多余的空白字符,
-" 对于 Go 类型文件来说, 也无法直观确认缩进是否是 tab 了.
-set list listchars=tab:>-,trail:-
+" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现多余的空白字符.
+function! SetList()
+  if &filetype != 'go'
+    set list listchars=tab:>-,trail:-
+  endif
+endfunction
+autocmd FileType * call SetList()
 
 " visual 模式下选择内容, 然后通过按 ,) 或 ,] 或 ,} 或 ," 或 ,' 或 ,`
 " 将选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
