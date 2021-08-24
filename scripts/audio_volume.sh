@@ -1,0 +1,70 @@
+#!/usr/bin/env zsh
+# audio_volume.sh
+#
+# Requirements:
+#   brew install switchaudio-osx
+#
+# alias vol="/path/audio_volume.sh"
+#
+# Only for MacOS.
+
+value=$1
+flag_value=$2
+
+usage() {
+    echo "Usage of vol:
+  digit             Set volume value, 1~100
+  -p, --print       Print all audio devices
+  -n, --next        Switch to the next audio device
+  -i device_id      Switch to the given audio device"
+
+    exit 1
+}
+
+set_volume() {
+    local volume_value=$1
+    osascript -e "set volume output volume $volume_value"
+}
+
+print_audios() {
+    SwitchAudioSource -a -f cli
+}
+
+switch_audio() {
+    local device_id=$1
+    SwitchAudioSource -i $device_id
+}
+
+switch_next_audio() {
+    SwitchAudioSource -n
+}
+
+main() {
+    case $value in
+    -p|--print)
+        print_audios
+        ;;
+    -i)
+        if echo "$flag_value" | grep -Eqw "[0-9]+";then
+            switch_audio $flag_value
+            return
+        fi
+        usage
+        ;;
+    -n|--next)
+        switch_next_audio
+        ;;
+    [0-9]|[0-9][0-9]|[0-9][0-9][0-9])
+        [[ "$value" -lt 0 ]] || [[ "$value" -gt 100 ]] && {
+            echo -e "volume value must be in 1~100\n"
+            usage
+        }
+        set_volume $value
+        ;;
+    *)
+        usage
+        ;;
+    esac
+}
+
+main

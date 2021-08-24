@@ -188,6 +188,7 @@ alias font-size="~/.dotfiles/scripts/font_size.sh"
 alias vim-bgtransparency="~/.dotfiles/scripts/vim_bgtransparency.sh"
 alias colors-print="~/.dotfiles/scripts/colors_print.sh"
 alias rgb="~/.dotfiles/scripts/print_256_rgb_colors.py"
+alias volume="~/.dotfiles/scripts/audio_volume.sh"
 
 alias cs=colorscheme
 alias f=font
@@ -195,6 +196,7 @@ alias o=opacity
 alias fs=font-size
 alias v=vim-bgtransparency
 alias c=colors-print
+alias vol=volume
 
 # }}
 
