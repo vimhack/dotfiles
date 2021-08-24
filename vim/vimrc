@@ -324,6 +324,11 @@ Plug 'uguu-org/vim-matrix-screensaver'
 " 可后续通过 command-line 模式安装 `:GoInstallBinaries`.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" 自动为 Go 生成单元测试用例模版代码.
+" 需提前安装 gotests 工具:
+"   go get -u github.com/cweill/gotests/...
+Plug 'buoto/gotests-vim'
+
 """""""" openresty
 " 提供 nginx/openresty 语法高亮与指令补全.
 Plug 'spacewander/openresty-vim'
@@ -2026,6 +2031,19 @@ nmap <leader>m :Matrix<CR>
 
 """""""" Go {{
 
+" 显示缩进线.
+autocmd FileType go set list lcs=tab:\¦\ " 注意结尾又一个空格.
+
+"""""" buoto/gotests-vim
+" doc: https://github.com/buoto/gotests-vim
+" :GoTests to generate a test for the function at the current line or functions selected in visual mode.
+" :GoTestsAll to generate tests for all functions in the current buffer.
+
+" normal 或 visual 模式下按 gc 生成光标所在函数或选择的函数的单元测试模版代码.
+noremap <silent> gc :GoTests<CR>
+" normal 或 visual 模式下按 gcc 生成当前 Go 文件的所有函数的单元测试模版代码.
+noremap <silent> gcc :GoTestsAll<CR>
+
 """""" fatih/vim-go
 " doc: https://github.com/fatih/vim-go
 
@@ -2037,9 +2055,6 @@ let g:go_fmt_autosave = 0
 
 " 默认值: 1
 let g:go_imports_autosave = 0
-
-" 显示缩进线.
-autocmd FileType go set list lcs=tab:\¦\ " 注意结尾又一个空格.
 
 " *** 代码高效阅读 ***
 
@@ -2073,7 +2088,6 @@ au FileType go nmap <silent> gv <Plug>(go-def-vertical)
 " 对于跳转到对象定义处的功能, 重用已经打开的buffer. 默认值: 0
 let g:go_def_reuse_buffer = 1
 
-
 " *** 代码自动生成 ***
 
 " ,im  自动为光标下的类型生成指定接口的实现方法.
@@ -2100,18 +2114,16 @@ let g:go_template_autocreate = 1
 " NOTE: 将覆盖掉 let g:go_template_autocreate = 1 的作用.
 let g:go_template_use_pkg = 1
 
-
 " *** 运行当前 Go 文件 ***
 
-" ,gr  go run 当前的go文件.
+" ,gr  go run 当前的 go 文件.
 au FileType go nmap <leader>gr <Plug>(go-run)
-" ,gb  go build 当前的go文件, 不产生二进制文件, 只是检查是否可以成功build.
+" ,gb  go build 当前的 go 文件, 不产生二进制文件, 只是检查是否可以成功 build.
 au FileType go nmap <leader>gb <Plug>(go-build)
-" ,gt  go test 当前的go文件.
+" ,gt  go test 当前的 go 文件.
 au FileType go nmap <leader>gt <Plug>(go-test)
 " ,gc  查看当前代码文件的测试覆盖率.
 au FileType go nmap <leader>gc <Plug>(go-coverage)
-
 
 " *** 代码语法高亮 ***
 
@@ -3059,6 +3071,10 @@ endif
 "                ,gb  go build 当前的 go 文件, 不产生二进制文件, 只是检查是否可以成功 build.
 "                ,gt  go test 当前的 go 文件.
 "                ,gc  查看当前代码文件的测试覆盖率.
+"
+" ** buoto/gotests-vim (https://github.com/buoto/gotests-vim)
+"                 gc  normal 或 visual 模式下按 gc 生成光标所在函数或选择的函数的单元测试模版代码.
+"                gcc  normal 或 visual 模式下按 gcc 生成当前 Go 文件的所有函数的单元测试模版代码.
 "
 " ** scrooloose/nerdtree (https://github.com/preservim/nerdtree)
 "                 ,x  打开或关闭左侧目录树.
