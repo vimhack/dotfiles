@@ -68,6 +68,13 @@ brew install tmux
 sudo gem install iStats
 ```
 
+- switchaudio-osx
+
+```bash
+# For showing audio volume status in the tmux status bar.
+brew install switchaudio-osx
+```
+
 ### Zsh
 
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
