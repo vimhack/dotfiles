@@ -2,13 +2,14 @@
 
 # dark
 dracula
+gruvbox
+solarized
+base16
 molokai
 rigel
 jellybeans
-base16
 nord
 tender
-gruvbox
 one
 iceberg
 papercolor
@@ -22,6 +23,7 @@ srcery
 
 # light
 gruvbox_light
+solarized_light
 one_light
 iceberg_light
 papercolor_light
@@ -30,4 +32,3 @@ onehalf_light
 vadelma_light
 pencil_light
 github_light
-

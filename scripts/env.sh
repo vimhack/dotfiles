@@ -25,20 +25,16 @@ last_opacity_file=~/.config/alacritty/.opacity.last
 default_opacity=0.9
 
 # value of adjusting opacity each time
-# shellcheck disable=SC2034
 opacity_step=0.05
 
-# shellcheck disable=SC2034,SC2207
 colorschemes=($(grep -Ev '#|//|"|^$' "$colorschemes_file" | xargs))
 
-# shellcheck disable=SC2207
 fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | awk -F:: '{print $1}' | xargs))
 
 [[ ! -f "$alacritty_conf" ]] && {
     \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf
 }
 
-# shellcheck disable=SC2206,SC2207,SC2068,SC2086,SC2034
 current_colorscheme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
 current_opacity=$(awk '/^background_opacity/{print $NF}' $alacritty_conf)
 current_font_size=$(awk '/^  size:/{print $NF}' $alacritty_conf)
@@ -62,7 +58,6 @@ colorschemes_without_current_colorscheme=(
         grep -vw $current_colorscheme | xargs)
 )
 
-# shellcheck disable=SC2207,SC2068,SC2086,SC2034
 fonts_without_current_font=(
     $(
         echo ${fonts[@]} | xargs -n1 | grep -vw $current_font | xargs
@@ -142,6 +137,8 @@ change_colorscheme_for_alacritty_vim() {
     [[ "$to_colorscheme" = "base16" ]] && to_colorscheme="base16-default-dark"
     [[ "$to_colorscheme" = "onehalf" ]] && to_colorscheme="onehalfdark"
     [[ "$to_colorscheme" = "onehalf_light" ]] && to_colorscheme="onehalflight"
+    [[ "$to_colorscheme" = "solarized" ]] && to_colorscheme="solarized8"
+    [[ "$to_colorscheme" = "solarized_light" ]] && to_colorscheme="solarized8_light"
 
     if [[ "$to_colorscheme" = "ayu" ]]; then
         echo "let ayucolor='dark'

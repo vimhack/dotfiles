@@ -234,6 +234,9 @@ Plug 'cormacrelf/vim-colors-github'
 " srcery
 Plug 'srcery-colors/srcery-vim'
 
+" solarized
+Plug 'lifepillar/vim-solarized8'
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1201,6 +1204,7 @@ endfunction
 "   pencil: https://github.com/preservim/vim-colors-pencil
 "   github: https://github.com/cormacrelf/vim-colors-github
 "   srcery: https://github.com/srcery-colors/srcery-vim
+"   solarized8: https://github.com/lifepillar/vim-solarized8
 "
 " NOTE:
 "   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1333,6 +1337,8 @@ function! LightlineReload()
     execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
   elseif g:colors_name =~# 'github'
     execute 'source ' . g:plug_home . '/vim-colors-github/autoload/lightline/colorscheme/github.vim'
+  elseif g:colors_name =~# 'solarized8'
+    execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/solarized.vim'
   endif
 
   windo call lightline#colorscheme()
@@ -1414,6 +1420,8 @@ function! ToggleBGColor()
     call VadelmaAfter()
   elseif g:colors_name == 'github'
     call GithubAfter()
+  elseif g:colors_name == 'solarized8'
+    call SolarizedAfter()
   endif
 
   " 重载 lightline 状态栏, 使其颜色随着背景色改变.
@@ -1456,6 +1464,8 @@ function! ToggleBGTransparent()
       call OnehalflightAfter()
     elseif g:colors_name == 'github'
       call GithubAfter()
+    elseif g:colors_name == 'solarized8'
+      call SolarizedAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1545,6 +1555,12 @@ function! SrceryBefore()
   let g:srcery_underline = 1
   let g:srcery_undercurl = 1
   let g:srcery_hard_black_terminal_bg = 0
+endfunction
+
+function! SolarizedBefore()
+  " 可选值: normal(default), low, high
+  let g:solarized_visibility = 'high'
+  let g:solarized_diffmode = 'normal'
 endfunction
 
 " }}
@@ -1784,6 +1800,20 @@ function! SrceryAfter()
   hi htmlBold guibg=NONE
 endfunction
 
+function! SolarizedAfter()
+  let g:lightline.colorscheme = 'solarized'
+
+  if &background == 'dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+  endif
+
+  call EnableItalic()
+endfunction
+
 " }}
 
 " *********************************
@@ -1798,6 +1828,7 @@ call JellybeansBefore()
 call PencilBefore()
 call GithubBefore()
 call SrceryBefore()
+call SolarizedBefore()
 
 " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
 " dotfiles git仓库可以不被无用的变更信息干扰.
@@ -1859,6 +1890,8 @@ if exists('g:colors_name')
     call GithubAfter()
   elseif g:colors_name == 'srcery'
     call SrceryAfter()
+  elseif g:colors_name == 'solarized8'
+    call SolarizedAfter()
   endif
 endif
 
