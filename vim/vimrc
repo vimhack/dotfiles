@@ -228,8 +228,11 @@ Plug 'windvalley/vadelma'
 " pencil
 Plug 'preservim/vim-colors-pencil'
 
-" github dark
+" github
 Plug 'cormacrelf/vim-colors-github'
+
+" srcery
+Plug 'srcery-colors/srcery-vim'
 
 " }}
 
@@ -1197,11 +1200,10 @@ endfunction
 "   vadelma: https://github.com/windvalley/vadelma
 "   pencil: https://github.com/preservim/vim-colors-pencil
 "   github: https://github.com/cormacrelf/vim-colors-github
+"   srcery: https://github.com/srcery-colors/srcery-vim
 "
 " NOTE:
-"   1) 使用颜色主题(colorscheme), 同时请将终端主题也设置成对应的主题, 这样才能获得更好的视觉效果.
-"   2) dracula, molokai, jellybeans, base16-default-dark, nord, tender 主题没有 light 方案.
-"   3) base16-default-dark, rigel 等主题默认没有提供斜体字的特性, 我们可以通过自定义方法提供支持.
+"   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
 
 " 代码高亮显示.
 syntax enable
@@ -1239,7 +1241,7 @@ let g:popup_window_transparent=0
 set t_ZH=[3m
 set t_ZR=[23m
 
-" colorschemes 优化方法集合 {{
+" *** colorschemes 优化方法集合 ***
 "
 " NOTE:
 "   方法结尾是 Before 的代表需要放在 colorscheme 指令之前执行;
@@ -1379,7 +1381,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'rigel' ||
     \ g:colors_name == 'tender' ||
     \ g:colors_name == 'nord' ||
-    \ g:colors_name == 'base16-default-dark'
+    \ g:colors_name == 'base16-default-dark' ||
+    \ g:colors_name == 'srcery'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -1534,6 +1537,14 @@ endfunction
 function! GithubBefore()
   " 使 github_light 的白色背景看上去更灰一些.
   let g:github_colors_soft = 1
+endfunction
+
+function! SrceryBefore()
+  let g:srcery_italic = 1
+  let g:srcery_bold = 1
+  let g:srcery_underline = 1
+  let g:srcery_undercurl = 1
+  let g:srcery_hard_black_terminal_bg = 0
 endfunction
 
 " }}
@@ -1766,9 +1777,16 @@ function! GithubAfter()
   call EnableBold()
 endfunction
 
-" }}
+function! SrceryAfter()
+  let g:lightline.colorscheme = 'srcery'
+  call EnableItalic()
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
+  hi htmlBold guibg=NONE
+endfunction
 
 " }}
+
+" *********************************
 
 " colorscheme 指令之前执行的主题优化方法.
 call GruvboxBefore()
@@ -1779,6 +1797,7 @@ call PaperColorBefore()
 call JellybeansBefore()
 call PencilBefore()
 call GithubBefore()
+call SrceryBefore()
 
 " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
 " dotfiles git仓库可以不被无用的变更信息干扰.
@@ -1838,6 +1857,8 @@ if exists('g:colors_name')
     call PencilAfter()
   elseif g:colors_name == 'github'
     call GithubAfter()
+  elseif g:colors_name == 'srcery'
+    call SrceryAfter()
   endif
 endif
 
