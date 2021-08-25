@@ -237,6 +237,9 @@ Plug 'srcery-colors/srcery-vim'
 " solarized
 Plug 'lifepillar/vim-solarized8'
 
+" spring-night
+Plug 'rhysd/vim-color-spring-night'
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1388,7 +1391,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'tender' ||
     \ g:colors_name == 'nord' ||
     \ g:colors_name == 'base16-default-dark' ||
-    \ g:colors_name == 'srcery'
+    \ g:colors_name == 'srcery' ||
+    \ g:colors_name == 'spring-night'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -1466,6 +1470,8 @@ function! ToggleBGTransparent()
       call GithubAfter()
     elseif g:colors_name == 'solarized8'
       call SolarizedAfter()
+    elseif g:colors_name == 'spring-night'
+      call SpringNightAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1795,9 +1801,11 @@ endfunction
 
 function! SrceryAfter()
   let g:lightline.colorscheme = 'srcery'
-  call EnableItalic()
+
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
   hi htmlBold guibg=NONE
+
+  call EnableItalic()
 endfunction
 
 function! SolarizedAfter()
@@ -1811,6 +1819,12 @@ function! SolarizedAfter()
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
   endif
 
+  call EnableItalic()
+endfunction
+
+function! SpringNightAfter()
+  let g:lightline.colorscheme = 'spring_night'
+  hi Whitespace term=NONE guifg=#607080 ctermfg=60
   call EnableItalic()
 endfunction
 
@@ -1892,6 +1906,8 @@ if exists('g:colors_name')
     call SrceryAfter()
   elseif g:colors_name == 'solarized8'
     call SolarizedAfter()
+  elseif g:colors_name == 'spring-night'
+    call SpringNightAfter()
   endif
 endif
 

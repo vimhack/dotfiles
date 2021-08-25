@@ -363,7 +363,7 @@ schemes:
       cyan: "#427b58"
       white: "#3c3836"
 
-  gruvbox_dark: &gruvbox
+  gruvbox: &gruvbox
     primary:
       # hard contrast background - '#1d2021'
       # soft contrast background - '#32302f'
@@ -464,7 +464,7 @@ schemes:
       cyan: "#56b6c2"
       white: "#828997"
 
-  iceberg_dark: &iceberg
+  iceberg: &iceberg
     primary:
       background: "#161821"
       foreground: "#d2d4de"
@@ -873,7 +873,7 @@ schemes:
       cyan: "#93a1a1"
       white: "#fdf6e3"
 
-  solarized_dark: &solarized
+  solarized: &solarized
     primary:
       background: "#002b36"
       foreground: "#839496"
@@ -899,6 +899,29 @@ schemes:
       magenta: "#6c71c4"
       cyan: "#93a1a1"
       white: "#fdf6e3"
+
+  springnight: &springnight
+    primary:
+      background: "#132132"
+      foreground: "#fffeeb"
+    normal:
+      black: "#132132"
+      red: "#ff6a6f"
+      green: "#a9dd9d"
+      yellow: "#fedf81"
+      blue: "#7098e6"
+      magenta: "#605779"
+      cyan: "#a8d2eb"
+      white: "#fffeeb"
+    bright:
+      black: "#8d9eb2"
+      red: "#fd8489"
+      green: "#c9fd88"
+      yellow: "#f0eaaa"
+      blue: "#98b8e6"
+      magenta: "#e7d5ff"
+      cyan: "#a8d2eb"
+      white: "#ffffff"
 
 # }}
 

@@ -139,6 +139,7 @@ change_colorscheme_for_alacritty_vim() {
     [[ "$to_colorscheme" = "onehalf_light" ]] && to_colorscheme="onehalflight"
     [[ "$to_colorscheme" = "solarized" ]] && to_colorscheme="solarized8"
     [[ "$to_colorscheme" = "solarized_light" ]] && to_colorscheme="solarized8_light"
+    [[ "$to_colorscheme" = "springnight" ]] && to_colorscheme="spring-night"
 
     if [[ "$to_colorscheme" = "ayu" ]]; then
         echo "let ayucolor='dark'
