@@ -1208,6 +1208,7 @@ endfunction
 "   github: https://github.com/cormacrelf/vim-colors-github
 "   srcery: https://github.com/srcery-colors/srcery-vim
 "   solarized8: https://github.com/lifepillar/vim-solarized8
+"   spring-night: https://github.com/rhysd/vim-color-spring-night
 "
 " NOTE:
 "   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1380,6 +1381,55 @@ function! BGTransparentAfter()
   endif
 endfunction
 
+" 在背景透明和不透明之间切换的方法.
+function! ToggleBGTransparent()
+  if g:bgtransparency == 1
+    let &background = &background
+    let g:bgtransparency = 0
+
+    if g:colors_name == 'PaperColor'
+      call PaperColorBefore()
+      execute 'colorscheme ' . g:colors_name
+      call PaperColorAfter()
+    elseif g:colors_name == 'jellybeans'
+      let g:jellybeans_overrides = {}
+      call JellybeansBefore()
+      execute 'colorscheme ' . g:colors_name
+      call JellybeansAfter()
+    elseif g:colors_name == 'rigel'
+      call RigelAfter()
+    elseif g:colors_name == 'dracula'
+      call DraculaAfter()
+    elseif g:colors_name == 'vadelma'
+      call VadelmaAfter()
+    elseif g:colors_name == 'molokai'
+      call MolokaiBefore()
+      execute 'colorscheme ' . g:colors_name
+      call MolokaiAfter()
+    elseif g:colors_name == 'base16-default-dark'
+      call Base16DefaultDarkAfter()
+    elseif g:colors_name == 'onehalfdark'
+      call OnehalfdarkAfter()
+    elseif g:colors_name == 'onehalflight'
+      call OnehalflightAfter()
+    elseif g:colors_name == 'github'
+      call GithubAfter()
+    elseif g:colors_name == 'solarized8'
+      call SolarizedAfter()
+    elseif g:colors_name == 'spring-night'
+      call SpringNightAfter()
+    endif
+  else
+    call BackgroundTransparency()
+    let g:bgtransparency = 1
+  endif
+
+  " 解决在切换背景透明色后, SignColumn/ALESign/GitSign 失去原有颜色方案的问题.
+  call SignColumnHi()
+  call ALESignHi()
+  call GitSignHi()
+endfunction
+
 " 在背景是 dark 和 light 之间切换的方法.
 function! ToggleBGColor()
   " 对于不支持切换背景色为 light 的 colorschemes, 给出提示信息.
@@ -1433,50 +1483,11 @@ function! ToggleBGColor()
 
   " 解决从透明背景的场景切换背景颜色后, 需要连续按两次 ,v 才能切换成背景透明的问题.
   let g:bgtransparency = 0
-endfunction
 
-" 在背景透明和不透明之间切换的方法.
-function! ToggleBGTransparent()
-  if g:bgtransparency == 1
-    let &background = &background
-    let g:bgtransparency = 0
-
-    if g:colors_name == 'PaperColor'
-      call PaperColorBefore()
-      execute 'colorscheme ' . g:colors_name
-      call PaperColorAfter()
-    elseif g:colors_name == 'jellybeans'
-      let g:jellybeans_overrides = {}
-      call JellybeansBefore()
-      execute 'colorscheme ' . g:colors_name
-      call JellybeansAfter()
-    elseif g:colors_name == 'rigel'
-      call RigelAfter()
-    elseif g:colors_name == 'dracula'
-      call DraculaAfter()
-    elseif g:colors_name == 'vadelma'
-      call VadelmaAfter()
-    elseif g:colors_name == 'molokai'
-      call MolokaiBefore()
-      execute 'colorscheme ' . g:colors_name
-      call MolokaiAfter()
-    elseif g:colors_name == 'base16-default-dark'
-      call Base16DefaultDarkAfter()
-    elseif g:colors_name == 'onehalfdark'
-      call OnehalfdarkAfter()
-    elseif g:colors_name == 'onehalflight'
-      call OnehalflightAfter()
-    elseif g:colors_name == 'github'
-      call GithubAfter()
-    elseif g:colors_name == 'solarized8'
-      call SolarizedAfter()
-    elseif g:colors_name == 'spring-night'
-      call SpringNightAfter()
-    endif
-  else
-    call BackgroundTransparency()
-    let g:bgtransparency = 1
-  endif
+  " 解决在变换背景颜色后, SignColumn/ALESign/GitSign 失去原有颜色方案的问题.
+  call SignColumnHi()
+  call ALESignHi()
+  call GitSignHi()
 endfunction
 
 " }}
@@ -1824,7 +1835,9 @@ endfunction
 
 function! SpringNightAfter()
   let g:lightline.colorscheme = 'spring_night'
+
   hi Whitespace term=NONE guifg=#607080 ctermfg=60
+
   call EnableItalic()
 endfunction
 
