@@ -72,13 +72,14 @@ colorscheme
 The current colorscheme is 'github', and it can be changed to one of the following list:
 
 * dracula
+* gruvbox
+* solarized
+* base16
 * molokai
 * rigel
 * jellybeans
-* base16
 * nord
 * tender
-* gruvbox
 * one
 * iceberg
 * papercolor
@@ -87,7 +88,10 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * onehalf
 * vadelma
 * pencil
+* srcery
+* springnight
 * gruvbox_light
+* solarized_light
 * one_light
 * iceberg_light
 * papercolor_light
@@ -100,6 +104,10 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 For example, change colorscheme to 'github_light':
 
 $ colorscheme github_light
+
+or
+
+$ cs github_light
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
@@ -156,6 +164,10 @@ The current font is 'Hasklug_Light', and it can be changed to one of the followi
 For example, change font to 'Monofur_Book':
 
 $ font Monofur_Book
+
+or
+
+$ f Monofur_Book
 ```
 
 **Change font size of Alacritty in terminal command line:**
@@ -213,7 +225,11 @@ or
 
 $ c
 
-$ rgb
+$ hexcolors-print
+
+or
+
+$ hex
 ```
 
 **Toggle Vim/Neovim background color(light or dark) in Vim Normal Mode:**
@@ -228,6 +244,8 @@ $ rgb
 - `github_light`
 - `gruvbox`
 - `gruvbox_light`
+- `solarized`
+- `solarized_light`
 - `iceberg`
 - `iceberg_light`
 - `one`
@@ -299,7 +317,7 @@ Font: `Hasklug_Light`
 FontSize: `12`
 VimBgTransparency: `1`
 
-![gruvbox](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/gruvbox.png)
+![gruvbox](https://github.com/windvalley/bigfiles/blob/main/dotfiles/images/gruvbox.png?raw=true)
 
 ColorScheme: `dracula`
 Opacity: `1.0`
@@ -307,7 +325,7 @@ Font: `Hurmit_light`
 FontSize: `11`
 VimBgTransparency: `1`
 
-![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png)
+![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png?raw=true)
 
 ColorScheme: `papercolor`
 Opacity: `0.85`
@@ -315,7 +333,7 @@ Font: `Lekton_Regular`
 FontSize: `11.5`
 VimBgTransparency: `1`
 
-![papercolor](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/papercolor.png)
+![papercolor](https://github.com/windvalley/bigfiles/blob/main/dotfiles/images/papercolor.png?raw=true)
 
 ## ⚖️ License
 
