@@ -240,6 +240,9 @@ Plug 'lifepillar/vim-solarized8'
 " spring-night
 Plug 'rhysd/vim-color-spring-night'
 
+" google/primary
+Plug 'windvalley/vim-colorscheme-primary'
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1209,6 +1212,7 @@ endfunction
 "   srcery: https://github.com/srcery-colors/srcery-vim
 "   solarized8: https://github.com/lifepillar/vim-solarized8
 "   spring-night: https://github.com/rhysd/vim-color-spring-night
+"   primary: https://github.com/google/vim-colorscheme-primary
 "
 " NOTE:
 "   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1343,6 +1347,8 @@ function! LightlineReload()
     execute 'source ' . g:plug_home . '/vim-colors-github/autoload/lightline/colorscheme/github.vim'
   elseif g:colors_name =~# 'solarized8'
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/solarized.vim'
+  elseif g:colors_name =~# 'primary'
+    execute 'source ' . g:plug_home . '/vim-colorscheme-primary/autoload/lightline/colorscheme/primary.vim'
   endif
 
   windo call lightline#colorscheme()
@@ -1356,7 +1362,8 @@ function! BackgroundTransparency()
   " NOTE: 不能对所有 colorscheme 都使用这种方式, 会对配色造成干扰, 比如 gruvbox.
   if g:colors_name == 'github' ||
     \ g:colors_name == 'jellybeans' ||
-    \ g:colors_name == 'PaperColor'
+    \ g:colors_name == 'PaperColor' ||
+    \ g:colors_name == 'primary'
 
     hi! NonText ctermbg=NONE guibg=NONE
   endif
@@ -1418,6 +1425,8 @@ function! ToggleBGTransparent()
       call SolarizedAfter()
     elseif g:colors_name == 'spring-night'
       call SpringNightAfter()
+    elseif g:colors_name == 'primary'
+      call GooglePrimaryAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1476,6 +1485,8 @@ function! ToggleBGColor()
     call GithubAfter()
   elseif g:colors_name == 'solarized8'
     call SolarizedAfter()
+  elseif g:colors_name == 'primary'
+    call GooglePrimaryAfter()
   endif
 
   " 重载 lightline 状态栏, 使其颜色随着背景色改变.
@@ -1841,6 +1852,21 @@ function! SpringNightAfter()
   call EnableItalic()
 endfunction
 
+function! GooglePrimaryAfter()
+  let g:lightline.colorscheme = 'primary'
+
+  if &background == 'dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#5f6368
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#5f6368
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+  endif
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
+
 " }}
 
 " *********************************
@@ -1921,6 +1947,8 @@ if exists('g:colors_name')
     call SolarizedAfter()
   elseif g:colors_name == 'spring-night'
     call SpringNightAfter()
+  elseif g:colors_name == 'primary'
+    call GooglePrimaryAfter()
   endif
 endif
 

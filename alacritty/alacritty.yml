@@ -923,6 +923,52 @@ schemes:
       cyan: "#a8d2eb"
       white: "#ffffff"
 
+  google_light: &google_light
+    primary:
+      background: "#FFFFFF"
+      foreground: "#202124"
+    normal:
+      black: "#202124"
+      red: "#DB4437"
+      green: "#0F9D58"
+      yellow: "#F4B400"
+      blue: "#4285F4"
+      magenta: "#7759b4"
+      cyan: "#4285F4"
+      white: "#5F6368"
+    bright:
+      black: "#5F6368"
+      red: "#DB4437"
+      green: "#598030"
+      yellow: "#F4B400"
+      blue: "#4285F4"
+      magenta: "#6845ad"
+      cyan: "#4285F4"
+      white: "#262a3f"
+
+  google: &google
+    primary:
+      background: "#202124"
+      foreground: "#d2d4de"
+    normal:
+      black: "#202124"
+      red: "#EA4335"
+      green: "#34A853"
+      yellow: "#FBBC04"
+      blue: "#4285F4"
+      magenta: "#8b71c1"
+      cyan: "#4285F4"
+      white: "#FFFFFF"
+    bright:
+      black: "#5F6368"
+      red: "#EA4335"
+      green: "#34A853"
+      yellow: "#FBBC04"
+      blue: "#4285F4"
+      magenta: "#ada0d3"
+      cyan: "#4285F4"
+      white: "#d2d4de"
+
 # }}
 
 # 主题配置 {{
