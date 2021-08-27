@@ -1964,9 +1964,9 @@ call GitSignHi()
 " ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 nnoremap <silent> <leader>b :call ToggleBGColor()<CR>
 
-" ,v  normal 模式下, 在背景透明和不透明之间切换.
+" ,o  normal 模式下, 在背景透明和不透明之间切换.
 " NOTE: terminal 需要设置透明度, Vim 才能看到切换效果.
-nnoremap <silent> <leader>v :call ToggleBGTransparent()<CR>
+nnoremap <silent> <leader>o :call ToggleBGTransparent()<CR>
 
 " }}
 

@@ -90,6 +90,7 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * pencil
 * srcery
 * springnight
+* google
 * gruvbox_light
 * solarized_light
 * one_light
@@ -99,6 +100,7 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * onehalf_light
 * vadelma_light
 * pencil_light
+* google_light
 * github_light
 
 For example, change colorscheme to 'github_light':
@@ -238,31 +240,12 @@ $ hex
 ,b
 ```
 
-💡 Support colorschemes:
-
-- `github`
-- `github_light`
-- `gruvbox`
-- `gruvbox_light`
-- `solarized`
-- `solarized_light`
-- `iceberg`
-- `iceberg_light`
-- `one`
-- `one_light`
-- `papercolor`
-- `papercolor_light`
-- `vadelma`
-- `vadelma_light`
-- `onehalf`
-- `onehalf_light`
-- `pencil`
-- `pencil_light`
+💡 Only support colorschemes that have both dark and light background color.
 
 **Toggle Vim/Neovim background transparency in Vim Normal Mode:**
 
 ```text
-,v
+,o
 ```
 
 💡 Opacity of Alacritty(terminal) must be less than 1.
