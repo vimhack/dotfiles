@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# font.sh
+# font.zsh
 #
 # Switch font for Alacritty.
 #
@@ -7,7 +7,7 @@
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.sh
+source $script_dir/env.zsh
 
 to_font=$1
 

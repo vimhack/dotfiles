@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# vim_bgtransparency.sh
+# vim_bgtransparency.zsh
 #
 # Turn on or off the transparency of the Vim background.
 # A parameter 1 means on, and a parameter 0 means off.
@@ -8,7 +8,7 @@
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.sh
+source $script_dir/env.zsh
 
 to_value=$1
 

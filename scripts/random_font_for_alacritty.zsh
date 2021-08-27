@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# random_font_for_alacritty.sh
+# random_font_for_alacritty.zsh
 #
 # Change font of alacritty randomly.
 #
@@ -7,7 +7,7 @@
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.sh
+source $script_dir/env.zsh
 
 to_font=${fonts_without_current_font[$RANDOM % ${#fonts_without_current_font[@]}+1]}
 

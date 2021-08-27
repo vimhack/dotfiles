@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# random_colorscheme_for_vim_alacritty.sh
+# random_colorscheme_for_vim_alacritty.zsh
 #
 # Change colorscheme for vim and alacritty randomly.
 #
@@ -7,7 +7,7 @@
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.sh
+source $script_dir/env.zsh
 
 to_colorscheme_index=$(($RANDOM % ${#colorschemes_without_current_colorscheme[@]}))
 to_colorscheme=${colorschemes_without_current_colorscheme[$to_colorscheme_index+1]}

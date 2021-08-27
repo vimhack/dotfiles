@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
-# audio_volume.sh
+# audio_volume.zsh
 #
 # Requirements:
 #   brew install switchaudio-osx
 #
-# alias vol="/path/audio_volume.sh"
+# alias vol="/path/audio_volume.zsh"
 #
 # Only for MacOS.
 

@@ -187,14 +187,14 @@ export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 
 # --- Vim/Neovim & Alacritty 主题相关命令配置 {{
 
-alias colorscheme="~/.dotfiles/scripts/colorscheme.sh"
-alias font="~/.dotfiles/scripts/font.sh"
-alias opacity="~/.dotfiles/scripts/opacity.sh"
-alias font-size="~/.dotfiles/scripts/font_size.sh"
-alias vim-bgtransparency="~/.dotfiles/scripts/vim_bgtransparency.sh"
+alias colorscheme="~/.dotfiles/scripts/colorscheme.zsh"
+alias font="~/.dotfiles/scripts/font.zsh"
+alias opacity="~/.dotfiles/scripts/opacity.zsh"
+alias font-size="~/.dotfiles/scripts/font_size.zsh"
+alias vim-bgtransparency="~/.dotfiles/scripts/vim_bgtransparency.zsh"
 alias colors-print="~/.dotfiles/scripts/colors_print.sh"
 alias hexcolors-print="~/.dotfiles/scripts/print_256_hex_colors.py"
-alias volume="~/.dotfiles/scripts/audio_volume.sh"
+alias volume="~/.dotfiles/scripts/audio_volume.zsh"
 
 alias cs=colorscheme
 alias f=font

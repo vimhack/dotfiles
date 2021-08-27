@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# env.sh
+# env.zsh
 #
 
 # windvalley/dotfiles root dir

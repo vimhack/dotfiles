@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
-# decrease_opacity_of_alacritty.sh
+# decrease_opacity_of_alacritty.zsh
 #
 # for tmux.conf
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.sh
+source $script_dir/env.zsh
 
 to_opacity=0$(echo "scale=2;$current_opacity-$opacity_step" | bc)
 
