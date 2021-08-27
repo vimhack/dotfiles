@@ -176,6 +176,12 @@ export PATH="/usr/local/opt/node@14/bin:$PATH"
 
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
+# ****** java ******
+# brew install java
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/usr/local/opt/openjdk/include"
+
 # }}
 
 
