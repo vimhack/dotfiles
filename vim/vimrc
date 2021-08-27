@@ -325,6 +325,9 @@ Plug 'Yggdroot/indentLine'
 " Vim 屏保 Matrix.
 Plug 'uguu-org/vim-matrix-screensaver'
 
+" 为几乎所有语言提供语法高亮支持.
+Plug 'sheerun/vim-polyglot'
+
 " }}
 
 " 编程语言  Programming Language {{
@@ -510,6 +513,7 @@ set shortmess+=c
 "   coc-ultisnips: 需要安装 vim 插件: Plug 'SirVer/ultisnips'
 "   coc-gocode: 为 Go 提供代码片段补全的数据库.
 "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
+"   coc-xml: 系统中需要安装 java: brew install java
 let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-git',
