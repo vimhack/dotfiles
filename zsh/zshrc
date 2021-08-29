@@ -83,6 +83,9 @@ export LC_ALL=en_US.UTF-8
 # 默认的编辑器, git、crontab 等会默认使用.
 export EDITOR=nvim
 
+# 私有配置单独存放的文件.
+source $HOME/.zshrc.private
+
 # }}
 
 
