@@ -122,9 +122,12 @@ debug:
 # }}
 
 # Color Schemas 定义 {{
-
+#
 # doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
+
 schemes:
+  # {{ part1
+
   # Default colors
   base16: &base16
     primary:
@@ -968,6 +971,35 @@ schemes:
       magenta: "#ada0d3"
       cyan: "#4285F4"
       white: "#d2d4de"
+
+  # }}
+
+  # {{ part2
+
+  flat: &flat
+    primary:
+      background: "#2C3E50"
+      foreground: "#e0e0e0"
+    normal:
+      black: "#2C3E50"
+      red: "#E74C3C"
+      green: "#2ECC71"
+      yellow: "#F1C40F"
+      blue: "#3498DB"
+      magenta: "#9B59B6"
+      cyan: "#1ABC9C"
+      white: "#e0e0e0"
+    bright:
+      black: "#95A5A6"
+      red: "#E74C3C"
+      green: "#2ECC71"
+      yellow: "#F1C40F"
+      blue: "#3498DB"
+      magenta: "#9B59B6"
+      cyan: "#1ABC9C"
+      white: "#ECF0F1"
+
+# }}
 
 # }}
 

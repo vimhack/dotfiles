@@ -289,7 +289,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
 " 美化状态栏插件.
-Plug 'itchyny/lightline.vim'
+Plug 'windvalley/lightline.vim'
 
 " 为 lightline 插件提供显示 ale 检查出来的错误或警告的统计信息;
 " 另外安装此插件可以解决 vim 打开文件同时显示目录树窗口的场景时,
@@ -1431,6 +1431,8 @@ function! ToggleBGTransparent()
       call SpringNightAfter()
     elseif g:colors_name == 'primary'
       call GooglePrimaryAfter()
+    elseif g:colors_name == 'base16-flat'
+      call Base16FlatAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1455,7 +1457,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'nord' ||
     \ g:colors_name == 'base16-default-dark' ||
     \ g:colors_name == 'srcery' ||
-    \ g:colors_name == 'spring-night'
+    \ g:colors_name == 'spring-night' ||
+    \ g:colors_name == 'base16-flat'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -1871,6 +1874,16 @@ function! GooglePrimaryAfter()
   call EnableBold()
 endfunction
 
+function! Base16FlatAfter()
+  let g:lightline.colorscheme = 'base16_flat'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#34495E
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#34495E
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
+
 " }}
 
 " *********************************
@@ -1953,6 +1966,8 @@ if exists('g:colors_name')
     call SpringNightAfter()
   elseif g:colors_name == 'primary'
     call GooglePrimaryAfter()
+  elseif g:colors_name == 'base16-flat'
+    call Base16FlatAfter()
   endif
 endif
 

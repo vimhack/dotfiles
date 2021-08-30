@@ -142,6 +142,7 @@ change_colorscheme_for_alacritty_vim() {
     [[ "$to_colorscheme" = "springnight" ]] && to_colorscheme="spring-night"
     [[ "$to_colorscheme" = "google" ]] && to_colorscheme="primary"
     [[ "$to_colorscheme" = "google_light" ]] && to_colorscheme="primary_light"
+    [[ "$to_colorscheme" = "flat" ]] && to_colorscheme="base16-flat"
 
     if [[ "$to_colorscheme" = "ayu" ]]; then
         echo "let ayucolor='dark'

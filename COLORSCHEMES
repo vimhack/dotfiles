@@ -4,7 +4,6 @@
 dracula
 gruvbox
 solarized
-base16
 molokai
 rigel
 jellybeans
@@ -35,3 +34,7 @@ vadelma_light
 pencil_light
 google_light
 github_light
+
+# base16 dark
+base16
+flat
