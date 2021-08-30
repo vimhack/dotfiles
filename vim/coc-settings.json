@@ -18,6 +18,11 @@
   "git.topRemovedSign.hlGroup": "GitTopDeleteSign",
   "git.changeRemovedSign.hlGroup": "GitChangeDeleteSign",
 
+  // Rust
+  // doc: https://github.com/fannheyward/coc-rust-analyzer
+  "rust-analyzer.enable": true,
+  "rust-analyzer.inlayHints.enable": false,
+
   "languageserver": {
     // luarocks install --server=http://luarocks.org/dev lua-lsp
     // luarocks install luacheck

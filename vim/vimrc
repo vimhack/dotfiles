@@ -260,6 +260,9 @@ Plug 'honza/vim-snippets'
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 
+" 为几乎所有语言提供语法高亮支持.
+Plug 'sheerun/vim-polyglot'
+
 " }}
 
 " 代码检查  Code Static Check {{
@@ -325,9 +328,6 @@ Plug 'Yggdroot/indentLine'
 " Vim 屏保 Matrix.
 Plug 'uguu-org/vim-matrix-screensaver'
 
-" 为几乎所有语言提供语法高亮支持.
-Plug 'sheerun/vim-polyglot'
-
 " }}
 
 " 编程语言  Programming Language {{
@@ -343,6 +343,13 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " 需提前安装 gotests 工具:
 "   go get -u github.com/cweill/gotests/...
 Plug 'buoto/gotests-vim'
+
+"""""""" Rust
+" https://github.com/rust-lang/rust.vim
+Plug 'rust-lang/rust.vim'
+
+" 帮助分析当前项目的依赖是否是最新的版本, 仅支持 Neovim.
+Plug 'mhinz/vim-crates'
 
 """""""" openresty
 " 提供 nginx/openresty 语法高亮与指令补全.
@@ -514,12 +521,14 @@ set shortmess+=c
 "   coc-gocode: 为 Go 提供代码片段补全的数据库.
 "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
 "   coc-xml: 系统中需要安装 java: brew install java
+"   coc-tabnine: 基于 AI 的自动补全，可以辅助更快地撰写代码.
 let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-git',
   \ 'coc-go',
   \ 'coc-gocode',
   \ 'coc-rls',
+  \ 'coc-rust-analyzer',
   \ 'coc-clangd',
   \ 'coc-jedi',
   \ 'coc-java',
@@ -541,6 +550,7 @@ let g:coc_global_extensions = [
   \ 'coc-emoji',
   \ 'coc-swagger',
   \ 'coc-translator',
+  \ 'coc-tabnine',
   \ ]
 " *************************
 
@@ -747,6 +757,7 @@ nmap <silent> <leader>j <Plug>(ale_next_wrap)
 "      poetry add pylint flake8 autoimport black isort -D
 let g:ale_linters = {
   \  'go': ['golangci-lint', 'revive', 'gopls'],
+  \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
   \  'python': ['pylint', 'flake8'],
   \  'lua': ['luac', 'luacheck'],
   \  'sh': ['shellcheck', 'language_server'],
@@ -801,6 +812,7 @@ let g:ale_yaml_yamllint_options = '-d "{
 "      所以不用重复添加.
 let g:ale_fixers = {
   \  'go': ['gofmt', 'goimports'],
+  \  'rust': ['rustfmt'],
   \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
   \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
   \  'sh': ['shfmt'],
@@ -2279,6 +2291,15 @@ let g:go_highlight_string_spellcheck = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 1
+
+" }}
+
+"""""" Rust {{
+
+"""""" mhinz/vim-crates
+if has('nvim')
+  autocmd BufRead Cargo.toml call crates#toggle()
+endif
 
 " }}
 
