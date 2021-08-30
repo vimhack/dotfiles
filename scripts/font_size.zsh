@@ -17,18 +17,18 @@ to_font_size=$1
 
 $ font-size number
 
-* number must between 1.0 and  200.0"
+* number must between 1 and  200"
 
     exit 0
 }
 
 [[ "$#" -gt 1 ]] && {
-    echo Usage example: font-size 12.0
+    echo Usage example: font-size 12
     exit 1
 }
 
 if [[ "$to_font_size" -lt 1 ]] || [[ "$to_font_size" -gt 200 ]]; then
-    echo font size must between 1.0 and 200.0
+    echo font size must between 1 and 200
     exit 1
 fi
 

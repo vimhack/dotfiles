@@ -17,7 +17,7 @@ to_opacity=$1
 
 $ opacity number
 
-* number must between 0.00 and 1.00"
+* number must between 0 and 1"
 
     exit 0
 }
@@ -27,10 +27,17 @@ $ opacity number
     exit 1
 }
 
+echo $to_opacity | grep -qE '^[0-1]?\.[0-9]+$|^1$|^0$' || {
+    echo "opacity must between 0 and 1"
+    exit 1
+}
+
 if [[ "$to_opacity" -lt 0 ]] || [[ "$to_opacity" -gt 1 ]]; then
-    echo "opacity must between 0.00 and 1.00"
+    echo "opacity must between 0 and 1"
     exit 1
 fi
+
+to_opacity=$(trim_opacity_suffix $to_opacity)
 
 update_config_for_alacritty
 

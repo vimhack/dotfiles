@@ -74,6 +74,29 @@ fonts_without_current_font=(
 
 last_opacity=$(cat $last_opacity_file)
 
+trim_opacity_suffix() {
+    local to_opacity=$1
+
+    if echo $to_opacity | grep -qE '^1\.'; then
+        echo -n 1
+        return
+    fi
+
+    if echo $to_opacity | grep -qE '^(0\.|\.)[0-9]+$'; then
+        to_opacity=$(echo -n ${to_opacity} | gsed -r 's/[0]+$//')
+    fi
+
+    if echo $to_opacity | grep -qE '^\.'; then
+        to_opacity=$(echo -n 0$to_opacity)
+    fi
+
+    if echo $to_opacity | grep -qE '^[0.]+$'; then
+        to_opacity=0
+    fi
+
+    echo -n $to_opacity
+}
+
 update_config_for_alacritty() {
     \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf_temp
 
@@ -175,7 +198,7 @@ toggle_transparancy_for_alacritty() {
         gsed -i "/^background_opacity/s/^.*$/background_opacity: $last_opacity/" \
             $alacritty_conf
     else
-        gsed -i "/^background_opacity/s/^.*$/background_opacity: 1.0/" \
+        gsed -i "/^background_opacity/s/^.*$/background_opacity: 1/" \
             $alacritty_conf
         echo "$current_opacity" >$last_opacity_file
     fi
