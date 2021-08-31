@@ -1364,7 +1364,7 @@ function! LightlineReload()
   elseif g:colors_name =~# 'solarized8'
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/solarized.vim'
   elseif g:colors_name =~# 'primary'
-    execute 'source ' . g:plug_home . '/vim-colorscheme-primary/autoload/lightline/colorscheme/primary.vim'
+    execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/primary.vim'
   endif
 
   windo call lightline#colorscheme()
@@ -1447,6 +1447,8 @@ function! ToggleBGTransparent()
       call Base16FlatAfter()
     elseif g:colors_name == 'base16-cupertino'
       call Base16CupertinoAfter()
+    elseif g:colors_name == 'base16-materia'
+      call Base16MateriaAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1472,7 +1474,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'base16-default-dark' ||
     \ g:colors_name == 'srcery' ||
     \ g:colors_name == 'spring-night' ||
-    \ g:colors_name == 'base16-flat'
+    \ g:colors_name == 'base16-flat' ||
+    \ g:colors_name == 'base16-materia'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -1908,6 +1911,16 @@ function! Base16CupertinoAfter()
   call EnableBold()
 endfunction
 
+function! Base16MateriaAfter()
+  let g:lightline.colorscheme = 'base16_materia'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#37474F
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#37474F
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
+
 " }}
 
 " *********************************
@@ -1994,6 +2007,8 @@ if exists('g:colors_name')
     call Base16FlatAfter()
   elseif g:colors_name == 'base16-cupertino'
     call Base16CupertinoAfter()
+  elseif g:colors_name == 'base16-materia'
+    call Base16MateriaAfter()
   endif
 endif
 

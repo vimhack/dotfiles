@@ -1022,6 +1022,29 @@ schemes:
       cyan: "#318495"
       white: "#5e5e5e"
 
+  materia: &materia
+    primary:
+      background: "#263238"
+      foreground: "#cdd3de"
+    normal:
+      black: "#263238"
+      red: "#ec5f67"
+      green: "#8bd649"
+      yellow: "#ffcc00"
+      blue: "#005faf"
+      magenta: "#82aaff"
+      cyan: "#80cbc4"
+      white: "#cdd3de"
+    bright:
+      black: "#707880"
+      red: "#ec5f67"
+      green: "#8bd649"
+      yellow: "#ffcc00"
+      blue: "#89ddff"
+      magenta: "#82aaff"
+      cyan: "#80cbc4"
+      white: "#ffffff"
+
 # }}
 
 # }}
