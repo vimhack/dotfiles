@@ -999,6 +999,29 @@ schemes:
       cyan: "#1ABC9C"
       white: "#ECF0F1"
 
+  cupertino: &cupertino
+    primary:
+      background: "#ffffff"
+      foreground: "#404040"
+    normal:
+      black: "#404040"
+      red: "#c41a15"
+      green: "#007400"
+      yellow: "#ffd787"
+      blue: "#afd7ff"
+      magenta: "#a90d91"
+      cyan: "#138495"
+      white: "#585858"
+    bright:
+      black: "#808080"
+      re: "#c41a15"
+      green: "#007400"
+      yellow: "#826b28"
+      blue: "#0000ff"
+      magenta: "#a90d91"
+      cyan: "#318495"
+      white: "#5e5e5e"
+
 # }}
 
 # }}

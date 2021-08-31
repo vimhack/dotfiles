@@ -1215,7 +1215,6 @@ endfunction
 "   molokai: https://github.com/tomasr/molokai
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
-"   base16-default-dark: https://github.com/chriskempson/base16-vim
 "   jellybeans: https://github.com/nanotech/jellybeans.vim
 "   nord: https://github.com/arcticicestudio/nord-vim
 "   tender: https://github.com/jacoborus/tender.vim
@@ -1229,6 +1228,7 @@ endfunction
 "   solarized8: https://github.com/lifepillar/vim-solarized8
 "   spring-night: https://github.com/rhysd/vim-color-spring-night
 "   primary: https://github.com/google/vim-colorscheme-primary
+"   base16-*: https://github.com/chriskempson/base16-vim
 "
 " NOTE:
 "   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1445,6 +1445,8 @@ function! ToggleBGTransparent()
       call GooglePrimaryAfter()
     elseif g:colors_name == 'base16-flat'
       call Base16FlatAfter()
+    elseif g:colors_name == 'base16-cupertino'
+      call Base16CupertinoAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1477,10 +1479,10 @@ function! ToggleBGColor()
   endif
 
   " 对于不支持切换背景色为 dark 的 colorschemes, 给出提示信息.
-  "if g:colors_name == ''
-    "echo g:colors_name . " has no dark colorscheme"
-    "return
-  "endif
+  if g:colors_name == 'base16-cupertino'
+    echo g:colors_name . " has no dark colorscheme"
+    return
+  endif
 
   " 由于 onehalfdark 和 onehalflight 不使用 background 选项来控制背景色, 故需单独配置.
   if g:colors_name == 'onehalfdark'
@@ -1896,6 +1898,16 @@ function! Base16FlatAfter()
   call EnableBold()
 endfunction
 
+function! Base16CupertinoAfter()
+  let g:lightline.colorscheme = 'base16_cupertino'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c0c0c0
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c0c0c0
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
+
 " }}
 
 " *********************************
@@ -1980,6 +1992,8 @@ if exists('g:colors_name')
     call GooglePrimaryAfter()
   elseif g:colors_name == 'base16-flat'
     call Base16FlatAfter()
+  elseif g:colors_name == 'base16-cupertino'
+    call Base16CupertinoAfter()
   endif
 endif
 

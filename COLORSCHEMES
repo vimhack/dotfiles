@@ -22,6 +22,10 @@ springnight
 google
 github
 
+# base16 dark
+base16
+flat
+
 # light
 gruvbox_light
 solarized_light
@@ -35,6 +39,5 @@ pencil_light
 google_light
 github_light
 
-# base16 dark
-base16
-flat
+# base16 light
+cupertino
