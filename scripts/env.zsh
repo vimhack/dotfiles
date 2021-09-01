@@ -15,6 +15,8 @@ vim_colorscheme_file=~/.vim/colorscheme.vim
 
 vim_transparency_file=~/.vim/transparency.vim
 
+vim_colorscheme_toggle_tmpfile=~/.vim/signal.tmp
+
 alacritty_conf=~/.config/alacritty/alacritty.yml
 alacritty_conf_temp=~/.config/alacritty/.alacritty.yml.temp
 
@@ -187,6 +189,8 @@ colorscheme ${to_colorscheme/_light/}" >$vim_colorscheme_file
 colorscheme ${to_colorscheme/_light/}" >$vim_colorscheme_file
         fi
     fi
+
+    touch $vim_colorscheme_toggle_tmpfile
 }
 
 change_opacity_for_alacritty() {
@@ -236,4 +240,6 @@ $ vim-bgtransparency 0"
     else
         echo "let g:bgtransparency=$to_value" >$vim_transparency_file
     fi
+
+    touch $vim_colorscheme_toggle_tmpfile
 }

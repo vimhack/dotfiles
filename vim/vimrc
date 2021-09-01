@@ -1249,16 +1249,6 @@ if has('vcon')
   set termguicolors
 endif
 
-" 是否启用 Vim/Neovim 透明背景色的功能, 从单独的配置文件读取相关变量值来控制;
-" 从单独的配置文件读取是为了变更时, 不会干扰到 dotfiles 仓库.
-let transparency_file = expand('~/.vim/transparency.vim')
-if filereadable(transparency_file)
-  exec 'source' transparency_file
-else
-  " 值为 1 表示启用 Vim/Neovim 背景透明, 0 为禁用.
-  let g:bgtransparency=1
-endif
-
 " 当 g:bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 变更效果涉及到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let g:popup_window_transparent=0
@@ -1276,6 +1266,38 @@ set t_ZR=[23m
 "   方法结尾是 After 的代表需要放在 colorscheme 指令之后执行.
 
 " 通用方法 {{
+
+function! Colorscheme()
+  " 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
+  " dotfiles git 仓库可以不被无用的变更信息干扰.
+  let colorscheme_file = expand('~/.vim/colorscheme.vim')
+
+  if filereadable(colorscheme_file)
+    exec 'source' colorscheme_file
+  else
+    " 默认的背景色, dark or light.
+    set background=dark
+
+    " 使用 try 的方式捕获并忽略错误, 来实现消除第一次使用此配置文件时的没用报错信息.
+    try
+      " 设置默认主题.
+      colorscheme dracula
+    catch /Cannot find colorscheme 'dracula'/
+    endtry
+  endif
+endfunction
+
+" 是否启用 Vim/Neovim 透明背景色的功能, 从单独的配置文件读取相关变量值来控制;
+" 从单独的配置文件读取是为了变更时, 不会干扰到 dotfiles 仓库.
+function! ToggleVimTransparentBgFeature()
+  let transparency_file = expand('~/.vim/transparency.vim')
+  if filereadable(transparency_file)
+    exec 'source' transparency_file
+  else
+    " 值为 1 表示启用 Vim/Neovim 背景透明, 0 为禁用.
+    let g:bgtransparency=1
+  endif
+endfunction
 
 " 支持斜体字的方法, 对于不支持斜体字或支持的不太理想的 colorscheme,
 " 可以使用此方法提供支持或优化.
@@ -1367,7 +1389,9 @@ function! LightlineReload()
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/primary.vim'
   endif
 
-  windo call lightline#colorscheme()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
 endfunction
 
 function! BackgroundTransparency()
@@ -1849,6 +1873,7 @@ function! SrceryAfter()
   let g:lightline.colorscheme = 'srcery'
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
+
   hi htmlBold guibg=NONE
 
   call EnableItalic()
@@ -1925,101 +1950,124 @@ endfunction
 
 " *********************************
 
-" colorscheme 指令之前执行的主题优化方法.
-call GruvboxBefore()
-call DraculaBefore()
-call NordBefore()
-call MolokaiBefore()
-call PaperColorBefore()
-call JellybeansBefore()
-call PencilBefore()
-call GithubBefore()
-call SrceryBefore()
-call SolarizedBefore()
+function! SetColorscheme()
+  " 启用或禁用 Vim 背景透明色特性.
+  call ToggleVimTransparentBgFeature()
 
-" 加载单独的用于设置 colorscheme 的文件, 设置该文件的目的是当变更颜色方案时,
-" dotfiles git仓库可以不被无用的变更信息干扰.
-let colorscheme_file = expand('~/.vim/colorscheme.vim')
+  " colorscheme 指令之前执行的主题优化方法.
+  call GruvboxBefore()
+  call DraculaBefore()
+  call NordBefore()
+  call MolokaiBefore()
+  call PaperColorBefore()
+  call JellybeansBefore()
+  call PencilBefore()
+  call GithubBefore()
+  call SrceryBefore()
+  call SolarizedBefore()
 
-if filereadable(colorscheme_file)
-  exec 'source' colorscheme_file
-else
-  " 默认的背景色, dark or light.
-  set background=dark
+  " 设置 colorscheme.
+  call Colorscheme()
 
-  " 使用 try 的方式捕获并忽略错误, 来实现消除第一次使用此配置文件时的没用报错信息.
-  try
-    " 设置默认主题.
-    colorscheme dracula
-  catch /Cannot find color scheme 'dracula'/
-  endtry
-endif
+  " colorscheme 指令之后执行的主题优化方法.
+  if exists('g:colors_name')
+    call BGTransparentAfter()
 
-" colorscheme 指令之后执行的主题优化方法.
-if exists('g:colors_name')
-  call BGTransparentAfter()
-
-  if g:colors_name == 'rigel'
-    call RigelAfter()
-  elseif g:colors_name == 'dracula'
-    call DraculaAfter()
-  elseif g:colors_name == 'one'
-    call OneAfter()
-  elseif g:colors_name == 'molokai'
-    call MolokaiAfter()
-  elseif g:colors_name == 'gruvbox'
-    call GruvboxAfter()
-  elseif g:colors_name == 'iceberg'
-    call IcebergAfter()
-  elseif g:colors_name == 'jellybeans'
-    call JellybeansAfter()
-  elseif g:colors_name == 'base16-default-dark'
-    call Base16DefaultDarkAfter()
-  elseif g:colors_name == 'nord'
-    call NordAfter()
-  elseif g:colors_name == 'tender'
-    call TenderAfter()
-  elseif g:colors_name == 'PaperColor'
-    call PaperColorAfter()
-  elseif g:colors_name == 'ayu'
-    " 解决在 AyuAfter 函数内找不到 ayucolor 变量的问题.
-    let g:ayucolor = ayucolor
-    call AyuAfter()
-  elseif g:colors_name == 'onehalfdark'
-    call OnehalfdarkAfter()
-  elseif g:colors_name == 'onehalflight'
-    call OnehalflightAfter()
-  elseif g:colors_name == 'vadelma'
-    call VadelmaAfter()
-  elseif g:colors_name == 'pencil'
-    call PencilAfter()
-  elseif g:colors_name == 'github'
-    call GithubAfter()
-  elseif g:colors_name == 'srcery'
-    call SrceryAfter()
-  elseif g:colors_name == 'solarized8'
-    call SolarizedAfter()
-  elseif g:colors_name == 'spring-night'
-    call SpringNightAfter()
-  elseif g:colors_name == 'primary'
-    call GooglePrimaryAfter()
-  elseif g:colors_name == 'base16-flat'
-    call Base16FlatAfter()
-  elseif g:colors_name == 'base16-cupertino'
-    call Base16CupertinoAfter()
-  elseif g:colors_name == 'base16-materia'
-    call Base16MateriaAfter()
+    if g:colors_name == 'rigel'
+      call RigelAfter()
+    elseif g:colors_name == 'dracula'
+      call DraculaAfter()
+    elseif g:colors_name == 'one'
+      call OneAfter()
+    elseif g:colors_name == 'molokai'
+      call MolokaiAfter()
+    elseif g:colors_name == 'gruvbox'
+      call GruvboxAfter()
+    elseif g:colors_name == 'iceberg'
+      call IcebergAfter()
+    elseif g:colors_name == 'jellybeans'
+      call JellybeansAfter()
+    elseif g:colors_name == 'nord'
+      call NordAfter()
+    elseif g:colors_name == 'tender'
+      call TenderAfter()
+    elseif g:colors_name == 'PaperColor'
+      call PaperColorAfter()
+    elseif g:colors_name == 'ayu'
+      call AyuAfter()
+    elseif g:colors_name == 'onehalfdark'
+      call OnehalfdarkAfter()
+    elseif g:colors_name == 'onehalflight'
+      call OnehalflightAfter()
+    elseif g:colors_name == 'vadelma'
+      call VadelmaAfter()
+    elseif g:colors_name == 'pencil'
+      call PencilAfter()
+    elseif g:colors_name == 'github'
+      call GithubAfter()
+    elseif g:colors_name == 'srcery'
+      call SrceryAfter()
+    elseif g:colors_name == 'solarized8'
+      call SolarizedAfter()
+    elseif g:colors_name == 'spring-night'
+      call SpringNightAfter()
+    elseif g:colors_name == 'primary'
+      call GooglePrimaryAfter()
+    elseif g:colors_name == 'base16-default-dark'
+      call Base16DefaultDarkAfter()
+    elseif g:colors_name == 'base16-flat'
+      call Base16FlatAfter()
+    elseif g:colors_name == 'base16-cupertino'
+      call Base16CupertinoAfter()
+    elseif g:colors_name == 'base16-materia'
+      call Base16MateriaAfter()
+    endif
   endif
+
+  " 设置提示列的颜色方案.
+  call SignColumnHi()
+
+  " 优化 ale 错误提示标识的颜色方案.
+  call ALESignHi()
+
+  " 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
+  call GitSignHi()
+endfunction
+
+call SetColorscheme()
+
+" *** Neovim 已打开的实例自动更新 colorscheme ***
+" 通过命令行或快捷键变更 colorscheme 时, 使打开的 neovim 实例自动更新 colorscheme,
+" NOTE: 对 Vim 支持的不是很好.
+
+let g:vim_colorscheme_toggle_tmpfile = '~/.vim/signal.tmp'
+
+if !exists("g:CheckUpdateStarted")
+  let g:CheckUpdateStarted=1
+  " 1ms
+  call timer_start(1,'CheckUpdate')
 endif
 
-" 设置提示列的颜色方案.
-call SignColumnHi()
+function! DeleteTmpfile(timer)
+  silent! execute '!rm -f ' . g:vim_colorscheme_toggle_tmpfile
+endfunction
 
-" 优化 ale 错误提示标识的颜色方案.
-call ALESignHi()
+function! CheckUpdate(timer)
+  if filereadable(expand(g:vim_colorscheme_toggle_tmpfile))
+    silent! call SetColorscheme()
+    silent! call LightlineReload()
 
-" 为 coc-git 插件提供 git 增删改提示标识的高亮颜色方案.
-call GitSignHi()
+    " 1000ms 后再删除临时文件, 避免打开的 vim 实例比较的多的情况下,
+    " 部分实例还没有执行此函数, 临时文件就已经被删除的情况,
+    " 最终导致部分vim实例无法更新 colorscheme.
+    call timer_start(1000, 'DeleteTmpfile')
+  endif
+
+  " 50ms
+  call timer_start(50,'CheckUpdate')
+endfunction
+
+" ***********************************************
 
 " ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 nnoremap <silent> <leader>b :call ToggleBGColor()<CR>
