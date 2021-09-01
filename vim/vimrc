@@ -1367,9 +1367,8 @@ function! GitSignHi()
 endfunction
 
 " 重新加载 lightline 状态栏的方法.
-" FIXME:
-"   1) onehalfdark 和 onehalflight 之间切换无法切换 lightline 颜色.
 function! LightlineReload()
+  " 这部分分支语句用于切换背景色时, 重新加载 lightline.
   if g:colors_name =~# 'gruvbox'
     execute "source " . g:plug_home . "/gruvbox/autoload/lightline/colorscheme/gruvbox.vim"
   elseif g:colors_name =~# 'iceberg'
@@ -1379,7 +1378,6 @@ function! LightlineReload()
   elseif g:colors_name =~# 'vadelma'
     execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
   elseif g:colors_name =~# 'PaperColor'
-    " 使用 vadelma 的 lightline 配色更舒服.
     execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
   elseif g:colors_name =~# 'github'
     execute 'source ' . g:plug_home . '/vim-colors-github/autoload/lightline/colorscheme/github.vim'
@@ -1447,8 +1445,18 @@ function! ToggleBGTransparent()
       call RigelAfter()
     elseif g:colors_name == 'dracula'
       call DraculaAfter()
+    elseif g:colors_name == 'gruvbox'
+      call GruvboxAfter()
     elseif g:colors_name == 'vadelma'
       call VadelmaAfter()
+    elseif g:colors_name == 'nord'
+      call NordAfter()
+    elseif g:colors_name == 'tender'
+      call TenderAfter()
+    elseif g:colors_name == 'pencil'
+      call PencilAfter()
+    elseif g:colors_name == 'ayu'
+      call AyuAfter()
     elseif g:colors_name == 'molokai'
       call MolokaiBefore()
       execute 'colorscheme ' . g:colors_name
@@ -1463,6 +1471,8 @@ function! ToggleBGTransparent()
       call GithubAfter()
     elseif g:colors_name == 'solarized8'
       call SolarizedAfter()
+    elseif g:colors_name == 'srcery'
+      call SrceryAfter()
     elseif g:colors_name == 'spring-night'
       call SpringNightAfter()
     elseif g:colors_name == 'primary'
@@ -1527,10 +1537,14 @@ function! ToggleBGColor()
     let g:PaperColor_Theme_Options.theme.default.transparent_background = 0
     execute 'colorscheme ' . g:colors_name
     call PaperColorAfter()
+  elseif g:colors_name == 'gruvbox'
+    call GruvboxAfter()
   elseif g:colors_name == 'vadelma'
     call VadelmaAfter()
   elseif g:colors_name == 'github'
     call GithubAfter()
+  elseif g:colors_name == 'pencil'
+    call PencilAfter()
   elseif g:colors_name == 'solarized8'
     call SolarizedAfter()
   elseif g:colors_name == 'primary'
@@ -1649,8 +1663,10 @@ function! VadelmaAfter()
   " for Vim
   if &background == 'dark'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=253 guibg=NONE guifg=#dadada
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=253 guibg=NONE guifg=#dadada
   endif
 
   call EnableItalic()
@@ -1767,6 +1783,14 @@ endfunction
 function! GruvboxAfter()
   let g:lightline.colorscheme = 'gruvbox'
 
+  if &background == 'dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#504945
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#504945
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#d5c4a1
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#d5c4a1
+  endif
+
   if !has('nvim')
     " 解决使用 vim 打开 markdown 类型文件, 部分内容背景颜色是黑色的问题.
     " 比如: **example**
@@ -1785,6 +1809,10 @@ endfunction
 
 function! NordAfter()
   let g:lightline.colorscheme = 'nord'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#4C566A
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#4C566A
+
   " nord 默认提供的斜体字支持不够理想, 使用自定义方法增强.
   call EnableItalic()
   call EnableBold()
@@ -1792,6 +1820,10 @@ endfunction
 
 function! TenderAfter()
   let g:lightline.colorscheme = 'tender'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+
   call EnableItalic()
   call EnableBold()
 endfunction
@@ -1799,10 +1831,16 @@ endfunction
 function! AyuAfter()
   if (g:ayucolor == 'dark')
     let g:lightline.colorscheme = 'ayu_dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#253340
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#253340
   elseif (g:ayucolor == 'mirage')
     let g:lightline.colorscheme = 'ayu_mirage'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#343F4C
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#343F4C
   else
     let g:lightline.colorscheme = 'ayu_light'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#F0EEE4
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#F0EEE4
   endif
 
   call EnableItalic()
@@ -1839,8 +1877,10 @@ function! PencilAfter()
   " for Vim
   if &background == 'light'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e0e0e0
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e0e0e0
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
   endif
 
   call EnableItalic()
@@ -1873,6 +1913,7 @@ function! SrceryAfter()
   let g:lightline.colorscheme = 'srcery'
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
 
   hi htmlBold guibg=NONE
 
@@ -1896,7 +1937,7 @@ endfunction
 function! SpringNightAfter()
   let g:lightline.colorscheme = 'spring_night'
 
-  hi Whitespace term=NONE guifg=#607080 ctermfg=60
+  hi Whitespace cterm=NONE term=NONE guifg=#607080 ctermfg=60
 
   call EnableItalic()
 endfunction
@@ -2034,10 +2075,10 @@ function! SetColorscheme()
   call GitSignHi()
 endfunction
 
-call SetColorscheme()
+silent! call SetColorscheme()
 
 " *** Neovim 已打开的实例自动更新 colorscheme ***
-" 通过命令行或快捷键变更 colorscheme 时, 使打开的 neovim 实例自动更新 colorscheme,
+" 通过命令行或快捷键变更 colorscheme 时, 使打开的 neovim 实例自动更新 colorscheme.
 " NOTE: 对 Vim 支持的不是很好.
 
 let g:vim_colorscheme_toggle_tmpfile = '~/.vim/signal.tmp'
@@ -2059,7 +2100,7 @@ function! CheckUpdate(timer)
 
     " 1000ms 后再删除临时文件, 避免打开的 vim 实例比较的多的情况下,
     " 部分实例还没有执行此函数, 临时文件就已经被删除的情况,
-    " 最终导致部分vim实例无法更新 colorscheme.
+    " 最终导致部分 vim 实例无法更新 colorscheme.
     call timer_start(1000, 'DeleteTmpfile')
   endif
 
