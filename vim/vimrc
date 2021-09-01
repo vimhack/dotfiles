@@ -2075,38 +2075,30 @@ function! SetColorscheme()
   call GitSignHi()
 endfunction
 
-silent! call SetColorscheme()
+call SetColorscheme()
 
 " *** Neovim 已打开的实例自动更新 colorscheme ***
 " 通过命令行或快捷键变更 colorscheme 时, 使打开的 neovim 实例自动更新 colorscheme.
-" NOTE: 对 Vim 支持的不是很好.
 
 let g:vim_colorscheme_toggle_tmpfile = '~/.vim/signal.tmp'
 
-if !exists("g:CheckUpdateStarted")
-  let g:CheckUpdateStarted=1
-  " 1ms
-  call timer_start(1,'CheckUpdate')
-endif
-
-function! DeleteTmpfile(timer)
-  silent! execute '!rm -f ' . g:vim_colorscheme_toggle_tmpfile
-endfunction
-
 function! CheckUpdate(timer)
   if filereadable(expand(g:vim_colorscheme_toggle_tmpfile))
-    silent! call SetColorscheme()
-    silent! call LightlineReload()
+    call SetColorscheme()
+    call LightlineReload()
 
-    " 1000ms 后再删除临时文件, 避免打开的 vim 实例比较的多的情况下,
-    " 部分实例还没有执行此函数, 临时文件就已经被删除的情况,
-    " 最终导致部分 vim 实例无法更新 colorscheme.
-    call timer_start(1000, 'DeleteTmpfile')
+    silent! execute '!rm -f ' . g:vim_colorscheme_toggle_tmpfile
   endif
 
-  " 50ms
-  call timer_start(50,'CheckUpdate')
+  " 每 50ms 运行一次该函数.
+  call timer_start(50, 'CheckUpdate')
 endfunction
+
+if !exists("g:CheckUpdateStarted")
+  let g:CheckUpdateStarted=1
+  " 1ms 后运行, 相当于立即运行.
+  call timer_start(1, 'CheckUpdate')
+endif
 
 " ***********************************************
 
