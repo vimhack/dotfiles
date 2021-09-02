@@ -1388,6 +1388,8 @@ function! LightlineReload()
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/solarized.vim'
   elseif g:colors_name == 'primary'
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/primary.vim'
+  elseif g:colors_name == 'pencil'
+    execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/pencil.vim'
   endif
 
   call lightline#init()
@@ -1868,12 +1870,12 @@ function! OnehalfAfter()
 endfunction
 
 function! PencilAfter()
-  let g:lightline.colorscheme = 'one'
+  let g:lightline.colorscheme = 'pencil'
 
   " for Vim
   if &background == 'light'
-    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e0e0e0
-    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e0e0e0
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=231 guibg=NONE guifg=#e0e0e0
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=231 guibg=NONE guifg=#e0e0e0
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
