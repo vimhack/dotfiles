@@ -1378,14 +1378,15 @@ function! LightlineReload()
   elseif g:colors_name == 'onehalfdark' || g:colors_name == 'onehalflight'
     execute "source " . g:plug_home . "/lightline.vim/autoload/lightline/colorscheme/onehalf.vim"
   elseif g:colors_name == 'vadelma'
-    execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
+    execute "source " . g:plug_home . "/lightline.vim/autoload/lightline/colorscheme/vadelma_new.vim"
   elseif g:colors_name == 'PaperColor'
     execute "source " . g:plug_home .
       \ "/lightline.vim/autoload/lightline/colorscheme/papercolor_new.vim"
   elseif g:colors_name == 'github'
     execute 'source ' . g:plug_home . '/vim-colors-github/autoload/lightline/colorscheme/github.vim'
   elseif g:colors_name == 'solarized8'
-    execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/solarized.vim'
+    execute 'source ' . g:plug_home .
+      \ '/lightline.vim/autoload/lightline/colorscheme/solarized8.vim'
   elseif g:colors_name == 'primary'
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/primary.vim'
   elseif g:colors_name == 'pencil'
@@ -1661,7 +1662,7 @@ endfunction
 " 需要放置到 colorscheme 指令之后的主题优化方法 {{
 
 function! VadelmaAfter()
-  let g:lightline.colorscheme = 'vadelma'
+  let g:lightline.colorscheme = 'vadelma_new'
 
   " for Vim
   if &background == 'dark'
@@ -1919,7 +1920,7 @@ function! SrceryAfter()
 endfunction
 
 function! SolarizedAfter()
-  let g:lightline.colorscheme = 'solarized'
+  let g:lightline.colorscheme = 'solarized8'
 
   if &background == 'dark'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
