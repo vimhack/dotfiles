@@ -1369,21 +1369,23 @@ endfunction
 " 重新加载 lightline 状态栏的方法.
 function! LightlineReload()
   " 这部分分支语句用于切换背景色时, 重新加载 lightline.
-  if g:colors_name =~# 'gruvbox'
+  if g:colors_name == 'gruvbox'
     execute "source " . g:plug_home . "/gruvbox/autoload/lightline/colorscheme/gruvbox.vim"
-  elseif g:colors_name =~# 'iceberg'
+  elseif g:colors_name == 'iceberg'
     execute "source " . g:plug_home . "/iceberg.vim/autoload/lightline/colorscheme/iceberg.vim"
-  elseif g:colors_name =~# 'one'
+  elseif g:colors_name == 'one'
     execute "source " . g:plug_home . "/lightline.vim/autoload/lightline/colorscheme/one.vim"
-  elseif g:colors_name =~# 'vadelma'
+  elseif g:colors_name == 'onehalfdark' || g:colors_name == 'onehalflight'
+    execute "source " . g:plug_home . "/lightline.vim/autoload/lightline/colorscheme/onehalf.vim"
+  elseif g:colors_name == 'vadelma'
     execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
-  elseif g:colors_name =~# 'PaperColor'
+  elseif g:colors_name == 'PaperColor'
     execute "source " . g:plug_home . "/vadelma/autoload/lightline/colorscheme/vadelma.vim"
-  elseif g:colors_name =~# 'github'
+  elseif g:colors_name == 'github'
     execute 'source ' . g:plug_home . '/vim-colors-github/autoload/lightline/colorscheme/github.vim'
-  elseif g:colors_name =~# 'solarized8'
+  elseif g:colors_name == 'solarized8'
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/solarized.vim'
-  elseif g:colors_name =~# 'primary'
+  elseif g:colors_name == 'primary'
     execute 'source ' . g:plug_home . '/lightline.vim/autoload/lightline/colorscheme/primary.vim'
   endif
 
@@ -1463,10 +1465,8 @@ function! ToggleBGTransparent()
       call MolokaiAfter()
     elseif g:colors_name == 'base16-default-dark'
       call Base16DefaultDarkAfter()
-    elseif g:colors_name == 'onehalfdark'
-      call OnehalfdarkAfter()
-    elseif g:colors_name == 'onehalflight'
-      call OnehalflightAfter()
+    elseif g:colors_name == 'onehalfdark' || g:colors_name == 'onehalflight'
+      call OnehalfAfter()
     elseif g:colors_name == 'github'
       call GithubAfter()
     elseif g:colors_name == 'solarized8'
@@ -1524,10 +1524,10 @@ function! ToggleBGColor()
   " 由于 onehalfdark 和 onehalflight 不使用 background 选项来控制背景色, 故需单独配置.
   if g:colors_name == 'onehalfdark'
     colorscheme onehalflight
-    call OnehalflightAfter()
+    call OnehalfAfter()
   elseif g:colors_name == 'onehalflight'
     colorscheme onehalfdark
-    call OnehalfdarkAfter()
+    call OnehalfAfter()
   else
     " 其他主题设置切换背景颜色.
     let &background = ( &background ==# 'dark'? 'light' : 'dark' )
@@ -1708,7 +1708,7 @@ function! JellybeansAfter()
 endfunction
 
 function! Base16DefaultDarkAfter()
-  let g:lightline.colorscheme = 'apprentice'
+  let g:lightline.colorscheme = 'base16_default_dark'
 
   " cterm=NONE 表示用来去掉默认的粗体显示.
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
@@ -1847,28 +1847,23 @@ function! AyuAfter()
   call EnableBold()
 endfunction
 
-function! OnehalfdarkAfter()
-  let g:lightline.colorscheme = 'onehalfdark'
+function! OnehalfAfter()
+  let g:lightline.colorscheme = 'onehalf'
 
-  " 此主题默认弹窗是 light 的, 这里改成 dark.
-  hi Pmenu guibg=#282c34 guifg=#dcdfe4
-
-  " for Vim
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-  " for Neovim
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  if &background == 'dark'
+    " 此主题默认弹窗是 light 的, 这里改成 dark.
+    hi Pmenu guibg=#313640 guifg=#dcdfe4
+    " for Vim
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#474e5d
+    " for Neovim
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#474e5d
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#d4d4d4
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#d4d4d4
+  endif
 
   call EnableItalic()
   call EnableBold()
-endfunction
-
-function! OnehalflightAfter()
-  let g:lightline.colorscheme = 'one'
-
-  " for Vim
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#e4e4e4
-
-  call EnableItalic()
 endfunction
 
 function! PencilAfter()
@@ -2036,10 +2031,8 @@ function! SetColorscheme()
       call PaperColorAfter()
     elseif g:colors_name == 'ayu'
       call AyuAfter()
-    elseif g:colors_name == 'onehalfdark'
-      call OnehalfdarkAfter()
-    elseif g:colors_name == 'onehalflight'
-      call OnehalflightAfter()
+    elseif g:colors_name == 'onehalfdark' || g:colors_name == 'onehalflight'
+      call OnehalfAfter()
     elseif g:colors_name == 'vadelma'
       call VadelmaAfter()
     elseif g:colors_name == 'pencil'
