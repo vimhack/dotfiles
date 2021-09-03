@@ -27,6 +27,7 @@ base16
 flat
 materia
 monokai
+atelierdune
 
 # light
 gruvbox_light
@@ -43,3 +44,5 @@ github_light
 
 # base16 light
 cupertino
+atelierdune_light
+
