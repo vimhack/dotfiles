@@ -1823,10 +1823,10 @@ function! NordAfter()
 endfunction
 
 function! TenderAfter()
-  let g:lightline.colorscheme = 'tender'
+  let g:lightline.colorscheme = 'tender_new'
 
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#293b4d
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#293b4d
 
   call EnableItalic()
   call EnableBold()
