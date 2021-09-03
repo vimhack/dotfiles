@@ -1487,6 +1487,8 @@ function! ToggleBGTransparent()
       call Base16CupertinoAfter()
     elseif g:colors_name == 'base16-materia'
       call Base16MateriaAfter()
+    elseif g:colors_name == 'base16-monokai'
+      call Base16MonokaiAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1513,7 +1515,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'srcery' ||
     \ g:colors_name == 'spring-night' ||
     \ g:colors_name == 'base16-flat' ||
-    \ g:colors_name == 'base16-materia'
+    \ g:colors_name == 'base16-materia' ||
+    \ g:colors_name == 'base16-monokai'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -1986,6 +1989,15 @@ function! Base16MateriaAfter()
   call EnableBold()
 endfunction
 
+function! Base16MonokaiAfter()
+  let g:lightline.colorscheme = 'base16_monokai'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
 " }}
 
 " *********************************
@@ -2059,6 +2071,8 @@ function! SetColorscheme()
       call Base16CupertinoAfter()
     elseif g:colors_name == 'base16-materia'
       call Base16MateriaAfter()
+    elseif g:colors_name == 'base16-monokai'
+      call Base16MonokaiAfter()
     endif
   endif
 

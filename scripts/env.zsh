@@ -170,6 +170,7 @@ change_colorscheme_for_alacritty_vim() {
     [[ "$to_colorscheme" = "flat" ]] && to_colorscheme="base16-flat"
     [[ "$to_colorscheme" = "cupertino" ]] && to_colorscheme="base16-cupertino"
     [[ "$to_colorscheme" = "materia" ]] && to_colorscheme="base16-materia"
+    [[ "$to_colorscheme" = "monokai" ]] && to_colorscheme="base16-monokai"
 
     if [[ "$to_colorscheme" = "ayu" ]]; then
         echo "let ayucolor='dark'

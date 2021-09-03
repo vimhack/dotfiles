@@ -202,9 +202,9 @@ schemes:
       red: "#f43753"
       green: "#c9d05c"
       yellow: "#ffc24b"
-      blue: "#b3deef"
+      blue: "#73cef4"
       magenta: "#d3b987"
-      cyan: "#73cef4"
+      cyan: "#b3deef"
       white: "#eeeeee"
     bright:
       black: "#4c4c4c"
@@ -1045,6 +1045,29 @@ schemes:
       magenta: "#82aaff"
       cyan: "#80cbc4"
       white: "#ffffff"
+
+  monokai: &monokai
+    primary:
+      background: "#272822"
+      foreground: "#F8F8F2"
+    normal:
+      black: "#272822"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#F4BF75"
+      blue: "#66D9EF"
+      magenta: "#AE81FF"
+      cyan: "#A1EFE4"
+      white: "#F8F8F2"
+    bright:
+      black: "#75715E"
+      red: "#F92672"
+      green: "#A6E22E"
+      yellow: "#F4BF75"
+      blue: "#66D9EF"
+      magenta: "#AE81FF"
+      cyan: "#A1EFE4"
+      white: "#F9F8F5"
 
 # }}
 
