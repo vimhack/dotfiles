@@ -183,13 +183,17 @@ colorscheme ayu" >$vim_colorscheme_file
     elif [[ "$to_colorscheme" = "ayu_light" ]]; then
         echo "let ayucolor='light'
 colorscheme ayu" >$vim_colorscheme_file
+    elif [[ "$to_colorscheme" = "onehalflight" ]] ||
+        [[ "$to_colorscheme" = "base16-atelier-dune-light" ]]; then
+        echo "set background=light
+colorscheme $to_colorscheme" >$vim_colorscheme_file
     else
         if echo "$to_colorscheme" | grep -q "_light"; then
             echo "set background=light
 colorscheme ${to_colorscheme/_light/}" >$vim_colorscheme_file
         else
             echo "set background=dark
-colorscheme ${to_colorscheme/_light/}" >$vim_colorscheme_file
+colorscheme ${to_colorscheme}" >$vim_colorscheme_file
         fi
     fi
 

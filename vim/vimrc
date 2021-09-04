@@ -1464,6 +1464,8 @@ function! ToggleBGTransparent()
       call DraculaAfter()
     elseif g:colors_name == 'gruvbox'
       call GruvboxAfter()
+    elseif g:colors_name == 'iceberg'
+      call IcebergAfter()
     elseif g:colors_name == 'vadelma'
       call VadelmaAfter()
     elseif g:colors_name == 'nord'
@@ -1480,8 +1482,6 @@ function! ToggleBGTransparent()
       call MolokaiAfter()
     elseif g:colors_name == 'base16-default-dark'
       call Base16DefaultDarkAfter()
-    elseif g:colors_name == 'onehalfdark' || g:colors_name == 'onehalflight'
-      call OnehalfAfter()
     elseif g:colors_name == 'github'
       call GithubAfter()
     elseif g:colors_name == 'solarized8'
@@ -1500,7 +1500,9 @@ function! ToggleBGTransparent()
       call Base16MateriaAfter()
     elseif g:colors_name == 'base16-monokai'
       call Base16MonokaiAfter()
-    elseif g:colors_name == 'base16-atelier-dune' || g:colors_name == 'base16-atelier-dune-light'
+    elseif g:colors_name =~ 'onehalf'
+      call OnehalfAfter()
+    elseif g:colors_name =~ 'base16-atelier-dune'
       call Base16AtelierDuneAfter()
     endif
   else
@@ -1556,7 +1558,7 @@ function! ToggleBGColor()
     call Base16AtelierDuneAfter()
   else
     " 其他主题设置切换背景颜色.
-    let &background = ( &background ==# 'dark'? 'light' : 'dark' )
+    let &background = ( &background ==# 'dark' ? 'light' : 'dark' )
   endif
 
   if g:colors_name == 'PaperColor'
@@ -1573,6 +1575,8 @@ function! ToggleBGColor()
     call PencilAfter()
   elseif g:colors_name == 'solarized8'
     call SolarizedAfter()
+  elseif g:colors_name == 'iceberg'
+    call IcebergAfter()
   elseif g:colors_name == 'primary'
     call GooglePrimaryAfter()
   endif
@@ -1683,16 +1687,40 @@ endfunction
 
 " 需要放置到 colorscheme 指令之后的主题优化方法 {{
 
+function! DraculaAfter()
+  " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
+  " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
+  if !has('nvim') && (g:colors_name == 'dracula') && (g:popup_window_transparent == 1)
+    hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
+  endif
+
+  let g:lightline.colorscheme = 'dracula'
+
+  " 优化第 80 列的颜色方案.
+  hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
+
+  " 优化非可见字符 nbsp, tab, trail 等的颜色方案:
+  " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
+  " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
+  " 但对于 Neovim, 则是由 Whitespace 高亮组定义的.
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
+
+  " 优化缩进线的颜色方案.
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
+endfunction
+
 function! VadelmaAfter()
   let g:lightline.colorscheme = 'vadelma_new'
 
-  " for Vim
   if &background == 'dark'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=253 guibg=NONE guifg=#dadada
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=253 guibg=NONE guifg=#dadada
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=253 guibg=NONE guifg=#dadada
   endif
 
   call EnableItalic()
@@ -1703,15 +1731,17 @@ function! PaperColorAfter()
   let g:lightline.colorscheme = 'papercolor_new'
 
   if &background == 'dark'
-    " 光标所在行的行号颜色.
+    " 优化光标所在行的行号颜色.
     hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=DarkYellow guibg=NONE guifg=DarkYellow
 
     " cterm=NONE 表示用来去掉默认的粗体显示.
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
   else
-    " for nvim only
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
   endif
 
   call EnableItalic()
@@ -1723,6 +1753,7 @@ function! JellybeansAfter()
 
     hi SpecialKey ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3a3a3a
 
     hi ColorColumn ctermbg=236 guibg=#303030
 
@@ -1736,29 +1767,12 @@ endfunction
 function! Base16DefaultDarkAfter()
   let g:lightline.colorscheme = 'base16_default_dark'
 
-  " cterm=NONE 表示用来去掉默认的粗体显示.
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#444444
 
   call EnableItalic()
   call EnableBold()
-endfunction
-
-function! DraculaAfter()
-  " 设置 popup window 背景透明色后, 使用 vim 时, 在进行代码提示的时候,
-  " dracula 主题的字体颜色变得很难辨认, 这里进行优化, nvim 无此问题.
-  if !has('nvim') && (g:colors_name == 'dracula') && (g:popup_window_transparent == 1)
-    hi Pmenu ctermbg=NONE guibg=NONE ctermfg=white
-  endif
-
-  let g:lightline.colorscheme = 'dracula'
-
-  hi ColorColumn cterm=NONE ctermbg=237 guibg=#44475a
-
-  " 优化 Vim 的非可见字符的颜色方案.
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
-  " 优化 Neovim 的非可见字符的颜色方案.
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#44475a
 endfunction
 
 function! RigelAfter()
@@ -1766,12 +1780,9 @@ function! RigelAfter()
   let g:rigel_lightline = 1
   let g:lightline.colorscheme = 'rigel'
 
-  " 优化非可见字符 nbsp, tab, trail 等的颜色方案:
-  " 目的是改变 tab 键和行尾空格的颜色样式, 从而方便我们明显的看到多余的空白字符.
-  " NOTE: 对于 Vim, 是由 SpecialKey 高亮组定义的,
-  " 但对于 Neovim, 则是由 Whitespace 高亮组定义的.
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
 
   " 优化 ColorColumn 列的颜色方案.
   " NOTE: 设置 ctermbg 对 vim 有效, 对 nvim 无效, 设置 guibg 才对 nvim 有效.
@@ -1792,6 +1803,13 @@ endfunction
 
 function! OneAfter()
   let g:lightline.colorscheme = 'one'
+
+  if &background == 'dark'
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=16 guibg=NONE guifg=#3b4048
+  else
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#d3d3d3
+  endif
+
   call EnableItalic()
   call EnableBold()
 endfunction
@@ -1801,6 +1819,7 @@ function! MolokaiAfter()
 
   " for Neovim, 通过 cterm=NONE 来去掉默认的粗体显示.
   hi Whitespace cterm=NONE guibg=NONE guifg=#465457
+  hi Conceal cterm=NONE guibg=NONE guifg=#465457
 
   call EnableItalic()
   call EnableBold()
@@ -1812,9 +1831,11 @@ function! GruvboxAfter()
   if &background == 'dark'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#504945
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#504945
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#504945
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#d5c4a1
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#d5c4a1
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#d5c4a1
   endif
 
   if !has('nvim')
@@ -1829,6 +1850,17 @@ endfunction
 
 function! IcebergAfter()
   let g:lightline.colorscheme = 'iceberg'
+
+  if &background == 'dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=240 guibg=NONE guifg=#515e97
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=240 guibg=NONE guifg=#515e97
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=240 guibg=NONE guifg=#515e97
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=248 guibg=NONE guifg=#a5b0d3
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=248 guibg=NONE guifg=#a5b0d3
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=248 guibg=NONE guifg=#a5b0d3
+  endif
+
   call EnableItalic()
   call EnableBold()
 endfunction
@@ -1838,6 +1870,7 @@ function! NordAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#4C566A
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#4C566A
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=250 guibg=NONE guifg=#4C566A
 
   " nord 默认提供的斜体字支持不够理想, 使用自定义方法增强.
   call EnableItalic()
@@ -1849,6 +1882,7 @@ function! TenderAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#293b4d
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#293b4d
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#293b4d
 
   call EnableItalic()
   call EnableBold()
@@ -1857,16 +1891,22 @@ endfunction
 function! AyuAfter()
   if (g:ayucolor == 'dark')
     let g:lightline.colorscheme = 'ayu_dark'
+
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#253340
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#253340
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#253340
   elseif (g:ayucolor == 'mirage')
     let g:lightline.colorscheme = 'ayu_mirage'
+
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#343F4C
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#343F4C
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#343F4C
   else
     let g:lightline.colorscheme = 'ayu_light'
+
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#F0EEE4
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#F0EEE4
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#F0EEE4
   endif
 
   call EnableItalic()
@@ -1879,13 +1919,14 @@ function! OnehalfAfter()
   if &background == 'dark'
     " 此主题默认弹窗是 light 的, 这里改成 dark.
     hi Pmenu guibg=#313640 guifg=#dcdfe4
-    " for Vim
+
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#474e5d
-    " for Neovim
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#474e5d
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#474e5d
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#d4d4d4
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#d4d4d4
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#d4d4d4
   endif
 
   call EnableItalic()
@@ -1899,9 +1940,11 @@ function! PencilAfter()
   if &background == 'light'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=231 guibg=NONE guifg=#e0e0e0
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=231 guibg=NONE guifg=#e0e0e0
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=231 guibg=NONE guifg=#e0e0e0
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#424242
   endif
 
   call EnableItalic()
@@ -1915,15 +1958,13 @@ function! GithubAfter()
   hi EndOfBuffer ctermbg=NONE guibg=NONE
 
   if &background == 'dark'
-    " for Vim
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#41484f
-    " for Neovim
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#41484f
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#41484f
   else
-    " for Vim
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
-    " for Neovim
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
   endif
 
   call EnableItalic()
@@ -1935,6 +1976,7 @@ function! SrceryAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=237 guibg=NONE guifg=#3A3A3A
 
   hi htmlBold guibg=NONE
 
@@ -1947,9 +1989,11 @@ function! SolarizedAfter()
   if &background == 'dark'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#00384d
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
   endif
 
   call EnableItalic()
@@ -1959,6 +2003,7 @@ function! SpringNightAfter()
   let g:lightline.colorscheme = 'spring_night'
 
   hi Whitespace cterm=NONE term=NONE guifg=#607080 ctermfg=60
+  hi Conceal cterm=NONE term=NONE guifg=#607080 ctermfg=60
 
   call EnableItalic()
 endfunction
@@ -1969,9 +2014,11 @@ function! GooglePrimaryAfter()
   if &background == 'dark'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#5f6368
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#5f6368
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#5f6368
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#c6c6c6
   endif
 
   call EnableItalic()
@@ -1983,6 +2030,7 @@ function! Base16FlatAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#34495E
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#34495E
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#34495E
 
   call EnableItalic()
   call EnableBold()
@@ -1993,6 +2041,7 @@ function! Base16CupertinoAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c0c0c0
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c0c0c0
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c0c0c0
 
   call EnableItalic()
   call EnableBold()
@@ -2003,6 +2052,7 @@ function! Base16MateriaAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#37474F
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#37474F
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#37474F
 
   call EnableItalic()
   call EnableBold()
@@ -2013,6 +2063,7 @@ function! Base16MonokaiAfter()
 
   hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
   hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
 
   call EnableItalic()
   call EnableBold()
@@ -2024,9 +2075,11 @@ function! Base16AtelierDuneAfter()
   if g:colors_name == 'base16-atelier-dune'
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#4C4939
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#4C4939
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#4C4939
   else
     hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#CCC8B3
     hi Whitespace cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#CCC8B3
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=251 guibg=NONE guifg=#CCC8B3
   endif
 
   call EnableItalic()
@@ -2082,8 +2135,6 @@ function! SetColorscheme()
       call PaperColorAfter()
     elseif g:colors_name == 'ayu'
       call AyuAfter()
-    elseif g:colors_name == 'onehalfdark' || g:colors_name == 'onehalflight'
-      call OnehalfAfter()
     elseif g:colors_name == 'vadelma'
       call VadelmaAfter()
     elseif g:colors_name == 'pencil'
@@ -2108,7 +2159,9 @@ function! SetColorscheme()
       call Base16MateriaAfter()
     elseif g:colors_name == 'base16-monokai'
       call Base16MonokaiAfter()
-    elseif g:colors_name == 'base16-atelier-dune' || g:colors_name == 'base16-atelier-dune-light'
+    elseif g:colors_name =~ 'onehalf'
+      call OnehalfAfter()
+    elseif g:colors_name =~ 'base16-atelier-dune'
       call Base16AtelierDuneAfter()
     endif
   endif
@@ -2287,6 +2340,9 @@ set guifont=Hack_Nerd_Font:h12
 " NOTE: 如果 json 类型文件中无法显示双引号可能也是由此插件导致,
 " 把 json 和 jsonc 添加到下面列表中即可.
 let g:indentLine_fileTypeExclude = ['markdown', 'text']
+
+" 缩进线颜色方案使用 SpecialKey 高亮组.
+let g:indentLine_defaultGroup = 'SpecialKey'
 
 """""" 'voldikss/vim-floaterm'
 " doc: https://github.com/voldikss/vim-floaterm

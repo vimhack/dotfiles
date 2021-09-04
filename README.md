@@ -177,7 +177,7 @@ $ f Monofur_Book
 ```text
 font-size
 
-Current font size is '12.0', and it can be changed by:
+Current font size is '12', and it can be changed by:
 
 $ font-size number
 
@@ -185,7 +185,7 @@ or
 
 $ fs number
 
-* number must between 1.0 and  200.0
+* number must between 1 and  200
 ```
 
 **Change opacity of Alacritty in terminal command line:**
@@ -193,7 +193,7 @@ $ fs number
 ```text
 opacity
 
-Current opacity is '0.90', and it can be changed by:
+Current opacity is '0.9', and it can be changed by:
 
 $ opacity number
 
@@ -201,7 +201,7 @@ or
 
 $ o number
 
-* number must between 0.00 and 1.00
+* number must between 0 and 1
 ```
 
 **Toggle Vim/Neovim background transparency in terminal command line:**
@@ -300,10 +300,10 @@ Font: `Hasklug_Light`
 FontSize: `12`
 VimBgTransparency: `1`
 
-![gruvbox](https://github.com/windvalley/bigfiles/blob/main/dotfiles/images/gruvbox.png?raw=true)
+![gruvbox](https://user-images.githubusercontent.com/6139938/131994883-47e0c72f-2a34-401d-acfe-0759a6c592e8.png)
 
 ColorScheme: `dracula`
-Opacity: `1.0`
+Opacity: `1`
 Font: `Hurmit_light`
 FontSize: `11`
 VimBgTransparency: `1`
