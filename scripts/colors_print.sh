@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # colors_print.sh
-#
+# wonderful utils: https://convertingcolors.com
 
 colors_print() {
     local column=18
