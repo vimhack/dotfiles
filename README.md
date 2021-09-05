@@ -308,7 +308,7 @@ Font: `Hurmit_light`
 FontSize: `11`
 VimBgTransparency: `1`
 
-![dracula](https://raw.githubusercontent.com/windvalley/bigfiles/main/dotfiles/images/dracula.png?raw=true)
+![dracula](https://user-images.githubusercontent.com/6139938/132120978-b1ec27f1-f79d-492f-955f-76dffd2c1e00.png)
 
 ColorScheme: `papercolor`
 Opacity: `0.85`
@@ -316,7 +316,7 @@ Font: `Lekton_Regular`
 FontSize: `11.5`
 VimBgTransparency: `1`
 
-![papercolor](https://github.com/windvalley/bigfiles/blob/main/dotfiles/images/papercolor.png?raw=true)
+![papercolor](https://user-images.githubusercontent.com/6139938/132120994-61a63c06-03a3-4c96-996b-bf84b52cc039.png)
 
 ## ⚖️ License
 
