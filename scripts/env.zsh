@@ -173,6 +173,7 @@ change_colorscheme_for_alacritty_vim() {
     [[ "$to_colorscheme" = "monokai" ]] && to_colorscheme="base16-monokai"
     [[ "$to_colorscheme" = "atelierdune" ]] && to_colorscheme="base16-atelier-dune"
     [[ "$to_colorscheme" = "atelierdune_light" ]] && to_colorscheme="base16-atelier-dune-light"
+    [[ "$to_colorscheme" = "oceanicnext" ]] && to_colorscheme="base16-oceanicnext"
 
     if [[ "$to_colorscheme" = "ayu" ]]; then
         echo "let ayucolor='dark'

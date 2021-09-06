@@ -1504,6 +1504,8 @@ function! ToggleBGTransparent()
       call OnehalfAfter()
     elseif g:colors_name =~ 'base16-atelier-dune'
       call Base16AtelierDuneAfter()
+    elseif g:colors_name == 'base16-oceanicnext'
+      call Base16OceanicnextAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1531,7 +1533,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'spring-night' ||
     \ g:colors_name == 'base16-flat' ||
     \ g:colors_name == 'base16-materia' ||
-    \ g:colors_name == 'base16-monokai'
+    \ g:colors_name == 'base16-monokai' ||
+    \ g:colors_name == 'base16-oceanicnext'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -2086,6 +2089,17 @@ function! Base16AtelierDuneAfter()
   call EnableBold()
 endfunction
 
+function! Base16OceanicnextAfter()
+  let g:lightline.colorscheme = 'base16_oceanicnext'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#4F5B66
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#4F5B66
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#4F5B66
+
+  call EnableItalic()
+  call EnableBold()
+endfunction
+
 " }}
 
 " *********************************
@@ -2163,6 +2177,8 @@ function! SetColorscheme()
       call OnehalfAfter()
     elseif g:colors_name =~ 'base16-atelier-dune'
       call Base16AtelierDuneAfter()
+    elseif g:colors_name =~ 'base16-oceanicnext'
+      call Base16OceanicnextAfter()
     endif
   endif
 
