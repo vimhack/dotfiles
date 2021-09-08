@@ -74,7 +74,6 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * dracula
 * gruvbox
 * solarized
-* base16
 * molokai
 * rigel
 * jellybeans
@@ -91,6 +90,12 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * srcery
 * springnight
 * google
+* base16
+* flat
+* materia
+* monokai
+* atelierdune
+* oceanicnext
 * gruvbox_light
 * solarized_light
 * one_light
@@ -102,10 +107,12 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * pencil_light
 * google_light
 * github_light
+* cupertino
+* atelierdune_light
 
-For example, change colorscheme to 'github_light':
+For example, change colorscheme to 'atelierdune_light':
 
-$ colorscheme github_light
+$ colorscheme atelierdune_light
 
 or
 
