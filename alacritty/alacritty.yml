@@ -255,7 +255,7 @@ schemes:
       blue: "#caa9fa"
       magenta: "#ff79c6"
       cyan: "#8be9fd"
-      white: "#bfbfbf"
+      white: "#ffffff"
     bright:
       black: "#575b70"
       red: "#ff6e67"
