@@ -185,6 +185,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 
+# ****** bash ******
+# brew install bash
+
+export PATH="/usr/local/opt/bash/bin:$PATH"
+
 # }}
 
 
