@@ -270,6 +270,20 @@ Plug 'sheerun/vim-polyglot'
 " 代码静态检查与自动修复插件: ALE(Asynchronous Lint Engine)
 Plug 'dense-analysis/ale'
 
+
+" }}
+
+" 代码调试  Code Debug {{
+
+" 代码 debug 插件
+Plug 'puremourning/vimspector', {'do': './install_gadget.py
+  \ --enable-c
+  \ --enable-go
+  \ --enable-python
+  \ --enable-lua
+  \ --enable-bash
+  \ '}
+
 " }}
 
 " 目录树等  UI Interface {{
@@ -304,17 +318,11 @@ Plug 'luochen1990/rainbow'
 
 " 快速打开想要的文件, 类似grep搜索文件内容等, 替代ctrlp插件.
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " 集成 ranger 文件管理器.
 Plug 'francoiscabrol/ranger.vim'
-
-" 为目录树或 LeaderF 等插件显示文件类型.
-" NOTE:
-" 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为: Hack Nerd Font 或 Hack Nerd Font Mono;
-"    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
-"    brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
-" 2) 此插件要安装在目录树、LeaderF 等插件的后面.
-Plug 'ryanoasis/vim-devicons'
 
 " 在上一个插件的基础上, 根据文件类型的不同, 改变图标的颜色.
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -327,6 +335,13 @@ Plug 'Yggdroot/indentLine'
 
 " Vim 屏保 Matrix.
 Plug 'uguu-org/vim-matrix-screensaver'
+
+" 为目录树、LeaderF、ranger 等插件显示文件类型.
+" NOTE:
+" 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
+"    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
+" 2) 此插件要安装在目录树、LeaderF 等插件的后面.
+Plug 'ryanoasis/vim-devicons'
 
 " }}
 
@@ -2697,6 +2712,80 @@ au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 " }}
 
 
+" 代码调试 Code Debug {{
+
+"""""" puremourning/vimspector
+" doc: https://github.com/puremourning/vimspector
+
+let g:vimspector_enable_mappings = 'HUMAN'
+
+" 启动 debug 模式, 或运行到下一个断点.
+nmap <leader>dc <Plug>VimspectorContinue
+
+" 停止运行 debug 模式.
+nmap <leader>ds <Plug>VimspectorStop
+
+" 重新运行 debug 模式.
+nmap <leader>dr <Plug>VimspectorRestart
+
+" 设置行断点.
+nmap <leader>db <Plug>VimspectorToggleBreakpoint
+
+" 运行到下一行代码, 每按一次运行一行代码.
+nmap <leader>dl <Plug>VimspectorStepOver
+
+" step in 进入 breakpoint 所在行调用的函数内部.
+nmap <leader>di <Plug>VimspectorStepInto
+
+" step out 从进入的函数中返回.
+nmap <leader>do <Plug>VimspectorStepOut
+
+" 查看光标所在变量的值, 注意在 debug 模式下必须运行过了这一行才可以.
+nmap <Leader>dv <Plug>VimspectorBalloonEval
+xmap <Leader>dv <Plug>VimspectorBalloonEval
+
+" ,dj  选择模版文件, 在项目的根目录创建必须的 .vimspector.json 文件.
+noremap <silent><leader>dj :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+
+function! s:read_template_into_buffer(template)
+	execute '0r ~/.dotfiles/vim/vimspector/'.a:template
+endfunction
+
+command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
+  \ 'source': 'ls -1 ~/.dotfiles/vim/vimspector',
+  \ 'down': 10,
+  \ 'sink': function('<sid>read_template_into_buffer')
+  \ })
+
+" 断点图标.
+sign define vimspectorBP            text=🌕  texthl=WarningMsg
+" 条件断点图标.
+sign define vimspectorBPCond        text=🔶  texthl=WarningMsg
+" 失效的断点图标.
+sign define vimspectorBPDisabled    text=🌑  texthl=Normal
+" 当前调试到的非断点所在行图标.
+sign define vimspectorPC            text=💎  texthl=NONE linehl=CursorLine
+" 当前调试到的断点所在行图标.
+sign define vimspectorPCBP          text=●▶  texthl=GitAddSign linehl=CursorLine
+" vimspector.StackTrace 窗口里显示的当前线程图标.
+sign define vimspectorCurrentThread text=🍎  texthl=NONE linehl=CursorLine
+" vimspector.StackTrace 窗口里显示的当前线程的某段任务代码的所在图标.
+sign define vimspectorCurrentFrame  text=🍒  texthl=Special    linehl=CursorLine
+
+" 解决其他插件的 sign 覆盖掉 vimspector sign 的问题.
+let g:vimspector_sign_priority = {
+  \ 'vimspectorBP':            199,
+  \ 'vimspectorBPCond':        199,
+  \ 'vimspectorBPDisabled':    199,
+  \ 'vimspectorPC':            200,
+  \ 'vimspectorPCBP':          200,
+  \ 'vimspectorCurrentThread': 200,
+  \ 'vimspectorCurrentFrame':  200,
+  \ }
+
+" }}
+
+
 " 常用原生选项  Native Configuration {{
 
 " 显示行号.
@@ -3559,6 +3648,17 @@ endif
 " ** AndrewRadev/splitjoin.vim (https://github.com/AndrewRadev/splitjoin.vim)
 "                 gS  将单行代码拆分成多行.
 "                 gJ  将多行代码合并成单行.
+"
+" ** puremourning/vimspector (https://github.com/puremourning/vimspector)
+"                ,dj  选择模版文件, 在项目的根目录创建必须的 .vimspector.json 文件.
+"                ,dc  启动 debug 模式, 或运行到设置的下一个断点.
+"                ,ds  停止运行 debug 模式.
+"                ,dr  重新运行 debug 模式.
+"                ,db  将当前光标所在行设置为断点.
+"                ,dl  运行到下一行代码, 每按一次快捷键运行一样代码.
+"                ,di  进入 breakpoint 所在行调用的函数内部.
+"                ,do  从进入的函数中返回.
+"                ,dv  查看光标所在变量的值, 注意在 debug 模式下必须运行过了这一行才可以.
 "
 " }}
 

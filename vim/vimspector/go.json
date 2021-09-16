@@ -1,0 +1,16 @@
+// go get -u github.com/go-delve/delve/cmd/dlv
+// cp go.vimspector.json /your/go-project/root-path/.vimspector.json
+{
+  "configurations": {
+    "run": {
+      "adapter": "vscode-go",
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "mode": "debug",
+        "dlvToolPath": "$HOME/go/bin/dlv"
+      }
+    }
+  }
+}
+
