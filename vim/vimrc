@@ -240,8 +240,8 @@ Plug 'lifepillar/vim-solarized8'
 " spring-night
 Plug 'rhysd/vim-color-spring-night'
 
-" google/primary
-Plug 'windvalley/vim-colorscheme-primary'
+" primary
+Plug 'google/vim-colorscheme-primary'
 
 " }}
 
@@ -278,6 +278,7 @@ Plug 'dense-analysis/ale'
 " 代码 debug 插件
 Plug 'puremourning/vimspector', {'do': './install_gadget.py
   \ --enable-c
+  \ --force-enable-rust
   \ --enable-go
   \ --enable-python
   \ --enable-lua
@@ -2764,11 +2765,11 @@ sign define vimspectorBPCond        text=🔶  texthl=WarningMsg
 " 失效的断点图标.
 sign define vimspectorBPDisabled    text=🌑  texthl=Normal
 " 当前调试到的非断点所在行图标.
-sign define vimspectorPC            text=💎  texthl=NONE linehl=CursorLine
+sign define vimspectorPC            text=💎  texthl=NONE       linehl=CursorLine
 " 当前调试到的断点所在行图标.
 sign define vimspectorPCBP          text=●▶  texthl=GitAddSign linehl=CursorLine
 " vimspector.StackTrace 窗口里显示的当前线程图标.
-sign define vimspectorCurrentThread text=🍎  texthl=NONE linehl=CursorLine
+sign define vimspectorCurrentThread text=🍎  texthl=NONE       linehl=CursorLine
 " vimspector.StackTrace 窗口里显示的当前线程的某段任务代码的所在图标.
 sign define vimspectorCurrentFrame  text=🍒  texthl=Special    linehl=CursorLine
 
