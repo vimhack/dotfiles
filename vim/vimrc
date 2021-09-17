@@ -1114,13 +1114,13 @@ nnoremap <leader>a :call SyntaxAttr()<CR>
 """""" matze/vim-move
 " doc: https://github.com/matze/vim-move
 "
-" [n] ctrl k/j/h/l   normal 模式下将光标所在行向上/向下移动 n 行,
+" [n] shift k/j/h/l  normal 模式下将光标所在行向上/向下移动 n 行,
 "                    或将光标所在字符向左/向右移动 n 个字符;
 "                    visual 模式下将选择的内容向上/向下移动 n 行,
 "                    或将选择的内容块向左/向右移动 n 个字符.
 
-" 将默认的 alt 键改为 ctrl 键.
-let g:move_key_modifier = 'C'
+" 将默认的 alt 键改为 shift 键.
+let g:move_key_modifier = 'S'
 
 " }}
 
@@ -2304,10 +2304,6 @@ autocmd BufEnter NERD_tree_* | execute 'normal R'
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
-" 标签页切换快捷键: `shift h` 向左, `shift l` 向右.
-map <S-h> gT
-map <S-l> gt
-
 " 是否显示隐藏文件, 默认值: 0, 表示不显示.
 let NERDTreeShowHidden=1
 
@@ -2749,7 +2745,7 @@ xmap <Leader>dv <Plug>VimspectorBalloonEval
 noremap <silent><leader>dj :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
 
 function! s:read_template_into_buffer(template)
-	execute '0r ~/.dotfiles/vim/vimspector/'.a:template
+  execute '0r ~/.dotfiles/vim/vimspector/'.a:template
 endfunction
 
 command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
@@ -2759,11 +2755,11 @@ command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
   \ })
 
 " 断点图标.
-sign define vimspectorBP            text=🌕  texthl=WarningMsg
+sign define vimspectorBP            text=🌕  texthl=NONE
 " 条件断点图标.
-sign define vimspectorBPCond        text=🔶  texthl=WarningMsg
+sign define vimspectorBPCond        text=🔶  texthl=NONE
 " 失效的断点图标.
-sign define vimspectorBPDisabled    text=🌑  texthl=Normal
+sign define vimspectorBPDisabled    text=🌑  texthl=NONE
 " 当前调试到的非断点所在行图标.
 sign define vimspectorPC            text=💎  texthl=NONE       linehl=CursorLine
 " 当前调试到的断点所在行图标.
@@ -2771,7 +2767,7 @@ sign define vimspectorPCBP          text=●▶  texthl=GitAddSign linehl=Cursor
 " vimspector.StackTrace 窗口里显示的当前线程图标.
 sign define vimspectorCurrentThread text=🍎  texthl=NONE       linehl=CursorLine
 " vimspector.StackTrace 窗口里显示的当前线程的某段任务代码的所在图标.
-sign define vimspectorCurrentFrame  text=🍒  texthl=Special    linehl=CursorLine
+sign define vimspectorCurrentFrame  text=🍒  texthl=NONE       linehl=CursorLine
 
 " 解决其他插件的 sign 覆盖掉 vimspector sign 的问题.
 let g:vimspector_sign_priority = {
@@ -2984,11 +2980,12 @@ nnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
 vnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
 inoremap <silent> <C-a> <C-R>=GoToFirstNonBlankOrFirstColumn()<CR>
 
-" ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候, 从默认的每次移动1行改为3行.
+" ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候,
+" 从默认的每次移动 1 行改为移动 3 行.
 noremap <C-e> 3<C-e>
 noremap <C-y> 3<C-y>
 
-" normal 模式下, 使用Y复制当前行光标之后的内容, 和C和D用法统一起来.
+" normal 模式下, 使用 Y 复制当前行光标之后的内容, 和 C 和 D 用法统一起来.
 nnoremap Y y$
 
 " visual 模式下进行 shift > 和 shift < 缩进操作时,
@@ -3119,6 +3116,16 @@ endif
 nmap <silent> <C-s> :setlocal spell! spelllang=en,cjk<CR>
 imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 
+" 将在多窗口之间进行上下左右跳转光标的快捷键重新映射:
+"   ctrl h  跳转到左边的窗口;
+"   ctrl l  跳转到右边的窗口;
+"   ctrl k  跳转到上面的窗口;
+"   ctrl j  跳转到下面的窗口.
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 " 从额外的本地配置文件(如果存在的话)加载配置.
 let vimrc_local='~/.vimrc.local'
 if filereadable(expand(vimrc_local))
@@ -3157,12 +3164,6 @@ endif
 
 " 出错时, 发出视觉提示, 通常是屏幕闪烁.
 "set visualbell
-
-" 多窗口之间上下左右移动的快捷键重新映射, 由于和 vim-move 插件的按键重合, 故暂不使用.
-"noremap <C-h> <C-w>h
-"noremap <C-j> <C-w>j
-"noremap <C-k> <C-w>k
-"noremap <C-l> <C-w>l
 
 " }}
 
@@ -3439,7 +3440,8 @@ endif
 "             ctrl s  normal/insert 模式下, 打开/关闭英文拼写检查.
 "                 ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 "                 ,v  normal 模式下, 在背景是透明和不透明之间切换.
-
+"       ctrl k/j/h/l  normal 模式下, 上下左右在多窗口之间跳转.
+"
 " }}
 
 """""""""" 插件提供的能力 {{
@@ -3559,7 +3561,6 @@ endif
 "                     然后使用 :w newfilename 来保存文件, 最后 r 来更新左侧目录树的显示.
 "              gt/gT  向右/向左切换标签页.
 "                3gt  切换到第 3 个标签, 切换到其他标签的方法类似.
-"          shift l/h  向右/向左切换标签页, 是在 .vimrc 中配置的上一条快捷键的映射.
 "          3 shift l  切换到第 3 个标签.
 "                  R  变更目录名称后, 更新目录树中的目录显示.
 "                 CD  如果当前目录树的根目录包含了很多项目, 要将某个项目设置为目录树的根,
@@ -3641,7 +3642,7 @@ endif
 "                 ,m  同上.
 "
 " ** matze/vim-move (https://github.com/matze/vim-move)
-"   [n] ctrl k/j/h/l  normal 模式下将光标所在行向上/向下移动 n 行,
+"   [n] shift k/j/h/l normal 模式下将光标所在行向上/向下移动 n 行,
 "                     或将光标所在字符向左/向右移动 n 个字符;
 "                     visual 模式下将选择的内容向上/向下移动 n 行,
 "                     或将选择的内容块向左/向右移动 n 个字符.
