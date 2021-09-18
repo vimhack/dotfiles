@@ -913,9 +913,9 @@ map <leader>l <Plug>(easymotion-lineforward)
 " 标记当前行光标左侧的字符.
 map <leader>h <Plug>(easymotion-linebackward)
 
-" 输入1个目标字符即可高亮定位, 支持多窗口同时定位.
+" 输入 1 个目标字符即可高亮定位, 支持多窗口同时定位.
 nmap s <Plug>(easymotion-overwin-f)
-" 需要输入2个目标字符才可高亮定位, 支持多窗口同时定位.
+" 需要输入 2 个目标字符才可高亮定位, 支持多窗口同时定位.
 "nmap s <Plug>(easymotion-overwin-f2)
 
 " 是否启用默认的快捷键映射, 默认值: 1, 表示启用.
@@ -2411,7 +2411,7 @@ nmap <leader>m :Matrix<CR>
 " }}
 
 
-" 编程语言  Programming Language {{
+" 编程语言  Programming Languages {{
 
 """""""" Go {{
 
@@ -2536,7 +2536,7 @@ let g:go_highlight_diagnostic_warnings = 1
 
 " }}
 
-"""""" Rust {{
+"""""""" Rust {{
 
 """""" mhinz/vim-crates
 if has('nvim')
@@ -2679,10 +2679,10 @@ inoreabbrev <expr> __
 " doc: https://github.com/instant-markdown/vim-instant-markdown
 
 " ,p  打开浏览器预览.
-nmap <leader>p :InstantMarkdownPreview<CR>
+nmap <silent><leader>p :InstantMarkdownPreview<CR>
 
 " ,,p  关闭预览.
-nmap <leader>,p :InstantMarkdownStop<CR>
+nmap <silent><leader><leader>p :InstantMarkdownStop<CR>
 
 " 是否打开 markdown 类型文件时自动打开预览, 默认值: 1
 let g:instant_markdown_autostart = 0
@@ -2690,9 +2690,49 @@ let g:instant_markdown_autostart = 0
 " 指定日志文件.
 let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
+""""""" 自定义快速输入 markdown 语法标识符的快捷键
+" from: https://github.com/theniceboy/nvim/blob/master/md-snippets.vim
+" NOTE: 此部分定义的快捷键需要全部在 insert 模式下使用.
+
+" ,b  生成粗体字标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>b **** <++><Esc>F*hi
+" ,i  生成斜体字标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>i ** <++><Esc>F*i
+" ,s  生成删除线标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>s ~~~~ <++><Esc>F~hi
+
+" ,d  生成行内代码标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>d `` <++><Esc>F`i
+" ,c  生成代码段标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>c
+  \ ```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
+
+" ,m  生成代办事项标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>m - [ ] <Esc>a
+" ,p  生成图片链接标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>p ![](<++>) <++><Esc>F[a
+" ,a  生成超链接标识符.
+autocmd Filetype markdown inoremap <buffer> <leader>a [](<++>) <++><Esc>F[a
+
+" ,1/2/3/4/5/6  生成一级到六级标题.
+autocmd Filetype markdown inoremap <buffer> <leader>1 #<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> <leader>2 ##<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> <leader>3 ###<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> <leader>4 ####<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> <leader>5 #####<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> <leader>6 ######<Space><Enter><++><Esc>kA
+
+" ,l  生成水平线.
+autocmd Filetype markdown inoremap <buffer> <leader>l ---<Enter><Enter>
+
+" ,f  以上几乎每一个快捷键都会生成一个占位符(<++>), 按 ,f 光标会跳转到占位符, 并同时删除占位符.
+autocmd Filetype markdown inoremap <buffer> <leader>f <Esc>/<++><CR>:nohlsearch<CR>"_c4l
+" ,w  相比于 ,f 还会增加一个换行动作.
+autocmd Filetype markdown inoremap <buffer> <leader>w <Esc>/<++><CR>:nohlsearch<CR>"_c5l<CR>
+
 " }}
 
-""""""" Vim/Neovim {{
+"""""""" Vim/Neovim {{
 
 " 缩进大小改为 2 个空格, insert 模式下将 tab 扩展为 2 个空格,
 " 此时, 如果想打印 tab 本身的话, 需要按 ctrl v tab
@@ -2700,7 +2740,7 @@ au FileType vim setlocal expandtab ts=2 sw=2 sts=2
 
 " }}
 
-""""""" Yaml {{
+"""""""" Yaml {{
 
 au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 
@@ -2709,7 +2749,7 @@ au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 " }}
 
 
-" 代码调试 Code Debug {{
+" 代码调试  Code Debug {{
 
 """""" puremourning/vimspector
 " doc: https://github.com/puremourning/vimspector
@@ -3441,6 +3481,21 @@ endif
 "                 ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 "                 ,v  normal 模式下, 在背景是透明和不透明之间切换.
 "       ctrl k/j/h/l  normal 模式下, 上下左右在多窗口之间跳转.
+"
+" ** 快速输入 Markdown 语法标识符的自定义快捷键:
+"                 ,b  生成粗体字标识符.
+"                 ,i  生成斜体字标识符.
+"                 ,s  生成删除线标识符.
+"                 ,d  生成行内代码标识符.
+"                 ,c  生成代码段标识符.
+"                 ,m  生成代办事项标识符.
+"                 ,p  生成图片链接标识符.
+"                 ,a  生成超链接标识符.
+"       ,1/2/3/4/5/6  生成一级到六级标题.
+"                 ,l  生成水平线.
+"                 ,f  以上几乎每一个快捷键都会生成一个占位符(<++>),
+"                     按 ,f 光标会跳转到占位符, 并同时删除占位符.
+"                 ,w  相比于 ,f 此快捷键还会增加一个换行动作.
 "
 " }}
 
