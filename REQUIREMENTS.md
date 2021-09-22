@@ -97,6 +97,14 @@ git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
+- [fzf](https://github.com/junegunn/fzf)
+
+```bash
+brew install fzf
+# To install useful key bindings and fuzzy completion:
+$(brew --prefix)/opt/fzf/install
+```
+
 ### Alacritty
 
 - [alacritty 0.8.0+](https://github.com/alacritty/alacritty)

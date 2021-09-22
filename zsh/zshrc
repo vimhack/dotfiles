@@ -237,9 +237,13 @@ alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
 # 用于 git commit 的签名.
 export GPG_TTY=$(tty)
 
-# fzf(https://github.com/junegunn/fzf)
+# *** fzf (https://github.com/junegunn/fzf)
+# brew install fzf
+# $(brew --prefix)/opt/fzf/install
 export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border'
 alias ff="vim \$(fzf)"
+# Useful key bindings and fuzzy completion.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # }}
 
@@ -279,6 +283,17 @@ alias ff="vim \$(fzf)"
 #                   glog  git log --oneline --decorate --graph
 #                     gl  git pull
 #
+# *** fzf 工具 (https://github.com/junegunn/fzf)
+#                     ff  通过 fzf 搜索文件并用 vim 打开.
+#                 ctrl t  列出当前目录下的所有目录和文件,
+#                         选择目标文件后回车即可将所选粘贴到命令行上.
+#                 meta c  使用 alt/option 键 + c 键, 列出当前目录下的所有子目录,
+#                         选择目标目录后回车即可直接进入到目录中.
+#                 ctrl r  列出历史命令列表, 输入关键字搜索想要执行的历史命令行.
+#               ctrl k/j  从文件列表或命令行列表中上下选择目标.
+#               ctrl p/n  同 ctrl j/k.
+#      ctrl c/ctrl g/esc  退出文件列表或历史命令列表.
+#
 # *** 自定义命令
 #         colorscheme/cs  切换 vim 和 alacritty 的颜色方案.
 #                 font/f  切换 alacritty 终端的字体.
@@ -289,7 +304,6 @@ alias ff="vim \$(fzf)"
 #    hexcolors-print/hex  打印 256 色的 16 进制表示方式.
 #             volume/vol  调整系统音量大小.
 #         ssh-sessions/s  便捷的批量 ssh 连接远程服务器.
-#                     ff  通过 fzf 搜索文件并用 vim 打开.
 #               lsof_tcp  查看当前监听的端口信息.
 
 # }}
