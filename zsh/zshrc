@@ -193,8 +193,9 @@ export PATH="/usr/local/opt/bash/bin:$PATH"
 # }}
 
 
-# --- Vim/Neovim & Alacritty 主题相关命令配置 {{
+# --- 自定义命令配置 {{
 
+# *** Vim/Neovim & Alacritty 主题相关命令配置
 alias colorscheme="~/.dotfiles/scripts/colorscheme.zsh"
 alias font="~/.dotfiles/scripts/font.zsh"
 alias opacity="~/.dotfiles/scripts/opacity.zsh"
@@ -212,6 +213,11 @@ alias v=vim-bgtransparency
 alias c=colors-print
 alias hex=hexcolors-print
 alias vol=volume
+
+# *** 快速 ssh 连接或恢复连接远程服务器
+alias ssh-sessions="~/.dotfiles/scripts/ssh_sessions.sh"
+
+alias s=ssh-sessions
 
 # }}
 
