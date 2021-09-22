@@ -1114,13 +1114,17 @@ nnoremap <leader>a :call SyntaxAttr()<CR>
 """""" matze/vim-move
 " doc: https://github.com/matze/vim-move
 "
-" [n] shift k/j/h/l  normal 模式下将光标所在行向上/向下移动 n 行,
+" [n] meta k/j/h/l   normal 模式下将光标所在行向上/向下移动 n 行,
 "                    或将光标所在字符向左/向右移动 n 个字符;
 "                    visual 模式下将选择的内容向上/向下移动 n 行,
 "                    或将选择的内容块向左/向右移动 n 个字符.
 
-" 将默认的 alt 键改为 shift 键.
-let g:move_key_modifier = 'S'
+" 默认值为 M, 即 Meta 键, 也就是 macOS 的 Option 键, Windows 的 Alt 键.
+" 可选值:
+"   M: Meta(Alt/Option)
+"   C: Ctrl
+"   S: Shift
+let g:move_key_modifier = 'M'
 
 " }}
 
@@ -3697,10 +3701,11 @@ endif
 "                 ,m  同上.
 "
 " ** matze/vim-move (https://github.com/matze/vim-move)
-"   [n] shift k/j/h/l normal 模式下将光标所在行向上/向下移动 n 行,
+"   [n] meta k/j/h/l  normal 模式下将光标所在行向上/向下移动 n 行,
 "                     或将光标所在字符向左/向右移动 n 个字符;
 "                     visual 模式下将选择的内容向上/向下移动 n 行,
 "                     或将选择的内容块向左/向右移动 n 个字符.
+"                     NOTE: meta 键表示 macOS 的 option 键, windows 的 alt 键.
 "
 " ** AndrewRadev/splitjoin.vim (https://github.com/AndrewRadev/splitjoin.vim)
 "                 gS  将单行代码拆分成多行.
