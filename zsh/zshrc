@@ -203,7 +203,6 @@ alias font-size="~/.dotfiles/scripts/font_size.zsh"
 alias vim-bgtransparency="~/.dotfiles/scripts/vim_bgtransparency.zsh"
 alias colors-print="~/.dotfiles/scripts/colors_print.sh"
 alias hexcolors-print="~/.dotfiles/scripts/print_256_hex_colors.py"
-alias volume="~/.dotfiles/scripts/audio_volume.zsh"
 
 alias cs=colorscheme
 alias f=font
@@ -212,11 +211,13 @@ alias fs=font-size
 alias v=vim-bgtransparency
 alias c=colors-print
 alias hex=hexcolors-print
+
+# *** 调节系统音量
+alias volume="~/.dotfiles/scripts/audio_volume.zsh"
 alias vol=volume
 
-# *** 快速 ssh 连接或恢复连接远程服务器
+# *** 便捷批量 ssh 连接或恢复连接远程服务器
 alias ssh-sessions="~/.dotfiles/scripts/ssh_sessions.sh"
-
 alias s=ssh-sessions
 
 # }}
@@ -279,13 +280,15 @@ alias ff="vim \$(fzf)"
 #                     gl  git pull
 #
 # *** 自定义命令
-#                  theme  列出 vim 和 alacritty 主题颜色和使用方法.
-#          theme gruvbox  将 vim 和 alacritty 的主题颜色切换为 gruvbox.
-#            opacity 0.8  将 alacritty 终端的背景透明度设置为80%, 数字越小, 透明度越大.
-#          font FiraCode  将 alacritty 终端的字体切换为 FiraCode.
-#           font-size 12  将 alacritty 终端的字体大小设置为 12.
-# vim-bgtransparency 1/0  打开或关闭 Vim 背景透明色.
-#             t/o/f/fs/v  theme, opacity, font, font-size, vim-bgtransparent 的 alias 命令.
+#         colorscheme/cs  切换 vim 和 alacritty 的颜色方案.
+#                 font/f  切换 alacritty 终端的字体.
+#              opacity/o  调整 alacritty 终端的透明度.
+#           font-size/fs  设置 alacritty 终端的字体大小.
+#   vim-bgtransparency/v  打开或关闭 Vim 背景透明色.
+#         colors-print/c  打印 256 色的前景色模式和背景色模式.
+#    hexcolors-print/hex  打印 256 色的 16 进制表示方式.
+#             volume/vol  调整系统音量大小.
+#         ssh-sessions/s  便捷的批量 ssh 连接远程服务器.
 #                     ff  通过 fzf 搜索文件并用 vim 打开.
 #               lsof_tcp  查看当前监听的端口信息.
 
