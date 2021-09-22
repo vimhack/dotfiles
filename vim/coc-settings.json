@@ -1,10 +1,13 @@
 {
   // 本文件 coc-settings.json 是 Vim/Neovim 的代码补全插件 coc.nvim 的配置文件.
+  //
   // 安装方法:
+  //
   // 1. Vim
-  //    wget -O ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+  //    curl -sfLo ~/.vim/coc-settings.json https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/coc-settings.json
+  //
   // 2. Neovim
-  //    wget -O ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+  //    curl -sfLo ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/coc-settings.json
 
 
   // edit, split, vsplit, tab drop

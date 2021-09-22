@@ -1,6 +1,6 @@
-# Windvalley's dotfiles 🍀
+# Vimhack/dotfiles 🍀
 
-Windvalley/dotfiles is a Fantastic Development Environment,
+Vimhack/dotfiles is a Fantastic Development Environment,
 built with Vim/Neovim, Tmux, Zsh, Alacritty
 and many other related excellent open source softwares.
 
@@ -24,7 +24,7 @@ To install, run the following from your terminal:
 
 ```bash
 # Make sure the target directory is '~/.dotfiles'
-git clone --depth=1 https://github.com/windvalley/dotfiles.git ~/.dotfiles
+git clone --depth=1 https://github.com/vimhack/dotfiles.git ~/.dotfiles
 
 # vim
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc

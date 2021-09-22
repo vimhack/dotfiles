@@ -1,5 +1,5 @@
 " vimrc_with_no_plugins by @windvalley
-" https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+" https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc_with_no_plugins
 
 
 " vim: set sw=2 ts=2 sts=2 et tw=80 ft=vim fdm=marker:
@@ -14,15 +14,15 @@
 "
 "   * 全局安装
 "     1) Neovim
-"     curl --create-dirs -fLo /usr/share/nvim/sysinit.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"     curl --create-dirs -fLo /usr/share/nvim/sysinit.vim https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc_with_no_plugins
 "     2) Vim
-"     curl -fLo /etc/vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"     curl -fLo /etc/vimrc https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc_with_no_plugins
 "
 "   * 用户环境安装
 "     1) Neovim
-"     curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"     curl --create-dirs -fLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc_with_no_plugins
 "     2) Vim
-"     curl -fLo ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc_with_no_plugins
+"     curl -fLo ~/.vimrc https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc_with_no_plugins
 
 " }}}
 
@@ -365,7 +365,7 @@ let bgtransparent=0
 
 " 当 bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 let popup_window_transparent=1
- 
+
 " 调整 gruvbox 主题的颜色对比度.
 " from: https://github.com/morhetz/gruvbox/wiki/Troubleshooting
 " 可选值: soft, medium, hard

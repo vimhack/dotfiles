@@ -1,6 +1,6 @@
 # Requirements Installation
 
-Install requirements for windvalley/dotfiles.
+Install requirements for vimhack/dotfiles.
 
 ## For MacOS
 
@@ -116,7 +116,7 @@ brew install alacritty
 - Install fonts
 
 ```bash
-git clone --depth=1 https://github.com/windvalley/nerd-fonts-patched.git
+git clone --depth=1 https://github.com/vimhack/nerd-fonts-patched.git
 
 cd nerd-fonts-patched
 

@@ -1,20 +1,20 @@
 # gitconfig by @windvalley
-# https://raw.githubusercontent.com/windvalley/dotfiles/master/git/gitconfig
+# https://raw.githubusercontent.com/vimhack/dotfiles/master/git/gitconfig
 
 
 # 安装:
-# wget -O ~/.gitconfig https://raw.githubusercontent.com/windvalley/dotfiles/master/git/gitconfig
+# curl -sfLo ~/.gitconfig https://raw.githubusercontent.com/vimhack/dotfiles/master/git/gitconfig
 
 
 # 全局用户信息(--global)
 [user]
-	name = windvalley
-	email = i@sre.im
+    name = windvalley
+    email = i@sre.im
     # 参见脚本: commit_sign_verified.sh
-	signingkey = 160D1A30727A4AED
+    signingkey = 160D1A30727A4AED
 
 [http]
-	postBuffer = 524288000
+    postBuffer = 524288000
 
 # git push 超过 100M .zip 文件方法:
 #   brew install git-lfs
@@ -26,15 +26,15 @@
 # git clone 超过 100M 仓库的方法:
 #   git lfs install --skip-repo
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 # commit 签名
 [commit]
     # 参见脚本: commit_sign_verified.sh
-	gpgsign = true
+    gpgsign = true
 
 [core]
     # 解决 Git 中 'Filename too long' 的错误.

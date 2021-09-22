@@ -1,5 +1,5 @@
 " vimrc by @windvalley
-" https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
+" https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc
 
 
 " vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
@@ -83,8 +83,8 @@
 "         mv ~/.vimrc ~/.vimrc.$(date +%F_%T)
 
 "      2) 替换你的当前 ~/.vimrc 文件
-"         curl -sfLo ~/.vimrc https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
-"         curl --create-dirs -sfLo ~/.vim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+"         curl -sfLo ~/.vimrc https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc
+"         curl --create-dirs -sfLo ~/.vim/coc-settings.json https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/coc-settings.json
 
 "    2. Neovim
 "
@@ -92,8 +92,8 @@
 "         mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.$(date +%F_%T)
 "
 "      2) 替换你的当前 ~/.config/nvim/init.vim 文件
-"         curl --create-dirs -sfLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/vimrc
-"         curl -sfLo ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/windvalley/dotfiles/master/vim/coc-settings.json
+"         curl --create-dirs -sfLo ~/.config/nvim/init.vim https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/vimrc
+"         curl -sfLo ~/.config/nvim/coc-settings.json https://raw.githubusercontent.com/vimhack/dotfiles/master/vim/coc-settings.json
 "
 " 三. 注意事项
 "
@@ -220,10 +220,10 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 " molokai
 " 该版本解决了设置透明背景色时, 对于 Vim 部分关键字背景颜色没有变透明的问题,
 " Neovim 不存在此问题.
-Plug 'windvalley/molokai'
+Plug 'vimhack/molokai'
 
 " vadelma
-Plug 'windvalley/vadelma'
+Plug 'severij/vadelma'
 
 " pencil
 Plug 'preservim/vim-colors-pencil'
@@ -307,7 +307,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
 " 美化状态栏插件.
-Plug 'windvalley/lightline.vim'
+Plug 'vimhack/lightline.vim'
 
 " 为 lightline 插件提供显示 ale 检查出来的错误或警告的统计信息;
 " 另外安装此插件可以解决 vim 打开文件同时显示目录树窗口的场景时,
@@ -1241,7 +1241,7 @@ endfunction
 "   papercolor: https://github.com/NLKNguyen/papercolor-theme
 "   ayu: https://github.com/ayu-theme/ayu-vim
 "   onehalf: https://github.com/sonph/onehalf
-"   vadelma: https://github.com/windvalley/vadelma
+"   vadelma: https://github.com/severij/vadelma
 "   pencil: https://github.com/preservim/vim-colors-pencil
 "   github: https://github.com/cormacrelf/vim-colors-github
 "   srcery: https://github.com/srcery-colors/srcery-vim

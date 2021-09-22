@@ -1,5 +1,5 @@
 # alacritty.yml by @windvalley
-# https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty.yml
+# https://raw.githubusercontent.com/vimhack/dotfiles/master/alacritty/alacritty.yml
 
 # vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker:
 #
@@ -18,23 +18,14 @@
 #
 #   1. brew install alacritty
 #
-#   2. wget -O ~/.config/alacritty/alacritty.yml https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty.conf
+#   2. curl -sfLo ~/.config/alacritty/alacritty.yml https://raw.githubusercontent.com/vimhack/dotfiles/master/alacritty/alacritty.conf
 #
 #   3. 私密配置, 非必需
-#      wget -O ~/.alacritty_private.yml https://raw.githubusercontent.com/windvalley/dotfiles/master/alacritty/alacritty_private.conf
+#      curl -sfLo ~/.alacritty_private.yml https://raw.githubusercontent.com/vimhack/dotfiles/master/alacritty/alacritty_private.conf
 #
 #   4. 安装一些好看的字体
-#      git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
-#
-#      # 给字体打图标补丁.
-#      cd nerd-fonts/bin/scripts
-#      ./gotta-patch-em-all-font-patcher\!.sh Hack
-#
-#      # 安装字体到 ~/Library/Fonts/NerdFonts/ 目录下.
-#      cd ../../
-#      ./install.sh Hack
-#
-#      可按如上方式安装想要的字体, 比如: VictorMono, RobotoMono 等.
+#      git clone --depth=1 https://github.com/vimhack/nerd-fonts-patched.git
+#      cd nerd-fonts-patched && ./install.sh
 
 # }}
 

@@ -2,7 +2,7 @@
 # env.zsh
 #
 
-# windvalley/dotfiles root dir
+# vimhack/dotfiles root dir
 dotfiles_dir=~/.dotfiles
 
 # fonts file for Alacritty
