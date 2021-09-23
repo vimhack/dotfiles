@@ -222,6 +222,9 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 " Neovim 不存在此问题.
 Plug 'vimhack/molokai'
 
+" monokai
+Plug 'sickill/vim-monokai'
+
 " vadelma
 Plug 'severij/vadelma'
 
@@ -1233,6 +1236,7 @@ endfunction
 "   rigel: https://github.com/Rigellute/rigel
 "   gruvbox: https://github.com/morhetz/gruvbox
 "   molokai: https://github.com/tomasr/molokai
+"   monokai: https://github.com/sickill/vim-monokai
 "   one: https://github.com/rakr/vim-one
 "   iceberg: https://github.com/cocopon/iceberg.vim
 "   jellybeans: https://github.com/nanotech/jellybeans.vim
@@ -1438,7 +1442,8 @@ function! BackgroundTransparency()
   if g:colors_name == 'github' ||
     \ g:colors_name == 'jellybeans' ||
     \ g:colors_name == 'PaperColor' ||
-    \ g:colors_name == 'primary'
+    \ g:colors_name == 'primary' ||
+    \ g:colors_name == 'monokai'
 
     hi! NonText ctermbg=NONE guibg=NONE
   endif
@@ -1500,6 +1505,8 @@ function! ToggleBGTransparent()
       call MolokaiBefore()
       execute 'colorscheme ' . g:colors_name
       call MolokaiAfter()
+    elseif g:colors_name == 'monokai'
+      call MonokaiAfter()
     elseif g:colors_name == 'base16-default-dark'
       call Base16DefaultDarkAfter()
     elseif g:colors_name == 'github'
@@ -1518,8 +1525,6 @@ function! ToggleBGTransparent()
       call Base16CupertinoAfter()
     elseif g:colors_name == 'base16-materia'
       call Base16MateriaAfter()
-    elseif g:colors_name == 'base16-monokai'
-      call Base16MonokaiAfter()
     elseif g:colors_name =~ 'onehalf'
       call OnehalfAfter()
     elseif g:colors_name =~ 'base16-atelier-dune'
@@ -1545,6 +1550,7 @@ function! ToggleBGColor()
     \ g:colors_name == 'dracula' ||
     \ g:colors_name == 'jellybeans' ||
     \ g:colors_name == 'molokai' ||
+    \ g:colors_name == 'monokai' ||
     \ g:colors_name == 'rigel' ||
     \ g:colors_name == 'tender' ||
     \ g:colors_name == 'nord' ||
@@ -1553,7 +1559,6 @@ function! ToggleBGColor()
     \ g:colors_name == 'spring-night' ||
     \ g:colors_name == 'base16-flat' ||
     \ g:colors_name == 'base16-materia' ||
-    \ g:colors_name == 'base16-monokai' ||
     \ g:colors_name == 'base16-oceanicnext'
 
     echo g:colors_name . " has no light colorscheme"
@@ -2081,12 +2086,20 @@ function! Base16MateriaAfter()
   call EnableBold()
 endfunction
 
-function! Base16MonokaiAfter()
-  let g:lightline.colorscheme = 'base16_monokai'
+function! MonokaiAfter()
+  let g:lightline.colorscheme = 'monokai'
 
-  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
-  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
-  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#75715e
+  " 使非文本区域和文本区域的颜色方案保持一致.
+  if (g:bgtransparency == 0)
+    hi NonText ctermfg=231 ctermbg=235 cterm=NONE guifg=#f8f8f2 guibg=#272822 gui=NONE
+  endif
+
+  " monokai 主题的 Pmenu 默认是透明背景的, 这里改成不透明.
+  hi Pmenu ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
+
+  hi SpecialKey ctermfg=NONE ctermbg=237 cterm=NONE guifg=#49483e guibg=NONE gui=NONE
+  hi Whitespace ctermfg=NONE ctermbg=237 cterm=NONE guifg=#49483e guibg=NONE gui=NONE
+  hi Conceal ctermfg=NONE ctermbg=237 cterm=NONE guifg=#49483e guibg=NONE gui=NONE
 
   call EnableItalic()
   call EnableBold()
@@ -2155,6 +2168,8 @@ function! SetColorscheme()
       call OneAfter()
     elseif g:colors_name == 'molokai'
       call MolokaiAfter()
+    elseif g:colors_name == 'monokai'
+      call MonokaiAfter()
     elseif g:colors_name == 'gruvbox'
       call GruvboxAfter()
     elseif g:colors_name == 'iceberg'
@@ -2191,8 +2206,6 @@ function! SetColorscheme()
       call Base16CupertinoAfter()
     elseif g:colors_name == 'base16-materia'
       call Base16MateriaAfter()
-    elseif g:colors_name == 'base16-monokai'
-      call Base16MonokaiAfter()
     elseif g:colors_name =~ 'onehalf'
       call OnehalfAfter()
     elseif g:colors_name =~ 'base16-atelier-dune'

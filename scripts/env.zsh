@@ -170,7 +170,6 @@ change_colorscheme_for_alacritty_vim() {
     [[ "$to_colorscheme" = "flat" ]] && to_colorscheme="base16-flat"
     [[ "$to_colorscheme" = "cupertino" ]] && to_colorscheme="base16-cupertino"
     [[ "$to_colorscheme" = "materia" ]] && to_colorscheme="base16-materia"
-    [[ "$to_colorscheme" = "monokai" ]] && to_colorscheme="base16-monokai"
     [[ "$to_colorscheme" = "atelierdune" ]] && to_colorscheme="base16-atelier-dune"
     [[ "$to_colorscheme" = "atelierdune_light" ]] && to_colorscheme="base16-atelier-dune-light"
     [[ "$to_colorscheme" = "oceanicnext" ]] && to_colorscheme="base16-oceanicnext"
