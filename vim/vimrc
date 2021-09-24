@@ -606,6 +606,19 @@ vmap tsr <Plug>(coc-translator-rv)
 autocmd FileType scss setl iskeyword+=@-@
 " ***************
 
+" *** coc-git ***
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" navigate conflicts of current buffer
+nmap [c <Plug>(coc-git-prevconflict)
+nmap ]c <Plug>(coc-git-nextconflict)
+" show chunk diff at current position
+nmap <leader>gd <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap <leader>gc <Plug>(coc-git-commit)
+" ***************
+
 " 使用 tab 键触发补全, 选择补全.
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
@@ -3532,6 +3545,14 @@ endif
 "                 ts  normal 和 visual 模式下, 将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
 "                tse  在状态栏下面显示翻译的结果.
 "                tsr  将翻译结果替换掉光标下的单词.
+"
+" ** coc-git (https://github.com/neoclide/coc-git)
+"                 [g  向下跳转到 git 变更处.
+"                 ]g  向上跳转到 git 变更处.
+"                 [c  向下跳转到 git 变更冲突处.
+"                 ]c  向上跳转到 git 变更冲突处.
+"                ,gd  git diff 当前 git 变更处.
+"                ,gc  查看当前光标所在的 git commit 信息.
 "
 " ** dense-analysis/ale (https://github.com/dense-analysis/ale)
 "                 :w  保存代码文件的时候, 将自动检查语法错误并提示.
