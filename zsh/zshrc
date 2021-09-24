@@ -72,6 +72,12 @@ plugins=(
     zsh-syntax-highlighting
 )
 
+# 解决粘贴较长的内容到终端命令行时速度太慢的问题.
+# NOTE:
+#   1) 此配置必须放到 source $ZSH/oh-my-zsh.sh 之前.
+#   2) 第一次配置之后, 如果想使当前 shell 立即生效, 可执行: exec zsh
+DISABLE_MAGIC_FUNCTIONS=true
+
 source $ZSH/oh-my-zsh.sh
 
 # 设置系统默认语言, 避免终端出现中文乱码.
