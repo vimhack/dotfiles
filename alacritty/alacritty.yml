@@ -92,6 +92,12 @@ selection:
   # Default: false
   save_to_clipboard: true
 
+mouse:
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  # 如果设置为 true, 则使用键盘的时候自动隐藏鼠标箭头.
+  # Default: false
+  hide_when_typing: true
+
 debug:
   # Log level
   #
@@ -104,15 +110,214 @@ debug:
   #   - Trace
   #
   # Default: Warn
-  log_level: Debug
+  log_level: Warn
 
   # Print all received window events.
   # Default: false
-  #print_events: true
+  print_events: false
 
 # }}
 
-# Color Schemas 定义 {{
+# 窗口样式配置 {{
+
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Number of lines/columns (not pixels) in the terminal. The number of columns
+  # must be at least `2`, while using a value of `0` for columns and lines will
+  # fall back to the window manager's recommended size.
+  #
+  # NOTE: `startup_mode: Windowed` is required.
+  #
+  # Default:
+  #   columns: 0
+  #   lines: 0
+  dimensions:
+    columns: 0
+    lines: 0
+
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  #
+  # Default:
+  #   x: 0
+  #   y: 0
+  position:
+    x: 0
+    y: 0
+
+  # Window content padding
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  #
+  # Default:
+  #   x: 0
+  #   y: 0
+  padding:
+    x: 0
+    y: 0
+
+  # Spread additional padding evenly around the terminal content.
+  # Default: false
+  dynamic_padding: false
+
+  # Window decorations (changes require restart)
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background and no title bar buttons
+  #
+  # Default: full
+  decorations: none
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  #
+  # Default: Windowed
+  startup_mode: Maximized
+
+# }}
+
+# 字体样式配置 {{
+
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: Hack Nerd Font
+
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+
+  # Bold font face
+  bold:
+    # Font family
+    #
+    # If the bold family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Hack Nerd Font
+
+    # The `style` can be specified to pick a specific face.
+    style: Bold
+
+  # Italic font face
+  italic:
+    # Font family
+    #
+    # If the italic family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Hack Nerd Font
+
+    # The `style` can be specified to pick a specific face.
+    style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    # Font family
+    #
+    # If the bold italic family is not specified, it will fall back to the
+    # value specified for the normal font.
+    family: Hack Nerd Font
+
+    # The `style` can be specified to pick a specific face.
+    style: Bold Italic
+
+  # Point size
+  size: 12.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
+  # spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
+  glyph_offset:
+    x: 0
+    y: 0
+
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`.
+  use_thin_strokes: true
+
+# If `true`, bold text is drawn using the bright color variants.
+# Default: false
+draw_bold_text_with_bright_colors: true
+
+# }}
+
+# 光标样式配置 {{
+
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Always
+
+  # Vi mode cursor style
+  #
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
+  # the style of the active value of the normal cursor.
+  #
+  # See `cursor.style` for available options.
+  # Default: None
+  vi_mode_style: Block
+
+  # Cursor blinking interval in milliseconds.
+  # Default: 750
+  blink_interval: 600
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  # Default: true
+  unfocused_hollow: true
+
+  # Thickness of the cursor relative to the cell width as floating point number
+  # from `0.0` to `1.0`.
+  # Default: 0.15
+  thickness: 0.1
+
+# }}
+
+# Colorschemas 定义 {{
 #
 # doc: https://github.com/alacritty/alacritty/wiki/Color-schemes
 
@@ -1141,114 +1346,10 @@ colors: *dracula
 # 背景透明度配置, 取值范围: 0.0 到 1.0
 background_opacity: 0.9
 
-# 窗口样式配置.
-window:
-  # Window decorations
-  #
-  # Values for `decorations`:
-  #     - full: Borders and title bar
-  #     - none: Neither borders nor title bar
-  #
-  # Values for `decorations` (macOS only):
-  #     - transparent: Title bar, transparent background and title bar buttons
-  #     - buttonless: Title bar, transparent background and no title bar buttons
-  #
-  # Default: full
-  decorations: buttonless
-
-  # Startup Mode (changes require restart)
-  #
-  # Values for `startup_mode`:
-  #   - Windowed
-  #   - Maximized
-  #   - Fullscreen
-  #
-  # Values for `startup_mode` (macOS only):
-  #   - SimpleFullscreen
-  #
-  # Default: Windowed
-  startup_mode: Maximized
-
-# 字体(Font)样式配置.
-font:
-  # Normal (roman) font face
-  normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    family: Hack Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Regular
-
-  # Bold font face
-  bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: Hack Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold
-
-  # Italic font face
-  italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: Hack Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Italic
-
-  # Bold italic font face
-  bold_italic:
-    # Font family
-    #
-    # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: Hack Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold Italic
-
-  # Point size
-  size: 12.0
-
-  # Offset is the extra space around each character. `offset.y` can be thought
-  # of as modifying the line spacing, and `offset.x` as modifying the letter
-  # spacing.
-  offset:
-    x: 0
-    y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the
-  # right, increasing `y` moves the glyph upward.
-  glyph_offset:
-    x: 0
-    y: 0
-
-  # Thin stroke font rendering (macOS only)
-  #
-  # Thin strokes are suitable for retina displays, but for non-retina screens
-  # it is recommended to set `use_thin_strokes` to `false`.
-  use_thin_strokes: true
-
-# If `true`, bold text is drawn using the bright color variants.
-# Default: false
-draw_bold_text_with_bright_colors: true
-
 # }}
 
-# 键盘 & 鼠标 {{
+# 快捷键配置 {{
 
-# 快捷键配置.
 key_bindings:
   # NOTE: 解决在使用 Pinyin 输入法中按 <Backspace> 键的时候删除已经输入的文字的问题.
   # from: https://github.com/alacritty/alacritty/issues/1606
@@ -1283,7 +1384,7 @@ key_bindings:
   - { key: B, mods: Command, mode: ~Search, action: SearchBackward }
 
   # Support for Meta(Alt/Option)+key  {{
-  # from: https://github.com/alacritty/alacritty/issues/62
+  # From: https://github.com/alacritty/alacritty/issues/62
 
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }
@@ -1362,57 +1463,6 @@ key_bindings:
   - { key: Backslash, mods: Alt|Shift, chars: "\x1b|" }
 
   # }}
-
-# 光标样式配置.
-cursor:
-  # Cursor style
-  style:
-    # Cursor shape
-    #
-    # Values for `shape`:
-    #   - ▇ Block
-    #   - _ Underline
-    #   - | Beam
-    shape: Block
-
-    # Cursor blinking state
-    #
-    # Values for `blinking`:
-    #   - Never: Prevent the cursor from ever blinking
-    #   - Off: Disable blinking by default
-    #   - On: Enable blinking by default
-    #   - Always: Force the cursor to always blink
-    blinking: Always
-
-  # Vi mode cursor style
-  #
-  # If the vi mode cursor style is `None` or not specified, it will fall back to
-  # the style of the active value of the normal cursor.
-  #
-  # See `cursor.style` for available options.
-  # Default: None
-  vi_mode_style: Block
-
-  # Cursor blinking interval in milliseconds.
-  # Default: 750
-  blink_interval: 600
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
-  # Default: true
-  unfocused_hollow: true
-
-  # Thickness of the cursor relative to the cell width as floating point number
-  # from `0.0` to `1.0`.
-  # Default: 0.15
-  thickness: 0.1
-
-# 鼠标配置.
-mouse:
-  # If this is `true`, the cursor is temporarily hidden when typing.
-  # 如果设置为 true, 则使用键盘的时候自动隐藏鼠标箭头.
-  # Default: false
-  hide_when_typing: true
 # }}
 
 # 使用技巧 {{
