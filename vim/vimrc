@@ -498,6 +498,7 @@ call plug#end()
 "   [LS]  Language Server, 补全来自语言服务器.
 "    [S]  Snippets, 补全来自 Snippets.
 "   [US]  UltiSnips, 补全来自 UltiSnips.
+"   [TN]  TabNine, 补全来自 TabNine.
 "  [GOC]  Gocode, 补全来自 gocode.
 "  [NEC]  Neco-vim, 补全来自 Shougo/neco-vim 插件.
 "    [A]  Around, 补全来自当前文件(buffer).
@@ -579,6 +580,20 @@ function! SetupCommandAbbrs(from, to)
 endfunction
 call SetupCommandAbbrs('C', 'CocConfig')
 " ********************************
+
+" *** coc-tabnine ***
+" doc: https://github.com/neoclide/coc-tabnine
+"
+" 1) 打开 TabNine 的配置文件
+"    :CocCommand tabnine.openConfig
+"    NOTE:
+"    如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
+"    需要先删除 ~/.config/coc/extensions/coc-tabnine-data,
+"    然后重新安装 coc-tabnine, :CocInstall coc-tabnine
+" 2) 为了使 coc.nvim 更好的配合 TabNine 工作, 将如下条目加入到 TabNine 的配置文件
+"    "ignore_all_lsp": true
+" 3) 成功安装配置后, 在代码补全的时候, 补全提示列表中会存在标识为 [TN] 的代码源.
+" *******************
 
 " *** coc-translator ***
 " doc: https://github.com/voldikss/coc-translator
