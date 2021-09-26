@@ -94,6 +94,12 @@ plugins=(
     aliases
 )
 
+# timer
+# Default: 1
+TIMER_PRECISION=2
+# Default: '/%d'
+TIMER_FORMAT='[%d]'
+
 # 解决粘贴较长的内容到终端命令行时速度太慢的问题.
 # NOTE:
 #   1) 此配置必须放到 source $ZSH/oh-my-zsh.sh 之前.
