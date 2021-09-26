@@ -53,15 +53,27 @@ ZSH_THEME="ys"
 # vi-mode:  ~/.oh-my-zsh/plugins/vi-mode/README.md
 # tmux:  ~/.oh-my-zsh/plugins/tmux/README.md
 # git:  ~/.oh-my-zsh/plugins/git/README.md
+# gitignore: ~/.oh-my-zsh/plugins/gitignore/README.md
 # history: ~/.oh-my-zsh/plugins/history/README.md
 # brew:  ~/.oh-my-zsh/plugins/brew/README.md
 # extract:  ~/.oh-my-zsh/plugins/extract/README.md
 # web-search: ~/.oh-my-zsh/plugins/web-search/README.md
 # emoji: ~/.oh-my-zsh/plugins/emoji/README.md
+# colorize: ~/.oh-my-zsh/plugins/colorize/README.md
+# colored-man-pages: ~/.oh-my-zsh/plugins/colored-man-pages/README.md
+# zsh_reload: ~/.oh-my-zsh/plugins/zsh_reload/README.md
+# sudo: ~/.oh-my-zsh/plugins/sudo/README.md
+# timer: ~/.oh-my-zsh/plugins/timer/README.md
+# themes: ~/.oh-my-zsh/plugins/themes/README.md
+# urltools: ~/.oh-my-zsh/plugins/urltools/README.md
+# copyfile: ~/.oh-my-zsh/plugins/copyfile/README.md
+# copydir: ~/.oh-my-zsh/plugins/copydir/README.md
+# aliases: ~/.oh-my-zsh/plugins/aliases/README.md
 plugins=(
     vi-mode
     tmux
     git
+    gitignore
     z
     history
     brew
@@ -70,6 +82,16 @@ plugins=(
     emoji
     zsh-autosuggestions
     zsh-syntax-highlighting
+    colorize
+    colored-man-pages
+    zsh_reload
+    sudo
+    timer
+    themes
+    urltools
+    copyfile
+    copydir
+    aliases
 )
 
 # 解决粘贴较长的内容到终端命令行时速度太慢的问题.
@@ -236,6 +258,12 @@ alias vol=volume
 alias ssh-sessions="~/.dotfiles/scripts/ssh_sessions.sh"
 alias s=ssh-sessions
 
+# *** 快速打开 dotfiles 的几种主要配置文件.
+alias zshrc='vim ~/.dotfiles/zsh/zshrc'
+alias vimrc='nvim ~/.dotfiles/vim/vimrc'
+alias tmuxconf='vim ~/.dotfiles/tmux/tmux.conf'
+alias ala='vim ~/.dotfiles/alacritty/alacritty.yml'
+
 # }}
 
 
@@ -243,7 +271,6 @@ alias s=ssh-sessions
 
 alias vi="nvim"
 
-# 拷贝和移动文件的时候, 如果目标文件存在则进行交互式确认.
 alias cp='cp -i'
 alias mv='mv -i'
 
@@ -298,6 +325,39 @@ alias ff="vim \$(fzf)"
 #                    glo  git log --oneline --decorate
 #                   glog  git log --oneline --decorate --graph
 #                     gl  git pull
+#
+# *** gitignore 插件 (~/.oh-my-zsh/plugins/gitignore/README.md)
+#                gi list  列出所有支持的编程语言.
+#                  gi go  生成 Go 语言的 .gitignore 文件内容.
+#
+# *** colorize 插件 (~/.oh-my-zsh/plugins/colorize/README.md)
+#                   ccat  彩色版的 cat.
+#                  cless  彩色版的 less.
+#
+# *** zsh_reload 插件 (~/.oh-my-zsh/plugins/zsh_reload/README.md)
+#                    src  重新加载 ~/.zshrc.
+#
+# *** sudo 插件 (~/.oh-my-zsh/plugins/sudo/README.md)
+#                esc esc  连续按两次 esc 将在命令行首自动增加 sudo.
+#
+# *** themes 插件 (~/.oh-my-zsh/plugins/themes/README.md)
+#                lstheme  列出所有已安装的 zsh 主题名称.
+#                  theme  随机更换一个主题.
+#             theme name  指定切换到某个主题.
+#
+# *** urltools 插件 (~/.oh-my-zsh/plugins/urltools/README.md)
+#        urlencode 'url'  url 编码.
+#        urldecode 'url'  url 解码.
+#
+# *** copyfile 插件 (~/.oh-my-zsh/plugins/copyfile/README.md)
+#         copyfile 1.txt  将 1.txt 文件内容拷贝到系统剪贴板.
+#
+# *** copydir 插件 (~/.oh-my-zsh/plugins/copydir/README.md)
+#                copydir  将当前的目录 fullpath 拷贝到系统剪贴板.
+#
+# *** aliases 插件 (~/.oh-my-zsh/plugins/aliases/README.md)
+#                    acs  列出所有 alias 设置.
+#                acs key  列出包含 key 的 alias 设置.
 #
 # *** fzf 工具 (https://github.com/junegunn/fzf)
 #                     ff  通过 fzf 搜索文件并用 vim 打开.
