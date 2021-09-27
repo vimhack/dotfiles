@@ -36,6 +36,16 @@
 
 # --- 基础配置 {{
 
+# 解决 source ~/.zshrc 和 ~/.tmux.conf 中 set-environment -g PATH 导致的 PATH 变量值重复的问题.
+# $PATH 值的来源:
+#   1) /etc/paths
+#   2) /etc/paths.d/*
+#   3) ~/.zshrc
+#   4) ~/.*.zsh
+#   5) ~/.zshenv
+#   6) ~/.tmux.conf 中的 set-environment -g PATH ""
+typeset -U PATH
+
 # oh-my-zsh 安装路径.
 export ZSH="$HOME/.oh-my-zsh"
 
