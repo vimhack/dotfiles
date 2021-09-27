@@ -246,6 +246,9 @@ Plug 'rhysd/vim-color-spring-night'
 " primary
 Plug 'google/vim-colorscheme-primary'
 
+" embark
+Plug 'embark-theme/vim', { 'as': 'embark' }
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1274,6 +1277,7 @@ endfunction
 "   spring-night: https://github.com/rhysd/vim-color-spring-night
 "   primary: https://github.com/google/vim-colorscheme-primary
 "   base16-*: https://github.com/chriskempson/base16-vim
+"   embark: https://github.com/embark-theme/vim
 "
 " NOTE:
 "   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1552,6 +1556,8 @@ function! ToggleBGTransparent()
       call Base16AtelierDuneAfter()
     elseif g:colors_name == 'base16-oceanicnext'
       call Base16OceanicnextAfter()
+    elseif g:colors_name == 'embark'
+      call EmbarkAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1580,7 +1586,8 @@ function! ToggleBGColor()
     \ g:colors_name == 'spring-night' ||
     \ g:colors_name == 'base16-flat' ||
     \ g:colors_name == 'base16-materia' ||
-    \ g:colors_name == 'base16-oceanicnext'
+    \ g:colors_name == 'base16-oceanicnext' ||
+    \ g:colors_name == 'embark'
 
     echo g:colors_name . " has no light colorscheme"
     return
@@ -2154,6 +2161,16 @@ function! Base16OceanicnextAfter()
   call EnableBold()
 endfunction
 
+function! EmbarkAfter()
+  let g:lightline.colorscheme = 'embark'
+
+  hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#585273
+  hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#585273
+  hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#585273
+
+  call EnableItalic()
+endfunction
+
 " }}
 
 " *********************************
@@ -2233,6 +2250,8 @@ function! SetColorscheme()
       call Base16AtelierDuneAfter()
     elseif g:colors_name =~ 'base16-oceanicnext'
       call Base16OceanicnextAfter()
+    elseif g:colors_name == 'embark'
+      call EmbarkAfter()
     endif
   endif
 

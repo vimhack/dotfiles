@@ -1192,6 +1192,32 @@ schemes:
       cyan: "#4285F4"
       white: "#d2d4de"
 
+  embark: &embark
+    primary:
+      background: "0x1e1c31"
+      foreground: "0xcbe3e7"
+    cursor:
+      text: "0x1e1c31"
+      cursor: "0xa1efd3"
+    normal:
+      black: "0x1e1c31"
+      red: "0xf48fb1"
+      green: "0xa1efd3"
+      yellow: "0xffe6b3"
+      blue: "0x91ddff"
+      magenta: "0xd4bfff"
+      cyan: "0x87dfeb"
+      white: "0xcbe3e7"
+    bright:
+      black: "0x585273"
+      red: "0xf02e6e"
+      green: "0x62d196"
+      yellow: "0xf2b482"
+      blue: "0x65b2ff"
+      magenta: "0xa37acc"
+      cyan: "0x63f2f1"
+      white: "0x8a889d"
+
   # }}
 
   # {{ part2
