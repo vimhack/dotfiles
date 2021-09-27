@@ -8,8 +8,27 @@ script_dir=$(cd "$(dirname $0)" && pwd)
 
 source $script_dir/../lib/env.zsh
 
-to_value=$1
+disable_bg_transparent() {
+    echo "let g:enable_bg_transparent=0" >$vim_transparent_file
+    echo "Vim background transparent disabled"
+}
 
-toggle_vim_background_transparency "$to_value"
+enable_bg_transparent() {
+    echo "let g:enable_bg_transparent=1" >$vim_transparent_file
+    echo "Vim background transparent enabled"
+}
+
+if [[ ! -s "$vim_transparent_file" ]]; then
+    disable_bg_transparent
+else
+    value=$(awk -F= '{print $NF}' $vim_transparent_file)
+    if [[ "$value" = 0 ]]; then
+        enable_bg_transparent
+    else
+        disable_bg_transparent
+    fi
+fi
+
+touch $vim_colorscheme_toggle_tmpfile
 
 exit 0

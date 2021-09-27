@@ -11,10 +11,13 @@ fonts_file=$dotfiles_dir/FONTS
 # colorschemes file for Alacritty and Vim/Neovim
 colorschemes_file=$dotfiles_dir/COLORSCHEMES
 
+# set colorscheme for vim/neovim
 vim_colorscheme_file=~/.vim/colorscheme.vim
 
-vim_transparency_file=~/.vim/transparency.vim
+# toggle background transparent for vim/neovim
+vim_transparent_file=~/.vim/bg_transparent.vim
 
+# auto refresh colorscheme for opened vim/neovim instances
 vim_colorscheme_toggle_tmpfile=~/.vim/signal.tmp
 
 alacritty_conf=~/.config/alacritty/alacritty.yml
@@ -215,38 +218,4 @@ toggle_transparancy_for_alacritty() {
             $alacritty_conf
         echo "$current_opacity" >$last_opacity_file
     fi
-}
-
-toggle_vim_background_transparency() {
-    local to_value=$1
-
-    if [[ "$to_value" != 1 ]] && [[ "$to_value" != 0 ]]; then
-        current_value=$(
-            awk -F= '/^let g:bgtransparency=/{print $2}' \
-                $vim_transparency_file 2>/dev/null
-        )
-
-        if [[ "$current_value" = 1 ]]; then
-            echo "Vim background transparency is currently enabled, to disable:
-
-$ vim-bgtransparency 0"
-
-        elif [[ "$current_value" = 0 ]]; then
-            echo "Vim background transparency is currently disabled, to enable:
-
-$ vim-bgtransparency 1"
-        else
-            echo "Vim background transparency is currently the default value(0 or 1), to enable:
-
-$ vim-bgtransparency 1
-
-to disable:
-
-$ vim-bgtransparency 0"
-        fi
-    else
-        echo "let g:bgtransparency=$to_value" >$vim_transparency_file
-    fi
-
-    touch $vim_colorscheme_toggle_tmpfile
 }

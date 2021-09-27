@@ -1298,7 +1298,7 @@ if has('vcon')
   set termguicolors
 endif
 
-" 当 g:bgtransparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
+" 当 g:enable_bg_transparent 等于 1 时, 是否使 popup window 背景变透明, 1 为开启, 0 为关闭.
 " NOTE: 变更效果涉及到 coc.nvim 命令补全的弹出窗口, 文档查看窗口等.
 let g:popup_window_transparent=0
 
@@ -1339,12 +1339,13 @@ endfunction
 " 是否启用 Vim/Neovim 透明背景色的功能, 从单独的配置文件读取相关变量值来控制;
 " 从单独的配置文件读取是为了变更时, 不会干扰到 dotfiles 仓库.
 function! ToggleVimTransparentBgFeature()
-  let transparency_file = expand('~/.vim/transparency.vim')
-  if filereadable(transparency_file)
-    exec 'source' transparency_file
+  let bg_transparent_file = expand('~/.vim/bg_transparent.vim')
+  if filereadable(bg_transparent_file)
+    exec 'source' bg_transparent_file
   else
     " 值为 1 表示启用 Vim/Neovim 背景透明, 0 为禁用.
-    let g:bgtransparency=1
+    " 默认值: 1
+    let g:enable_bg_transparent=1
   endif
 endfunction
 
@@ -1488,16 +1489,16 @@ endfunction
 
 " 设置背景透明的方法, 需要放到 colorscheme 指令之后执行.
 function! BGTransparentAfter()
-  if (g:bgtransparency == 1)
+  if (g:enable_bg_transparent == 1)
     call BackgroundTransparency()
   endif
 endfunction
 
 " 在背景透明和不透明之间切换的方法.
 function! ToggleBGTransparent()
-  if g:bgtransparency == 1
+  if g:enable_bg_transparent == 1
     let &background = &background
-    let g:bgtransparency = 0
+    let g:enable_bg_transparent = 0
 
     if g:colors_name == 'PaperColor'
       call PaperColorBefore()
@@ -1561,7 +1562,7 @@ function! ToggleBGTransparent()
     endif
   else
     call BackgroundTransparency()
-    let g:bgtransparency = 1
+    let g:enable_bg_transparent = 1
   endif
 
   " 解决在切换背景透明色后, SignColumn/ALESign/GitSign 失去原有颜色方案的问题.
@@ -1641,7 +1642,7 @@ function! ToggleBGColor()
   call LightlineReload()
 
   " 解决从透明背景的场景切换背景颜色后, 需要连续按两次 ,v 才能切换成背景透明的问题.
-  let g:bgtransparency = 0
+  let g:enable_bg_transparent = 0
 
   " 解决在变换背景颜色后, SignColumn/ALESign/GitSign 失去原有颜色方案的问题.
   call SignColumnHi()
@@ -2118,7 +2119,7 @@ function! MonokaiAfter()
   let g:lightline.colorscheme = 'monokai'
 
   " 使非文本区域和文本区域的颜色方案保持一致.
-  if (g:bgtransparency == 0)
+  if (g:enable_bg_transparent == 0)
     hi NonText ctermfg=231 ctermbg=235 cterm=NONE guifg=#f8f8f2 guibg=#272822 gui=NONE
   endif
 
@@ -2267,8 +2268,8 @@ endfunction
 
 call SetColorscheme()
 
-" *** Neovim 已打开的实例自动更新 colorscheme ***
-" 通过命令行或快捷键变更 colorscheme 时, 使打开的 neovim 实例自动更新 colorscheme.
+" *** Vim/Neovim 已打开的实例自动更新 colorscheme ***
+" 通过命令行或快捷键变更 colorscheme 时, 使打开的 vim/neovim 实例自动更新 colorscheme.
 
 let g:vim_colorscheme_toggle_tmpfile = '~/.vim/signal.tmp'
 
@@ -2290,7 +2291,7 @@ if !exists("g:CheckUpdateStarted")
   call timer_start(1, 'CheckUpdate')
 endif
 
-" ***********************************************
+" ***************************************************
 
 " ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 nnoremap <silent> <leader>b :call ToggleBGColor()<CR>
