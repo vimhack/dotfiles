@@ -237,7 +237,7 @@ export PATH="/usr/local/opt/bash/bin:$PATH"
 # }}
 
 
-# --- 自定义命令配置 {{
+# --- alias 配置 {{
 
 # *** Vim/Neovim & Alacritty 主题相关命令配置
 alias colorscheme="~/.dotfiles/scripts/colorscheme.zsh"
@@ -264,17 +264,19 @@ alias vol=volume
 alias ssh-sessions="~/.dotfiles/scripts/ssh_sessions.sh"
 alias s=ssh-sessions
 
-# *** 快速打开 dotfiles 的几种主要配置文件.
+# *** 快速打开 dotfiles 的几种主要配置文件
 alias zshrc='vim ~/.dotfiles/zsh/zshrc'
 alias vimrc='nvim ~/.dotfiles/vim/vimrc'
 alias tmuxconf='vim ~/.dotfiles/tmux/tmux.conf'
 alias ala='vim ~/.dotfiles/alacritty/alacritty.yml'
 
-# }}
+# *** 快速切换到常用的目录
+alias d="cd ~/Documents"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias gitlab="cd ~/gitlab"
 
-
-# --- 其他配置 {{
-
+# *** 其他
 alias vi="nvim"
 
 alias cp='cp -i'
@@ -282,6 +284,11 @@ alias mv='mv -i'
 
 # 列出正在监听的tcp连接.
 alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
+
+# }}
+
+
+# --- 其他配置 {{
 
 # 用于 git commit 的签名.
 export GPG_TTY=$(tty)
@@ -320,6 +327,7 @@ alias ff="vim \$(fzf)"
 #               bing key  打开浏览器使用 bing 搜索 key.
 #              baidu key  打开浏览器使用 baidu 搜索 key.
 #      stackoverflow key  打开浏览器使用 stackoverflow 搜索 key.
+#             github key  打开浏览器使用 github 搜索 key.
 #
 # *** git 插件 (~/.oh-my-zsh/plugins/git/README.md)
 #                    gst  git status
