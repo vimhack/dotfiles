@@ -41,9 +41,8 @@
 #   1) /etc/paths
 #   2) /etc/paths.d/*
 #   3) ~/.zshrc
-#   4) ~/.*.zsh
-#   5) ~/.zshenv
-#   6) ~/.tmux.conf 中的 set-environment -g PATH ""
+#   4) ~/.zshenv
+#   5) ~/.tmux.conf 中的 set-environment -g PATH ""
 typeset -U PATH
 
 # oh-my-zsh 安装路径.
@@ -249,36 +248,36 @@ export PATH="/usr/local/opt/bash/bin:$PATH"
 
 # --- alias 配置 {{
 
-# *** Vim/Neovim & Alacritty 主题相关命令配置
-alias colorscheme="~/.dotfiles/scripts/colorscheme.zsh"
-alias font="~/.dotfiles/scripts/font.zsh"
-alias opacity="~/.dotfiles/scripts/opacity.zsh"
-alias font-size="~/.dotfiles/scripts/font_size.zsh"
-alias vim-bgtransparency="~/.dotfiles/scripts/vim_bgtransparency.zsh"
-alias colors-print="~/.dotfiles/scripts/colors_print.sh"
-alias hexcolors-print="~/.dotfiles/scripts/print_256_hex_colors.py"
+# *** dotfiles 项目可执行文件
 
+# 将 bin 目录加入到 PATH.
+export PATH="$HOME/.dotfiles/bin:$PATH"
+
+# Vim/Neovim & Alacritty 主题相关命令
 alias cs=colorscheme
+alias rc=random-colorscheme
 alias f=font
+alias rf=random-font
 alias o=opacity
+alias ino=increase-opacity
+alias deo=decrease-opacity
 alias fs=font-size
-alias v=vim-bgtransparency
+alias tv=toggle-vim-transparent
+alias to=toggle-alacritty-transparent
 alias c=colors-print
-alias hex=hexcolors-print
+alias hex=print-256-hex-colors
 
-# *** 调节系统音量
-alias volume="~/.dotfiles/scripts/audio_volume.zsh"
-alias vol=volume
+## 调节系统音量
+alias vol=audio-volume
 
-# *** 便捷批量 ssh 连接或恢复连接远程服务器
-alias ssh-sessions="~/.dotfiles/scripts/ssh_sessions.sh"
+## 便捷批量 ssh 连接或恢复连接远程服务器
 alias s=ssh-sessions
 
-# *** 快速打开 dotfiles 的几种主要配置文件
-alias zshrc='vim ~/.dotfiles/zsh/zshrc'
+## *** 快速打开 dotfiles 的几种主要配置文件
+alias zshrc='nvim ~/.dotfiles/zsh/zshrc'
 alias vimrc='nvim ~/.dotfiles/vim/vimrc'
-alias tmuxconf='vim ~/.dotfiles/tmux/tmux.conf'
-alias ala='vim ~/.dotfiles/alacritty/alacritty.yml'
+alias tmuxconf='nvim ~/.dotfiles/tmux/tmux.conf'
+alias ala='nvim ~/.dotfiles/alacritty/alacritty.yml'
 
 # *** 快速切换到常用的目录
 alias d="cd ~/Documents"
@@ -396,13 +395,17 @@ alias ff="vim \$(fzf)"
 #
 # *** 自定义命令
 #         colorscheme/cs  切换 vim 和 alacritty 的颜色方案.
+#                     rc  随机切换 vim 和 alacritty 的颜色方案.
 #                 font/f  切换 alacritty 终端的字体.
+#                     rf  随机切换 alacritty 终端的字体.
 #              opacity/o  调整 alacritty 终端的透明度.
+#                ino/deo  微调 alacritty 终端的透明度.
 #           font-size/fs  设置 alacritty 终端的字体大小.
-#   vim-bgtransparency/v  打开或关闭 Vim 背景透明色.
+#                     tv  打开或关闭 Vim 背景透明色.
+#                     to  打开或关闭 Alacritty 背景透明色.
 #         colors-print/c  打印 256 色的前景色模式和背景色模式.
-#    hexcolors-print/hex  打印 256 色的 16 进制表示方式.
-#             volume/vol  调整系统音量大小.
+#                    hex  打印 256 色的 16 进制表示方式.
+#                    vol  调整系统音量大小.
 #         ssh-sessions/s  便捷的批量 ssh 连接远程服务器.
 #               lsof_tcp  查看当前监听的端口信息.
 

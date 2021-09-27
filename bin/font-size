@@ -1,14 +1,12 @@
 #!/usr/bin/env zsh
-# font_size.zsh
+# font-size
 #
 # Change font size of Alacritty.
-#
-# for zshrc
 
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.zsh
+source $script_dir/../lib/env.zsh
 
 to_font_size=$1
 

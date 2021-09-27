@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
-# ssh_sessions.sh
+# ssh-sessions
 #
 # Description:
 #   Create or recreate tmux-panes in one tmux-window of the current tmux-session
 #   according to the number of servers given, and batch ssh these remote servers
 #   in these tmux-panes.
-#
-# Bin Name: ssh-sessions
 #
 # Author: noone <https://github.com/windvalley>
 

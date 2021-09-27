@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# colors_print.sh
+# colors-print
+#
 # wonderful utils: https://convertingcolors.com
 
 colors_print() {

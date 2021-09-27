@@ -1,13 +1,11 @@
 #!/usr/bin/env zsh
-# random_colorscheme_for_vim_alacritty.zsh
+# random-colorscheme
 #
 # Change colorscheme for vim and alacritty randomly.
-#
-# for tmux.conf
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.zsh
+source $script_dir/../lib/env.zsh
 
 to_colorscheme_index=$(($RANDOM % ${#colorschemes_without_current_colorscheme[@]}))
 to_colorscheme=${colorschemes_without_current_colorscheme[$to_colorscheme_index+1]}

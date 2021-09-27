@@ -1,14 +1,12 @@
 #!/usr/bin/env zsh
-# opacity.zsh
+# opacity
 #
 # Alacritty terminal background transparency adjustment.
-#
-# for zshrc
 
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.zsh
+source $script_dir/../lib/env.zsh
 
 to_opacity=$1
 

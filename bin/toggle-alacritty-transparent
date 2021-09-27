@@ -1,11 +1,9 @@
 #!/usr/bin/env zsh
-# toggle_transparency_for_alacritty.zsh
-#
-# for tmux.conf
+# toggle-alacritty-transparent
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.zsh
+source $script_dir/../lib/env.zsh
 
 update_config_for_alacritty
 

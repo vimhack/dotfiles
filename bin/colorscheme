@@ -1,13 +1,11 @@
 #!/usr/bin/env zsh
-# colorscheme.zsh
+# colorscheme
 #
 # Switch colorscheme for Vim/Neovim and Alacritty.
-#
-# for zshrc
 
 script_dir=$(cd "$(dirname $0)" && pwd)
 
-source $script_dir/env.zsh
+source $script_dir/../lib/env.zsh
 
 to_colorscheme=$1
 

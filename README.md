@@ -211,18 +211,18 @@ $ o number
 * number must between 0 and 1
 ```
 
-**Toggle Vim/Neovim background transparency in terminal command line:**
+**Toggle Vim/Neovim background transparent in terminal command line:**
 
 ```text
-vim-bgtransparency
+toggle-vim-transparent
 
 Vim background transparency is currently enabled, to disable:
 
-$ vim-bgtransparency 0
+$ toggle-vim-bgtransparent 0
 
 or
 
-$ v 0
+$ tv 0
 ```
 
 **Print 256 colors in terminal command line:**
