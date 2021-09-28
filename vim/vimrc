@@ -330,9 +330,6 @@ Plug 'junegunn/fzf.vim'
 " 集成 ranger 文件管理器.
 Plug 'francoiscabrol/ranger.vim'
 
-" 在上一个插件的基础上, 根据文件类型的不同, 改变图标的颜色.
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
 " 悬浮终端插件.
 Plug 'voldikss/vim-floaterm'
 
@@ -342,12 +339,25 @@ Plug 'Yggdroot/indentLine'
 " Vim 屏保 Matrix.
 Plug 'uguu-org/vim-matrix-screensaver'
 
+" 在文件内直接显示颜色代码所表示的颜色.
+" NOTE: 该插件需要操作系统有 Go 环境.
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+" 对 Vim 主题配色方案进行调整时, 可使用此工具获取光标下标识符当前配色方案的详细信息.
+Plug 'vim-scripts/SyntaxAttr.vim'
+
+" 日历插件.
+Plug 'itchyny/calendar.vim'
+
 " 为目录树、LeaderF、ranger 等插件显示文件类型.
 " NOTE:
 " 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
 "    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
 " 2) 此插件要安装在目录树、LeaderF 等插件的后面.
 Plug 'ryanoasis/vim-devicons'
+
+" 在 vim-devicons 插件的基础上, 根据文件类型的不同, 改变图标的颜色.
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " }}
 
@@ -438,16 +448,6 @@ Plug 'skywind3000/asyncrun.vim'
 
 " 显示光标所在内容的 git commit 信息, 方便了解代码背景.
 Plug 'rhysd/git-messenger.vim'
-
-" 在文件内直接显示颜色代码所表示的颜色.
-" NOTE: 该插件需要操作系统有 Go 环境.
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-
-" 自己对配色方案进行调整时, 可使用此工具获取光标下当前配色方案的详细信息.
-Plug 'vim-scripts/SyntaxAttr.vim'
-
-" 日历插件.
-Plug 'itchyny/calendar.vim'
 
 " Vim 作者 Bram 写的一个小游戏, 用于演示 Vim8.2 的几个新功能.
 " NOTE: :Kill 启动游戏, 按说明玩既可, 只支持 Vim8.2+, 不支持 Neovim.
