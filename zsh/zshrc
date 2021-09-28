@@ -248,6 +248,10 @@ export PATH="/usr/local/opt/bash/bin:$PATH"
 
 # --- alias 配置 {{
 
+alias vi="nvim"
+alias cp='cp -i'
+alias mv='mv -i'
+
 # *** dotfiles 项目可执行文件
 
 # 将 bin 目录加入到 PATH.
@@ -267,32 +271,34 @@ alias to=toggle-alacritty-transparent
 alias c=colors-print
 alias hex=print-256-hex-colors
 
-## 调节系统音量
+# 调节系统音量
 alias vol=audio-volume
 
-## 便捷批量 ssh 连接或恢复连接远程服务器
+# 便捷批量 ssh 连接或恢复连接远程服务器
 alias s=ssh-sessions
 
-## *** 快速打开 dotfiles 的几种主要配置文件
+# *** 快速打开 dotfiles 的几种主要配置文件
+
 alias zshrc='nvim ~/.dotfiles/zsh/zshrc'
 alias vimrc='nvim ~/.dotfiles/vim/vimrc'
 alias tmuxconf='nvim ~/.dotfiles/tmux/tmux.conf'
 alias ala='nvim ~/.dotfiles/alacritty/alacritty.yml'
 
 # *** 快速切换到常用的目录
+
 alias d="cd ~/Documents"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias gitlab="cd ~/gitlab"
 
 # *** 其他
-alias vi="nvim"
-
-alias cp='cp -i'
-alias mv='mv -i'
 
 # 列出正在监听的tcp连接.
 alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
+
+# brew install jesseduffield/lazygit/lazygit
+# doc: https://github.com/jesseduffield/lazygit
+alias lg=lazygit
 
 # }}
 
