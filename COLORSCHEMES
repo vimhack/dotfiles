@@ -23,6 +23,7 @@ springnight
 google
 github
 embark
+off
 
 # base16 dark
 base16
@@ -43,6 +44,7 @@ vadelma_light
 pencil_light
 google_light
 github_light
+off_light
 
 # base16 light
 cupertino

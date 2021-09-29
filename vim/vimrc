@@ -249,6 +249,9 @@ Plug 'google/vim-colorscheme-primary'
 " embark
 Plug 'embark-theme/vim', { 'as': 'embark' }
 
+" no color: off
+Plug 'pbrisbin/vim-colors-off'
+
 " }}
 
 " 代码补全  Code Completion {{
@@ -1278,6 +1281,7 @@ endfunction
 "   primary: https://github.com/google/vim-colorscheme-primary
 "   base16-*: https://github.com/chriskempson/base16-vim
 "   embark: https://github.com/embark-theme/vim
+"   off: https://github.com/pbrisbin/vim-colors-off
 "
 " NOTE:
 "   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
@@ -1452,6 +1456,9 @@ function! LightlineReload()
   elseif g:colors_name == 'pencil'
     execute 'source ' . g:plug_home .
       \ '/lightline.vim/autoload/lightline/colorscheme/pencil.vim'
+  elseif g:colors_name == 'off'
+    execute 'source ' . g:plug_home .
+      \ '/lightline.vim/autoload/lightline/colorscheme/off.vim'
   endif
 
   call lightline#init()
@@ -1559,6 +1566,8 @@ function! ToggleBGTransparent()
       call Base16OceanicnextAfter()
     elseif g:colors_name == 'embark'
       call EmbarkAfter()
+    elseif g:colors_name == 'off'
+      call OffAfter()
     endif
   else
     call BackgroundTransparency()
@@ -1636,6 +1645,8 @@ function! ToggleBGColor()
     call IcebergAfter()
   elseif g:colors_name == 'primary'
     call GooglePrimaryAfter()
+  elseif g:colors_name == 'off'
+    call OffAfter()
   endif
 
   " 重载 lightline 状态栏, 使其颜色随着背景色改变.
@@ -2172,6 +2183,25 @@ function! EmbarkAfter()
   call EnableItalic()
 endfunction
 
+function! OffAfter()
+  let g:lightline.colorscheme = 'off'
+
+  if &background == 'dark'
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#545454
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#545454
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#545454
+  else
+    hi SpecialKey cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c6c6c6
+    hi Whitespace cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c6c6c6
+    hi Conceal cterm=NONE ctermbg=NONE ctermfg=238 guibg=NONE guifg=#c6c6c6
+  endif
+
+  call EnableItalic()
+  hi Special cterm=italic gui=italic guifg=NONE ctermfg=NONE
+
+  call EnableBold()
+endfunction
+
 " }}
 
 " *********************************
@@ -2253,6 +2283,8 @@ function! SetColorscheme()
       call Base16OceanicnextAfter()
     elseif g:colors_name == 'embark'
       call EmbarkAfter()
+    elseif g:colors_name == 'off'
+      call OffAfter()
     endif
   endif
 
