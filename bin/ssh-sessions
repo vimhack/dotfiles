@@ -3,7 +3,7 @@
 #
 # Description:
 #   Create or recreate tmux-panes in one tmux-window of the current tmux-session
-#   according to the number of servers given, and batch ssh these remote servers
+#   according to the number of hosts given, and batch ssh these remote hosts
 #   in these tmux-panes.
 #
 # Author: noone <https://github.com/windvalley>
@@ -11,65 +11,72 @@
 usage() {
     cat <<-EOF
 Usage:
-    ssh-sessions /yourpath/window_name[.extension_name]
+    ssh-sessions /yourpath/tmux_window[.extension]
 
-Content format of /yourpath/window_name[.extension_name]:
+Content format of /yourpath/tmux_window[.extension]:
     node1.example.com
     node2.example.com
     node3.exmaple.com
     ...
 
 Note:
-    Make sure the servers in /yourpath/window_name.extension_name 
+    Make sure the hosts in /yourpath/tmux_window.extension 
     can login without password by ssh public key authentication.
 
 Examples:
-    $ ssh-sessions ~/.xxxservers.ssh
+    $ ssh-sessions ~/.xxxhosts.ssh
 
     or
 
-    $ ssh-sessions ~/.xxxservers
+    $ ssh-sessions ~/.xxxhosts
 
     or
 
-    $ ssh-sessions ~/xxxservers
+    $ ssh-sessions ~/xxxhosts
 EOF
     exit 1
 }
 
-SSH_SERVERS_FILE=$1
-OMIT_CONTENT_PATTERN='#|//|"|--|^$'
+shh_hosts_file=$1
+omit_content_pattern='#|//|"|--|^$'
 
-[[ ! -s "$SSH_SERVERS_FILE" ]] && usage
+[[ ! -s "$shh_hosts_file" ]] && usage
 
-grep -Ev "$OMIT_CONTENT_PATTERN" "$SSH_SERVERS_FILE" | grep -Eq '[^0-9a-zA-Z.-]' && usage
+grep -Ev "$omit_content_pattern" "$shh_hosts_file" | grep -Eq '[^0-9a-zA-Z.-]' && usage
 
-SERVERS=$(grep -Ev "$OMIT_CONTENT_PATTERN" "$SSH_SERVERS_FILE")
-# Default: NULL -- means the current tmux session
-SESSION_NAME=
-WINDOW_NAME=$(echo "$SSH_SERVERS_FILE" | awk -F/ '{print $NF}' |
-    awk -F. '{print $(NF-1)}')
-PANE_COUNT=$(echo "$SERVERS" | xargs -n1 | grep -c .)
+hosts=$(grep -Ev "$omit_content_pattern" "$shh_hosts_file")
 
-[[ -z "$WINDOW_NAME" ]] && {
-    WINDOW_NAME=$(echo "$SSH_SERVERS_FILE" | awk -F/ '{print $NF}' | sed 's/^.//')
-}
+# means the current tmux session if null
+tmux_session=
+tmux_window=$(echo "$shh_hosts_file" | awk -F/ '{print $NF}' | awk -F. '{print $(NF-1)}')
 
-tmux kill-window -t "$SESSION_NAME:$WINDOW_NAME" 2>/dev/null
+[[ -z "$tmux_window" ]] &&
+    tmux_window=$(echo "$shh_hosts_file" | awk -F/ '{print $NF}' | sed 's/^.//')
 
-tmux new-window -n "$WINDOW_NAME" -d
+tmux kill-window -t "$tmux_session:$tmux_window" 2>/dev/null
 
-for i in $(seq 2 "$PANE_COUNT"); do
-    tmux split-window -t "$SESSION_NAME:$WINDOW_NAME"
-    tmux select-layout -t "$SESSION_NAME:$WINDOW_NAME" even-vertical
+for _ in $hosts; do
+    ! tmux list-windows -F "#W" | grep -q "$tmux_window" && {
+        tmux new-window -n "$tmux_window" -d
+        continue
+    }
+
+    tmux split-window -t "$tmux_session:$tmux_window"
+    tmux select-layout -t "$tmux_session:$tmux_window" even-vertical
 done
 
-tmux select-layout -t "$SESSION_NAME:$WINDOW_NAME" tiled
+tmux select-layout -t "$tmux_session:$tmux_window" tiled
 
-pane_id=1
-for i in $SERVERS; do
-    tmux send-keys -t "$SESSION_NAME:$WINDOW_NAME".$pane_id "ssh $i" C-m
-    ((pane_id++))
+tmux_pane_id=1
+for host in $hosts; do
+    tmux send-keys -t "$tmux_session:$tmux_window".$tmux_pane_id "ssh $host" C-m
+    ((tmux_pane_id++))
 done
+
+tmux set-window-option -t "$tmux_session:$tmux_window" synchronize-panes on
+tmux send-keys -t "$tmux_session:$tmux_window".1 "clear;hostname" C-m
+tmux set-window-option -t "$tmux_session:$tmux_window" synchronize-panes off
+
+tmux switch-client -t "$tmux_session:$tmux_window"
 
 exit 0
