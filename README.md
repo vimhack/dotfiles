@@ -69,12 +69,12 @@ Enjoy it😘
 ```text
 colorscheme
 
-The current colorscheme is 'github', and it can be changed to one of the following list:
+The current colorscheme is 'dracula', and it can be changed to one of the following list:
 
-* dracula
 * gruvbox
 * solarized
 * molokai
+* monokai
 * rigel
 * jellybeans
 * nord
@@ -90,10 +90,12 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * srcery
 * springnight
 * google
+* github
+* embark
+* off
 * base16
 * flat
 * materia
-* monokai
 * atelierdune
 * oceanicnext
 * gruvbox_light
@@ -107,6 +109,7 @@ The current colorscheme is 'github', and it can be changed to one of the followi
 * pencil_light
 * google_light
 * github_light
+* off_light
 * cupertino
 * atelierdune_light
 
@@ -116,7 +119,7 @@ $ colorscheme atelierdune_light
 
 or
 
-$ cs github_light
+$ cs atelierdune_light
 ```
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
@@ -272,13 +275,13 @@ ctrl a v
 **Change font of Alacritty randomly with hot key:**
 
 ```text
-ctrl a f
+ctrl a shift f
 ```
 
 **Toggle transparency of Alacritty with hot key:**
 
 ```text
-ctrl a o
+ctrl a shift o
 ```
 
 **Increase transparency of Alacritty with hot key:**
@@ -297,6 +300,12 @@ ctrl a ctrl j
 
 ```text
 ctrl a b
+```
+
+**Toggle tmux pane-border-status(pane name) with hot key:**
+
+```text
+ctrl a ctrl b
 ```
 
 💡 `ctrl a` aboves is the tmux prefix key.
