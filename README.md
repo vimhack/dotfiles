@@ -179,7 +179,7 @@ $ font Monofur_Book
 
 or
 
-$ f Monofur_Book
+$ ft Monofur_Book
 ```
 
 **Change font size of Alacritty in terminal command line:**
