@@ -1,0 +1,13 @@
+{
+  "$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json",
+  "configurations": {
+    "Run - CodeLLDB": {
+      "adapter": "CodeLLDB",
+      "configuration": {
+        "request": "launch",
+        // FIXME: 将 modify-to-your-project-bin-name 改成项目的二进制名称.
+        "program": "${workspaceFolder}/target/debug/modify-to-your-project-bin-name"
+      }
+    }
+  }
+}
