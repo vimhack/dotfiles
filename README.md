@@ -85,6 +85,7 @@ Enjoy it😘
     - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark)
     - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
 - [Alacritty](#Alacritty)
+  - [Keyboard Shortcuts](#Keyboard-Shortcuts)
 - [Zsh(OhMyZsh)](#ZshOhMyZsh)
 - [Tmux](#Tmux)
 - [Vim/Neovim](#VimNeovim)
@@ -344,6 +345,20 @@ ctrl a ctrl b
 💡 Opacity of Alacritty(terminal) must be less than 1.
 
 ### Alacritty
+
+#### Keyboard Shortcuts
+
+| Shortcut               | Action                                                   |
+| ---------------------- | -------------------------------------------------------- |
+| `Command` `h`          | Hide the current Alacritty terminal                      |
+| `Command` `m`          | Minimize the current Alacritty to the Dock               |
+| `Command` `q`/`w`      | Quit Alacritty                                           |
+| `Command` `n`          | Spawn new instance of Alacritty                          |
+| `Command` `f`/`b`      | Search forward or backward                               |
+| `Command` `+`/`-`/`0`  | Increase/Decrease/Reset font size                        |
+| `Ctrl` `Command` `f`   | Toggle full screen                                       |
+| `Ctrl` `l`             | Clear warning/error messages of Alacritty in status line |
+| `Command` `Option` `h` | Hiding all windows other than the current Alacritty      |
 
 ### Zsh(OhMyZsh)
 
