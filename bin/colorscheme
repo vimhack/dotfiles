@@ -10,7 +10,7 @@ source $script_dir/../lib/env.zsh
 to_colorscheme=$1
 
 if [[ "$to_colorscheme" = "list" ]] || [[ "$to_colorscheme" = "" ]]; then
-    echo -e "The current colorscheme is '$current_colorscheme', \
+    echo -e "Current colorscheme is '$current_colorscheme', \
 and it can be changed to one of the following list:\n"
 
     for i in ${colorschemes[*]}; do

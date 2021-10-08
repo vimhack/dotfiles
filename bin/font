@@ -10,7 +10,7 @@ source $script_dir/../lib/env.zsh
 to_font=$1
 
 if [[ "$to_font" = "list" ]] || [[ "$to_font" = "" ]]; then
-    echo -e "The current font is '$current_font', and it can be changed to one of the following list:\n"
+    echo -e "Current font is '$current_font', and it can be changed to one of the following list:\n"
 
     for i in ${fonts[*]}; do
         [[ "$i" != "$current_font" ]] && {
