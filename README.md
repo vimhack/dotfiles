@@ -22,7 +22,7 @@ See [here](REQUIREMENTS.md).
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
 
-```bash
+```sh
 # Make sure the target directory is '~/.dotfiles'
 git clone --depth=1 https://github.com/vimhack/dotfiles.git ~/.dotfiles
 
@@ -55,7 +55,7 @@ they will be installed automatically.
 
 To update:
 
-```bash
+```sh
 cd ~/.dotfiles
 git pull
 ```
@@ -64,12 +64,41 @@ Enjoy it😘
 
 ## 📜 Tips
 
-**Change colorscheme of Vim/Neovim and Alacritty in terminal command line:**
+- [Colorscheme/Theme](#ColorschemeTheme)
+  - [In Terminal Command Line](#In-Terminal-Command-Line)
+    - [Change colorscheme of Vim/Neovim and Alacritty](#Change-colorscheme-of-VimNeovim-and-Alacritty)
+    - [Change font of Alacritty](#Change-font-of-Alacritty)
+    - [Change font size of Alacritty](#Change-font-size-of-Alacritty)
+    - [Change opacity of Alacritty](#Change-opacity-of-Alacritty)
+    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
+    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
+    - [Print 256 colors](#Print-256-colors)
+  - [With Keyboard Shortcuts/Hot key](#With-Keyboard-shortcutsHot-key)
+    - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly)
+    - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly)
+    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
+    - [Increase Alacritty background transparent](#Increase-Alacritty-background-transparent)
+    - [Decrease Alacritty background transparent](#Decrease-Alacritty-background-transparent)
+    - [Toggle Tmux status bar](#Toggle-Tmux-status-bar)
+    - [Toggle Tmux pane-border-status(pane name)](#Toggle-Tmux-pane-border-statuspane-name)
+  - [In Vim Normal Mode](#In-Vim-Normal-Mode)
+    - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark)
+    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
+- [Alacritty](#Alacritty)
+- [Zsh(OhMyZsh)](#ZshOhMyZsh)
+- [Tmux](#Tmux)
+- [Vim/Neovim](#VimNeovim)
 
-```text
-colorscheme
+### Colorscheme/Theme
 
-The current colorscheme is 'dracula', and it can be changed to one of the following list:
+#### In Terminal Command Line
+
+##### Change colorscheme of Vim/Neovim and Alacritty
+
+```sh
+$ colorscheme
+
+Current colorscheme is 'dracula', and it can be changed to one of the following list:
 
 * gruvbox
 * solarized
@@ -124,12 +153,12 @@ $ cs atelierdune_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-**Change font of Alacritty in terminal command line:**
+##### Change font of Alacritty
 
-```text
-font
+```sh
+$ font
 
-The current font is 'Hasklug_Light', and it can be changed to one of the following list:
+Current font is 'Hasklug_Light', and it can be changed to one of the following list:
 
 * Hack_Regular
 * BlexMono_Book
@@ -182,10 +211,10 @@ or
 $ ft Monofur_Book
 ```
 
-**Change font size of Alacritty in terminal command line:**
+##### Change font size of Alacritty
 
-```text
-font-size
+```sh
+$ font-size
 
 Current font size is '12', and it can be changed by:
 
@@ -198,10 +227,10 @@ $ fs number
 * number must between 1 and  200
 ```
 
-**Change opacity of Alacritty in terminal command line:**
+##### Change opacity of Alacritty
 
-```text
-opacity
+```sh
+$ opacity
 
 Current opacity is '0.9', and it can be changed by:
 
@@ -214,9 +243,9 @@ $ o number
 * number must between 0 and 1
 ```
 
-**Toggle Vim/Neovim background transparent in terminal command line:**
+##### Toggle Vim/Neovim background transparent
 
-```text
+```sh
 $ toggle-vim-transparent
 
 or
@@ -224,9 +253,9 @@ or
 $ tv
 ```
 
-**Toggle Alacritty background transparent in terminal command line:**
+##### Toggle Alacritty background transparent
 
-```text
+```sh
 $ toggle-alacritty-transparent
 
 or
@@ -234,9 +263,9 @@ or
 $ to
 ```
 
-**Print 256 colors in terminal command line:**
+##### Print 256 colors
 
-```text
+```sh
 $ colors-print
 
 or
@@ -250,7 +279,55 @@ or
 $ hex
 ```
 
-**Toggle Vim/Neovim background color(light or dark) in Vim Normal Mode:**
+#### With Keyboard Shortcuts/Hot key
+
+> `ctrl a` follows is the tmux prefix key.
+
+##### Change colorscheme of Vim/Neovim and Alacritty randomly
+
+```text
+ctrl a v
+```
+
+##### Change font of Alacritty randomly
+
+```text
+ctrl a shift f
+```
+
+##### Toggle Alacritty background transparent
+
+```text
+ctrl a shift o
+```
+
+##### Increase Alacritty background transparent
+
+```text
+ctrl a ctrl k
+```
+
+##### Decrease Alacritty background transparent
+
+```text
+ctrl a ctrl j
+```
+
+##### Toggle Tmux status bar
+
+```text
+ctrl a b
+```
+
+##### Toggle Tmux pane-border-status(pane name)
+
+```text
+ctrl a ctrl b
+```
+
+#### In Vim Normal Mode
+
+##### Toggle Vim/Neovim background color(light or dark)
 
 ```text
 ,b
@@ -258,7 +335,7 @@ $ hex
 
 💡 Only support colorschemes that have both dark and light background color.
 
-**Toggle Vim/Neovim background transparency in Vim Normal Mode:**
+##### Toggle Vim/Neovim background transparent
 
 ```text
 ,o
@@ -266,53 +343,13 @@ $ hex
 
 💡 Opacity of Alacritty(terminal) must be less than 1.
 
-**Change colorscheme of Vim/Neovim and Alacritty randomly with hot key:**
+### Alacritty
 
-```text
-ctrl a v
-```
+### Zsh(OhMyZsh)
 
-**Change font of Alacritty randomly with hot key:**
+### Tmux
 
-```text
-ctrl a shift f
-```
-
-**Toggle transparency of Alacritty with hot key:**
-
-```text
-ctrl a shift o
-```
-
-**Increase transparency of Alacritty with hot key:**
-
-```text
-ctrl a ctrl k
-```
-
-**Decrease transparency of Alacritty with hot key:**
-
-```text
-ctrl a ctrl j
-```
-
-**Toggle status bar of Tmux with hot key:**
-
-```text
-ctrl a b
-```
-
-**Toggle tmux pane-border-status(pane name) with hot key:**
-
-```text
-ctrl a ctrl b
-```
-
-💡 `ctrl a` aboves is the tmux prefix key.
-
-**NOTE:**
-
-_Almost every dotfile has usage tips at the end of it for reference._
+### Vim/Neovim
 
 ## 🔮 Show
 
