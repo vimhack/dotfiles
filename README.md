@@ -87,6 +87,22 @@ Enjoy it😘
 - [Alacritty](#Alacritty)
   - [Keyboard Shortcuts](#Keyboard-Shortcuts)
 - [Zsh(OhMyZsh)](#ZshOhMyZsh)
+  - [Reload ~/.zshrc](#Reload-zshrc)
+  - [fzf](#fzf)
+  - [Custom Commands](#Custom-Commands)
+    - [Adjust the system volume](#Adjust-the-system-volume)
+    - [Batch ssh remote hosts in multi-tmux-panes](#Batch-ssh-remote-hosts-in-multi-tmux-panes)
+  - [Plugins](#Plugins)
+    - [vi-mode](#vi-mode)
+    - [git](#git)
+    - [gitignore](#gitignore)
+    - [web-search](#web-search)
+    - [colorize](#colorize)
+    - [sudo](#sudo)
+    - [themes](#themes)
+    - [copyfile](#copyfile)
+    - [copydir](#copydir)
+    - [aliases](#aliases)
 - [Tmux](#Tmux)
 - [Vim/Neovim](#VimNeovim)
 
@@ -361,6 +377,266 @@ ctrl a ctrl b
 | `Command` `Option` `h` | Hiding all windows other than the current Alacritty      |
 
 ### Zsh(OhMyZsh)
+
+#### Reload `~/.zshrc`
+
+```sh
+$ omz reload
+```
+
+or
+
+```sh
+$ exec zsh
+```
+
+#### fzf
+
+> <https://github.com/junegunn/fzf>
+
+- `$ ff`
+
+  Search file by `fzf` and then open it by `vim`.
+
+- `Ctrl t`
+
+  List all files and dirs of the current dir, then select one and `enter`,
+  it will paste the selected file name to the command line.
+
+- `Option`/`Alt` `c`
+
+  List all dirs of the current dir, then select one and `enter`,
+  it will switch to the selected dir.
+
+- `Ctrl` `r`
+
+  List history commands, then input keywords and select the specific one,
+  and `enter`, it will paste the selected command to the command line.
+
+- `Ctrl` `k`/`j`
+
+  Select up or down in file/dir list or history command list.
+
+- `Ctrl` `p`/`n`
+
+  The same as `Ctrl` `k`/`j`.
+
+- `Ctrl` `c` / `Ctrl` `g` / `esc`
+
+  Quit from file/dir list or history command list.
+
+#### Custom Commands
+
+##### Adjust the system volume
+
+```sh
+$ vol
+
+Usage of audio-volume:
+  digit             Set volume value, 1~100
+  -p, --print       Print all audio devices
+  -n, --next        Switch to the next audio device
+  -i device_id      Switch to the given audio device
+```
+
+##### Batch ssh remote hosts in multi-tmux-panes
+
+```sh
+Usage:
+    ssh-sessions /yourpath/tmux_window[.extension]
+
+Content format of /yourpath/tmux_window[.extension]:
+    node1.example.com
+    node2.example.com
+    node3.exmaple.com
+    ...
+
+Note:
+    Make sure the hosts in /yourpath/tmux_window.extension
+    can login without password by ssh public key authentication.
+
+Examples:
+    $ ssh-sessions ~/.xxxhosts.ssh
+
+    or
+
+    $ ssh-sessions ~/.xxxhosts
+
+    or
+
+    $ ssh-sessions ~/xxxhosts
+```
+
+#### Plugins
+
+##### vi-mode
+
+> ~/.oh-my-zsh/plugins/web-search/README.md
+
+###### Enter `Normal Mode`
+
+Use `ESC` or `CTRL-[` to enter `Normal mode`.
+
+###### History
+
+- `ctrl-p` : Previous command in history
+- `ctrl-n` : Next command in history
+- `/` : Search backward in history
+- `n` : Repeat the last `/`
+
+###### Vim edition
+
+- `vv` : Edit current command line in Vim
+
+###### Movement
+
+- `$` : To the end of the line
+- `^` : To the first non-blank character of the line
+- `0` : To the first character of the line
+- `w` : [count] words forward
+- `W` : [count] WORDS forward
+- `e` : Forward to the end of word [count] inclusive
+- `E` : Forward to the end of WORD [count] inclusive
+- `b` : [count] words backward
+- `B` : [count] WORDS backward
+- `t{char}` : Till before [count]'th occurrence of {char} to the right
+- `T{char}` : Till before [count]'th occurrence of {char} to the left
+- `f{char}` : To [count]'th occurrence of {char} to the right
+- `F{char}` : To [count]'th occurrence of {char} to the left
+- `;` : Repeat latest f, t, F or T [count] times
+- `,` : Repeat latest f, t, F or T in opposite direction
+
+###### Insertion
+
+- `i` : Insert text before the cursor
+- `I` : Insert text before the first character in the line
+- `a` : Append text after the cursor
+- `A` : Append text at the end of the line
+- `o` : Insert new command line below the current one
+- `O` : Insert new command line above the current one
+
+###### Delete and Insert
+
+- `ctrl-h` : While in _Insert mode_: delete character before the cursor
+- `ctrl-w` : While in _Insert mode_: delete word before the cursor
+- `d{motion}` : Delete text that {motion} moves over
+- `dd` : Delete line
+- `D` : Delete characters under the cursor until the end of the line
+- `c{motion}` : Delete {motion} text and start insert
+- `cc` : Delete line and start insert
+- `C` : Delete to the end of the line and start insert
+- `r{char}` : Replace the character under the cursor with {char}
+- `R` : Enter replace mode: Each character replaces existing one
+- `x` : Delete `count` characters under and after the cursor
+- `X` : Delete `count` characters before the cursor
+
+##### git
+
+> ~/.oh-my-zsh/plugins/git/README.md
+
+- `gst` : git status
+- `gsh` : git show
+- `ga` : git add
+- `gc` : git commit -v
+- `gp` : git push
+- `gpf` : git push -f
+- `glo` : git log --oneline --decorate
+- `glog` : git log --oneline --decorate --graph
+- `gl` : git pull
+
+##### gitignore
+
+> ~/.oh-my-zsh/plugins/gitignore/README.md
+
+- `gi list`: List all the currently supported gitignore.io templates.
+- `gi [TEMPLATENAME]`: Show git-ignore output on the command line, e.g. `gi java` to exclude class and package files.
+- `gi [TEMPLATENAME] >> .gitignore`: Appending programming language settings to your projects .gitignore.
+
+##### web-search
+
+> ~/.oh-my-zsh/plugins/web-search/README.md
+
+You can use the `web-search` plugin in these two forms:
+
+- `web_search <context> <term> [more terms if you want]`
+- `<context> <term> [more terms if you want]`
+
+For example, these two are equivalent:
+
+```sh
+$ web_search google oh-my-zsh
+$ google oh-my-zsh
+```
+
+Available search contexts are:
+
+| Context               | URL                                      |
+| --------------------- | ---------------------------------------- |
+| `bing`                | `https://www.bing.com/search?q=`         |
+| `google`              | `https://www.google.com/search?q=`       |
+| `yahoo`               | `https://search.yahoo.com/search?p=`     |
+| `ddg` or `duckduckgo` | `https://www.duckduckgo.com/?q=`         |
+| `sp` or `startpage`   | `https://www.startpage.com/do/search?q=` |
+| `yandex`              | `https://yandex.ru/yandsearch?text=`     |
+| `github`              | `https://github.com/search?q=`           |
+| `baidu`               | `https://www.baidu.com/s?wd=`            |
+| `ecosia`              | `https://www.ecosia.org/search?q=`       |
+| `goodreads`           | `https://www.goodreads.com/search?q=`    |
+| `qwant`               | `https://www.qwant.com/?q=`              |
+| `givero`              | `https://www.givero.com/search?q=`       |
+| `stackoverflow`       | `https://stackoverflow.com/search?q=`    |
+| `wolframalpha`        | `https://wolframalpha.com/input?i=`      |
+| `archive`             | `https://web.archive.org/web/*/`         |
+| `scholar`             | `https://scholar.google.com/scholar?q=`  |
+
+##### colorize
+
+> ~/.oh-my-zsh/plugins/colorize/README.md
+
+- `ccat <file> [files]`: colorize the contents of the file (or files, if more than one are provided).
+  If no files are passed it will colorize the standard input.
+
+- `cless [less-options] <file> [files]`: colorize the contents of the file (or files, if more than one are provided) and open less.
+  If no files are passed it will colorize the standard input.
+  The LESSOPEN and LESSCLOSE will be overwritten for this to work, but only in a local scope.
+
+##### sudo
+
+> ~/.oh-my-zsh/plugins/sudo/README.md
+
+Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc</kbd> twice.
+
+##### themes
+
+> ~/.oh-my-zsh/plugins/themes/README.md
+
+- `theme <theme_name>` : Changes the Zsh theme to specified theme.
+
+- `theme` : Changes the Zsh theme to some random theme.
+
+- `lstheme` : Lists installed Zsh themes.
+
+##### copyfile
+
+> ~/.oh-my-zsh/plugins/copyfile/README.md
+
+- `copyfile <filename>` : Puts the contents of a file in your system clipboard so you can paste it anywhere.
+
+##### copydir
+
+> ~/.oh-my-zsh/plugins/copydir/README.md
+
+- `copydir` : Copy the $PWD to the system clipboard.
+
+##### aliases
+
+> ~/.oh-my-zsh/plugins/aliases/README.md
+
+With lots of 3rd-party amazing aliases installed, this plugin helps list the shortcuts
+that are currently available based on the plugins you have enabled.
+
+- `acs` : Group all alias
+- `acs <keyword>` : Quickly filter alias & highlight
 
 ### Tmux
 
