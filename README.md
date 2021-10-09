@@ -6,18 +6,75 @@ and many other related excellent open source softwares.
 
 The supported platforms currently are macOS and Linux.
 
-## 💝 Powers
+## Contents
+
+- [Powers](#Powers)
+- [Requirements Installation](#Requirements-Installation)
+- [Installation](#Installation)
+- [Colorscheme/Theme](#ColorschemeTheme)
+  - [In Terminal Command Line](#In-Terminal-Command-Line)
+    - [Change colorscheme of Vim/Neovim and Alacritty](#Change-colorscheme-of-VimNeovim-and-Alacritty)
+    - [Change font of Alacritty](#Change-font-of-Alacritty)
+    - [Change font size of Alacritty](#Change-font-size-of-Alacritty)
+    - [Change opacity of Alacritty](#Change-opacity-of-Alacritty)
+    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
+    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
+    - [Print 256 colors](#Print-256-colors)
+  - [With Keyboard Shortcuts/Hot key](#With-Keyboard-shortcutsHot-key)
+    - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly)
+    - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly)
+    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
+    - [Increase Alacritty background transparent](#Increase-Alacritty-background-transparent)
+    - [Decrease Alacritty background transparent](#Decrease-Alacritty-background-transparent)
+    - [Toggle Tmux status bar](#Toggle-Tmux-status-bar)
+    - [Toggle Tmux pane-border-status(pane name)](#Toggle-Tmux-pane-border-statuspane-name)
+  - [In Vim Normal Mode](#In-Vim-Normal-Mode)
+    - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark)
+    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
+- [Alacritty](#Alacritty)
+  - [Keyboard Shortcuts](#Keyboard-Shortcuts)
+- [Zsh(OhMyZsh)](#ZshOhMyZsh)
+  - [Reload ~/.zshrc](#Reload-zshrc)
+  - [fzf](#fzf)
+  - [Custom Commands](#Custom-Commands)
+    - [Adjust the system volume](#Adjust-the-system-volume)
+    - [Batch ssh remote hosts in multi-tmux-panes](#Batch-ssh-remote-hosts-in-multi-tmux-panes)
+  - [Plugins](#Plugins)
+    - [vi-mode](#vi-mode)
+    - [git](#git)
+    - [gitignore](#gitignore)
+    - [web-search](#web-search)
+    - [colorize](#colorize)
+    - [sudo](#sudo)
+    - [themes](#themes)
+    - [copyfile](#copyfile)
+    - [copydir](#copydir)
+    - [aliases](#aliases)
+- [Tmux](#Tmux)
+  - [Prefix Key](#Prefix-key)
+  - [Session](#Session)
+  - [Window](#Window)
+  - [Pane](#Pane)
+  - [Copy Mode](#Copy-Mode)
+  - [Sync Mode](#Sync-Mode)
+  - [Plugins](#Plugins)
+  - [FQA](#FQA)
+- [Vim/Neovim](#VimNeovim)
+- [Show](#show)
+- [License](#License)
+
+## 💝 Powers [↟](#Contents)
 
 - [Vim](https://github.com/vim/vim) or [Neovim](https://github.com/neovim/neovim)
 - [Tmux](https://github.com/tmux/tmux)
 - [Zsh](https://ohmyz.sh/)
 - [Alacritty](https://github.com/alacritty/alacritty)
 
-## 📦 Requirements Installation
+## 📦 Requirements Installation [↟](#Contents)
 
 See [here](REQUIREMENTS.md).
 
-## 📀 Dotfiles Installation
+## 📀 Installation [↟](#Contents)
 
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
@@ -62,55 +119,11 @@ git pull
 
 Enjoy it😘
 
-## 📜 Tips
+## 🍀 Colorscheme/Theme [↟](#Contents)
 
-- [Colorscheme/Theme](#ColorschemeTheme)
-  - [In Terminal Command Line](#In-Terminal-Command-Line)
-    - [Change colorscheme of Vim/Neovim and Alacritty](#Change-colorscheme-of-VimNeovim-and-Alacritty)
-    - [Change font of Alacritty](#Change-font-of-Alacritty)
-    - [Change font size of Alacritty](#Change-font-size-of-Alacritty)
-    - [Change opacity of Alacritty](#Change-opacity-of-Alacritty)
-    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
-    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
-    - [Print 256 colors](#Print-256-colors)
-  - [With Keyboard Shortcuts/Hot key](#With-Keyboard-shortcutsHot-key)
-    - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly)
-    - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly)
-    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
-    - [Increase Alacritty background transparent](#Increase-Alacritty-background-transparent)
-    - [Decrease Alacritty background transparent](#Decrease-Alacritty-background-transparent)
-    - [Toggle Tmux status bar](#Toggle-Tmux-status-bar)
-    - [Toggle Tmux pane-border-status(pane name)](#Toggle-Tmux-pane-border-statuspane-name)
-  - [In Vim Normal Mode](#In-Vim-Normal-Mode)
-    - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark)
-    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
-- [Alacritty](#Alacritty)
-  - [Keyboard Shortcuts](#Keyboard-Shortcuts)
-- [Zsh(OhMyZsh)](#ZshOhMyZsh)
-  - [Reload ~/.zshrc](#Reload-zshrc)
-  - [fzf](#fzf)
-  - [Custom Commands](#Custom-Commands)
-    - [Adjust the system volume](#Adjust-the-system-volume)
-    - [Batch ssh remote hosts in multi-tmux-panes](#Batch-ssh-remote-hosts-in-multi-tmux-panes)
-  - [Plugins](#Plugins)
-    - [vi-mode](#vi-mode)
-    - [git](#git)
-    - [gitignore](#gitignore)
-    - [web-search](#web-search)
-    - [colorize](#colorize)
-    - [sudo](#sudo)
-    - [themes](#themes)
-    - [copyfile](#copyfile)
-    - [copydir](#copydir)
-    - [aliases](#aliases)
-- [Tmux](#Tmux)
-- [Vim/Neovim](#VimNeovim)
+### In Terminal Command Line
 
-### Colorscheme/Theme
-
-#### In Terminal Command Line
-
-##### Change colorscheme of Vim/Neovim and Alacritty
+#### Change colorscheme of Vim/Neovim and Alacritty
 
 ```sh
 $ colorscheme
@@ -170,7 +183,7 @@ $ cs atelierdune_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-##### Change font of Alacritty
+#### Change font of Alacritty
 
 ```sh
 $ font
@@ -228,7 +241,7 @@ or
 $ ft Monofur_Book
 ```
 
-##### Change font size of Alacritty
+#### Change font size of Alacritty
 
 ```sh
 $ font-size
@@ -244,7 +257,7 @@ $ fs number
 * number must between 1 and  200
 ```
 
-##### Change opacity of Alacritty
+#### Change opacity of Alacritty
 
 ```sh
 $ opacity
@@ -260,7 +273,7 @@ $ o number
 * number must between 0 and 1
 ```
 
-##### Toggle Vim/Neovim background transparent
+#### Toggle Vim/Neovim background transparent
 
 ```sh
 $ toggle-vim-transparent
@@ -270,7 +283,7 @@ or
 $ tv
 ```
 
-##### Toggle Alacritty background transparent
+#### Toggle Alacritty background transparent
 
 ```sh
 $ toggle-alacritty-transparent
@@ -280,7 +293,7 @@ or
 $ to
 ```
 
-##### Print 256 colors
+#### Print 256 colors
 
 ```sh
 $ colors-print
@@ -296,55 +309,55 @@ or
 $ hex
 ```
 
-#### With Keyboard Shortcuts/Hot key
+### With Keyboard Shortcuts/Hot key
 
 > `ctrl a` follows is the tmux prefix key.
 
-##### Change colorscheme of Vim/Neovim and Alacritty randomly
+#### Change colorscheme of Vim/Neovim and Alacritty randomly
 
 ```text
 ctrl a v
 ```
 
-##### Change font of Alacritty randomly
+#### Change font of Alacritty randomly
 
 ```text
 ctrl a shift f
 ```
 
-##### Toggle Alacritty background transparent
+#### Toggle Alacritty background transparent
 
 ```text
 ctrl a shift o
 ```
 
-##### Increase Alacritty background transparent
+#### Increase Alacritty background transparent
 
 ```text
 ctrl a ctrl k
 ```
 
-##### Decrease Alacritty background transparent
+#### Decrease Alacritty background transparent
 
 ```text
 ctrl a ctrl j
 ```
 
-##### Toggle Tmux status bar
+#### Toggle Tmux status bar
 
 ```text
 ctrl a b
 ```
 
-##### Toggle Tmux pane-border-status(pane name)
+#### Toggle Tmux pane-border-status(pane name)
 
 ```text
 ctrl a ctrl b
 ```
 
-#### In Vim Normal Mode
+### In Vim Normal Mode
 
-##### Toggle Vim/Neovim background color(light or dark)
+#### Toggle Vim/Neovim background color(light or dark)
 
 ```text
 ,b
@@ -352,7 +365,7 @@ ctrl a ctrl b
 
 💡 Only support colorschemes that have both dark and light background color.
 
-##### Toggle Vim/Neovim background transparent
+#### Toggle Vim/Neovim background transparent
 
 ```text
 ,o
@@ -360,9 +373,9 @@ ctrl a ctrl b
 
 💡 Opacity of Alacritty(terminal) must be less than 1.
 
-### Alacritty
+## 📺 Alacritty [↟](#Contents)
 
-#### Keyboard Shortcuts
+### Keyboard Shortcuts
 
 | Shortcut               | Action                                                   |
 | ---------------------- | -------------------------------------------------------- |
@@ -376,9 +389,9 @@ ctrl a ctrl b
 | `Ctrl` `l`             | Clear warning/error messages of Alacritty in status line |
 | `Command` `Option` `h` | Hiding all windows other than the current Alacritty      |
 
-### Zsh(OhMyZsh)
+## 🐚 Zsh(OhMyZsh) [↟](#Contents)
 
-#### Reload `~/.zshrc`
+### Reload `~/.zshrc`
 
 ```sh
 $ omz reload
@@ -390,7 +403,7 @@ or
 $ exec zsh
 ```
 
-#### fzf
+### fzf
 
 > <https://github.com/junegunn/fzf>
 
@@ -398,7 +411,7 @@ $ exec zsh
 
   Search file by `fzf` and then open it by `vim`.
 
-- `Ctrl t`
+- `Ctrl` `t`
 
   List all files and dirs of the current dir, then select one and `enter`,
   it will paste the selected file name to the command line.
@@ -425,9 +438,9 @@ $ exec zsh
 
   Quit from file/dir list or history command list.
 
-#### Custom Commands
+### Custom Commands
 
-##### Adjust the system volume
+#### Adjust the system volume
 
 ```sh
 $ vol
@@ -439,7 +452,7 @@ Usage of audio-volume:
   -i device_id      Switch to the given audio device
 ```
 
-##### Batch ssh remote hosts in multi-tmux-panes
+#### Batch ssh remote hosts in multi-tmux-panes
 
 ```sh
 Usage:
@@ -467,28 +480,28 @@ Examples:
     $ ssh-sessions ~/xxxhosts
 ```
 
-#### Plugins
+### Plugins
 
-##### vi-mode
+#### vi-mode
 
 > ~/.oh-my-zsh/plugins/web-search/README.md
 
-###### Enter `Normal Mode`
+##### Enter `Normal Mode`
 
-Use `ESC` or `CTRL-[` to enter `Normal mode`.
+First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 
-###### History
+##### History
 
-- `ctrl-p` : Previous command in history
-- `ctrl-n` : Next command in history
+- `ctrl` `p` : Previous command in history
+- `ctrl` `n` : Next command in history
 - `/` : Search backward in history
 - `n` : Repeat the last `/`
 
-###### Vim edition
+##### Vim edition
 
 - `vv` : Edit current command line in Vim
 
-###### Movement
+##### Movement
 
 - `$` : To the end of the line
 - `^` : To the first non-blank character of the line
@@ -506,7 +519,7 @@ Use `ESC` or `CTRL-[` to enter `Normal mode`.
 - `;` : Repeat latest f, t, F or T [count] times
 - `,` : Repeat latest f, t, F or T in opposite direction
 
-###### Insertion
+##### Insertion
 
 - `i` : Insert text before the cursor
 - `I` : Insert text before the first character in the line
@@ -515,7 +528,7 @@ Use `ESC` or `CTRL-[` to enter `Normal mode`.
 - `o` : Insert new command line below the current one
 - `O` : Insert new command line above the current one
 
-###### Delete and Insert
+##### Delete and Insert
 
 - `ctrl-h` : While in _Insert mode_: delete character before the cursor
 - `ctrl-w` : While in _Insert mode_: delete word before the cursor
@@ -530,7 +543,7 @@ Use `ESC` or `CTRL-[` to enter `Normal mode`.
 - `x` : Delete `count` characters under and after the cursor
 - `X` : Delete `count` characters before the cursor
 
-##### git
+#### git
 
 > ~/.oh-my-zsh/plugins/git/README.md
 
@@ -544,7 +557,7 @@ Use `ESC` or `CTRL-[` to enter `Normal mode`.
 - `glog` : git log --oneline --decorate --graph
 - `gl` : git pull
 
-##### gitignore
+#### gitignore
 
 > ~/.oh-my-zsh/plugins/gitignore/README.md
 
@@ -552,7 +565,7 @@ Use `ESC` or `CTRL-[` to enter `Normal mode`.
 - `gi [TEMPLATENAME]`: Show git-ignore output on the command line, e.g. `gi java` to exclude class and package files.
 - `gi [TEMPLATENAME] >> .gitignore`: Appending programming language settings to your projects .gitignore.
 
-##### web-search
+#### web-search
 
 > ~/.oh-my-zsh/plugins/web-search/README.md
 
@@ -589,7 +602,7 @@ Available search contexts are:
 | `archive`             | `https://web.archive.org/web/*/`         |
 | `scholar`             | `https://scholar.google.com/scholar?q=`  |
 
-##### colorize
+#### colorize
 
 > ~/.oh-my-zsh/plugins/colorize/README.md
 
@@ -600,13 +613,13 @@ Available search contexts are:
   If no files are passed it will colorize the standard input.
   The LESSOPEN and LESSCLOSE will be overwritten for this to work, but only in a local scope.
 
-##### sudo
+#### sudo
 
 > ~/.oh-my-zsh/plugins/sudo/README.md
 
 Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc</kbd> twice.
 
-##### themes
+#### themes
 
 > ~/.oh-my-zsh/plugins/themes/README.md
 
@@ -616,19 +629,19 @@ Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc
 
 - `lstheme` : Lists installed Zsh themes.
 
-##### copyfile
+#### copyfile
 
 > ~/.oh-my-zsh/plugins/copyfile/README.md
 
 - `copyfile <filename>` : Puts the contents of a file in your system clipboard so you can paste it anywhere.
 
-##### copydir
+#### copydir
 
 > ~/.oh-my-zsh/plugins/copydir/README.md
 
 - `copydir` : Copy the $PWD to the system clipboard.
 
-##### aliases
+#### aliases
 
 > ~/.oh-my-zsh/plugins/aliases/README.md
 
@@ -638,11 +651,78 @@ that are currently available based on the plugins you have enabled.
 - `acs` : Group all alias
 - `acs <keyword>` : Quickly filter alias & highlight
 
-### Tmux
+## 🎹 Tmux [↟](#Contents)
 
-### Vim/Neovim
+### Prefix Key
 
-## 🔮 Show
+Prefix Key: `Ctrl a`
+
+All the following shortcuts keys must first press the prefix key.
+
+> Note that after pressing the prefix key, you need to release the prefix key first,
+> and then press other specific shortcut keys.
+
+### Session
+
+- `?` : List key bindings
+- `s` : Choose a session from a list
+- `Option/Alt` `f` : Search session
+- `Ctrl` `c` : Create new session
+- `$` : Rename the current session
+
+### Window
+
+- `c` : Create new window
+- `,` : Rename current window
+- `.` : Move current window
+- `n` : Select the next window
+- `p` : Select the previous window
+- `0-9`: Select window 0-9
+- `&` : Kill current window
+- `w` : Choose a window from a list
+- `f` : Search window
+- `i` : Display window information
+
+### Pane
+
+- `%` : Split window horizontally
+- `"` : Split window vertically
+- `<Space>` : Select next layout
+- `Ctrl` `E` : Spread panes out evenly
+- `x` : Kill the active pane
+- `z` : Zoom the active pane
+- `{` / `<` : Swap the active pane with the pane above
+- `}` / `>` : Swap the active pane with the pane below
+- `q` : Display pane numbers(it will also display a letter if the number gather than 10),
+  then press the specified number(or letter) to select it.
+- `t` : Show a clock in current pane
+- `!` : Break pane to a new window
+- `;` : Move to the previously active pane
+- `k` : Select the pane above the active pane
+- `j` : Select the pane below the active pane
+- `h` : Select the pane to the left of the active pane
+- `l` : Select the pane to the right of the active pane
+- `o` : Select the next pane
+- `Ctrl` `o` : Rotate through the panes
+- `Option/Alt` `o` : Rotate through the panes in reverse
+- `m` : Toggle the marked pane
+- `K` : Resize the pane up
+- `J` : Resize the pane down
+- `H` : Resize the pane left
+- `L` : Resize the pane right
+- `Ctrl` `l` : Clear all the messages(include history messages) in the active pane
+
+### Copy Mode
+
+### Sync Mode
+
+### Plugins
+
+### FQA
+
+## 💯 Vim/Neovim [↟](#Contents)
+
+## 🔮 Show [↟](#Contents)
 
 ColorScheme: `gruvbox`
 Opacity: `0.9`
@@ -668,7 +748,7 @@ VimBgTransparency: `1`
 
 ![papercolor](https://user-images.githubusercontent.com/6139938/132120994-61a63c06-03a3-4c96-996b-bf84b52cc039.png)
 
-## ⚖️ License
+## ⚖️ License [↟](#Contents)
 
 This project is under the MIT License.
 See the [LICENSE](LICENSE) file for the full license text.
