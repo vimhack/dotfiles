@@ -328,7 +328,7 @@ alias ff="vim \$(fzf)"
 #                      z  z 后输入你要切换的目标目录的一部分, 回车即可自动跳转到目标目录.
 #    omz reload/exec zsh  重新加载 ~/.zshrc 配置文件.
 #
-# *** vi-mode 插件 (~/.oh-my-zsh/plugins/web-search/README.md)
+# *** vi-mode 插件 (~/.oh-my-zsh/plugins/vi-mode/README.md)
 #                 ctrl e  编辑模式下将光标移动到行尾, 如果命令行有提示的补全, 则会有补全效果,
 #                         替代不使用 vi-mode 插件时的 ctrl f 快捷键.
 #                    ESC  使命令行进入 vim 的 normal 模式, 光标移动/文本对象编辑与 vim 一致.
