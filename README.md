@@ -6,6 +6,11 @@ and many other related excellent open source softwares.
 
 The supported platforms currently are macOS and Linux.
 
+> NOTE:<br>
+> For efficient and convenient use of shortcuts,
+> I strongly recommend using [HHKB](https://happyhackingkb.com/) keyboard,
+> or a keyboard capable of changing the key position and change <kbd>Caps</kbd> to <kbd>Ctrl</kbd>.
+
 ## Contents
 
 - [Powers](#Powers)
@@ -20,7 +25,7 @@ The supported platforms currently are macOS and Linux.
     - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
     - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
     - [Print 256 colors](#Print-256-colors)
-  - [With Keyboard Shortcuts/Hot key](#With-Keyboard-shortcutsHot-key)
+  - [With Keyboard Shortcuts/Hotkey](#With-Keyboard-shortcutsHotkey)
     - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly)
     - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly)
     - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
@@ -52,12 +57,26 @@ The supported platforms currently are macOS and Linux.
     - [aliases](#aliases)
 - [Tmux](#Tmux)
   - [Prefix Key](#Prefix-key)
+  - [Common](#Common)
   - [Session](#Session)
   - [Window](#Window)
   - [Pane](#Pane)
   - [Copy Mode](#Copy-Mode)
   - [Sync Mode](#Sync-Mode)
   - [Plugins](#Plugins)
+    - [tmux-plugins/tpm](#tmux-pluginstpm)
+    - [tmux-plugins/tmux-prefix-highlight](#tmux-pluginstmux-prefix-highlight)
+    - [tmux-plugins/tmux-resurrect](#tmux-pluginstmux-resurrect)
+    - [tmux-plugins/tmux-continuum](#tmux-pluginstmux-continuum)
+    - [tmux-plugins/tmux-copycat](#tmux-pluginstmux-copycat)
+    - [tmux-plugins/tmux-yank](#tmux-pluginstmux-yank)
+    - [tmux-plugins/tmux-open](#tmux-pluginstmux-open)
+    - [ki-chi/tmux-inputmethod](#ki-chitmux-inputmethod)
+    - [vimhack/tmux-show-colorscheme](#vimhacktmux-show-colorscheme)
+    - [vimhack/tmux-audio-volume](#vimhacktmux-audio-volume)
+    - [vimhack/tmux-battery](#vimhacktmux-battery)
+    - [vimhack/tmux-cpu](#vimhacktmux-cpu)
+    - [vimhack/tmux-weather](#vimhacktmux-weather)
   - [FQA](#FQA)
 - [Vim/Neovim](#VimNeovim)
 - [Show](#show)
@@ -309,7 +328,7 @@ or
 $ hex
 ```
 
-### With Keyboard Shortcuts/Hot key
+### With Keyboard Shortcuts/Hotkey
 
 > `ctrl a` follows is the tmux prefix key.
 
@@ -455,6 +474,8 @@ Usage of audio-volume:
 #### Batch ssh remote hosts in multi-tmux-panes
 
 ```sh
+$ s
+
 Usage:
     ssh-sessions /yourpath/tmux_window[.extension]
 
@@ -662,13 +683,21 @@ All the following shortcuts keys must first press the prefix key.
 > Note that after pressing the prefix key, you need to release the prefix key first,
 > and then press other specific shortcut keys.
 
-### Session
+### Common
 
 - `?` : List key bindings
+- `r` : Reload `~/.tmux.conf`
+- `e` : Edit `~/.tmux.conf`
+- `K` : View help documents of the object in `~/.tmux.conf`
+- `d` : Detach the current client
+
+### Session
+
 - `s` : Choose a session from a list
 - `Option/Alt` `f` : Search session
 - `Ctrl` `c` : Create new session
 - `$` : Rename the current session
+- `b` : Toggle status line of the current session
 
 ### Window
 
@@ -711,14 +740,168 @@ All the following shortcuts keys must first press the prefix key.
 - `H` : Resize the pane left
 - `L` : Resize the pane right
 - `Ctrl` `l` : Clear all the messages(include history messages) in the active pane
+- `Ctrl` `b` : Toggle pane name of the current window's all panes
 
 ### Copy Mode
 
+- `[` : Enter copy mode
+- `]` : Paste the most recent paste buffer
+
+**NOTE**: The followings is the operations after entered copy mode, **no need** to press the Prefix Key first.
+
+- `q` : Exit from copy mode
+- `hjhl` : Movements
+- `v` : Text select
+- `V` : Text line select
+- `Ctrl` `v` : Text block select
+- `enter`: Copy the selected text
+- `esc` : Escape from text selected
+- `/` : Search down
+- `?` : Search up
+
+Enabled `vi-mode`, many vi shortcuts can be used in this scenario.
+
 ### Sync Mode
+
+- `Ctrl` `y` : Toggle sync mode
 
 ### Plugins
 
+#### tmux-plugins/tpm
+
+> <https://github.com/tmux-plugins/tpm>
+
+Tmux Plugin Manager.
+
+- `I` : Install new plugins
+- `U` : Update all plugins
+- `u` : Uninstall plugins that not in `~/.tmux.conf`
+
+#### tmux-plugins/tmux-prefix-highlight
+
+> <https://github.com/tmux-plugins/tmux-prefix-highlight>
+
+Plugin that highlights when you press tmux prefix key.
+
+#### tmux-plugins/tmux-resurrect
+
+> <https://github.com/tmux-plugins/tmux-resurrect>
+
+This plugin saves all the little details from your tmux environment so it can be completely restored after a system restart (or when you feel like it).
+
+- `Ctrl` `s` : Save sessions
+- `Ctrl` `r` : Restore sessions from local backup
+
+#### tmux-plugins/tmux-continuum
+
+> <https://github.com/tmux-plugins/tmux-continuum>
+
+Continuous saving of tmux environment. Automatic restore when tmux is started.
+
+#### tmux-plugins/tmux-copycat
+
+> <https://github.com/tmux-plugins/tmux-copycat>
+
+##### Search
+
+- `/` : Regex search (strings work too)
+
+  Example search entries:
+
+  - `foo` : Searches for string foo
+  - `[0-9]+` : Regex search for numbers
+
+##### Predefined searches
+
+- `Ctrl` `f` : Simple file search
+- `Ctrl` `g` : Jumping over git status files (best used after git status command: `git status -sb`)
+- `Ctrl` `h` : Jumping over SHA-1/SHA-256 hashes (best used after git log command)
+- `Ctrl` `u` : URL search (http, ftp and git urls)
+- `Ctrl` `d` : Number search (mnemonic d, as digit)
+- `Ctrl` `i` : IP address search
+- `S` : Jumping over string surrounded by `""`
+
+These start "copycat mode" and jump to first match.
+
+##### `Copycat mode` bindings
+
+These are enabled when you search with copycat:
+
+- `n` : Jumps to the next match
+- `N` : Jumps to the previous match
+- `enter` : Copy a highlighted match
+
+#### tmux-plugins/tmux-yank
+
+> <https://github.com/tmux-plugins/tmux-yank>
+
+- Tmux Normal Mode
+  - `y` : Copies text from the command line to the clipboard.
+  - `Y` : Copy the current pane's current working directory to the clipboard.
+- Tmux Copy Mode
+  - `y` : Copy selection to system clipboard.
+  - `Y` : Equivalent to copying a selection, and pasting it to the command line.
+
+#### tmux-plugins/tmux-open
+
+> <https://github.com/tmux-plugins/tmux-open>
+
+Plugin for opening highlighted selection directly from Tmux copy mode.
+
+In Tmux Copy Mode:
+
+- `o` : Open a highlighted selection with the system default program. open for OS X or xdg-open for Linux.
+- `Ctrl` `o` : Open a highlighted selection with the $EDITOR
+- `S` : Search the highlighted selection directly by Google
+- `B` : Search the highlighted selection directly by Bing
+
+#### ki-chi/tmux-inputmethod
+
+> <https://github.com/ki-chi/tmux-inputmethod>
+
+Display current input method in the Tmux status line.
+
+#### vimhack/tmux-show-colorscheme
+
+> <https://github.com/vimhack/tmux-show-colorscheme#main>
+
+Display current colorscheme/opacity/font/font-size of Vim and Alacritty in the Tmux status line.
+
+#### vimhack/tmux-audio-volume
+
+> <https://github.com/vimhack/tmux-audio-volume>
+
+Display system volume in the Tmux status line.
+
+#### vimhack/tmux-battery
+
+> <https://github.com/vimhack/tmux-battery>
+
+Display battery status in the Tmux status line.
+
+#### [vimhack/tmux-cpu](https://github.com/vimhack/tmux-cpu)
+
+Display cpu utilization and fan speed in the Tmux status line.
+
+#### vimhack/tmux-weather
+
+> <https://github.com/vimhack/tmux-weather>
+
+Display local weather information in the Tmux status line.
+
 ### FQA
+
+- In some cases, modifying `~/.tmux.conf` cannot take effect after reload or restart Tmux, how to fix it?
+
+```sh
+$ tmux kill-server
+```
+
+- Even if execute `tmux kill-server`, the new configuration still does not take effect.
+
+```sh
+$ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
+```
 
 ## 💯 Vim/Neovim [↟](#Contents)
 
