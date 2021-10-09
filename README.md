@@ -44,7 +44,7 @@ The supported platforms currently are macOS and Linux.
   - [Custom Commands](#Custom-Commands)
     - [Adjust the system volume](#Adjust-the-system-volume)
     - [Batch ssh remote hosts in multi-tmux-panes](#Batch-ssh-remote-hosts-in-multi-tmux-panes)
-  - [Plugins](#Plugins)
+  - [OhMyZsh Plugins](#OhMyZsh-Plugins)
     - [vi-mode](#vi-mode)
     - [git](#git)
     - [gitignore](#gitignore)
@@ -63,7 +63,7 @@ The supported platforms currently are macOS and Linux.
   - [Pane](#Pane)
   - [Copy Mode](#Copy-Mode)
   - [Sync Mode](#Sync-Mode)
-  - [Plugins](#Plugins)
+  - [Tmux Plugins](#Tmux-Plugins)
     - [tmux-plugins/tpm](#tmux-pluginstpm)
     - [tmux-plugins/tmux-prefix-highlight](#tmux-pluginstmux-prefix-highlight)
     - [tmux-plugins/tmux-resurrect](#tmux-pluginstmux-resurrect)
@@ -82,18 +82,18 @@ The supported platforms currently are macOS and Linux.
 - [Show](#show)
 - [License](#License)
 
-## 💝 Powers [↟](#Contents)
+## 💝 <a name="powers"></a>Powers [↟](#Contents)
 
 - [Vim](https://github.com/vim/vim) or [Neovim](https://github.com/neovim/neovim)
 - [Tmux](https://github.com/tmux/tmux)
 - [Zsh](https://ohmyz.sh/)
 - [Alacritty](https://github.com/alacritty/alacritty)
 
-## 📦 Requirements Installation [↟](#Contents)
+## 📦 <a name="Requirements-Installation"></a>Requirements Installation [↟](#Contents)
 
 See [here](REQUIREMENTS.md).
 
-## 📀 Installation [↟](#Contents)
+## 📀 <a name="Installation"></a>Installation [↟](#Contents)
 
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
@@ -138,11 +138,11 @@ git pull
 
 Enjoy it😘
 
-## 🍀 Colorscheme/Theme [↟](#Contents)
+## 🍀 <a name="ColorschemeTheme"></a>Colorscheme/Theme [↟](#Contents)
 
-### In Terminal Command Line
+### <a name="In-Terminal-Command-Line"></a>In Terminal Command Line [⌅](#ColorschemeTheme)
 
-#### Change colorscheme of Vim/Neovim and Alacritty
+#### <a name="Change-colorscheme-of-VimNeovim-and-Alacritty"></a>Change colorscheme of Vim/Neovim and Alacritty [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ colorscheme
@@ -202,7 +202,7 @@ $ cs atelierdune_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-#### Change font of Alacritty
+#### <a name="Change-font-of-Alacritty"></a>Change font of Alacritty [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ font
@@ -260,7 +260,7 @@ or
 $ ft Monofur_Book
 ```
 
-#### Change font size of Alacritty
+#### <a name="Change-font-size-of-Alacritty"></a>Change font size of Alacritty [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ font-size
@@ -276,7 +276,7 @@ $ fs number
 * number must between 1 and  200
 ```
 
-#### Change opacity of Alacritty
+#### <a name="Change-opacity-of-Alacritty"></a>Change opacity of Alacritty [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ opacity
@@ -292,7 +292,7 @@ $ o number
 * number must between 0 and 1
 ```
 
-#### Toggle Vim/Neovim background transparent
+#### <a name="Toggle-VimNeovim-background-transparent"></a>Toggle Vim/Neovim background transparent [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ toggle-vim-transparent
@@ -302,7 +302,7 @@ or
 $ tv
 ```
 
-#### Toggle Alacritty background transparent
+#### <a name="Toggle-Alacritty-background-transparent"></a>Toggle Alacritty background transparent [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ toggle-alacritty-transparent
@@ -312,7 +312,7 @@ or
 $ to
 ```
 
-#### Print 256 colors
+#### <a name="Print-256-colors"></a>Print 256 colors [⌆](#In-Terminal-Command-Line)
 
 ```sh
 $ colors-print
@@ -328,55 +328,55 @@ or
 $ hex
 ```
 
-### With Keyboard Shortcuts/Hotkey
+### <a name="With-Keyboard-ShortcutsHotkey"></a>With Keyboard Shortcuts/Hotkey [⌅](#ColorschemeTheme)
 
 > `ctrl a` follows is the tmux prefix key.
 
-#### Change colorscheme of Vim/Neovim and Alacritty randomly
+#### <a name="Change-colorscheme-of-VimNeovim-and-Alacritty-randomly"></a>Change colorscheme of Vim/Neovim and Alacritty randomly [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a v
 ```
 
-#### Change font of Alacritty randomly
+#### <a name="Change-font-of-Alacritty-randomly"></a>Change font of Alacritty randomly [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a shift f
 ```
 
-#### Toggle Alacritty background transparent
+#### <a name="Toggle-Alacritty-background-transparent"></a>Toggle Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a shift o
 ```
 
-#### Increase Alacritty background transparent
+#### <a name="Increase-Alacritty-background-transparent"></a>Increase Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a ctrl k
 ```
 
-#### Decrease Alacritty background transparent
+#### <a name="Decrease-Alacritty-background-transparent"></a>Decrease Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a ctrl j
 ```
 
-#### Toggle Tmux status bar
+#### <a name="Toggle-Tmux-status-bar"></a>Toggle Tmux status bar [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a b
 ```
 
-#### Toggle Tmux pane-border-status(pane name)
+#### <a name="Toggle-Tmux-pane-border-statuspane-name"></a>Toggle Tmux pane-border-status(pane name) [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a ctrl b
 ```
 
-### In Vim Normal Mode
+### <a name="In-Vim-Normal-Mode"></a>In Vim Normal Mode [⌅](#ColorschemeTheme)
 
-#### Toggle Vim/Neovim background color(light or dark)
+#### <a name="Toggle-VimNeovim-background-colorlight-or-dark"></a>Toggle Vim/Neovim background color(light or dark) [⌆](#In-Vim-Normal-Mode)
 
 ```text
 ,b
@@ -384,7 +384,7 @@ ctrl a ctrl b
 
 💡 Only support colorschemes that have both dark and light background color.
 
-#### Toggle Vim/Neovim background transparent
+#### <a name="Toggle-VimNeovim-background-transparent"></a>Toggle Vim/Neovim background transparent [⌆](#In-Vim-Normal-Mode)
 
 ```text
 ,o
@@ -392,7 +392,7 @@ ctrl a ctrl b
 
 💡 Opacity of Alacritty(terminal) must be less than 1.
 
-## 📺 Alacritty [↟](#Contents)
+## 📺 <a name="Alacritty"></a>Alacritty [↟](#Contents)
 
 ### Keyboard Shortcuts
 
@@ -408,9 +408,9 @@ ctrl a ctrl b
 | `Ctrl` `l`             | Clear warning/error messages of Alacritty in status line |
 | `Command` `Option` `h` | Hiding all windows other than the current Alacritty      |
 
-## 🐚 Zsh(OhMyZsh) [↟](#Contents)
+## 🐚 <a name="ZshOhMyZsh"></a>Zsh(OhMyZsh) [↟](#Contents)
 
-### Reload `~/.zshrc`
+### <a name="Reload-zshrc"></a>Reload `~/.zshrc` [⌅](#zshohmyzsh)
 
 ```sh
 $ omz reload
@@ -422,7 +422,7 @@ or
 $ exec zsh
 ```
 
-### [fzf](https://github.com/junegunn/fzf)
+### <a name="fzf"></a>[fzf](https://github.com/junegunn/fzf) [⌅](#zshohmyzsh)
 
 - `$ ff`
 
@@ -455,7 +455,7 @@ $ exec zsh
 
   Quit from file/dir list or history command list.
 
-### Custom Commands
+### <a name="Custom-Commands"></a>Custom Commands [⌅](#zshohmyzsh)
 
 #### Adjust the system volume
 
@@ -499,9 +499,9 @@ Examples:
     $ ssh-sessions ~/xxxhosts
 ```
 
-### Plugins
+### <a name="OhMyZsh-Plugins"></a>OhMyZsh Plugins [⌅](#zshohmyzsh)
 
-#### vi-mode
+#### <a name="vi-mode"></a>vi-mode [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/web-search/README.md
 
@@ -562,7 +562,7 @@ First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 - `x` : Delete `count` characters under and after the cursor
 - `X` : Delete `count` characters before the cursor
 
-#### git
+#### <a name="git"></a>git [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/git/README.md
 
@@ -576,7 +576,7 @@ First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 - `glog` : git log --oneline --decorate --graph
 - `gl` : git pull
 
-#### gitignore
+#### <a name="gitignore"></a>gitignore [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/gitignore/README.md
 
@@ -584,7 +584,7 @@ First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 - `gi [TEMPLATENAME]`: Show git-ignore output on the command line, e.g. `gi java` to exclude class and package files.
 - `gi [TEMPLATENAME] >> .gitignore`: Appending programming language settings to your projects .gitignore.
 
-#### web-search
+#### <a name="web-search"></a>web-search [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/web-search/README.md
 
@@ -621,7 +621,7 @@ Available search contexts are:
 | `archive`             | `https://web.archive.org/web/*/`         |
 | `scholar`             | `https://scholar.google.com/scholar?q=`  |
 
-#### colorize
+#### <a name="colorize"></a>colorize [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/colorize/README.md
 
@@ -632,13 +632,13 @@ Available search contexts are:
   If no files are passed it will colorize the standard input.
   The LESSOPEN and LESSCLOSE will be overwritten for this to work, but only in a local scope.
 
-#### sudo
+#### <a name="sudo"></a>sudo [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/sudo/README.md
 
 Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc</kbd> twice.
 
-#### themes
+#### <a name="themes"></a>themes [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/themes/README.md
 
@@ -648,19 +648,19 @@ Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc
 
 - `lstheme` : Lists installed Zsh themes.
 
-#### copyfile
+#### <a name="copyfile"></a>copyfile [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/copyfile/README.md
 
 - `copyfile <filename>` : Puts the contents of a file in your system clipboard so you can paste it anywhere.
 
-#### copydir
+#### <a name="copydir"></a>copydir [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/copydir/README.md
 
 - `copydir` : Copy the $PWD to the system clipboard.
 
-#### aliases
+#### <a name="aliases"></a>aliases [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/aliases/README.md
 
@@ -670,9 +670,9 @@ that are currently available based on the plugins you have enabled.
 - `acs` : Group all alias
 - `acs <keyword>` : Quickly filter alias & highlight
 
-## 🎹 Tmux [↟](#Contents)
+## 🎹 <a name="Tmux"></a>Tmux [↟](#Contents)
 
-### Prefix Key
+### <a name="Prefix-Key"></a>Prefix Key [⌅](#Tmux)
 
 Prefix Key: `Ctrl a`
 
@@ -681,7 +681,7 @@ All the following shortcuts keys must first press the prefix key.
 > Note that after pressing the prefix key, you need to release the prefix key first,
 > and then press other specific shortcut keys.
 
-### Common
+### <a name="Common"></a>Common [⌅](#Tmux)
 
 - `?` : List key bindings
 - `r` : Reload `~/.tmux.conf`
@@ -689,7 +689,7 @@ All the following shortcuts keys must first press the prefix key.
 - `K` : View help documents of the object in `~/.tmux.conf`
 - `d` : Detach the current client
 
-### Session
+### <a name="Session"></a>Session [⌅](#Tmux)
 
 - `s` : Choose a session from a list
 - `Option/Alt` `f` : Search session
@@ -697,7 +697,7 @@ All the following shortcuts keys must first press the prefix key.
 - `$` : Rename the current session
 - `b` : Toggle status line of the current session
 
-### Window
+### <a name="Window"></a>Window [⌅](#Tmux)
 
 - `c` : Create new window
 - `,` : Rename current window
@@ -710,7 +710,7 @@ All the following shortcuts keys must first press the prefix key.
 - `f` : Search window
 - `i` : Display window information
 
-### Pane
+### <a name="Pane"></a>Pane [⌅](#Tmux)
 
 - `%` : Split window horizontally
 - `"` : Split window vertically
@@ -740,7 +740,7 @@ All the following shortcuts keys must first press the prefix key.
 - `Ctrl` `l` : Clear all the messages(include history messages) in the active pane
 - `Ctrl` `b` : Toggle pane name of the current window's all panes
 
-### Copy Mode
+### <a name="Copy-Mode"></a>Copy Mode [⌅](#Tmux)
 
 - `[` : Enter copy mode
 - `]` : Paste the most recent paste buffer
@@ -759,13 +759,13 @@ All the following shortcuts keys must first press the prefix key.
 
 Enabled `vi-mode`, many vi shortcuts can be used in this scenario.
 
-### Sync Mode
+### <a name="Sync-mode"></a>Sync Mode [⌅](#Tmux)
 
 - `Ctrl` `y` : Toggle sync mode
 
-### Plugins
+### <a name="Tmux-Plugins"></a>Tmux Plugins [⌅](#Tmux)
 
-#### [tmux-plugins/tpm](https://github.com/tmux-plugins/tpm)
+#### <a name="tmux-pluginstpm"></a>[tmux-plugins/tpm](https://github.com/tmux-plugins/tpm) [⌆](#tmux-plugins)
 
 Tmux Plugin Manager.
 
@@ -773,22 +773,22 @@ Tmux Plugin Manager.
 - `U` : Update all plugins
 - `u` : Uninstall plugins that not in `~/.tmux.conf`
 
-#### [tmux-plugins/tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
+#### <a name="tmux-pluginstmux-prefix-highlight"></a>[tmux-plugins/tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight) [⌆](#tmux-plugins)
 
 Plugin that highlights when you press tmux prefix key.
 
-#### [tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect)
+#### <a name="tmux-pluginstmux-resurrect"></a>[tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) [⌆](#tmux-plugins)
 
 This plugin saves all the little details from your tmux environment so it can be completely restored after a system restart (or when you feel like it).
 
 - `Ctrl` `s` : Save sessions
 - `Ctrl` `r` : Restore sessions from local backup
 
-#### [tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)
+#### <a name="tmux-pluginstmux-continuum"></a>[tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) [⌆](#tmux-plugins)
 
 Continuous saving of tmux environment. Automatic restore when tmux is started.
 
-#### [tmux-plugins/tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
+#### <a name="tmux-pluginstmux-copycat"></a>[tmux-plugins/tmux-copycat](https://github.com/tmux-plugins/tmux-copycat) [⌆](#tmux-plugins)
 
 ##### Search
 
@@ -811,7 +811,7 @@ Continuous saving of tmux environment. Automatic restore when tmux is started.
 
 These start "copycat mode" and jump to first match.
 
-##### `Copycat mode` bindings
+##### Copycat mode bindings
 
 These are enabled when you search with copycat:
 
@@ -819,7 +819,7 @@ These are enabled when you search with copycat:
 - `N` : Jumps to the previous match
 - `enter` : Copy a highlighted match
 
-#### [tmux-plugins/tmux-yank](https://github.com/tmux-plugins/tmux-yank)
+#### <a name="tmux-pluginstmux-yank"></a>[tmux-plugins/tmux-yank](https://github.com/tmux-plugins/tmux-yank) [⌆](#tmux-plugins)
 
 - Tmux Normal Mode
   - `y` : Copies text from the command line to the clipboard.
@@ -828,7 +828,7 @@ These are enabled when you search with copycat:
   - `y` : Copy selection to system clipboard.
   - `Y` : Equivalent to copying a selection, and pasting it to the command line.
 
-#### [tmux-plugins/tmux-open](https://github.com/tmux-plugins/tmux-open)
+#### <a name="tmux-pluginstmux-open"></a>[tmux-plugins/tmux-open](https://github.com/tmux-plugins/tmux-open) [⌆](#tmux-plugins)
 
 Plugin for opening highlighted selection directly from Tmux copy mode.
 
@@ -839,31 +839,31 @@ In Tmux Copy Mode:
 - `S` : Search the highlighted selection directly by Google
 - `B` : Search the highlighted selection directly by Bing
 
-#### [ki-chi/tmux-inputmethod](https://github.com/ki-chi/tmux-inputmethod)
+#### <a name="ki-chitmux-inputmethod"></a>[ki-chi/tmux-inputmethod](https://github.com/ki-chi/tmux-inputmethod) [⌆](#tmux-plugins)
 
 Display current input method in the Tmux status line.
 
-#### [vimhack/tmux-show-colorscheme](https://github.com/vimhack/tmux-show-colorscheme#main)
+#### <a name="vimhacktmux-show-colorscheme"></a>[vimhack/tmux-show-colorscheme](https://github.com/vimhack/tmux-show-colorscheme#main) [⌆](#tmux-plugins)
 
 Display current colorscheme/opacity/font/font-size of Vim and Alacritty in the Tmux status line.
 
-#### [vimhack/tmux-audio-volume](https://github.com/vimhack/tmux-audio-volume)
+#### <a name="vimhacktmux-audio-volume"></a>[vimhack/tmux-audio-volume](https://github.com/vimhack/tmux-audio-volume) [⌆](#tmux-plugins)
 
 Display system volume in the Tmux status line.
 
-#### [vimhack/tmux-battery](https://github.com/vimhack/tmux-battery)
+#### <a name="vimhacktmux-battery"></a>[vimhack/tmux-battery](https://github.com/vimhack/tmux-battery) [⌆](#tmux-plugins)
 
 Display battery status in the Tmux status line.
 
-#### [vimhack/tmux-cpu](https://github.com/vimhack/tmux-cpu)
+#### <a name="vimhacktmux-cpu"></a>[vimhack/tmux-cpu](https://github.com/vimhack/tmux-cpu) [⌆](#tmux-plugins)
 
 Display cpu utilization and fan speed in the Tmux status line.
 
-#### [vimhack/tmux-weather](https://github.com/vimhack/tmux-weather)
+#### <a name="vimhacktmux-weather"></a>[vimhack/tmux-weather](https://github.com/vimhack/tmux-weather) [⌆](#tmux-plugins)
 
 Display local weather information in the Tmux status line.
 
-### FQA
+### <a name="FQA"></a>FQA [⌅](#Tmux)
 
 - In some cases, modifying `~/.tmux.conf` cannot take effect after reload or restart Tmux, how to fix it?
 
@@ -877,9 +877,9 @@ $ tmux kill-server
 $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 ```
 
-## 💯 Vim/Neovim [↟](#Contents)
+## 💯 <a name="VimNeovim"></a> Vim/Neovim [↟](#Contents)
 
-## 🔮 Show [↟](#Contents)
+## 🔮 <a name="Show"></a>Show [↟](#Contents)
 
 ColorScheme: `gruvbox`
 Opacity: `0.9`
@@ -905,7 +905,7 @@ VimBgTransparency: `1`
 
 ![papercolor](https://user-images.githubusercontent.com/6139938/132120994-61a63c06-03a3-4c96-996b-bf84b52cc039.png)
 
-## ⚖️ License [↟](#Contents)
+## ⚖️ <a name="License"></a>License [↟](#Contents)
 
 This project is under the MIT License.
 See the [LICENSE](LICENSE) file for the full license text.
