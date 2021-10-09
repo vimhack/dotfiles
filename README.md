@@ -422,9 +422,7 @@ or
 $ exec zsh
 ```
 
-### fzf
-
-> <https://github.com/junegunn/fzf>
+### [fzf](https://github.com/junegunn/fzf)
 
 - `$ ff`
 
@@ -767,9 +765,7 @@ Enabled `vi-mode`, many vi shortcuts can be used in this scenario.
 
 ### Plugins
 
-#### tmux-plugins/tpm
-
-> <https://github.com/tmux-plugins/tpm>
+#### [tmux-plugins/tpm](https://github.com/tmux-plugins/tpm)
 
 Tmux Plugin Manager.
 
@@ -777,30 +773,22 @@ Tmux Plugin Manager.
 - `U` : Update all plugins
 - `u` : Uninstall plugins that not in `~/.tmux.conf`
 
-#### tmux-plugins/tmux-prefix-highlight
-
-> <https://github.com/tmux-plugins/tmux-prefix-highlight>
+#### [tmux-plugins/tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
 
 Plugin that highlights when you press tmux prefix key.
 
-#### tmux-plugins/tmux-resurrect
-
-> <https://github.com/tmux-plugins/tmux-resurrect>
+#### [tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect)
 
 This plugin saves all the little details from your tmux environment so it can be completely restored after a system restart (or when you feel like it).
 
 - `Ctrl` `s` : Save sessions
 - `Ctrl` `r` : Restore sessions from local backup
 
-#### tmux-plugins/tmux-continuum
-
-> <https://github.com/tmux-plugins/tmux-continuum>
+#### [tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)
 
 Continuous saving of tmux environment. Automatic restore when tmux is started.
 
-#### tmux-plugins/tmux-copycat
-
-> <https://github.com/tmux-plugins/tmux-copycat>
+#### [tmux-plugins/tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
 
 ##### Search
 
@@ -831,9 +819,7 @@ These are enabled when you search with copycat:
 - `N` : Jumps to the previous match
 - `enter` : Copy a highlighted match
 
-#### tmux-plugins/tmux-yank
-
-> <https://github.com/tmux-plugins/tmux-yank>
+#### [tmux-plugins/tmux-yank](https://github.com/tmux-plugins/tmux-yank)
 
 - Tmux Normal Mode
   - `y` : Copies text from the command line to the clipboard.
@@ -842,9 +828,7 @@ These are enabled when you search with copycat:
   - `y` : Copy selection to system clipboard.
   - `Y` : Equivalent to copying a selection, and pasting it to the command line.
 
-#### tmux-plugins/tmux-open
-
-> <https://github.com/tmux-plugins/tmux-open>
+#### [tmux-plugins/tmux-open](https://github.com/tmux-plugins/tmux-open)
 
 Plugin for opening highlighted selection directly from Tmux copy mode.
 
@@ -855,27 +839,19 @@ In Tmux Copy Mode:
 - `S` : Search the highlighted selection directly by Google
 - `B` : Search the highlighted selection directly by Bing
 
-#### ki-chi/tmux-inputmethod
-
-> <https://github.com/ki-chi/tmux-inputmethod>
+#### [ki-chi/tmux-inputmethod](https://github.com/ki-chi/tmux-inputmethod)
 
 Display current input method in the Tmux status line.
 
-#### vimhack/tmux-show-colorscheme
-
-> <https://github.com/vimhack/tmux-show-colorscheme#main>
+#### [vimhack/tmux-show-colorscheme](https://github.com/vimhack/tmux-show-colorscheme#main)
 
 Display current colorscheme/opacity/font/font-size of Vim and Alacritty in the Tmux status line.
 
-#### vimhack/tmux-audio-volume
-
-> <https://github.com/vimhack/tmux-audio-volume>
+#### [vimhack/tmux-audio-volume](https://github.com/vimhack/tmux-audio-volume)
 
 Display system volume in the Tmux status line.
 
-#### vimhack/tmux-battery
-
-> <https://github.com/vimhack/tmux-battery>
+#### [vimhack/tmux-battery](https://github.com/vimhack/tmux-battery)
 
 Display battery status in the Tmux status line.
 
@@ -883,9 +859,7 @@ Display battery status in the Tmux status line.
 
 Display cpu utilization and fan speed in the Tmux status line.
 
-#### vimhack/tmux-weather
-
-> <https://github.com/vimhack/tmux-weather>
+#### [vimhack/tmux-weather](https://github.com/vimhack/tmux-weather)
 
 Display local weather information in the Tmux status line.
 
