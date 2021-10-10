@@ -2958,8 +2958,7 @@ set expandtab
 " insert 模式下按退格键的时候退回缩进的长度为 4 个空格, 默认是退回一个空格.
 set softtabstop=4
 
-" normal 模式下 shift >> 和 shift << 或
-" visual 模式下 shift > 和 shift < 每次缩进4个空格, 默认是8个空格.
+" normal 模式下 >> 和 << 或 visual 模式下 > 和 < 每次缩进 4 个空格, 默认是 8 个空格.
 set shiftwidth=4
 
 " 启用智能缩进, 按回车键后自动缩进,
@@ -3117,7 +3116,7 @@ noremap <C-y> 3<C-y>
 " normal 模式下, 使用 Y 复制当前行光标之后的内容, 和 C 和 D 用法统一起来.
 nnoremap Y y$
 
-" visual 模式下进行 shift > 和 shift < 缩进操作时,
+" visual 模式下进行 > 和 < 缩进操作时,
 " 使不退出 visual 模式, 这样可方便执行多行的连续缩进.
 vnoremap < <gv
 vnoremap > >gv
@@ -3558,7 +3557,6 @@ endif
 "                     command-line 模式下向左/向右移动光标, 向上或向下翻阅历史命令.
 "           ctrl a/e  insert/command-line 模式下跳转到行首/行尾,
 "                     ctrl a 会跳转到行首第一个非空字符, 再按一次跳转到行首.
-"            esc b/f  insert/command-line 模式下向左或向右移动一个单词.
 "           ctrl h/d  insert/command-line 模式下向左或向右删除一个字符.
 "             ctrl w  insert/command-line 模式下向左删除一个单词.
 "      , )/]/}/"/'/`  将 visual 模式下选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
