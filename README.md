@@ -79,6 +79,14 @@ The supported platforms currently are macOS and Linux.
     - [vimhack/tmux-weather](#vimhacktmux-weather)
   - [FQA](#FQA)
 - [Vim/Neovim](#VimNeovim)
+  - [Custom Key Bindings](#Custom-key-bindings)
+    - [Normal Mode](#Normal-mode)
+    - [Insert Mode](#Insert-mode)
+    - [Command-Line Mode](#Command-Line-Mode)
+    - [Visual Mode](#Visual-Mode)
+  - [Custom Snippets](#Custom-Snippets)
+    - [Markdown](#Markdown)
+  - [Vim/Neovim Plugins](#VimNeovim-Plugins)
 - [Show](#show)
 - [License](#License)
 
@@ -878,6 +886,70 @@ $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 ```
 
 ## 💯 <a name="VimNeovim"></a> Vim/Neovim [↟](#Contents)
+
+### <a name="Custom-key-bindings"></a>Custom Key Bindings [⌅](#VimNeovim)
+
+#### <a name="Normal-Mode"></a>Normal Mode [⌆](#Custom-key-bindings)
+
+- `Y` : Copy from the cursor position to the end of the line
+- `E` : Edit `~/.vimrc` or `~/.config/nvim/init.vim` in the new split window
+- `R` : Reload `~/.vimrc` or `~/.config/nvim/init.vim`
+- `Ctrl` `s`: Toggle spell check
+- `Ctrl` `k`/`j`/`h`/`l` : Move the cursor to up/down/left/right window
+
+#### <a name="Insert-Mode"></a>Insert Mode [⌆](#Custom-key-bindings)
+
+- `Ctrl` `p`/`n`/`b`/`f` : Move the cursor to up/down/left/right
+- `Ctrl` `e` : Move the cursor to the end of the line
+- `Ctrl` `a`: Press twice for moving the cursor to the first non-blank character,
+  and press twice once again for moving the cursor to the first character.
+- `Ctrl` `h`/`d` : Delete a character from left/right
+- `Ctrl` `w` : Delete a word from left
+- `Ctrl` `s`: Toggle spell check
+
+#### <a name="Command-Line-Mode"></a>Command-Line Mode [⌆](#Custom-key-bindings)
+
+- `Ctrl` `b`/`f` : Move the cursor to left/right
+- `Ctrl` `p`/`n` : Go through history commands from up/down
+- `Ctrl` `a`/`e` : Move the cursor to the first character or the end of the line
+- `Ctrl` `h`/`d` : Delete a character from left/right
+- `Ctrl` `w` : Delete a word from left
+
+#### <a name="Visual-Mode"></a>Visual Mode [⌆](#Custom-key-bindings)
+
+- `,` `)`/`]`/`}`/`"`/`'` : Surround the selected text by `)` or `]` or `}` or `"` or `'`
+
+### <a name="Custom-Snippets"></a>Custom Snippets [⌅](#VimNeovim)
+
+#### <a name="Markdown"></a>Markdown [⌆](#Custom-Snippets)
+
+| Shortcut | Output        |
+| -------- | ------------- |
+| `,b`     | **Bold**      |
+| `,s`     | ~~sliced~~    |
+| `,i`     | _italic_      |
+| `,d`     | `inline code` |
+| `,c`     | `block code`  |
+| `,m`     | - [ ]         |
+| `,p`     | `![img]()`    |
+| `,a`     | `[link]()`    |
+| `,l`     | ---           |
+| `,1`     | # H1          |
+| `,2`     | ## H2         |
+| `,3`     | ### H3        |
+| `,4`     | #### H4       |
+| `,5`     | #### H5       |
+| `,6`     | #### H6       |
+
+`,f` : Almost every shortcut above generates a placeholder (<++>),
+pressing `,f` will jump the cursor to the placeholder and delete it at the same time.
+
+`,w` : The same as `,f`, but it will generate a blank line for you.
+
+> **NOTE:** <br>
+> All above shortcuts are in the _Vim Insert Mode_.
+
+### <a name="VimNeovim-Plugins"></a>Vim/Neovim Plugins [⌅](#VimNeovim)
 
 ## 🔮 <a name="Show"></a>Show [↟](#Contents)
 
