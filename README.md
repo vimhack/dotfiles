@@ -79,11 +79,12 @@ The supported platforms currently are macOS and Linux.
     - [vimhack/tmux-weather](#vimhacktmux-weather)
   - [FQA](#FQA)
 - [Vim/Neovim](#VimNeovim)
+  - [Leader Key](#Leader-Key)
   - [Custom Key Bindings](#Custom-key-bindings)
     - [Normal Mode](#Normal-mode)
     - [Insert Mode](#Insert-mode)
-    - [Command-Line Mode](#Command-Line-Mode)
     - [Visual Mode](#Visual-Mode)
+    - [Command-Line Mode](#Command-Line-Mode)
   - [Custom Snippets](#Custom-Snippets)
     - [Markdown](#Markdown)
   - [Vim/Neovim Plugins](#VimNeovim-Plugins)
@@ -887,6 +888,12 @@ $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 
 ## 💯 <a name="VimNeovim"></a> Vim/Neovim [↟](#Contents)
 
+### <a name="Leader-Key"></a>Leader Key [⌅](#VimNeovim)
+
+The vim leader key has been changed from `\`(default) to `,`.
+
+`,` in the following shortcut keys represent the leader key.
+
 ### <a name="Custom-key-bindings"></a>Custom Key Bindings [⌅](#VimNeovim)
 
 #### <a name="Normal-Mode"></a>Normal Mode [⌆](#Custom-key-bindings)
@@ -896,6 +903,8 @@ $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 - `R` : Reload `~/.vimrc` or `~/.config/nvim/init.vim`
 - `Ctrl` `s`: Toggle spell check
 - `Ctrl` `k`/`j`/`h`/`l` : Move the cursor to up/down/left/right window
+- `Ctrl` `e`/`y` : Move the screen down or up by 3 lines step
+- `0` : Move the cursor to the first non-blank character, if already at the first character, then to the first character.
 
 #### <a name="Insert-Mode"></a>Insert Mode [⌆](#Custom-key-bindings)
 
@@ -903,21 +912,30 @@ $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 - `Ctrl` `e` : Move the cursor to the end of the line
 - `Ctrl` `a`: Press twice for moving the cursor to the first non-blank character,
   and press twice once again for moving the cursor to the first character.
-- `Ctrl` `h`/`d` : Delete a character from left/right
+- `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
+- `Ctrl` `h`/`l` : Delete a character from left/right
+- `Ctrl` `d` : Delete from the cursor position to the end of the line.
+- `Ctrl` `u` : Delete from the cursor position to the head of the line.
 - `Ctrl` `w` : Delete a word from left
 - `Ctrl` `s`: Toggle spell check
+
+#### <a name="Visual-Mode"></a>Visual Mode [⌆](#Custom-key-bindings)
+
+- `0` : Move the cursor to the first non-blank character, if it already at the first character,
+  then to the first character.
+- `>`/`<`: Use `>` or `<` to indent without exiting visual mode
+- `,` `)`/`]`/`}`/`"`/`'` : Surround the selected text by `)` or `]` or `}` or `"` or `'`
 
 #### <a name="Command-Line-Mode"></a>Command-Line Mode [⌆](#Custom-key-bindings)
 
 - `Ctrl` `b`/`f` : Move the cursor to left/right
 - `Ctrl` `p`/`n` : Go through history commands from up/down
 - `Ctrl` `a`/`e` : Move the cursor to the first character or the end of the line
-- `Ctrl` `h`/`d` : Delete a character from left/right
+- `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
+- `Ctrl` `h`/`l` : Delete a character from left/right
+- `Ctrl` `d` : Delete from the cursor position to the end of the line.
+- `Ctrl` `u` : Delete from the cursor position to the head of the line.
 - `Ctrl` `w` : Delete a word from left
-
-#### <a name="Visual-Mode"></a>Visual Mode [⌆](#Custom-key-bindings)
-
-- `,` `)`/`]`/`}`/`"`/`'` : Surround the selected text by `)` or `]` or `}` or `"` or `'`
 
 ### <a name="Custom-Snippets"></a>Custom Snippets [⌅](#VimNeovim)
 
@@ -930,10 +948,10 @@ $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 | `,i`     | _italic_      |
 | `,d`     | `inline code` |
 | `,c`     | `block code`  |
-| `,m`     | - [ ]         |
+| `,m`     | `- [ ]`       |
 | `,p`     | `![img]()`    |
 | `,a`     | `[link]()`    |
-| `,l`     | ---           |
+| `,l`     | `---`         |
 | `,1`     | # H1          |
 | `,2`     | ## H2         |
 | `,3`     | ### H3        |
