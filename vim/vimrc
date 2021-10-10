@@ -462,6 +462,9 @@ Plug 'matze/vim-move'
 " 将代码从多行转换为单行或将单行转换为多行.
 Plug 'AndrewRadev/splitjoin.vim'
 
+" 使平滑的滚动内容.
+Plug 'terryma/vim-smooth-scroll'
+
 " }}
 
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
@@ -664,7 +667,7 @@ nmap <silent> gr <Plug>(coc-references)
 " ,rn  级联的对光标所在 symbol 进行重命名.
 nmap <leader>rn <Plug>(coc-rename)
 
-" 使用 K 在预览窗口中查看文档.
+" K  在悬浮窗口中查看文档.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -682,21 +685,24 @@ endfunction
 " 突出显示光标所在 symbol 及其引用.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" 使用 <C-d> 和 <C-u> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
+" 使用 <C-f> 和 <C-b> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
 " 比如在查看较长的文档时出现了滚动条的场景下使用.
 let lines_count=5
-nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ?
-  \ coc#float#scroll(1, lines_count) : "\<C-d>"
-nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ?
-  \ coc#float#scroll(0, lines_count) : "\<C-u>"
-inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ?
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+  \ coc#float#scroll(1, lines_count) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+  \ coc#float#scroll(0, lines_count) : "\<C-b>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+  \ coc#float#scroll(1, lines_count) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+  \ coc#float#scroll(0, lines_count) : "\<C-b>"
+" insert 模式下, 代码补全提示的选项列表中,
+" 通过 tab 选择一项所弹出来的详细说明窗口中如果出现滚动条,
+" 则可以使用此快捷键进行内容滚动, 否则分别表示向右或向左移动一个字符.
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
   \ "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ?
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
   \ "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ?
-  \ coc#float#scroll(1, lines_count) : "\<C-d>"
-vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ?
-  \ coc#float#scroll(0, lines_count) : "\<C-u>"
 
 " *** CocList 相关命令快捷键映射 ***
 " NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
@@ -1155,6 +1161,14 @@ nnoremap <leader>a :call SyntaxAttr()<CR>
 "   C: Ctrl
 "   S: Shift
 let g:move_key_modifier = 'M'
+
+"""""" terryma/vim-smooth-scroll
+" doc: https://github.com/terryma/vim-smooth-scroll
+"
+" NOTE: 不要映射 <C-b> 和 <C-f>, 因为会和 coc.nvim 插件的配置相冲突.
+
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
 " }}
 
@@ -3063,34 +3077,55 @@ vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 
 " insert 模式下使用 emacs 键位.
 " 光标移动:
-"   ctrl p 上, ctrl n 下, ctrl b 左, ctrl f 右;
-"   ctrl a 行首, ctrl e 行尾;
-" NOTE: 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
+"   ctrl p 上
+"   ctrl n 下
+"   ctrl a 行首
+"   ctrl e 行尾
+" NOTE:
+"   1) 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a.
+"   2) 如下两个快捷键已在 coc.nvim 插件的配置中配置, 此处不要重复配置.
+"      ctrl b 左
+"      ctrl f 右
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
-" 编辑动作:
-"   ctrl d 向右删除一个字符.
+
+" Option/Alt b/f  insert 模式下将光标向左或向右移动一个单词.
+inoremap <M-b> <S-Left>
+inoremap <M-f> <S-Right>
+
+" insert 模式下的编辑动作:
+"   ctrl l 向右删除一个字符.
+"   ctrl d 从光标位置删除到行尾.
+" NOTE: 如下两个快捷键是默认行为, 无需额外配置.
 "   ctrl h 向左删除一个字符.
 "   ctrl w 向左删除一个单词.
-inoremap <C-d> <Del>
+"   ctrl u 从光标位置删除到行首.
+inoremap <C-l> <Del>
+inoremap <C-d> <C-[>Di
 
 " command-line 模式下使用 emacs 键位, :h emacs-keys
 " 光标移动:
-"   ctrl a 移动到行首, ctrl e 移动到行尾;
-"   ctrl b 向左移动一个字符, ctrl f 向右移动一个字符;
+"   ctrl a 移动到行首.
+"   ctrl e 移动到行尾.
+"   ctrl b 向左移动一个字符.
+"   ctrl f 向右移动一个字符.
 cnoremap <C-a>  <Home>
 cnoremap <C-e>  <End>
 cnoremap <C-b>  <Left>
 cnoremap <C-f>  <Right>
-" 编辑动作:
-"   ctrl d 删除光标右侧字符;
+
+" Option/Alt b/f  command-line 模式下将光标向左或向右移动一个单词.
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+
+" command-line 模式下的编辑动作:
+"   ctrl l 删除光标右侧字符;
+" NOTE: 如下两个快捷键是默认行为, 无需额外配置.
 "   ctrl h 删除光标左侧字符;
 "   ctrl w 删除光标左侧一个单词.
-cnoremap <C-d>  <Del>
+cnoremap <C-l>  <Del>
 
 " normal/visual 模式下, 按 0 光标将回到当前行的第一个非空字符,
 "               如果光标已经在第一个非空字符, 则回到行首.
@@ -3555,9 +3590,11 @@ endif
 "                  Y  这个命令默认是复制整行的意思, 这里更改为复制光标位置到行结尾的内容.
 "       ctrl b/f/p/n  insert 模式下左右上下移动光标, 或
 "                     command-line 模式下向左/向右移动光标, 向上或向下翻阅历史命令.
+"     Option/Alt b/f  insert/command-line 模式下, 将光标向左或向右移动一个单词.
 "           ctrl a/e  insert/command-line 模式下跳转到行首/行尾,
 "                     ctrl a 会跳转到行首第一个非空字符, 再按一次跳转到行首.
-"           ctrl h/d  insert/command-line 模式下向左或向右删除一个字符.
+"           ctrl h/l  insert/command-line 模式下向左或向右删除一个字符.
+"           ctrl u/d  insert/command-line 模式下从光标位置删除到行首或删除到行尾.
 "             ctrl w  insert/command-line 模式下向左删除一个单词.
 "      , )/]/}/"/'/`  将 visual 模式下选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
 "                 ,R  文件 ~/.vimrc 或 ~/.config/nvim/init.vim 发生变化后,
@@ -3593,9 +3630,9 @@ endif
 "                 gy  跳转到类型定义处.
 "                 gi  跳转到接口实现处.
 "                 gr  在 location list 中列出相关条目, 如果只有 1 条, 则直接跳转过去.
-"                  K  使用 K 在预览窗口中查看文档.
-"           ctrl d/u  使用 K 查看文档时, 或者出现代码补全提示时,
-"                     如果文档或提示所在的悬浮窗口出现了滚动条,
+"                  K  normal 模式下, 在悬浮窗口中查看文档.
+"           ctrl f/b  在悬浮窗口中查看文档时, 或者出现代码补全提示时,
+"                     如果文档或某个提示条目弹出的详细信息所在的悬浮窗口出现了滚动条,
 "                     则使用此快捷键进行向下或向上翻滚页面.
 "
 " ** coc-translator (https://github.com/voldikss/coc-translator)
