@@ -172,6 +172,15 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q
   \| endif
 
+" 提供解除本配置文件中配置的默认插件的指令, 使用方法:
+" 在 $HOME/.vimrc.plugins.local 中使用 UnPlug 'PluginRepoName'
+function! s:plugRemove(plugin_repo)
+  let plugin_repo = substitute(a:plugin_repo, '[\/]\+$', '', '')
+  let plugin_name = fnamemodify(plugin_repo, ':t:s?\.git$??')
+  call remove(g:plugs, plugin_name)
+endfunction
+command! -nargs=1 -bar UnPlug call s:plugRemove(<args>)
+
 " }}
 
 " 开始安装 Vim/Neovim 的众多插件,
@@ -525,202 +534,204 @@ call plug#end()
 "      f  func, 是一个函数.
 " **************************
 
-" 设置隐藏模式, 未保存的buffer(文件)可以被切换走或者关闭;
-" 如果不设置这个, TextEdit 可能失败.
-set hidden
+if &rtp =~ '/coc.nvim,'
+  " 设置隐藏模式, 未保存的 buffer (文件)可以被切换走或者关闭;
+  " 如果不设置这个, TextEdit 可能失败.
+  set hidden
 
-" 底部命令模式的显示高度, 默认值1.
-" 设置为2是为了给提示信息更多的展示空间, 防止信息截断.
-set cmdheight=2
+  " 底部命令模式的显示高度, 默认值 1.
+  " 设置为 2 是为了给提示信息更多的展示空间, 防止信息截断.
+  set cmdheight=2
 
-" 不要将信息传递给 ins-completion-menu.
-set shortmess+=c
+  " 不要将信息传递给 ins-completion-menu.
+  set shortmess+=c
 
-" *** coc.nvim 扩展安装 ***
-" 将需要安装的 coc.nvim 扩展(语言服务器等) 放到数组中,
-" 打开 vim 时, coc.nvim 会自动对扩展进行自动安装.
-" doc: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-" 部分扩展说明:
-"   coc-jedi: Python3.6.1+
-"   coc-css: Css/Less/Sass
-"   coc-vetur: 需要在 vue 项目根路径下运行: npm i eslint eslint-plugin-vue -D
-"   coc-snippets: 需要安装 vim 插件: Plug 'honza/vim-snippets'
-"   coc-ultisnips: 需要安装 vim 插件: Plug 'SirVer/ultisnips'
-"   coc-gocode: 为 Go 提供代码片段补全的数据库.
-"   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
-"   coc-xml: 系统中需要安装 java: brew install java
-"   coc-tabnine: 基于 AI 的自动补全，可以辅助更快地撰写代码.
-let g:coc_global_extensions = [
-  \ 'coc-json',
-  \ 'coc-git',
-  \ 'coc-go',
-  \ 'coc-gocode',
-  \ 'coc-rls',
-  \ 'coc-rust-analyzer',
-  \ 'coc-clangd',
-  \ 'coc-jedi',
-  \ 'coc-java',
-  \ 'coc-sh',
-  \ 'coc-perl',
-  \ 'coc-tsserver',
-  \ 'coc-css',
-  \ 'coc-cssmodules',
-  \ 'coc-emmet',
-  \ 'coc-html',
-  \ 'coc-vetur',
-  \ 'coc-sql',
-  \ 'coc-toml',
-  \ 'coc-yaml',
-  \ 'coc-xml',
-  \ 'coc-vimlsp',
-  \ 'coc-snippets',
-  \ 'coc-ultisnips',
-  \ 'coc-emoji',
-  \ 'coc-swagger',
-  \ 'coc-translator',
-  \ 'coc-tabnine',
-  \ ]
-" *************************
+  " *** coc.nvim 扩展安装 ***
+  " 将需要安装的 coc.nvim 扩展(语言服务器等) 放到数组中,
+  " 打开 vim 时, coc.nvim 会自动对扩展进行自动安装.
+  " doc: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+  " 部分扩展说明:
+  "   coc-jedi: Python3.6.1+
+  "   coc-css: Css/Less/Sass
+  "   coc-vetur: 需要在 vue 项目根路径下运行: npm i eslint eslint-plugin-vue -D
+  "   coc-snippets: 需要安装 vim 插件: Plug 'honza/vim-snippets'
+  "   coc-ultisnips: 需要安装 vim 插件: Plug 'SirVer/ultisnips'
+  "   coc-gocode: 为 Go 提供代码片段补全的数据库.
+  "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
+  "   coc-xml: 系统中需要安装 java: brew install java
+  "   coc-tabnine: 基于 AI 的自动补全，可以辅助更快地撰写代码.
+  let g:coc_global_extensions = [
+    \ 'coc-json',
+    \ 'coc-git',
+    \ 'coc-go',
+    \ 'coc-gocode',
+    \ 'coc-rls',
+    \ 'coc-rust-analyzer',
+    \ 'coc-clangd',
+    \ 'coc-jedi',
+    \ 'coc-java',
+    \ 'coc-sh',
+    \ 'coc-perl',
+    \ 'coc-tsserver',
+    \ 'coc-css',
+    \ 'coc-cssmodules',
+    \ 'coc-emmet',
+    \ 'coc-html',
+    \ 'coc-vetur',
+    \ 'coc-sql',
+    \ 'coc-toml',
+    \ 'coc-yaml',
+    \ 'coc-xml',
+    \ 'coc-vimlsp',
+    \ 'coc-snippets',
+    \ 'coc-ultisnips',
+    \ 'coc-emoji',
+    \ 'coc-swagger',
+    \ 'coc-translator',
+    \ 'coc-tabnine',
+    \ ]
+  " *************************
 
-" *** ~/.vim/coc-settings.json ***
-"   该配置文件可对 coc.nvim 以及安装的各种扩展进行个性配置,
-"   如果已经安装了 coc-json 扩展, 则该配置文件将支持自动补全和合法性检查,
-"   方便我们进行配置.
+  " *** ~/.vim/coc-settings.json ***
+  "   该配置文件可对 coc.nvim 以及安装的各种扩展进行个性配置,
+  "   如果已经安装了 coc-json 扩展, 则该配置文件将支持自动补全和合法性检查,
+  "   方便我们进行配置.
 
-" :C  打开 ~/.vim/coc-settings.json 配置文件.
-function! SetupCommandAbbrs(from, to)
-  exec 'cnoreabbrev <expr> '.a:from
-    \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
-    \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfunction
-call SetupCommandAbbrs('C', 'CocConfig')
-" ********************************
+  " :C  打开 ~/.vim/coc-settings.json 配置文件.
+  function! SetupCommandAbbrs(from, to)
+    exec 'cnoreabbrev <expr> '.a:from
+      \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+      \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+  endfunction
+  call SetupCommandAbbrs('C', 'CocConfig')
+  " ********************************
 
-" *** coc-tabnine ***
-" doc: https://github.com/neoclide/coc-tabnine
-"
-" 1) 打开 TabNine 的配置文件
-"    :CocCommand tabnine.openConfig
-"    NOTE:
-"    如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
-"    需要先删除 ~/.config/coc/extensions/coc-tabnine-data,
-"    然后重新安装 coc-tabnine, :CocInstall coc-tabnine
-" 2) 为了使 coc.nvim 更好的配合 TabNine 工作, 将如下条目加入到 TabNine 的配置文件
-"    "ignore_all_lsp": true
-" 3) 成功安装配置后, 在代码补全的时候, 补全提示列表中会存在标识为 [TN] 的代码源.
-" *******************
+  " *** coc-tabnine ***
+  " doc: https://github.com/neoclide/coc-tabnine
+  "
+  " 1) 打开 TabNine 的配置文件
+  "    :CocCommand tabnine.openConfig
+  "    NOTE:
+  "    如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
+  "    需要先删除 ~/.config/coc/extensions/coc-tabnine-data,
+  "    然后重新安装 coc-tabnine, :CocInstall coc-tabnine
+  " 2) 为了使 coc.nvim 更好的配合 TabNine 工作, 将如下条目加入到 TabNine 的配置文件
+  "    "ignore_all_lsp": true
+  " 3) 成功安装配置后, 在代码补全的时候, 补全提示列表中会存在标识为 [TN] 的代码源.
+  " *******************
 
-" *** coc-translator ***
-" doc: https://github.com/voldikss/coc-translator
-" NOTE: 有可能被google翻译禁止使用其接口导致翻译失败报错.
+  " *** coc-translator ***
+  " doc: https://github.com/voldikss/coc-translator
+  " NOTE: 有可能被google翻译禁止使用其接口导致翻译失败报错.
 
-" normal 和 visual 模式下, 将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
-nmap ts <Plug>(coc-translator-p)
-vmap ts <Plug>(coc-translator-pv)
-" 在状态栏下面显示翻译的结果.
-nmap tse <Plug>(coc-translator-e)
-vmap tse <Plug>(coc-translator-ev)
-" 将翻译结果替换掉光标下的单词.
-nmap tsr <Plug>(coc-translator-r)
-vmap tsr <Plug>(coc-translator-rv)
-" **********************
+  " normal 和 visual 模式下, 将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
+  nmap ts <Plug>(coc-translator-p)
+  vmap ts <Plug>(coc-translator-pv)
+  " 在状态栏下面显示翻译的结果.
+  nmap tse <Plug>(coc-translator-e)
+  vmap tse <Plug>(coc-translator-ev)
+  " 将翻译结果替换掉光标下的单词.
+  nmap tsr <Plug>(coc-translator-r)
+  vmap tsr <Plug>(coc-translator-rv)
+  " **********************
 
-" *** coc-css ***
-autocmd FileType scss setl iskeyword+=@-@
-" ***************
+  " *** coc-css ***
+  autocmd FileType scss setl iskeyword+=@-@
+  " ***************
 
-" *** coc-git ***
-" navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" navigate conflicts of current buffer
-nmap [c <Plug>(coc-git-prevconflict)
-nmap ]c <Plug>(coc-git-nextconflict)
-" show chunk diff at current position
-nmap <leader>gd <Plug>(coc-git-chunkinfo)
-" show commit contains current position
-nmap <leader>gc <Plug>(coc-git-commit)
-" ***************
+  " *** coc-git ***
+  " navigate chunks of current buffer
+  nmap [g <Plug>(coc-git-prevchunk)
+  nmap ]g <Plug>(coc-git-nextchunk)
+  " navigate conflicts of current buffer
+  nmap [c <Plug>(coc-git-prevconflict)
+  nmap ]c <Plug>(coc-git-nextconflict)
+  " show chunk diff at current position
+  nmap <leader>gd <Plug>(coc-git-chunkinfo)
+  " show commit contains current position
+  nmap <leader>gc <Plug>(coc-git-commit)
+  " ***************
 
-" 使用 tab 键触发补全, 选择补全.
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+  " 使用 tab 键触发补全, 选择补全.
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
 
-" 使用 <CR>(回车键) 来自动选择补全条目的第一条并格式化代码.
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  " 使用 <CR>(回车键) 来自动选择补全条目的第一条并格式化代码.
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
-" 实际上并不会用到这里设置的快捷键.
-let g:UltiSnipsExpandTrigger="<leader>,,,f"
+  " SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
+  " 实际上并不会用到这里设置的快捷键.
+  let g:UltiSnipsExpandTrigger="<leader>,,,f"
 
-" gd  跳转到定义处.
-nmap <silent> gd <Plug>(coc-definition)
-" gy  跳转到类型定义处.
-nmap <silent> gy <Plug>(coc-type-definition)
-" gi  跳转到实现处.
-nmap <silent> gi <Plug>(coc-implementation)
-" gr  在 location list 中列出相关条目, 如果相关的只有1条, 则直接跳转过去.
-nmap <silent> gr <Plug>(coc-references)
+  " gd  跳转到定义处.
+  nmap <silent> gd <Plug>(coc-definition)
+  " gy  跳转到类型定义处.
+  nmap <silent> gy <Plug>(coc-type-definition)
+  " gi  跳转到实现处.
+  nmap <silent> gi <Plug>(coc-implementation)
+  " gr  在 location list 中列出相关条目, 如果相关的只有1条, 则直接跳转过去.
+  nmap <silent> gr <Plug>(coc-references)
 
-" ,rn  级联的对光标所在 symbol 进行重命名.
-nmap <leader>rn <Plug>(coc-rename)
+  " ,rn  级联的对光标所在 symbol 进行重命名.
+  nmap <leader>rn <Plug>(coc-rename)
 
-" K  在悬浮窗口中查看文档.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  " 使支持 tmux-plugins/vim-tmux 插件.
-  elseif (index(['tmux'], &filetype) >= 0)
-    call tmux#man()
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+  " K  在悬浮窗口中查看文档.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    " 使支持 tmux-plugins/vim-tmux 插件.
+    elseif (index(['tmux'], &filetype) >= 0)
+      call tmux#man()
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
 
-" 突出显示光标所在 symbol 及其引用.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+  " 突出显示光标所在 symbol 及其引用.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" 使用 <C-f> 和 <C-b> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
-" 比如在查看较长的文档时出现了滚动条的场景下使用.
-let lines_count=5
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
-  \ coc#float#scroll(1, lines_count) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
-  \ coc#float#scroll(0, lines_count) : "\<C-b>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
-  \ coc#float#scroll(1, lines_count) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
-  \ coc#float#scroll(0, lines_count) : "\<C-b>"
-" insert 模式下, 代码补全提示的选项列表中,
-" 通过 tab 选择一项所弹出来的详细说明窗口中如果出现滚动条,
-" 则可以使用此快捷键进行内容滚动, 否则分别表示向右或向左移动一个字符.
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
-  \ "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
-  \ "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
+  " 使用 <C-f> 和 <C-b> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
+  " 比如在查看较长的文档时出现了滚动条的场景下使用.
+  let lines_count=5
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+    \ coc#float#scroll(1, lines_count) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+    \ coc#float#scroll(0, lines_count) : "\<C-b>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+    \ coc#float#scroll(1, lines_count) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+    \ coc#float#scroll(0, lines_count) : "\<C-b>"
+  " insert 模式下, 代码补全提示的选项列表中,
+  " 通过 tab 选择一项所弹出来的详细说明窗口中如果出现滚动条,
+  " 则可以使用此快捷键进行内容滚动, 否则分别表示向右或向左移动一个字符.
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+    \ "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+    \ "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
 
-" *** CocList 相关命令快捷键映射 ***
-" NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
-"
-" space e  列出所有扩展.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" space c  列出所有命令.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" space s  列出当前所在文件类型有哪些代码补全数据源.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
-" space p  重新列出上一次展示的 CocList.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+  " *** CocList 相关命令快捷键映射 ***
+  " NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
+  "
+  " space e  列出所有扩展.
+  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+  " space c  列出所有命令.
+  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+  " space s  列出当前所在文件类型有哪些代码补全数据源.
+  nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
+  " space p  重新列出上一次展示的 CocList.
+  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+endif
 
 " }}
 
@@ -732,159 +743,161 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " 内容尾部是对当前文件内容执行检查的日志, 可通过这些日志排查问题.
 " doc: https://github.com/dense-analysis/ale
 
-" 定制显示在行左侧的错误提示符和警告提示符.
-" 默认值: '>>'
-let g:ale_sign_error = '>>'
-" 默认值: '--'
-let g:ale_sign_warning = '--'
+if &rtp =~ '/ale,'
+  " 定制显示在行左侧的错误提示符和警告提示符.
+  " 默认值: '>>'
+  let g:ale_sign_error = '>>'
+  " 默认值: '--'
+  let g:ale_sign_warning = '--'
 
-" 左侧的错误/警告提示列是否一直保持打开, 默认值: 0
-let g:ale_sign_column_always = 0
+  " 左侧的错误/警告提示列是否一直保持打开, 默认值: 0
+  let g:ale_sign_column_always = 0
 
-" 用于错误或警告提示的字符串.
-" 默认值: 'Error'
-let g:ale_echo_msg_error_str = 'Error'
-" 默认值: 'Warning'
-let g:ale_echo_msg_warning_str = 'Warning'
+  " 用于错误或警告提示的字符串.
+  " 默认值: 'Error'
+  let g:ale_echo_msg_error_str = 'Error'
+  " 默认值: 'Warning'
+  let g:ale_echo_msg_warning_str = 'Warning'
 
-" 设置提示信息的输出格式, 默认值: '%code: %%s'
-let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
+  " 设置提示信息的输出格式, 默认值: '%code: %%s'
+  let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
 
-" 是否将 ale linter 发现的错误或警告的具体位置列表信息添加到 location list 中.
-" 我们这里禁用, 以防止使用 gr 时, 破坏 gr 使用的 location list.
-" 默认值: 1
-let g:ale_set_loclist = 0
+  " 是否将 ale linter 发现的错误或警告的具体位置列表信息添加到 location list 中.
+  " 我们这里禁用, 以防止使用 gr 时, 破坏 gr 使用的 location list.
+  " 默认值: 1
+  let g:ale_set_loclist = 0
 
-" 如果 location list 不为空, 是否打开一个独立的窗口显示其信息, 默认值: 0
-let g:ale_open_list = 0
-" 错误信息窗口的高度, 在 g:ale_open_list 设置为 1 时才有效果, 默认值: 10
-let g:ale_list_window_size = 5
+  " 如果 location list 不为空, 是否打开一个独立的窗口显示其信息, 默认值: 0
+  let g:ale_open_list = 0
+  " 错误信息窗口的高度, 在 g:ale_open_list 设置为 1 时才有效果, 默认值: 10
+  let g:ale_list_window_size = 5
 
-" 错误或警告信息全部修复后, 是否保留错误信息窗口, 1 表示保留, 默认值: 0
-let g:ale_keep_list_window_open = 0
+  " 错误或警告信息全部修复后, 是否保留错误信息窗口, 1 表示保留, 默认值: 0
+  let g:ale_keep_list_window_open = 0
 
-" 退出文件时, 如果仅剩错误信息窗口, 则其也一同退出(loclist).
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
+  " 退出文件时, 如果仅剩错误信息窗口, 则其也一同退出(loclist).
+  augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+  augroup END
 
-" 新打开文件时是否自动 lint, 默认值: 1
-let g:ale_lint_on_enter = 1
+  " 新打开文件时是否自动 lint, 默认值: 1
+  let g:ale_lint_on_enter = 1
 
-" 保存文件时是否进行 lint, 默认值: 1
-let g:ale_lint_on_save = 1
+  " 保存文件时是否进行 lint, 默认值: 1
+  let g:ale_lint_on_save = 1
 
-" 保存文件时是否进行 fix,  默认值: 0
-let g:ale_fix_on_save = 1
+  " 保存文件时是否进行 fix,  默认值: 0
+  let g:ale_fix_on_save = 1
 
-" , k/j 在错误提示之间跳转.
-nmap <silent> <leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <leader>j <Plug>(ale_next_wrap)
+  " , k/j 在错误提示之间跳转.
+  nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+  nmap <silent> <leader>j <Plug>(ale_next_wrap)
 
-" 针对不同语言的静态代码检查工具配置.
-" NOTE:
-"   1) 其他没有在这里配置的语言将使用 ale 默认配置的 linter,
-"      可以使用 :ALEInfo 来查看当前文件使用了哪些默认的 linter.
-"
-"   2) 注意需要在本地安装涉及到的命令行工具:
-"      brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
-"      luarocks install luacheck
-"      npm install -g eslint standard eslint-plugin-vue vls \
-"          proselint alex write-good stylelint markdownlint jsonlint
-"      pip3 install pylint flake8 yamllint
-"      go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.39.0
-"      go get -u github.com/mgechev/revive
-"      sudo gem install mdl
-"
-"   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
-"      我们这里使用 standard 风格: eslint --init
-"      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
-"      将配置生成到 package.json 的 eslintConfig 字段.
-"
-"   4) prettier 配置文件, 项目根目录下的 .prettierrc.json:
-"      {
-"        "singleQuote": true,
-"        "semi": false
-"      }
-"
-"   5) 对于 Python 项目, 如果使用虚拟环境, 需要在虚拟环境下安装相关 linter 工具,
-"      拿 Python 的依赖管理工具 poetry 举例:
-"      poetry init
-"      poetry shell
-"      poetry add pylint flake8 autoimport black isort -D
-let g:ale_linters = {
-  \  'go': ['golangci-lint', 'revive', 'gopls'],
-  \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
-  \  'python': ['pylint', 'flake8'],
-  \  'lua': ['luac', 'luacheck'],
-  \  'sh': ['shellcheck', 'language_server'],
-  \  'zsh': ['shellcheck', 'language_server'],
-  \  'javascript': ['eslint', 'standard'],
-  \  'vue': ['eslint', 'vls'],
-  \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
-  \  'yaml': ['yamllint'],
-  \  'json': ['jq', 'jsonlint'],
-  \  'jsonc': ['jq', 'jsonlint'],
-  \  'markdown': ['markdownlint'],
-  \ }
+  " 针对不同语言的静态代码检查工具配置.
+  " NOTE:
+  "   1) 其他没有在这里配置的语言将使用 ale 默认配置的 linter,
+  "      可以使用 :ALEInfo 来查看当前文件使用了哪些默认的 linter.
+  "
+  "   2) 注意需要在本地安装涉及到的命令行工具:
+  "      brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
+  "      luarocks install luacheck
+  "      npm install -g eslint standard eslint-plugin-vue vls \
+  "          proselint alex write-good stylelint markdownlint jsonlint
+  "      pip3 install pylint flake8 yamllint
+  "      go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.39.0
+  "      go get -u github.com/mgechev/revive
+  "      sudo gem install mdl
+  "
+  "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
+  "      我们这里使用 standard 风格: eslint --init
+  "      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
+  "      将配置生成到 package.json 的 eslintConfig 字段.
+  "
+  "   4) prettier 配置文件, 项目根目录下的 .prettierrc.json:
+  "      {
+  "        "singleQuote": true,
+  "        "semi": false
+  "      }
+  "
+  "   5) 对于 Python 项目, 如果使用虚拟环境, 需要在虚拟环境下安装相关 linter 工具,
+  "      拿 Python 的依赖管理工具 poetry 举例:
+  "      poetry init
+  "      poetry shell
+  "      poetry add pylint flake8 autoimport black isort -D
+  let g:ale_linters = {
+    \  'go': ['golangci-lint', 'revive', 'gopls'],
+    \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
+    \  'python': ['pylint', 'flake8'],
+    \  'lua': ['luac', 'luacheck'],
+    \  'sh': ['shellcheck', 'language_server'],
+    \  'zsh': ['shellcheck', 'language_server'],
+    \  'javascript': ['eslint', 'standard'],
+    \  'vue': ['eslint', 'vls'],
+    \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
+    \  'yaml': ['yamllint'],
+    \  'json': ['jq', 'jsonlint'],
+    \  'jsonc': ['jq', 'jsonlint'],
+    \  'markdown': ['markdownlint'],
+    \ }
 
-" golangci-lint 配置:
-" 指定可执行文件的具体名称.
-let g:ale_go_golangci_lint_executable = 'golangci-lint'
-" golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
-let g:ale_go_golangci_lint_options = ''
-" golangci-lint run 命令以包为单位进行检查,
-" 解决默认以文件方式检查时的 typecheck 错误误报的问题.
-let g:ale_go_golangci_lint_package = 1
+  " golangci-lint 配置:
+  " 指定可执行文件的具体名称.
+  let g:ale_go_golangci_lint_executable = 'golangci-lint'
+  " golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
+  let g:ale_go_golangci_lint_options = ''
+  " golangci-lint run 命令以包为单位进行检查,
+  " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
+  let g:ale_go_golangci_lint_package = 1
 
-" flake8 配置:
-" 指定允许的 Python 代码每行最大字符数, 默认值 79.
-let g:ale_python_flake8_options = '--max-line-length 120'
+  " flake8 配置:
+  " 指定允许的 Python 代码每行最大字符数, 默认值 79.
+  let g:ale_python_flake8_options = '--max-line-length 120'
 
-" yamllint 配置:
-" doc: https://yamllint.readthedocs.io/en/stable/configuration.html
-" 指定可执行文件的具体名称.
-let g:ale_yaml_yamllint_executable = 'yamllint'
-" 配置参数.
-let g:ale_yaml_yamllint_options = '-d "{
-  \ extends: relaxed,
-  \ rules: {
-  \   line-length: {max: 200},
-  \ },
-  \ }"'
+  " yamllint 配置:
+  " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
+  " 指定可执行文件的具体名称.
+  let g:ale_yaml_yamllint_executable = 'yamllint'
+  " 配置参数.
+  let g:ale_yaml_yamllint_options = '-d "{
+    \ extends: relaxed,
+    \ rules: {
+    \   line-length: {max: 200},
+    \ },
+    \ }"'
 
-" 针对不同语言的自动修复功能.
-"    需要安装相关的命令行工具:
-"       npm install -g prettier importjs lua-fmt
-"       pip3 install black isort
-"       go get mvdan.cc/sh/v3/cmd/shfmt
-"
-" NOTE:
-"   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;
-"      用于 python 的 isort, 可选择性使用, 我这里也不启用,
-"      直接用 black 的 import 排版能力即可.
-"   2) lua 的 luafmt 可进行自动格式化, 由于其格式化效果不符合我的审美要求,
-"      我这里暂不启用.
-"   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
-"      所以不用重复添加.
-let g:ale_fixers = {
-  \  'go': ['gofmt', 'goimports'],
-  \  'rust': ['rustfmt'],
-  \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
-  \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
-  \  'sh': ['shfmt'],
-  \  'javascript': ['eslint', 'importjs'],
-  \  'vue': ['eslint'],
-  \  'html': ['prettier'],
-  \  'json': ['jq'],
-  \  'jsonc': ['jq'],
-  \  'yaml': ['prettier'],
-  \  'markdown': ['prettier'],
-  \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
-  \  'zsh': ['trim_whitespace', 'remove_trailing_lines'],
-  \  'tmux': ['trim_whitespace', 'remove_trailing_lines'],
-  \ }
+  " 针对不同语言的自动修复功能.
+  "    需要安装相关的命令行工具:
+  "       npm install -g prettier importjs lua-fmt
+  "       pip3 install black isort
+  "       go get mvdan.cc/sh/v3/cmd/shfmt
+  "
+  " NOTE:
+  "   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;
+  "      用于 python 的 isort, 可选择性使用, 我这里也不启用,
+  "      直接用 black 的 import 排版能力即可.
+  "   2) lua 的 luafmt 可进行自动格式化, 由于其格式化效果不符合我的审美要求,
+  "      我这里暂不启用.
+  "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
+  "      所以不用重复添加.
+  let g:ale_fixers = {
+    \  'go': ['gofmt', 'goimports'],
+    \  'rust': ['rustfmt'],
+    \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
+    \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'sh': ['shfmt'],
+    \  'javascript': ['eslint', 'importjs'],
+    \  'vue': ['eslint'],
+    \  'html': ['prettier'],
+    \  'json': ['jq'],
+    \  'jsonc': ['jq'],
+    \  'yaml': ['prettier'],
+    \  'markdown': ['prettier'],
+    \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'zsh': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'tmux': ['trim_whitespace', 'remove_trailing_lines'],
+    \ }
+endif
 
 " }}
 
@@ -894,139 +907,147 @@ let g:ale_fixers = {
 """""" takac/vim-hardtime
 " doc: https://github.com/takac/vim-hardtime
 
-" 是否使每一个窗口 buffer 都应用此插件功能, 默认值: 0
-let g:hardtime_default_on = 1
+if &rtp =~ '/vim-hardtime,'
+  " 是否使每一个窗口 buffer 都应用此插件功能, 默认值: 0
+  let g:hardtime_default_on = 1
 
-" 连续按 jklh 等命令时, 禁止连续按的超时时间, 默认值: 1000毫秒.
-let g:hardtime_timeout = 600
+  " 连续按 jklh 等命令时, 禁止连续按的超时时间, 默认值: 1000毫秒.
+  let g:hardtime_timeout = 600
 
-" 启用 hardtime 模式后, 是否进行模式已启用的提示, 默认值: 0, 表示不提示.
-let g:hardtime_showmsg = 1
+  " 启用 hardtime 模式后, 是否进行模式已启用的提示, 默认值: 0, 表示不提示.
+  let g:hardtime_showmsg = 1
 
-" 是否允许连续按2个不同的简单指令, 比如 jh, 默认值: 0, 表示不允许.
-let g:hardtime_allow_different_key = 1
+  " 是否允许连续按2个不同的简单指令, 比如 jh, 默认值: 0, 表示不允许.
+  let g:hardtime_allow_different_key = 1
 
-" 允许连续按几次简单命令, 默认值: 1
-let g:hardtime_maxcount = 3
+  " 允许连续按几次简单命令, 默认值: 1
+  let g:hardtime_maxcount = 3
+endif
 
 """""" preservim/nerdcommenter
 " doc: https://github.com/preservim/nerdcommenter
 
-" 解决 vue 类型文件的代码注释问题.
-" from: https://github.com/posva/vim-vue#how-can-i-use-nerdcommenter-in-vue-files
-let g:ft = ''
+if &rtp =~ '/nerdcommenter,'
+  " 解决 vue 类型文件的代码注释问题.
+  " from: https://github.com/posva/vim-vue#how-can-i-use-nerdcommenter-in-vue-files
+  let g:ft = ''
 
-function! NERDCommenter_before()
-  if &ft == 'vue'
-    let g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+  function! NERDCommenter_before()
+    if &ft == 'vue'
+      let g:ft = 'vue'
+      let stack = synstack(line('.'), col('.'))
+      if len(stack) > 0
+        let syn = synIDattr((stack)[0], 'name')
+        if len(syn) > 0
+          exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+        endif
       endif
     endif
-  endif
-endfunction
+  endfunction
 
-function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
-endfunction
+  function! NERDCommenter_after()
+    if g:ft == 'vue'
+      setf vue
+      let g:ft = ''
+    endif
+  endfunction
+endif
 
 """""" easymotion/vim-easymotion
 " doc: https://github.com/easymotion/vim-easymotion
 
-" 标记所有窗口的单词.
-nmap <leader>w <Plug>(easymotion-overwin-w)
-" 仅标记当前窗口的单词.
-"map  <leader>w <Plug>(easymotion-bd-w)
+if &rtp =~ '/vim-easymotion,'
+  " 标记所有窗口的单词.
+  nmap <leader>w <Plug>(easymotion-overwin-w)
+  " 仅标记当前窗口的单词.
+  "map  <leader>w <Plug>(easymotion-bd-w)
 
-" 标记所有窗口的所有行首字符.
-nmap <leader>L <Plug>(easymotion-overwin-line)
-" 标记当前窗口的所有行首字符.
-"map <leader>L <Plug>(easymotion-bd-jk)
+  " 标记所有窗口的所有行首字符.
+  nmap <leader>L <Plug>(easymotion-overwin-line)
+  " 标记当前窗口的所有行首字符.
+  "map <leader>L <Plug>(easymotion-bd-jk)
 
-" 标记当前行光标右侧的字符.
-map <leader>l <Plug>(easymotion-lineforward)
+  " 标记当前行光标右侧的字符.
+  map <leader>l <Plug>(easymotion-lineforward)
 
-" 标记当前行光标左侧的字符.
-map <leader>h <Plug>(easymotion-linebackward)
+  " 标记当前行光标左侧的字符.
+  map <leader>h <Plug>(easymotion-linebackward)
 
-" 输入 1 个目标字符即可高亮定位, 支持多窗口同时定位.
-nmap s <Plug>(easymotion-overwin-f)
-" 需要输入 2 个目标字符才可高亮定位, 支持多窗口同时定位.
-"nmap s <Plug>(easymotion-overwin-f2)
+  " 输入 1 个目标字符即可高亮定位, 支持多窗口同时定位.
+  nmap s <Plug>(easymotion-overwin-f)
+  " 需要输入 2 个目标字符才可高亮定位, 支持多窗口同时定位.
+  "nmap s <Plug>(easymotion-overwin-f2)
 
-" 是否启用默认的快捷键映射, 默认值: 1, 表示启用.
-let g:EasyMotion_do_mapping = 1
+  " 是否启用默认的快捷键映射, 默认值: 1, 表示启用.
+  let g:EasyMotion_do_mapping = 1
 
-" 搜索字母的时候是否忽略大小写和 Vim 的 smartcase 表现一致.
-let g:EasyMotion_smartcase = 1
+  " 搜索字母的时候是否忽略大小写和 Vim 的 smartcase 表现一致.
+  let g:EasyMotion_smartcase = 1
 
-" 搜索小写字母, 搜索结果大小写字母都包含, 但搜索大写字母时, 搜索结果仅包含大写字母.
-let g:EasyMotion_use_smartsign_us = 1
+  " 搜索小写字母, 搜索结果大小写字母都包含, 但搜索大写字母时, 搜索结果仅包含大写字母.
+  let g:EasyMotion_use_smartsign_us = 1
+endif
 
 """""" Yggdroot/LeaderF
 " 需要在系统上提前安装 rg 命令: brew install rg
 " doc: https://github.com/Yggdroot/LeaderF
 
-" 项目根目录的标志.
-let g:Lf_RootMarkers = ['.git']
+if &rtp =~ '/LeaderF,'
+  " 项目根目录的标志.
+  let g:Lf_RootMarkers = ['.git']
 
-" 设置 LeaderF 工作目录为项目根目录, 如果不在项目中, 则为当前目录.
-let g:Lf_WorkingDirectoryMode = 'A'
+  " 设置 LeaderF 工作目录为项目根目录, 如果不在项目中, 则为当前目录.
+  let g:Lf_WorkingDirectoryMode = 'A'
 
-" 预览代码, 默认值: 0
-let g:Lf_PreviewCode = 1
+  " 预览代码, 默认值: 0
+  let g:Lf_PreviewCode = 1
 
-" 弹出独立的窗口来显示搜索文件.
-let g:Lf_WindowPosition = 'popup'
+  " 弹出独立的窗口来显示搜索文件.
+  let g:Lf_WindowPosition = 'popup'
 
-" 弹出的窗口占终端屏幕的百分比, 0.8 即 80%.
-let g:Lf_PopupWidth = 0.8
+  " 弹出的窗口占终端屏幕的百分比, 0.8 即 80%.
+  let g:Lf_PopupWidth = 0.8
 
-" 是否在弹出的窗口中预览搜索结果, 默认值: 0
-let g:Lf_PreviewInPopup = 1
+  " 是否在弹出的窗口中预览搜索结果, 默认值: 0
+  let g:Lf_PreviewInPopup = 1
 
-" 弹出的窗口的颜色模式, 默认值: 'default';
-" 可选值: gruvbox_default, gruvbox_material, one;
-" 可在 LeaderF/autoload/leaderf/colorscheme/popup 目录中增加新的颜色方案文件;
-" 经过测试 one 可以适配几乎所有颜色主题, 所以建议设置为 one.
-let g:Lf_PopupColorscheme = 'one'
+  " 弹出的窗口的颜色模式, 默认值: 'default';
+  " 可选值: gruvbox_default, gruvbox_material, one;
+  " 可在 LeaderF/autoload/leaderf/colorscheme/popup 目录中增加新的颜色方案文件;
+  " 经过测试 one 可以适配几乎所有颜色主题, 所以建议设置为 one.
+  let g:Lf_PopupColorscheme = 'one'
 
-" 弹出的窗口的高度, 默认值: 0.4, 表示占屏幕的 40%.
-let g:Lf_PopupHeight = 0.6
+  " 弹出的窗口的高度, 默认值: 0.4, 表示占屏幕的 40%.
+  let g:Lf_PopupHeight = 0.6
 
-" normal 模式下 ,f  进入文件搜索的模糊搜索方式; 再 ctrl r  进入 正则匹配 方式.
-let g:Lf_ShortcutF = ",ff"
+  " normal 模式下 ,f  进入文件搜索的模糊搜索方式; 再 ctrl r  进入 正则匹配 方式.
+  let g:Lf_ShortcutF = ",ff"
 
-" 搜索当前已经打开的所有文件的内容.
-noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+  " 搜索当前已经打开的所有文件的内容.
+  noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 
-" 显示最近打开过的文件列表.
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+  " 显示最近打开过的文件列表.
+  noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 
-" 显示当前文件的 tag 信息.
-noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+  " 显示当前文件的 tag 信息.
+  noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
 
-" 显示当前文件去除空行之外的所有行.
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+  " 显示当前文件去除空行之外的所有行.
+  noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
 
-" normal 模式下按 ,rg 进入 command-line 模式下,
-" 然后输入要搜索的文本(支持正则表达式), 回车即可显示此项目内包含此文本的文件列表;
-" 在弹出的结果窗口中, 按 gi 可以将光标移动到输入框, 可以继续输入内容缩小结果列表,
-" 然后按 tab 进入结果列表中, 按 j/k 上下选择, 选择一个文件后,
-" 按 t 将以新建标签页的方式打开选择的文件.
-noremap <leader>rg :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+  " normal 模式下按 ,rg 进入 command-line 模式下,
+  " 然后输入要搜索的文本(支持正则表达式), 回车即可显示此项目内包含此文本的文件列表;
+  " 在弹出的结果窗口中, 按 gi 可以将光标移动到输入框, 可以继续输入内容缩小结果列表,
+  " 然后按 tab 进入结果列表中, 按 j/k 上下选择, 选择一个文件后,
+  " 按 t 将以新建标签页的方式打开选择的文件.
+  noremap <leader>rg :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
-" visual 模式下选择文本后, 按 rg 在整个项目内搜索选择的文本, 显示搜索结果.
-xnoremap rg :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
+  " visual 模式下选择文本后, 按 rg 在整个项目内搜索选择的文本, 显示搜索结果.
+  xnoremap rg :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 
-" ,rg 搜索内容关闭后, 想再次搜索上次搜索的内容, normal 模式下按 rc 即可.
-noremap <leader>rc :<C-U>Leaderf! rg --recall<CR>
+  " ,rg 搜索内容关闭后, 想再次搜索上次搜索的内容, normal 模式下按 rc 即可.
+  noremap <leader>rc :<C-U>Leaderf! rg --recall<CR>
+endif
 
 """""" lyokha/vim-xkbswitch
 " doc: https://github.com/lyokha/vim-xkbswitch
@@ -1040,118 +1061,132 @@ noremap <leader>rc :<C-U>Leaderf! rg --recall<CR>
 "   git clone https://github.com/myshov/libxkbswitch-macosx
 "   cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
 
-" 是否开启输入法切换功能.
-let g:XkbSwitchEnabled = 1
+if &rtp =~ '/vim-xkbswitch,'
+  " 是否开启输入法切换功能.
+  let g:XkbSwitchEnabled = 1
 
-" 依赖的库文件.
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
+  " 依赖的库文件.
+  let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
 
-" 默认情况从 insert 模式到 normal 模式, 将还原 normal 的上一次输入法,
-" 如果 normal 上一次是中文, 这次还是中文;
-" 添加此指令后, 将始终保持 normal 模式是英文输入法.
-let g:XkbSwitchNLayout = 'us'
+  " 默认情况从 insert 模式到 normal 模式, 将还原 normal 的上一次输入法,
+  " 如果 normal 上一次是中文, 这次还是中文;
+  " 添加此指令后, 将始终保持 normal 模式是英文输入法.
+  let g:XkbSwitchNLayout = 'us'
 
-" 同上一条, 区别是这条指令针对的是 insert 模式,
-" 目前的输入体验是不建议启用这条指令, 可根据自身的使用场景调整.
-"let g:XkbSwitchILayout = 'us'
+  " 同上一条, 区别是这条指令针对的是 insert 模式,
+  " 目前的输入体验是不建议启用这条指令, 可根据自身的使用场景调整.
+  "let g:XkbSwitchILayout = 'us'
 
-" 默认情况下, 从 insert 模式切换到 normal 模式,
-" 输入法从中文切换到英文有一定的延迟, 非常影响体验,
-" 此条指令解决这个问题, 可以将数字改的更小以或得更快的切换体验.
-set ttimeoutlen=5
+  " 默认情况下, 从 insert 模式切换到 normal 模式,
+  " 输入法从中文切换到英文有一定的延迟, 非常影响体验,
+  " 此条指令解决这个问题, 可以将数字改的更小以或得更快的切换体验.
+  set ttimeoutlen=5
+endif
 
 """""" machakann/vim-highlightedyank
 " doc: https://github.com/machakann/vim-highlightedyank
 
-" 被复制的文本对象的高亮颜色显示的时间, 单位毫秒.
-" 如果值为 -1, 则表示高亮颜色永久显示.
-let g:highlightedyank_highlight_duration = 1000
+if &rtp =~ '/vim-highlightedyank,'
+  " 被复制的文本对象的高亮颜色显示的时间, 单位毫秒.
+  " 如果值为 -1, 则表示高亮颜色永久显示.
+  let g:highlightedyank_highlight_duration = 1000
 
-" 解决个别主题或 terminal 配置下高亮不生效的问题, 一般可不配置此项.
-highlight HighlightedyankRegion cterm=reverse gui=reverse
+  " 解决个别主题或 terminal 配置下高亮不生效的问题, 一般可不配置此项.
+  highlight HighlightedyankRegion cterm=reverse gui=reverse
+endif
 
 """""" unblevable/quick-scope
 " doc: https://github.com/unblevable/quick-scope
 
-" 是否禁用此插件, 默认值1, 表示启用.
-let g:qs_enable=1
+if &rtp =~ '/quick-scope,'
+  " 是否禁用此插件, 默认值1, 表示启用.
+  let g:qs_enable=1
 
-" 性能考虑, 是否延迟显示高亮字符, 默认值: 0, 表示实时显示.
-let g:qs_lazy_highlight = 0
+  " 性能考虑, 是否延迟显示高亮字符, 默认值: 0, 表示实时显示.
+  let g:qs_lazy_highlight = 0
+endif
 
 """""" skywind3000/asyncrun.vim
 " doc: https://github.com/skywind3000/asyncrun.vim
 
-" ,ar  在 command-line 模式下输入要异步执行的命令, 并在当前窗口底部输出执行结果.
-" NOTE: 这里使用 exec 包装一层, 是为了不让行尾空格直接暴露出来,
-" 所以通过使用 exec 的方式, 就可以将原来行尾的空格包裹起来了.
-exec "nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10 "
+if &rtp =~ '/asyncrun.vim,'
+  " ,ar  在 command-line 模式下输入要异步执行的命令, 并在当前窗口底部输出执行结果.
+  " NOTE: 这里使用 exec 包装一层, 是为了不让行尾空格直接暴露出来,
+  " 所以通过使用 exec 的方式, 就可以将原来行尾的空格包裹起来了.
+  exec "nnoremap <leader>ar :AsyncRun -mode=term -pos=bottom -rows=10 "
+endif
 
 """""" rhysd/git-messenger.vim
 " doc: https://github.com/rhysd/git-messenger.vim
 
-" 弹出 popup window 时, 自动将光标移动到 popup window, 如果设置为 v:false,
-" 则需要通过 ctrl ww 快捷键将光标移动到 popup window.
-let g:git_messenger_always_into_popup = v:true
+if &rtp =~ '/git-messenger,'
+  " 弹出 popup window 时, 自动将光标移动到 popup window, 如果设置为 v:false,
+  " 则需要通过 ctrl ww 快捷键将光标移动到 popup window.
+  let g:git_messenger_always_into_popup = v:true
 
-" 自定义 commit 时间显示的格式.
-let g:git_messenger_date_format = "%Y %b %d %X"
+  " 自定义 commit 时间显示的格式.
+  let g:git_messenger_date_format = "%Y %b %d %X"
+endif
 
 """""" RRethy/vim-hexokinase
 " doc: https://github.com/RRethy/vim-hexokinase
 
-" 显示或不显示颜色标识符的颜色.
-au FileType * nmap <leader>ys :HexokinaseToggle<CR>
+if &rtp =~ '/vim-hexokinase,'
+  " 显示或不显示颜色标识符的颜色.
+  au FileType * nmap <leader>ys :HexokinaseToggle<CR>
 
-" 支持哪些展示颜色的方式.
-" 支持的展示方式: virtual,sign_column,background,backgroundfull,foreground,foregroundfull
-if has('nvim')
-  let g:Hexokinase_highlighters = [
-    \  'virtual',
-    \  'sign_column',
-    \  'foregroundfull',
+  " 支持哪些展示颜色的方式.
+  " 支持的展示方式: virtual,sign_column,background,backgroundfull,foreground,foregroundfull
+  if has('nvim')
+    let g:Hexokinase_highlighters = [
+      \  'virtual',
+      \  'sign_column',
+      \  'foregroundfull',
+      \ ]
+  else
+    let g:Hexokinase_highlighters = [
+      \  'sign_column',
+      \  'foregroundfull',
+      \ ]
+  endif
+
+  " 匹配哪些类型的颜色标识.
+  " 支持颜色类型: full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names
+  let g:Hexokinase_optInPatterns = [
+    \  'full_hex',
+    \  'triple_hex',
+    \  'rgb',
+    \  'rgba',
+    \  'hsl',
+    \  'hsla',
     \ ]
-else
-  let g:Hexokinase_highlighters = [
-    \  'sign_column',
-    \  'foregroundfull',
-    \ ]
+
+  " 针对文件类型定制需要匹配的颜色类型.
+  let g:Hexokinase_ftOptInPatterns = {
+    \  'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
+    \  'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names'
+    \ }
+
+  " 对哪些文件类型提供该插件提供的功能.
+  " NOTE: 默认对所有文件都启用, 如果只想对部分文件类型启用, 则通过下面这条指令配置.
+  "let g:Hexokinase_ftEnabled = ['css', 'html', 'javascript']
+
+  " 对哪些文件类型禁用该插件提供的功能, 默认值空列表.
+  let g:Hexokinase_ftDisabled = []
 endif
-
-" 匹配哪些类型的颜色标识.
-" 支持颜色类型: full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names
-let g:Hexokinase_optInPatterns = [
-  \  'full_hex',
-  \  'triple_hex',
-  \  'rgb',
-  \  'rgba',
-  \  'hsl',
-  \  'hsla',
-  \ ]
-
-" 针对文件类型定制需要匹配的颜色类型.
-let g:Hexokinase_ftOptInPatterns = {
-  \  'css': 'full_hex,rgb,rgba,hsl,hsla,colour_names',
-  \  'html': 'full_hex,rgb,rgba,hsl,hsla,colour_names'
-  \ }
-
-" 对哪些文件类型提供该插件提供的功能.
-" NOTE: 默认对所有文件都启用, 如果只想对部分文件类型启用, 则通过下面这条指令配置.
-"let g:Hexokinase_ftEnabled = ['css', 'html', 'javascript']
-
-" 对哪些文件类型禁用该插件提供的功能, 默认值空列表.
-let g:Hexokinase_ftDisabled = []
 
 """""" vim-scripts/SyntaxAttr.vim
 " doc: https://github.com/vim-scripts/SyntaxAttr.vim
 
-" ,a  显示光标所在的语法高亮详情, 便于调试配色方案.
-"
-" 举例:
-"    group: goComment->Comment guifg=#585858(#585858) gui=italic
-"    如上结果表示, 光标所在属于 goComment 语法加亮组, 并且被链接到了 Comment 加亮组,
-"    guifg 和 gui 是加亮组的值, guifg 表示前景色, gui 表示特殊效果.
-nnoremap <leader>a :call SyntaxAttr()<CR>
+if &rtp =~ '/SyntaxAttr.vim,'
+  " ,a  显示光标所在的语法高亮详情, 便于调试配色方案.
+  "
+  " 举例:
+  "    group: goComment->Comment guifg=#585858(#585858) gui=italic
+  "    如上结果表示, 光标所在属于 goComment 语法加亮组, 并且被链接到了 Comment 加亮组,
+  "    guifg 和 gui 是加亮组的值, guifg 表示前景色, gui 表示特殊效果.
+  nnoremap <leader>a :call SyntaxAttr()<CR>
+endif
 
 """""" matze/vim-move
 " doc: https://github.com/matze/vim-move
@@ -1161,20 +1196,24 @@ nnoremap <leader>a :call SyntaxAttr()<CR>
 "                    visual 模式下将选择的内容向上/向下移动 n 行,
 "                    或将选择的内容块向左/向右移动 n 个字符.
 
-" 默认值为 M, 即 Meta 键, 也就是 macOS 的 Option 键, Windows 的 Alt 键.
-" 可选值:
-"   M: Meta(Alt/Option)
-"   C: Ctrl
-"   S: Shift
-let g:move_key_modifier = 'M'
+if &rtp =~ '/vim-move,'
+  " 默认值为 M, 即 Meta 键, 也就是 macOS 的 Option 键, Windows 的 Alt 键.
+  " 可选值:
+  "   M: Meta(Alt/Option)
+  "   C: Ctrl
+  "   S: Shift
+  let g:move_key_modifier = 'M'
+endif
 
 """""" terryma/vim-smooth-scroll
 " doc: https://github.com/terryma/vim-smooth-scroll
 "
 " NOTE: 不要映射 <C-b> 和 <C-f>, 因为会和 coc.nvim 插件的配置相冲突.
 
-noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+if &rtp =~ '/vim-smooth-scroll,'
+  noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+  noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+endif
 
 " }}
 
@@ -1184,94 +1223,98 @@ noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 """""" itchyny/lightline.vim
 " doc: https://github.com/itchyny/lightline.vim
 
-" 本选项的值影响最后一个窗口何时有状态行:
-"     0: 永不
-"     1: 只有在有至少两个窗口时
-"     2: 总是
-" 默认值: 1, 为了单窗口也可以显示状态栏, 此处设置为2.
-set laststatus=2
+if &rtp =~ '/lightline.vim'
+  " 本选项的值影响最后一个窗口何时有状态行:
+  "     0: 永不
+  "     1: 只有在有至少两个窗口时
+  "     2: 总是
+  " 默认值: 1, 为了单窗口也可以显示状态栏, 此处设置为2.
+  set laststatus=2
 
-" 由于此插件已经帮我们美化显示了当前的 Vim 模式, 所以 Vim 自带的模式显示可以去除.
-set noshowmode
+  " 由于此插件已经帮我们美化显示了当前的 Vim 模式, 所以 Vim 自带的模式显示可以去除.
+  set noshowmode
+endif
 
 """""" 'maximbaz/lightline-ale'
 " doc: https://github.com/maximbaz/lightline-ale
 
-" 美化错误与警告等信息的显示图标.
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_ok = "\uf00c"
+if &rtp =~ 'lightline-ale,'
+  " 美化错误与警告等信息的显示图标.
+  let g:lightline#ale#indicator_checking = "\uf110"
+  let g:lightline#ale#indicator_ok = "\uf00c"
 
-" 以下三条指令的字符串值结尾多一个空格, 用来解决图标和数字重叠的问题.
-let g:lightline#ale#indicator_infos = "\uf129 "
-let g:lightline#ale#indicator_warnings = "\uf071 "
-let g:lightline#ale#indicator_errors = "\uf05e "
+  " 以下三条指令的字符串值结尾多一个空格, 用来解决图标和数字重叠的问题.
+  let g:lightline#ale#indicator_infos = "\uf129 "
+  let g:lightline#ale#indicator_warnings = "\uf071 "
+  let g:lightline#ale#indicator_errors = "\uf05e "
 
-let g:lightline = {}
+  let g:lightline = {}
 
-let g:lightline.component_expand = {
-  \  'linter_checking': 'lightline#ale#checking',
-  \  'linter_infos': 'lightline#ale#infos',
-  \  'linter_warnings': 'lightline#ale#warnings',
-  \  'linter_errors': 'lightline#ale#errors',
-  \  'linter_ok': 'lightline#ale#ok',
-  \ }
+  let g:lightline.component_expand = {
+    \  'linter_checking': 'lightline#ale#checking',
+    \  'linter_infos': 'lightline#ale#infos',
+    \  'linter_warnings': 'lightline#ale#warnings',
+    \  'linter_errors': 'lightline#ale#errors',
+    \  'linter_ok': 'lightline#ale#ok',
+    \ }
 
-let g:lightline.component_type = {
-  \  'linter_checking': 'right',
-  \  'linter_infos': 'right',
-  \  'linter_warnings': 'warning',
-  \  'linter_errors': 'error',
-  \  'linter_ok': 'right',
-  \ }
+  let g:lightline.component_type = {
+    \  'linter_checking': 'right',
+    \  'linter_infos': 'right',
+    \  'linter_warnings': 'warning',
+    \  'linter_errors': 'error',
+    \  'linter_ok': 'right',
+    \ }
 
-" 已从 left 中去除 cocstatus, 可选择性加入.
-let g:lightline.active = {
-  \  'left': [ [ 'mode', 'paste' ],
-  \            [ 'git', 'bgit', 'method', 'readonly', 'filename', 'modified' ],
-  \  ],
-  \  'right': [ [ 'lineinfo' ],
-  \             [ 'percent' ],
-  \             [ 'fileformat', 'fileencoding', 'filetype' ],
-  \             [ 'linter_checking', 'linter_errors', 'linter_warnings',
-  \               'linter_infos', 'linter_ok' ],
-  \             [ 'blame' ],
-  \  ],
-  \ }
+  " 已从 left 中去除 cocstatus, 可选择性加入.
+  let g:lightline.active = {
+    \  'left': [ [ 'mode', 'paste' ],
+    \            [ 'git', 'bgit', 'method', 'readonly', 'filename', 'modified' ],
+    \  ],
+    \  'right': [ [ 'lineinfo' ],
+    \             [ 'percent' ],
+    \             [ 'fileformat', 'fileencoding', 'filetype' ],
+    \             [ 'linter_checking', 'linter_errors', 'linter_warnings',
+    \               'linter_infos', 'linter_ok' ],
+    \             [ 'blame' ],
+    \  ],
+    \ }
 
-let g:lightline.component_function = {
-  \  'cocstatus': 'coc#status',
-  \  'git': 'LightlineGitStatus',
-  \  'bgit': 'LightlineBufferGitStatus',
-  \  'blame': 'LightlineGitBlame',
-  \ }
+  let g:lightline.component_function = {
+    \  'cocstatus': 'coc#status',
+    \  'git': 'LightlineGitStatus',
+    \  'bgit': 'LightlineBufferGitStatus',
+    \  'blame': 'LightlineGitBlame',
+    \ }
 
-" 如果状态栏内容过多, 从右侧砍掉部分内容.
-let g:lightline.component = {
-  \  'lineinfo': '%3l:%-2v%<',
-  \ }
+  " 如果状态栏内容过多, 从右侧砍掉部分内容.
+  let g:lightline.component = {
+    \  'lineinfo': '%3l:%-2v%<',
+    \ }
 
-" doc: https://github.com/neoclide/coc-git
-"   *  表示 git 仓库内容有变更;
-"   x  表示 git 仓库内容有冲突;
-"   ●  表示 git 新增或变化内容已经提交到暂存区;
-"   …  表示 git 仓库内有未跟踪的新文件;
-"   以上符号可同时在分支后显示, 如果分支名称后没有任何上述符号, 说明分支是干净的.
-function! LightlineGitStatus() abort
-  let gstatus = get(g:, 'coc_git_status', '')
-  return gstatus
-endfunction
+  " doc: https://github.com/neoclide/coc-git
+  "   *  表示 git 仓库内容有变更;
+  "   x  表示 git 仓库内容有冲突;
+  "   ●  表示 git 新增或变化内容已经提交到暂存区;
+  "   …  表示 git 仓库内有未跟踪的新文件;
+  "   以上符号可同时在分支后显示, 如果分支名称后没有任何上述符号, 说明分支是干净的.
+  function! LightlineGitStatus() abort
+    let gstatus = get(g:, 'coc_git_status', '')
+    return gstatus
+  endfunction
 
-function! LightlineBufferGitStatus() abort
-  let gbstatus = get(b:, 'coc_git_status', '')
-  return gbstatus
-endfunction
+  function! LightlineBufferGitStatus() abort
+    let gbstatus = get(b:, 'coc_git_status', '')
+    return gbstatus
+  endfunction
 
-function! LightlineGitBlame() abort
-  let blame = get(b:, 'coc_git_blame', '')
+  function! LightlineGitBlame() abort
+    let blame = get(b:, 'coc_git_blame', '')
 
-  " 窗口宽度大于120时, 状态栏才显示 git blame 信息.
-  return winwidth(0) > 120 ? blame : ''
-endfunction
+    " 窗口宽度大于120时, 状态栏才显示 git blame 信息.
+    return winwidth(0) > 120 ? blame : ''
+  endfunction
+endif
 
 " }}
 
@@ -2360,100 +2403,106 @@ nnoremap <silent> <leader>o :call ToggleBGTransparent()<CR>
 """""" preservim/nerdtree
 " doc: https://github.com/preservim/nerdtree
 
-" ,t  normal 模式下显示或隐藏目录树的快捷键.
-nnoremap <leader>x :NERDTreeToggle<CR>
+if &rtp =~ '/nerdtree,'
+  " ,t  normal 模式下显示或隐藏目录树的快捷键.
+  nnoremap <leader>x :NERDTreeToggle<CR>
 
-" 目录树显示在左侧还是右侧.
-" 可选值: 'right', 'left', 默认值: 'left'
-let NERDTreeWinPos = 'left'
+  " 目录树显示在左侧还是右侧.
+  " 可选值: 'right', 'left', 默认值: 'left'
+  let NERDTreeWinPos = 'left'
 
-" 设置目录树窗口宽度, 默认值: 31
-let NERDTreeWinSize=35
+  " 设置目录树窗口宽度, 默认值: 31
+  let NERDTreeWinSize=35
 
-" 不显示目录树上方的 'Bookmarks' 和 'Press ? for help' 文本,
-" 默认值为 0, 表示显示, 1 表示不显示.
-let NERDTreeMinimalUI=1
+  " 不显示目录树上方的 'Bookmarks' 和 'Press ? for help' 文本,
+  " 默认值为 0, 表示显示, 1 表示不显示.
+  let NERDTreeMinimalUI=1
 
-" 按 m 键触发 menu 的时候, 是否使用精简版 menu, 类似这种:
-"   Menu: [ (a)dd ,m,d,r,o,q,c,l] (Use j/k/enter or shortcut):
-" 默认值: 0, 表示不使用.
-let NERDTreeMinimalMenu=0
+  " 按 m 键触发 menu 的时候, 是否使用精简版 menu, 类似这种:
+  "   Menu: [ (a)dd ,m,d,r,o,q,c,l] (Use j/k/enter or shortcut):
+  " 默认值: 0, 表示不使用.
+  let NERDTreeMinimalMenu=0
 
-" 运行 Vim 时, 后面不接任何文件的情况, 自动打开目录树窗口.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+  " 运行 Vim 时, 后面不接任何文件的情况, 自动打开目录树窗口.
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-" 运行 Vim 的时候自动打开目录树. 如果 vim 后面接了文件, 则将光标自动移动到文件窗口.
-" NOTE: 如果使用 tmux, 不建议启用此条配置.
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+  " 运行 Vim 的时候自动打开目录树. 如果 vim 后面接了文件, 则将光标自动移动到文件窗口.
+  " NOTE: 如果使用 tmux, 不建议启用此条配置.
+  "autocmd StdinReadPre * let s:std_in=1
+  "autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
-" 如果文件都退出了, 只剩目录树窗口的情况下自动退出 Vim.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree')
-  \ && b:NERDTree.isTabTree() | quit | endif
+  " 如果文件都退出了, 只剩目录树窗口的情况下自动退出 Vim.
+  autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree')
+    \ && b:NERDTree.isTabTree() | quit | endif
 
-" 每新打开一个标签页都显示当前已存在的目录树窗口.
-" NOTE:
-"   1)官方提供的指令是: autocmd BufWinEnter * silent NERDTreeMirror,
-"     但经过实测, 会和以下2条指令产生冲突, 当 gd 或 gr 打开新的 buffer 时会报错:
-"     冲突的2条指令是:
-"         1) let g:ale_set_loclist = 1
-"         2) map gr :YcmCompleter GoToReferences<CR>
-"     修改为当前指令后, 可修复此问题.
-"   2) 如果使用 tmux, 不建议启用此条配置.
-"autocmd BufWinEnter *.* silent NERDTreeMirror
+  " 每新打开一个标签页都显示当前已存在的目录树窗口.
+  " NOTE:
+  "   1)官方提供的指令是: autocmd BufWinEnter * silent NERDTreeMirror,
+  "     但经过实测, 会和以下2条指令产生冲突, 当 gd 或 gr 打开新的 buffer 时会报错:
+  "     冲突的2条指令是:
+  "         1) let g:ale_set_loclist = 1
+  "         2) map gr :YcmCompleter GoToReferences<CR>
+  "     修改为当前指令后, 可修复此问题.
+  "   2) 如果使用 tmux, 不建议启用此条配置.
+  "autocmd BufWinEnter *.* silent NERDTreeMirror
 
-" 当项目下新增或删除文件时, 目录树窗口中自动更新变化,
-" 省去了在目录树窗口中手动按 R 的动作了;
-" 注意, 需要光标移动到目录树窗口中或重新打开目录树窗口来触发更新动作.
-autocmd BufEnter NERD_tree_* | execute 'normal R'
+  " 当项目下新增或删除文件时, 目录树窗口中自动更新变化,
+  " 省去了在目录树窗口中手动按 R 的动作了;
+  " 注意, 需要光标移动到目录树窗口中或重新打开目录树窗口来触发更新动作.
+  autocmd BufEnter NERD_tree_* | execute 'normal R'
 
-" 目录树中目录折叠与展开的样式, 默认值: '▸' 和 '▾';
-" 可供选择: '+' 与 '~', '<' 与 'v', 等等.
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+  " 目录树中目录折叠与展开的样式, 默认值: '▸' 和 '▾';
+  " 可供选择: '+' 与 '~', '<' 与 'v', 等等.
+  let g:NERDTreeDirArrowExpandable = '▸'
+  let g:NERDTreeDirArrowCollapsible = '▾'
 
-" 是否显示隐藏文件, 默认值: 0, 表示不显示.
-let NERDTreeShowHidden=1
+  " 是否显示隐藏文件, 默认值: 0, 表示不显示.
+  let NERDTreeShowHidden=1
 
-" 忽略哪些文件的显示, 开启这个将默认显示隐藏文件.
-let NERDTreeIgnore=['\.git$','\.pyc$','__pycache__','\.swp$']
+  " 忽略哪些文件的显示, 开启这个将默认显示隐藏文件.
+  let NERDTreeIgnore=['\.git$','\.pyc$','__pycache__','\.swp$']
 
-" 是否显示目录树的行号, 默认值: 0, 表示不显示.
-let NERDTreeShowLineNumbers=0
+  " 是否显示目录树的行号, 默认值: 0, 表示不显示.
+  let NERDTreeShowLineNumbers=0
+endif
 
-"""""" nerdtree-git-plugin
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-  \  "Modified"  : "✹",
-  \  "Staged"    : "✚",
-  \  "Untracked" : "✭",
-  \  "Renamed"   : "➜",
-  \  "Unmerged"  : "═",
-  \  "Deleted"   : "✖",
-  \  "Dirty"     : "✗",
-  \  "Clean"     : "✔︎",
-  \  'Ignored'   : '☒',
-  \  "Unknown"   : "?"
-  \ }
+"""""" Xuyuanp/nerdtree-git-plugin
+if &rtp =~ '/nerdtree-git-plugin,'
+  let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \  "Modified"  : "✹",
+    \  "Staged"    : "✚",
+    \  "Untracked" : "✭",
+    \  "Renamed"   : "➜",
+    \  "Unmerged"  : "═",
+    \  "Deleted"   : "✖",
+    \  "Dirty"     : "✗",
+    \  "Clean"     : "✔︎",
+    \  'Ignored'   : '☒',
+    \  "Unknown"   : "?"
+    \ }
+endif
 
 """""" majutsushi/tagbar
-" 显示或隐藏大纲视图的快捷键: `,e`
-nmap ,e :TagbarToggle<CR>
+if &rtp =~ '/tagbar,'
+  " 显示或隐藏大纲视图的快捷键: `,e`
+  nmap ,e :TagbarToggle<CR>
 
-" Tagbar 窗口是否显示在左侧, 默认值: 0, 表示显示在右测.
-let g:tagbar_left = 0
+  " Tagbar 窗口是否显示在左侧, 默认值: 0, 表示显示在右测.
+  let g:tagbar_left = 0
 
-" 设置 Tagbar 窗口宽度, 默认值: 40
-let g:tagbar_width = 35
+  " 设置 Tagbar 窗口宽度, 默认值: 40
+  let g:tagbar_width = 35
 
-" 是否开启自动预览, 如果开启, 将光标移动到 Tagbar 窗口时, 会自动打开一个新窗口用于预览,
-" 随着光标在标签上移动, 预览窗口也会实时进行代码定位.
-" 默认值: 0, 表示不开启预览.
-let g:tagbar_autopreview = 1
+  " 是否开启自动预览, 如果开启, 将光标移动到 Tagbar 窗口时, 会自动打开一个新窗口用于预览,
+  " 随着光标在标签上移动, 预览窗口也会实时进行代码定位.
+  " 默认值: 0, 表示不开启预览.
+  let g:tagbar_autopreview = 1
 
-" 根据 tag 的名称排序, 默认值: 1.
-" 设置为 0 表示禁用排序, 即按标签本身在代码文件中的位置排序.
-let g:tagbar_sort = 0
+  " 根据 tag 的名称排序, 默认值: 1.
+  " 设置为 0 表示禁用排序, 即按标签本身在代码文件中的位置排序.
+  let g:tagbar_sort = 0
+endif
 
 """""" 'ryanoasis/vim-devicons'
 " doc: https://github.com/ryanoasis/vim-devicons
@@ -2463,59 +2512,69 @@ let g:tagbar_sort = 0
 "   2. Hack Nerd Font 字体安装(macOS):
 "      brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 
-" 是否启用文件类型图标显示, 默认值: 1, 表示启用.
-let g:webdevicons_enable = 1
+if &rtp =~ '/vim-devicons,'
+  " 是否启用文件类型图标显示, 默认值: 1, 表示启用.
+  let g:webdevicons_enable = 1
 
-" 为 gvim/mvim(GUI) 设置字体和字号.
-set guifont=Hack_Nerd_Font:h12
+  " 为 gvim/mvim(GUI) 设置字体和字号.
+  set guifont=Hack_Nerd_Font:h12
+endif
 
 """""" 'Yggdroot/indentLine'
 " doc: https://github.com/Yggdroot/indentLine
 
-" 此插件会自动设置 set conceallevel=2, 导致 markdown/text 隐藏部分语法的显示,
-" 比如 markdown 的 ** **, 通过在这里排除掉 markdown 等文件类型来解决这个问题.
-" NOTE: 如果 json 类型文件中无法显示双引号可能也是由此插件导致,
-" 把 json 和 jsonc 添加到下面列表中即可.
-let g:indentLine_fileTypeExclude = ['markdown', 'text']
+if &rtp =~ '/indentLine,'
+  " 此插件会自动设置 set conceallevel=2, 导致 markdown/text 隐藏部分语法的显示,
+  " 比如 markdown 的 ** **, 通过在这里排除掉 markdown 等文件类型来解决这个问题.
+  " NOTE: 如果 json 类型文件中无法显示双引号可能也是由此插件导致,
+  " 把 json 和 jsonc 添加到下面列表中即可.
+  let g:indentLine_fileTypeExclude = ['markdown', 'text']
 
-" 缩进线颜色方案使用 SpecialKey 高亮组.
-let g:indentLine_defaultGroup = 'SpecialKey'
+  " 缩进线颜色方案使用 SpecialKey 高亮组.
+  let g:indentLine_defaultGroup = 'SpecialKey'
+endif
 
 """""" 'voldikss/vim-floaterm'
 " doc: https://github.com/voldikss/vim-floaterm
 " FIXME: 使用 Vim 的情况, floaterm 的颜色方案和 Vim 的不一致, 使用 Neovim 无此问题.
 
-" 显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
-let g:floaterm_keymap_toggle = '<leader>t'
+if &rtp =~ '/vim-floaterm,'
+  " 显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
+  let g:floaterm_keymap_toggle = '<leader>t'
 
-" 新建一个悬浮窗口.
-let g:floaterm_keymap_new = '<leader>tc'
+  " 新建一个悬浮窗口.
+  let g:floaterm_keymap_new = '<leader>tc'
 
-" 关闭当前悬浮窗口.
-let g:floaterm_keymap_kill = '<leader>tk'
+  " 关闭当前悬浮窗口.
+  let g:floaterm_keymap_kill = '<leader>tk'
 
-" 切换到下一个悬浮窗口.
-let g:floaterm_keymap_next = '<leader>tn'
+  " 切换到下一个悬浮窗口.
+  let g:floaterm_keymap_next = '<leader>tn'
 
-" 显示目前存在的悬浮窗口.
-let g:floaterm_keymap_show = '<leader>ts'
+  " 显示目前存在的悬浮窗口.
+  let g:floaterm_keymap_show = '<leader>ts'
+endif
 
 """""" 'francoiscabrol/ranger.vim'
 " doc: https://github.com/francoiscabrol/ranger.vim
 " NOTE: 需要在 ~/.zshrc 中加入 export LC_ALL="en_US.UTF-8", 否则 ranger 中将出现乱码.
 
-" 禁用默认的 <leader>f 快捷键.
-let g:ranger_map_keys = 0
+if &rtp =~ '/ranger.vim,'
+  " 禁用默认的 <leader>f 快捷键.
+  let g:ranger_map_keys = 0
 
-" ,r  打开 ranger, 选择文件后按 l 或 enter 以新建标签页的方式打开文件,
-" 如果文件已经打开了, 则直接跳转到相关的标签页.
-map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
+  " ,r  打开 ranger, 选择文件后按 l 或 enter 以新建标签页的方式打开文件,
+  " 如果文件已经打开了, 则直接跳转到相关的标签页.
+  map <leader>r :RangerCurrentFileExistingOrNewTab<CR>
+endif
 
 """""" 'uguu-org/vim-matrix-screensaver'
 " doc: https://github.com/uguu-org/vim-matrix-screensaver
 
-" 在当前 Vim 窗口启用 Matrix 屏幕保护.
-nmap <leader>m :Matrix<CR>
+if &rtp =~ '/vim-matrix-screensaver,'
+  " 在当前 Vim 窗口启用 Matrix 屏幕保护.
+  nmap <leader>m :Matrix<CR>
+endif
 
 " }}
 
@@ -2525,7 +2584,7 @@ nmap <leader>m :Matrix<CR>
 """""""" Go {{
 
 " 显示缩进线.
-autocmd FileType go set list lcs=tab:\¦\ " 注意结尾又一个空格.
+autocmd FileType go set list lcs=tab:\¦\ " 注意结尾有一个空格.
 
 """""" buoto/gotests-vim
 " doc: https://github.com/buoto/gotests-vim
@@ -2863,71 +2922,73 @@ au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 """""" puremourning/vimspector
 " doc: https://github.com/puremourning/vimspector
 
-let g:vimspector_enable_mappings = 'HUMAN'
+if &rtp =~ '/vimspector,'
+  let g:vimspector_enable_mappings = 'HUMAN'
 
-" 启动 debug 模式, 或运行到下一个断点.
-nmap <leader>dc <Plug>VimspectorContinue
+  " 启动 debug 模式, 或运行到下一个断点.
+  nmap <leader>dc <Plug>VimspectorContinue
 
-" 停止运行 debug 模式.
-nmap <leader>ds <Plug>VimspectorStop
+  " 停止运行 debug 模式.
+  nmap <leader>ds <Plug>VimspectorStop
 
-" 重新运行 debug 模式.
-nmap <leader>dr <Plug>VimspectorRestart
+  " 重新运行 debug 模式.
+  nmap <leader>dr <Plug>VimspectorRestart
 
-" 设置行断点.
-nmap <leader>db <Plug>VimspectorToggleBreakpoint
+  " 设置行断点.
+  nmap <leader>db <Plug>VimspectorToggleBreakpoint
 
-" 运行到下一行代码, 每按一次运行一行代码.
-nmap <leader>dl <Plug>VimspectorStepOver
+  " 运行到下一行代码, 每按一次运行一行代码.
+  nmap <leader>dl <Plug>VimspectorStepOver
 
-" step in 进入 breakpoint 所在行调用的函数内部.
-nmap <leader>di <Plug>VimspectorStepInto
+  " step in 进入 breakpoint 所在行调用的函数内部.
+  nmap <leader>di <Plug>VimspectorStepInto
 
-" step out 从进入的函数中返回.
-nmap <leader>do <Plug>VimspectorStepOut
+  " step out 从进入的函数中返回.
+  nmap <leader>do <Plug>VimspectorStepOut
 
-" 查看光标所在变量的值, 注意在 debug 模式下必须运行过了这一行才可以.
-nmap <Leader>dv <Plug>VimspectorBalloonEval
-xmap <Leader>dv <Plug>VimspectorBalloonEval
+  " 查看光标所在变量的值, 注意在 debug 模式下必须运行过了这一行才可以.
+  nmap <Leader>dv <Plug>VimspectorBalloonEval
+  xmap <Leader>dv <Plug>VimspectorBalloonEval
 
-" ,dj  选择模版文件, 在项目的根目录创建必须的 .vimspector.json 文件.
-noremap <silent><leader>dj :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+  " ,dj  选择模版文件, 在项目的根目录创建必须的 .vimspector.json 文件.
+  noremap <silent><leader>dj :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
 
-function! s:read_template_into_buffer(template)
-  execute '0r ~/.dotfiles/vim/vimspector/'.a:template
-endfunction
+  function! s:read_template_into_buffer(template)
+    execute '0r ~/.dotfiles/vim/vimspector/'.a:template
+  endfunction
 
-command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
-  \ 'source': 'ls -1 ~/.dotfiles/vim/vimspector',
-  \ 'down': 10,
-  \ 'sink': function('<sid>read_template_into_buffer')
-  \ })
+  command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
+    \ 'source': 'ls -1 ~/.dotfiles/vim/vimspector',
+    \ 'down': 10,
+    \ 'sink': function('<sid>read_template_into_buffer')
+    \ })
 
-" 断点图标.
-sign define vimspectorBP            text=🌕  texthl=NONE
-" 条件断点图标.
-sign define vimspectorBPCond        text=🔶  texthl=NONE
-" 失效的断点图标.
-sign define vimspectorBPDisabled    text=🌑  texthl=NONE
-" 当前调试到的非断点所在行图标.
-sign define vimspectorPC            text=💎  texthl=NONE       linehl=CursorLine
-" 当前调试到的断点所在行图标.
-sign define vimspectorPCBP          text=●▶  texthl=GitAddSign linehl=CursorLine
-" vimspector.StackTrace 窗口里显示的当前线程图标.
-sign define vimspectorCurrentThread text=🍎  texthl=NONE       linehl=CursorLine
-" vimspector.StackTrace 窗口里显示的当前线程的某段任务代码的所在图标.
-sign define vimspectorCurrentFrame  text=🍒  texthl=NONE       linehl=CursorLine
+  " 断点图标.
+  sign define vimspectorBP            text=🌕  texthl=NONE
+  " 条件断点图标.
+  sign define vimspectorBPCond        text=🔶  texthl=NONE
+  " 失效的断点图标.
+  sign define vimspectorBPDisabled    text=🌑  texthl=NONE
+  " 当前调试到的非断点所在行图标.
+  sign define vimspectorPC            text=💎  texthl=NONE       linehl=CursorLine
+  " 当前调试到的断点所在行图标.
+  sign define vimspectorPCBP          text=●▶  texthl=GitAddSign linehl=CursorLine
+  " vimspector.StackTrace 窗口里显示的当前线程图标.
+  sign define vimspectorCurrentThread text=🍎  texthl=NONE       linehl=CursorLine
+  " vimspector.StackTrace 窗口里显示的当前线程的某段任务代码的所在图标.
+  sign define vimspectorCurrentFrame  text=🍒  texthl=NONE       linehl=CursorLine
 
-" 解决其他插件的 sign 覆盖掉 vimspector sign 的问题.
-let g:vimspector_sign_priority = {
-  \ 'vimspectorBP':            199,
-  \ 'vimspectorBPCond':        199,
-  \ 'vimspectorBPDisabled':    199,
-  \ 'vimspectorPC':            200,
-  \ 'vimspectorPCBP':          200,
-  \ 'vimspectorCurrentThread': 200,
-  \ 'vimspectorCurrentFrame':  200,
-  \ }
+  " 解决其他插件的 sign 覆盖掉 vimspector sign 的问题.
+  let g:vimspector_sign_priority = {
+    \ 'vimspectorBP':            199,
+    \ 'vimspectorBPCond':        199,
+    \ 'vimspectorBPDisabled':    199,
+    \ 'vimspectorPC':            200,
+    \ 'vimspectorPCBP':          200,
+    \ 'vimspectorCurrentThread': 200,
+    \ 'vimspectorCurrentFrame':  200,
+    \ }
+endif
 
 " }}
 
