@@ -467,6 +467,12 @@ Plug 'terryma/vim-smooth-scroll'
 
 " }}
 
+" 加载自定义插件的配置文件.
+let vimrc_plugins_local = $HOME . '/.vimrc.plugins.local'
+if filereadable(expand(vimrc_plugins_local))
+  exec 'source' vimrc_plugins_local
+endif
+
 " 最后 command-line 模式下执行 :PlugInstall 自动安装上面未安装的插件, 其他常用命令:
 "    :PlugStatus   查看当前状态, 安装进度等;
 "    :PlugUpdate   更新所有插件, 建议定期更新所有插件;
@@ -3290,7 +3296,7 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
 " 从额外的本地配置文件(如果存在的话)加载配置.
-let vimrc_local='~/.vimrc.local'
+let vimrc_local = $HOME . '/.vimrc.local'
 if filereadable(expand(vimrc_local))
   exec 'source' vimrc_local
 endif
