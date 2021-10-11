@@ -6,7 +6,6 @@ and many other related excellent open source softwares.
 
 The supported platforms currently are macOS and Linux.
 
-> NOTE:<br>
 > For efficient and convenient use of shortcuts,
 > I strongly recommend using [HHKB](https://happyhackingkb.com/) keyboard,
 > or a keyboard capable of changing the key position and change <kbd>Caps</kbd> to <kbd>Ctrl</kbd>.
@@ -88,6 +87,10 @@ The supported platforms currently are macOS and Linux.
   - [Custom Snippets](#Custom-Snippets)
     - [Markdown](#Markdown)
   - [Vim/Neovim Plugins](#VimNeovim-Plugins)
+  - [Put Your Own Customization](#Put-Your-Own-Customization)
+    - [Add More Plugins](#Add-More-Plugins)
+    - [Add More Configurations](#Add-More-Configurations)
+    - [Disable Default Plugins](#Disable-Default-Plugins)
 - [Show](#show)
 - [License](#License)
 
@@ -886,7 +889,7 @@ $ tmux kill-server
 $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 ```
 
-## 💯 <a name="VimNeovim"></a> Vim/Neovim [↟](#Contents)
+## 💯 <a name="VimNeovim"></a>Vim/Neovim [↟](#Contents)
 
 ### <a name="Leader-Key"></a>Leader Key [⌅](#VimNeovim)
 
@@ -968,6 +971,84 @@ pressing `,f` will jump the cursor to the placeholder and delete it at the same 
 > All above shortcuts are in the _Vim Insert Mode_.
 
 ### <a name="VimNeovim-Plugins"></a>Vim/Neovim Plugins [⌅](#VimNeovim)
+
+### <a name="Put-Your-Own-Customization"></a>Put Your Own Customization [⌅](#VimNeovim)
+
+#### <a name="Add-More-Plugins"></a>Add More Plugins [⌆](#Put-your-own-customization)
+
+If you want to use other plugins that not in `$HOME/.vimrc` or `$HOME/.config/nvim/init.vim`,
+you can put them in `$HOME/.vimrc.plugins.local`.
+
+For example:
+
+```vim
+" For distraction-free writing in Vim.
+Plug 'junegunn/goyo.vim'
+```
+
+> NOTE:<br>
+> Do not put other configurations in `$HOME/.vimrc.plugins.local`,
+> you should put them in `$HOME/.vimrc.local`.
+
+#### <a name="Add-More-Configurations"></a>Add More Configurations [⌆](#Put-your-own-customization)
+
+You can put your own configurations in `$HOME/.vimrc.local`,
+it will be soured at the end of `$HOME/.vimrc` or `$HOME/.config/nvim/init.vim`.
+
+For example:
+
+```vim
+" *** For plugin 'junegunn/goyo.vim'
+" doc: https://github.com/junegunn/goyo.vim
+" Usage:
+"   :Goyo              Toggle Goyo
+"   :Goyo [dimension]  Turn on or resize Goyo
+"   :Goyo!             Turn Goyo off
+
+let g:goyo_width = 120 " default: 80
+let g:goyo_height = '85%' " default: 85%
+let g:goyo_linenr = 1 " default: 0
+
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+endfunction
+
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" **********************************
+```
+
+#### <a name="Disable-Default-Plugins"></a>Disable Default Plugins [⌆](#Put-your-own-customization)
+
+If you want to disable some plugins in `$HOME/.vimrc` or `$HOME/.config/nvim/init.vim`,
+you can `UnPlug` them in `$HOME/.vimrc.plugins.local`.
+
+For example:
+
+```vim
+" Disable smooth scroll feature.
+UnPlug 'terryma/vim-smooth-scroll'
+" Disable input method auto switch feature.
+UnPlug 'lyokha/vim-xkbswitch'
+" Disable vim hardtime feature.
+UnPlug 'takac/vim-hardtime'
+```
 
 ## 🔮 <a name="Show"></a>Show [↟](#Contents)
 
