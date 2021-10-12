@@ -3356,6 +3356,53 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" 标签页管理.
+"   g tab  normal 模式下切换到上一次访问的标签页;
+"   gt/gT  normal 模式下切换到下一个/上一个标签页;
+"
+"   , 1/2/3/4/5/6/7/8/9/0  normal 模式下切换到具体的某一个标签页.
+noremap <silent><leader>1 1gt<CR>
+noremap <silent><leader>2 2gt<CR>
+noremap <silent><leader>3 3gt<CR>
+noremap <silent><leader>4 4gt<CR>
+noremap <silent><leader>5 5gt<CR>
+noremap <silent><leader>6 6gt<CR>
+noremap <silent><leader>7 7gt<CR>
+noremap <silent><leader>8 8gt<CR>
+noremap <silent><leader>9 9gt<CR>
+noremap <silent><leader>0 10gt<CR>
+"   Option/Alt 1/2/3/4/5/6/7/8/9/0  normal/insert 模式下切换到具体的某一个标签页.
+noremap <silent><m-1> :tabn 1<cr>
+noremap <silent><m-2> :tabn 2<cr>
+noremap <silent><m-3> :tabn 3<cr>
+noremap <silent><m-4> :tabn 4<cr>
+noremap <silent><m-5> :tabn 5<cr>
+noremap <silent><m-6> :tabn 6<cr>
+noremap <silent><m-7> :tabn 7<cr>
+noremap <silent><m-8> :tabn 8<cr>
+noremap <silent><m-9> :tabn 9<cr>
+noremap <silent><m-0> :tabn 10<cr>
+inoremap <silent><m-1> <ESC>:tabn 1<cr>
+inoremap <silent><m-2> <ESC>:tabn 2<cr>
+inoremap <silent><m-3> <ESC>:tabn 3<cr>
+inoremap <silent><m-4> <ESC>:tabn 4<cr>
+inoremap <silent><m-5> <ESC>:tabn 5<cr>
+inoremap <silent><m-6> <ESC>:tabn 6<cr>
+inoremap <silent><m-7> <ESC>:tabn 7<cr>
+inoremap <silent><m-8> <ESC>:tabn 8<cr>
+inoremap <silent><m-9> <ESC>:tabn 9<cr>
+inoremap <silent><m-0> <ESC>:tabn 10<cr>
+"   ,fc  创建一个新的标签页文件;
+"   ,fq  关闭当前的标签页文件;
+"   ,fo  只保留当前的标签页, 关闭其他所有标签页;
+"   ,fn  切换到下一个标签页;
+"   ,fp  切换到上一个标签页.
+noremap <silent> <leader>fc :tabnew<cr>
+noremap <silent> <leader>fq :tabclose<cr>
+noremap <silent> <leader>fo :tabonly<cr>
+noremap <silent> <leader>fn :tabnext<cr>
+noremap <silent> <leader>fp :tabprev<cr>
+
 " 从额外的本地配置文件(如果存在的话)加载配置.
 let vimrc_local = $HOME . '/.vimrc.local'
 if filereadable(expand(vimrc_local))
@@ -3673,6 +3720,18 @@ endif
 "                 ,v  normal 模式下, 在背景是透明和不透明之间切换.
 "       ctrl k/j/h/l  normal 模式下, 上下左右在多窗口之间跳转.
 "
+" ** 标签页管理:
+"              g tab  normal 模式下切换到上一次访问的标签页.
+"              gt/gT  normal 模式下切换到下一个/上一个标签页.
+"               n gt  normal 模式下切换到具体的某一个标签页.
+"            , 1/2/3  normal 模式下切换到具体的某一个标签页.
+"   Option/Alt 1/2/3  normal/insert 模式下切换到具体的某一个标签页.
+"                ,fc  创建一个新的标签页文件.
+"                ,fq  关闭当前的标签页文件.
+"                ,fo  只保留当前的标签页, 关闭其他所有标签页.
+"                ,fn  切换到下一个标签页.
+"                ,fp  切换到上一个标签页.
+"
 " ** 快速输入 Markdown 语法标识符的自定义快捷键:
 "                 ,b  生成粗体字标识符.
 "                 ,i  生成斜体字标识符.
@@ -3815,7 +3874,6 @@ endif
 "                     然后使用 :w newfilename 来保存文件, 最后 r 来更新左侧目录树的显示.
 "              gt/gT  向右/向左切换标签页.
 "                3gt  切换到第 3 个标签, 切换到其他标签的方法类似.
-"          3 shift l  切换到第 3 个标签.
 "                  R  变更目录名称后, 更新目录树中的目录显示.
 "                 CD  如果当前目录树的根目录包含了很多项目, 要将某个项目设置为目录树的根,
 "                     则选择这个项目目录, 按 CD.
