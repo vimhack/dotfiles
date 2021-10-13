@@ -361,7 +361,11 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 " 日历插件.
 Plug 'itchyny/calendar.vim'
 
-" 为目录树、LeaderF、ranger 等插件显示文件类型.
+" 提供开始界面.
+" The fancy start screen for Vim.
+Plug 'mhinz/vim-startify'
+
+" 为目录树、LeaderF、ranger、vim-startify 等插件显示文件类型.
 " NOTE:
 " 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
 "    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
@@ -824,12 +828,14 @@ if &rtp =~ '/lightline.vim'
 
   " 由于此插件已经帮我们美化显示了当前的 Vim 模式, 所以 Vim 自带的模式显示可以去除.
   set noshowmode
+
+  let g:lightline = {}
 endif
 
 """""" 'maximbaz/lightline-ale'
 " doc: https://github.com/maximbaz/lightline-ale
 
-if &rtp =~ 'lightline-ale,'
+if &rtp =~ '/lightline-ale,'
   " 美化错误与警告等信息的显示图标.
   let g:lightline#ale#indicator_checking = "\uf110"
   let g:lightline#ale#indicator_ok = "\uf00c"
@@ -838,8 +844,6 @@ if &rtp =~ 'lightline-ale,'
   let g:lightline#ale#indicator_infos = "\uf129 "
   let g:lightline#ale#indicator_warnings = "\uf071 "
   let g:lightline#ale#indicator_errors = "\uf05e "
-
-  let g:lightline = {}
 
   let g:lightline.component_expand = {
     \  'linter_checking': 'lightline#ale#checking',
@@ -904,6 +908,24 @@ if &rtp =~ 'lightline-ale,'
 
     " 窗口宽度大于120时, 状态栏才显示 git blame 信息.
     return winwidth(0) > 120 ? blame : ''
+  endfunction
+endif
+
+"""""" 'mhinz/vim-startify'
+" doc: https://github.com/mhinz/vim-startify
+" :help vim-startify
+
+if &rtp =~ '/vim-startify,'
+  " 在状态栏添加适合的文件类型和文件格式图标.
+  let g:lightline.component_function.filetype = 'MyFiletype'
+  let g:lightline.component_function.fileformat = 'MyFileformat'
+
+  function! MyFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  endfunction
+
+  function! MyFileformat()
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
   endfunction
 endif
 
@@ -2015,8 +2037,9 @@ if &rtp =~ '/nerdtree,'
   let NERDTreeMinimalMenu=0
 
   " 运行 Vim 时, 后面不接任何文件的情况, 自动打开目录树窗口.
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+  " NOTE: 会与 vim-startify 插件冲突, 注释掉, 暂时不使用.
+  "autocmd StdinReadPre * let s:std_in=1
+  "autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
   " 运行 Vim 的时候自动打开目录树. 如果 vim 后面接了文件, 则将光标自动移动到文件窗口.
   " NOTE: 如果使用 tmux, 不建议启用此条配置.
@@ -2165,6 +2188,50 @@ endif
 if &rtp =~ '/vim-matrix-screensaver,'
   " 在当前 Vim 窗口启用 Matrix 屏幕保护.
   nmap <leader>m :Matrix<CR>
+endif
+
+"""""" 'mhinz/vim-startify'
+" doc: https://github.com/mhinz/vim-startify
+
+if &rtp =~ '/vim-startify,'
+  " Returns all modified files of the current git repo.
+  " `2>/dev/null` makes the command fail quietly, so that when we are not
+  " in a git repo, the list will be empty.
+  function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+  endfunction
+
+  " Same as above, but show untracked files, honouring .gitignore
+  function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+  endfunction
+
+  let g:startify_lists = [
+    \ { 'type': 'files',     'header': ['   MRU']            },
+    \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+    \ { 'type': 'sessions',  'header': ['   Sessions']       },
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+    \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+    \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+    \ { 'type': 'commands',  'header': ['   Commands']       },
+    \ ]
+
+  " Create a custom header using figlet.
+  "   MacOS: brew install figlet
+  "let g:startify_custom_header =
+    "\ startify#pad(split(system('figlet -w 100 VimHack/Dotfiles'), '\n'))
+  let g:startify_custom_header = [
+        \ '   __     ___           _   _            _        ______        _    __ _             ',
+        \ '   \ \   / (_)_ __ ___ | | | | __ _  ___| | __   / /  _ \  ___ | |_ / _(_) | ___  ___ ',
+        \ '    \ \ / /| | ''_ ` _ \| |_| |/ _` |/ __| |/ /  / /| | | |/ _ \| __| |_| | |/ _ \/ __|',
+        \ '     \ V / | | | | | | |  _  | (_| | (__|   <  / / | |_| | (_) | |_|  _| | |  __/\__ \',
+        \ '      \_/  |_|_| |_| |_|_| |_|\__,_|\___|_|\_\/_/  |____/ \___/ \__|_| |_|_|\___||___/',
+        \ ]
+
+  " Custom footer.
+  let g:startify_custom_footer= 'startify#pad(startify#fortune#cowsay())'
 endif
 
 " }}
