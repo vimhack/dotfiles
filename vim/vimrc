@@ -3357,52 +3357,71 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" 标签页管理.
+" 标签页切换.
 "   g tab  normal 模式下切换到上一次访问的标签页;
 "   gt/gT  normal 模式下切换到下一个/上一个标签页;
 "
 "   , 1/2/3/4/5/6/7/8/9/0  normal 模式下切换到具体的某一个标签页.
-noremap <silent><leader>1 1gt<CR>
-noremap <silent><leader>2 2gt<CR>
-noremap <silent><leader>3 3gt<CR>
-noremap <silent><leader>4 4gt<CR>
-noremap <silent><leader>5 5gt<CR>
-noremap <silent><leader>6 6gt<CR>
-noremap <silent><leader>7 7gt<CR>
-noremap <silent><leader>8 8gt<CR>
-noremap <silent><leader>9 9gt<CR>
-noremap <silent><leader>0 10gt<CR>
+noremap <silent> <leader>1 1gt<CR>
+noremap <silent> <leader>2 2gt<CR>
+noremap <silent> <leader>3 3gt<CR>
+noremap <silent> <leader>4 4gt<CR>
+noremap <silent> <leader>5 5gt<CR>
+noremap <silent> <leader>6 6gt<CR>
+noremap <silent> <leader>7 7gt<CR>
+noremap <silent> <leader>8 8gt<CR>
+noremap <silent> <leader>9 9gt<CR>
+noremap <silent> <leader>0 10gt<CR>
 "   Option/Alt 1/2/3/4/5/6/7/8/9/0  normal/insert 模式下切换到具体的某一个标签页.
-noremap <silent><m-1> :tabn 1<cr>
-noremap <silent><m-2> :tabn 2<cr>
-noremap <silent><m-3> :tabn 3<cr>
-noremap <silent><m-4> :tabn 4<cr>
-noremap <silent><m-5> :tabn 5<cr>
-noremap <silent><m-6> :tabn 6<cr>
-noremap <silent><m-7> :tabn 7<cr>
-noremap <silent><m-8> :tabn 8<cr>
-noremap <silent><m-9> :tabn 9<cr>
-noremap <silent><m-0> :tabn 10<cr>
-inoremap <silent><m-1> <ESC>:tabn 1<cr>
-inoremap <silent><m-2> <ESC>:tabn 2<cr>
-inoremap <silent><m-3> <ESC>:tabn 3<cr>
-inoremap <silent><m-4> <ESC>:tabn 4<cr>
-inoremap <silent><m-5> <ESC>:tabn 5<cr>
-inoremap <silent><m-6> <ESC>:tabn 6<cr>
-inoremap <silent><m-7> <ESC>:tabn 7<cr>
-inoremap <silent><m-8> <ESC>:tabn 8<cr>
-inoremap <silent><m-9> <ESC>:tabn 9<cr>
-inoremap <silent><m-0> <ESC>:tabn 10<cr>
+noremap <silent> <M-1> :tabn 1<CR>
+noremap <silent> <M-2> :tabn 2<CR>
+noremap <silent> <M-3> :tabn 3<CR>
+noremap <silent> <M-4> :tabn 4<CR>
+noremap <silent> <M-5> :tabn 5<CR>
+noremap <silent> <M-6> :tabn 6<CR>
+noremap <silent> <M-7> :tabn 7<CR>
+noremap <silent> <M-8> :tabn 8<CR>
+noremap <silent> <M-9> :tabn 9<CR>
+noremap <silent> <M-0> :tabn 10<CR>
+inoremap <silent> <M-1> <ESC>:tabn 1<CR>
+inoremap <silent> <M-2> <ESC>:tabn 2<CR>
+inoremap <silent> <M-3> <ESC>:tabn 3<CR>
+inoremap <silent> <M-4> <ESC>:tabn 4<CR>
+inoremap <silent> <M-5> <ESC>:tabn 5<CR>
+inoremap <silent> <M-6> <ESC>:tabn 6<CR>
+inoremap <silent> <M-7> <ESC>:tabn 7<CR>
+inoremap <silent> <M-8> <ESC>:tabn 8<CR>
+inoremap <silent> <M-9> <ESC>:tabn 9<CR>
+inoremap <silent> <M-0> <ESC>:tabn 10<CR>
+
+"   ,fn  切换到下一个标签页;
+"   ,fp  切换到上一个标签页.
+noremap <silent> <leader>fn :tabnext<CR>
+noremap <silent> <leader>fp :tabprev<CR>
+
+" 标签页管理.
 "   ,fc  创建一个新的标签页文件;
 "   ,fq  关闭当前的标签页文件;
 "   ,fo  只保留当前的标签页, 关闭其他所有标签页;
-"   ,fn  切换到下一个标签页;
-"   ,fp  切换到上一个标签页.
-noremap <silent> <leader>fc :tabnew<cr>
-noremap <silent> <leader>fq :tabclose<cr>
-noremap <silent> <leader>fo :tabonly<cr>
-noremap <silent> <leader>fn :tabnext<cr>
-noremap <silent> <leader>fp :tabprev<cr>
+"   ,fh  向左移动标签页;
+"   ,fl  向右移动标签页.
+noremap <silent> <leader>fc :tabnew<CR>
+noremap <silent> <leader>fq :tabclose<CR>
+noremap <silent> <leader>fo :tabonly<CR>
+noremap <silent> <leader>fh :call Tab_MoveLeft()<CR>
+noremap <silent> <leader>fl :call Tab_MoveRight()<CR>
+function! Tab_MoveLeft()
+  let l:tabnr = tabpagenr() - 2
+  if l:tabnr >= 0
+    exec 'tabmove '.l:tabnr
+  endif
+endfunc
+function! Tab_MoveRight()
+  let l:tabnr = tabpagenr() + 1
+  if l:tabnr <= tabpagenr('$')
+    exec 'tabmove '.l:tabnr
+  endif
+endfunc
 
 " 从额外的本地配置文件(如果存在的话)加载配置.
 let vimrc_local = $HOME . '/.vimrc.local'
@@ -3732,6 +3751,8 @@ endif
 "                ,fo  只保留当前的标签页, 关闭其他所有标签页.
 "                ,fn  切换到下一个标签页.
 "                ,fp  切换到上一个标签页.
+"                ,fh  向左移动标签页;
+"                ,fl  向右移动标签页.
 "
 " ** 快速输入 Markdown 语法标识符的自定义快捷键:
 "                 ,b  生成粗体字标识符.
