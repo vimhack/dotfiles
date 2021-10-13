@@ -908,6 +908,15 @@ The vim leader key has been changed from `\`(default) to `,`.
 - `Ctrl` `k`/`j`/`h`/`l` : Move the cursor to up/down/left/right window
 - `Ctrl` `e`/`y` : Move the screen down or up by 3 lines step
 - `0` : Move the cursor to the first non-blank character, if already at the first character, then to the first character.
+- `,` `1`/`2`/`3`... : Go to the specific tab
+- `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
+- `,` `fc` : Create new tab
+- `,` `fq` : Close current tab
+- `,` `fo` : Close all tabs except current one
+- `,` `fn` : Go to the next tab
+- `,` `fp` : Go to the previous tab
+- `,` `fh` : Move the tab to the left
+- `,` `fl` : Move the tab to the right
 
 #### <a name="Insert-Mode"></a>Insert Mode [⌆](#Custom-key-bindings)
 
@@ -915,12 +924,14 @@ The vim leader key has been changed from `\`(default) to `,`.
 - `Ctrl` `e` : Move the cursor to the end of the line
 - `Ctrl` `a`: Press twice for moving the cursor to the first non-blank character,
   and press twice once again for moving the cursor to the first character.
+  > NOTE: Press twice coz `Ctrl` `a` is also the tmux prefix key.
 - `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
 - `Ctrl` `h`/`l` : Delete a character from left/right
 - `Ctrl` `d` : Delete from the cursor position to the end of the line.
 - `Ctrl` `u` : Delete from the cursor position to the head of the line.
 - `Ctrl` `w` : Delete a word from left
 - `Ctrl` `s`: Toggle spell check
+- `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
 
 #### <a name="Visual-Mode"></a>Visual Mode [⌆](#Custom-key-bindings)
 
