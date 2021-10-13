@@ -493,415 +493,6 @@ call plug#end()
 " }}
 
 
-" 代码自动补全  Code Completion {{
-
-"""""""" neoclide/coc.nvim
-" CoC 的全称是: Conqure of Completion
-" doc: https://github.com/neoclide/coc.nvim
-"
-
-" *** 基本命令 ***
-"                  :CocInfo  补全服务启动失败原因查看.
-"               :CocOpenLog  查看补全服务的日志.
-"                :CocConfig  打开 ~/.vim/coc-settings.json.
-"                            NOTE: 已映射快捷键 :C
-"       :CocList extensions  查看安装了哪些扩展, 通过 ctrl k/j 上下滚动查看:
-"                            * 表示激活的扩展;
-"                            + 表示已经加载的扩展;
-"                            - 表示禁用的扩展;
-"                            ? 表示不正常的扩展.
-"                            选中某一个扩展后, 按 tab 键将会提示相应的操作.
-"                            NOTE: 已映射快捷键 space e
-"      :CocInstall coc-json  安装 Json language server.
-"    :CocUninstall coc-json  卸载 Json language server.
-"                :CocUpdate  更新所有扩展.
-"          :CocList sources  列出当前已经有哪些代码补全的数据源.
-" ****************
-
-" *** 补全菜单的符号说明 ***
-"   [LS]  Language Server, 补全来自语言服务器.
-"    [S]  Snippets, 补全来自 Snippets.
-"   [US]  UltiSnips, 补全来自 UltiSnips.
-"   [TN]  TabNine, 补全来自 TabNine.
-"  [GOC]  Gocode, 补全来自 gocode.
-"  [NEC]  Neco-vim, 补全来自 Shougo/neco-vim 插件.
-"    [A]  Around, 补全来自当前文件(buffer).
-"    [B]  Buffer, 补全来自其他已经打开的文件(buffer).
-"    [F]  File, 补全来自文件名自动检测.
-"      M  Module, 此条补全是一个模块.
-"      I  Interface, 是一个接口.
-"      S  Struct, 是一个结构体.
-"      f  func, 是一个函数.
-" **************************
-
-if &rtp =~ '/coc.nvim,'
-  " 设置隐藏模式, 未保存的 buffer (文件)可以被切换走或者关闭;
-  " 如果不设置这个, TextEdit 可能失败.
-  set hidden
-
-  " 底部命令模式的显示高度, 默认值 1.
-  " 设置为 2 是为了给提示信息更多的展示空间, 防止信息截断.
-  set cmdheight=2
-
-  " 不要将信息传递给 ins-completion-menu.
-  set shortmess+=c
-
-  " *** coc.nvim 扩展安装 ***
-  " 将需要安装的 coc.nvim 扩展(语言服务器等) 放到数组中,
-  " 打开 vim 时, coc.nvim 会自动对扩展进行自动安装.
-  " doc: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-  " 部分扩展说明:
-  "   coc-jedi: Python3.6.1+
-  "   coc-css: Css/Less/Sass
-  "   coc-vetur: 需要在 vue 项目根路径下运行: npm i eslint eslint-plugin-vue -D
-  "   coc-snippets: 需要安装 vim 插件: Plug 'honza/vim-snippets'
-  "   coc-ultisnips: 需要安装 vim 插件: Plug 'SirVer/ultisnips'
-  "   coc-gocode: 为 Go 提供代码片段补全的数据库.
-  "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
-  "   coc-xml: 系统中需要安装 java: brew install java
-  "   coc-tabnine: 基于 AI 的自动补全，可以辅助更快地撰写代码.
-  let g:coc_global_extensions = [
-    \ 'coc-json',
-    \ 'coc-git',
-    \ 'coc-go',
-    \ 'coc-gocode',
-    \ 'coc-rls',
-    \ 'coc-rust-analyzer',
-    \ 'coc-clangd',
-    \ 'coc-jedi',
-    \ 'coc-java',
-    \ 'coc-sh',
-    \ 'coc-perl',
-    \ 'coc-tsserver',
-    \ 'coc-css',
-    \ 'coc-cssmodules',
-    \ 'coc-emmet',
-    \ 'coc-html',
-    \ 'coc-vetur',
-    \ 'coc-sql',
-    \ 'coc-toml',
-    \ 'coc-yaml',
-    \ 'coc-xml',
-    \ 'coc-vimlsp',
-    \ 'coc-snippets',
-    \ 'coc-ultisnips',
-    \ 'coc-emoji',
-    \ 'coc-swagger',
-    \ 'coc-translator',
-    \ 'coc-tabnine',
-    \ ]
-  " *************************
-
-  " *** ~/.vim/coc-settings.json ***
-  "   该配置文件可对 coc.nvim 以及安装的各种扩展进行个性配置,
-  "   如果已经安装了 coc-json 扩展, 则该配置文件将支持自动补全和合法性检查,
-  "   方便我们进行配置.
-
-  " :C  打开 ~/.vim/coc-settings.json 配置文件.
-  function! SetupCommandAbbrs(from, to)
-    exec 'cnoreabbrev <expr> '.a:from
-      \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
-      \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-  endfunction
-  call SetupCommandAbbrs('C', 'CocConfig')
-  " ********************************
-
-  " *** coc-tabnine ***
-  " doc: https://github.com/neoclide/coc-tabnine
-  "
-  " 1) 打开 TabNine 的配置文件
-  "    :CocCommand tabnine.openConfig
-  "    NOTE:
-  "    如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
-  "    需要先删除 ~/.config/coc/extensions/coc-tabnine-data,
-  "    然后重新安装 coc-tabnine, :CocInstall coc-tabnine
-  " 2) 为了使 coc.nvim 更好的配合 TabNine 工作, 将如下条目加入到 TabNine 的配置文件
-  "    "ignore_all_lsp": true
-  " 3) 成功安装配置后, 在代码补全的时候, 补全提示列表中会存在标识为 [TN] 的代码源.
-  " *******************
-
-  " *** coc-translator ***
-  " doc: https://github.com/voldikss/coc-translator
-  " NOTE: 有可能被google翻译禁止使用其接口导致翻译失败报错.
-
-  " normal 和 visual 模式下, 将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
-  nmap ts <Plug>(coc-translator-p)
-  vmap ts <Plug>(coc-translator-pv)
-  " 在状态栏下面显示翻译的结果.
-  nmap tse <Plug>(coc-translator-e)
-  vmap tse <Plug>(coc-translator-ev)
-  " 将翻译结果替换掉光标下的单词.
-  nmap tsr <Plug>(coc-translator-r)
-  vmap tsr <Plug>(coc-translator-rv)
-  " **********************
-
-  " *** coc-css ***
-  autocmd FileType scss setl iskeyword+=@-@
-  " ***************
-
-  " *** coc-git ***
-  " navigate chunks of current buffer
-  nmap [g <Plug>(coc-git-prevchunk)
-  nmap ]g <Plug>(coc-git-nextchunk)
-  " navigate conflicts of current buffer
-  nmap [c <Plug>(coc-git-prevconflict)
-  nmap ]c <Plug>(coc-git-nextconflict)
-  " show chunk diff at current position
-  nmap <leader>gd <Plug>(coc-git-chunkinfo)
-  " show commit contains current position
-  nmap <leader>gc <Plug>(coc-git-commit)
-  " ***************
-
-  " 使用 tab 键触发补全, 选择补全.
-  inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
-
-  " 使用 <CR>(回车键) 来自动选择补全条目的第一条并格式化代码.
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-  " SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
-  " 实际上并不会用到这里设置的快捷键.
-  let g:UltiSnipsExpandTrigger="<leader>,,,f"
-
-  " gd  跳转到定义处.
-  nmap <silent> gd <Plug>(coc-definition)
-  " gy  跳转到类型定义处.
-  nmap <silent> gy <Plug>(coc-type-definition)
-  " gi  跳转到实现处.
-  nmap <silent> gi <Plug>(coc-implementation)
-  " gr  在 location list 中列出相关条目, 如果相关的只有1条, 则直接跳转过去.
-  nmap <silent> gr <Plug>(coc-references)
-
-  " ,rn  级联的对光标所在 symbol 进行重命名.
-  nmap <leader>rn <Plug>(coc-rename)
-
-  " K  在悬浮窗口中查看文档.
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    " 使支持 tmux-plugins/vim-tmux 插件.
-    elseif (index(['tmux'], &filetype) >= 0)
-      call tmux#man()
-    elseif (coc#rpc#ready())
-      call CocActionAsync('doHover')
-    else
-      execute '!' . &keywordprg . " " . expand('<cword>')
-    endif
-  endfunction
-
-  " 突出显示光标所在 symbol 及其引用.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  " 使用 <C-f> 和 <C-b> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
-  " 比如在查看较长的文档时出现了滚动条的场景下使用.
-  let lines_count=5
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
-    \ coc#float#scroll(1, lines_count) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
-    \ coc#float#scroll(0, lines_count) : "\<C-b>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
-    \ coc#float#scroll(1, lines_count) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
-    \ coc#float#scroll(0, lines_count) : "\<C-b>"
-  " insert 模式下, 代码补全提示的选项列表中,
-  " 通过 tab 选择一项所弹出来的详细说明窗口中如果出现滚动条,
-  " 则可以使用此快捷键进行内容滚动, 否则分别表示向右或向左移动一个字符.
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
-    \ "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
-    \ "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
-
-  " *** CocList 相关命令快捷键映射 ***
-  " NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
-  "
-  " space e  列出所有扩展.
-  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-  " space c  列出所有命令.
-  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-  " space s  列出当前所在文件类型有哪些代码补全数据源.
-  nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
-  " space p  重新列出上一次展示的 CocList.
-  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-endif
-
-" }}
-
-
-" 代码静态检查  Code Static Check {{
-
-" ale 用于替代 syntastic 插件.
-" NOTE: :ALEInfo  用于查看当前文件的语法检查配置情况,
-" 内容尾部是对当前文件内容执行检查的日志, 可通过这些日志排查问题.
-" doc: https://github.com/dense-analysis/ale
-
-if &rtp =~ '/ale,'
-  " 定制显示在行左侧的错误提示符和警告提示符.
-  " 默认值: '>>'
-  let g:ale_sign_error = '>>'
-  " 默认值: '--'
-  let g:ale_sign_warning = '--'
-
-  " 左侧的错误/警告提示列是否一直保持打开, 默认值: 0
-  let g:ale_sign_column_always = 0
-
-  " 用于错误或警告提示的字符串.
-  " 默认值: 'Error'
-  let g:ale_echo_msg_error_str = 'Error'
-  " 默认值: 'Warning'
-  let g:ale_echo_msg_warning_str = 'Warning'
-
-  " 设置提示信息的输出格式, 默认值: '%code: %%s'
-  let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
-
-  " 是否将 ale linter 发现的错误或警告的具体位置列表信息添加到 location list 中.
-  " 我们这里禁用, 以防止使用 gr 时, 破坏 gr 使用的 location list.
-  " 默认值: 1
-  let g:ale_set_loclist = 0
-
-  " 如果 location list 不为空, 是否打开一个独立的窗口显示其信息, 默认值: 0
-  let g:ale_open_list = 0
-  " 错误信息窗口的高度, 在 g:ale_open_list 设置为 1 时才有效果, 默认值: 10
-  let g:ale_list_window_size = 5
-
-  " 错误或警告信息全部修复后, 是否保留错误信息窗口, 1 表示保留, 默认值: 0
-  let g:ale_keep_list_window_open = 0
-
-  " 退出文件时, 如果仅剩错误信息窗口, 则其也一同退出(loclist).
-  augroup CloseLoclistWindowGroup
-    autocmd!
-    autocmd QuitPre * if empty(&buftype) | lclose | endif
-  augroup END
-
-  " 新打开文件时是否自动 lint, 默认值: 1
-  let g:ale_lint_on_enter = 1
-
-  " 保存文件时是否进行 lint, 默认值: 1
-  let g:ale_lint_on_save = 1
-
-  " 保存文件时是否进行 fix,  默认值: 0
-  let g:ale_fix_on_save = 1
-
-  " , k/j 在错误提示之间跳转.
-  nmap <silent> <leader>k <Plug>(ale_previous_wrap)
-  nmap <silent> <leader>j <Plug>(ale_next_wrap)
-
-  " 针对不同语言的静态代码检查工具配置.
-  " NOTE:
-  "   1) 其他没有在这里配置的语言将使用 ale 默认配置的 linter,
-  "      可以使用 :ALEInfo 来查看当前文件使用了哪些默认的 linter.
-  "
-  "   2) 注意需要在本地安装涉及到的命令行工具:
-  "      brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
-  "      luarocks install luacheck
-  "      npm install -g eslint standard eslint-plugin-vue vls \
-  "          proselint alex write-good stylelint markdownlint jsonlint
-  "      pip3 install pylint flake8 yamllint
-  "      go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.39.0
-  "      go get -u github.com/mgechev/revive
-  "      sudo gem install mdl
-  "
-  "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
-  "      我们这里使用 standard 风格: eslint --init
-  "      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
-  "      将配置生成到 package.json 的 eslintConfig 字段.
-  "
-  "   4) prettier 配置文件, 项目根目录下的 .prettierrc.json:
-  "      {
-  "        "singleQuote": true,
-  "        "semi": false
-  "      }
-  "
-  "   5) 对于 Python 项目, 如果使用虚拟环境, 需要在虚拟环境下安装相关 linter 工具,
-  "      拿 Python 的依赖管理工具 poetry 举例:
-  "      poetry init
-  "      poetry shell
-  "      poetry add pylint flake8 autoimport black isort -D
-  let g:ale_linters = {
-    \  'go': ['golangci-lint', 'revive', 'gopls'],
-    \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
-    \  'python': ['pylint', 'flake8'],
-    \  'lua': ['luac', 'luacheck'],
-    \  'sh': ['shellcheck', 'language_server'],
-    \  'zsh': ['shellcheck', 'language_server'],
-    \  'javascript': ['eslint', 'standard'],
-    \  'vue': ['eslint', 'vls'],
-    \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
-    \  'yaml': ['yamllint'],
-    \  'json': ['jq', 'jsonlint'],
-    \  'jsonc': ['jq', 'jsonlint'],
-    \  'markdown': ['markdownlint'],
-    \ }
-
-  " golangci-lint 配置:
-  " 指定可执行文件的具体名称.
-  let g:ale_go_golangci_lint_executable = 'golangci-lint'
-  " golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
-  let g:ale_go_golangci_lint_options = ''
-  " golangci-lint run 命令以包为单位进行检查,
-  " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
-  let g:ale_go_golangci_lint_package = 1
-
-  " flake8 配置:
-  " 指定允许的 Python 代码每行最大字符数, 默认值 79.
-  let g:ale_python_flake8_options = '--max-line-length 120'
-
-  " yamllint 配置:
-  " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
-  " 指定可执行文件的具体名称.
-  let g:ale_yaml_yamllint_executable = 'yamllint'
-  " 配置参数.
-  let g:ale_yaml_yamllint_options = '-d "{
-    \ extends: relaxed,
-    \ rules: {
-    \   line-length: {max: 200},
-    \ },
-    \ }"'
-
-  " 针对不同语言的自动修复功能.
-  "    需要安装相关的命令行工具:
-  "       npm install -g prettier importjs lua-fmt
-  "       pip3 install black isort
-  "       go get mvdan.cc/sh/v3/cmd/shfmt
-  "
-  " NOTE:
-  "   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;
-  "      用于 python 的 isort, 可选择性使用, 我这里也不启用,
-  "      直接用 black 的 import 排版能力即可.
-  "   2) lua 的 luafmt 可进行自动格式化, 由于其格式化效果不符合我的审美要求,
-  "      我这里暂不启用.
-  "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
-  "      所以不用重复添加.
-  let g:ale_fixers = {
-    \  'go': ['gofmt', 'goimports'],
-    \  'rust': ['rustfmt'],
-    \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
-    \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
-    \  'sh': ['shfmt'],
-    \  'javascript': ['eslint', 'importjs'],
-    \  'vue': ['eslint'],
-    \  'html': ['prettier'],
-    \  'json': ['jq'],
-    \  'jsonc': ['jq'],
-    \  'yaml': ['prettier'],
-    \  'markdown': ['prettier'],
-    \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
-    \  'zsh': ['trim_whitespace', 'remove_trailing_lines'],
-    \  'tmux': ['trim_whitespace', 'remove_trailing_lines'],
-    \ }
-endif
-
-" }}
-
-
 " 效率相关  Configuration of Efficiency Related Plugins {{
 
 """""" takac/vim-hardtime
@@ -2624,21 +2215,22 @@ au FileType go nmap <leader>cl :GoCallers<CR>
 au FileType go nmap <leader>s <Plug>(go-implements)
 
 " NOTE:
-"   Go 跳转到光标所在函数定义处的4种方式均由 vim-go 插件提供, 和 YCM 配置无关.
+"   Go 跳转到光标所在函数定义处的 4 种方式均由 vim-go 插件提供.
 "   如果光标所在函数定义处就是在当前页面, 则直接在当前页内跳转, 并不打开新页面;
 "   如果在当前页面内跳转, 推荐使用 ctrl o/i 来回跳转切换, 以提高效率.
 "
-" gd  默认以覆盖当前页面的方式跳转到函数定义处, vim-go插件默认行为, 无需配置.
+" gd  默认以覆盖当前页面的方式跳转到函数定义处, vim-go 插件默认行为(go-def), 无需配置.
+" gt  新开一个标签页的方式跳转到函数定义处, coc.nvim 提供的能力,
+"     这里我们不使用 vim-go 提供的 go-def-tab,
+"     因为 go-def-tab 经常会错误的以上下分屏的方式跳转到定义处.
 "
-" gl  新开一个标签页的方式跳转到函数定义处.
-au FileType go nmap <silent> gl <Plug>(go-def-tab)
 " gs  上下分屏跳转到函数定义处.
 au FileType go nmap <silent> gs <Plug>(go-def-split)
 " gv  左右分屏跳转到函数定义处.
 au FileType go nmap <silent> gv <Plug>(go-def-vertical)
 
 " 对于跳转到对象定义处的功能, 重用已经打开的buffer. 默认值: 0
-let g:go_def_reuse_buffer = 1
+let g:go_def_reuse_buffer = 0
 
 " *** 代码自动生成 ***
 
@@ -2913,6 +2505,415 @@ au FileType vim setlocal expandtab ts=2 sw=2 sts=2
 au FileType yaml setlocal expandtab ts=2 sw=2 sts=2
 
 " }}
+
+" }}
+
+
+" 代码自动补全  Code Completion {{
+
+"""""""" neoclide/coc.nvim
+" CoC 的全称是: Conqure of Completion
+" doc: https://github.com/neoclide/coc.nvim
+"
+
+" *** 基本命令 ***
+"                  :CocInfo  补全服务启动失败原因查看.
+"               :CocOpenLog  查看补全服务的日志.
+"                :CocConfig  打开 ~/.vim/coc-settings.json.
+"                            NOTE: 已映射快捷键 :C
+"       :CocList extensions  查看安装了哪些扩展, 通过 ctrl k/j 上下滚动查看:
+"                            * 表示激活的扩展;
+"                            + 表示已经加载的扩展;
+"                            - 表示禁用的扩展;
+"                            ? 表示不正常的扩展.
+"                            选中某一个扩展后, 按 tab 键将会提示相应的操作.
+"                            NOTE: 已映射快捷键 space e
+"      :CocInstall coc-json  安装 Json language server.
+"    :CocUninstall coc-json  卸载 Json language server.
+"                :CocUpdate  更新所有扩展.
+"          :CocList sources  列出当前已经有哪些代码补全的数据源.
+" ****************
+
+" *** 补全菜单的符号说明 ***
+"   [LS]  Language Server, 补全来自语言服务器.
+"    [S]  Snippets, 补全来自 Snippets.
+"   [US]  UltiSnips, 补全来自 UltiSnips.
+"   [TN]  TabNine, 补全来自 TabNine.
+"  [GOC]  Gocode, 补全来自 gocode.
+"  [NEC]  Neco-vim, 补全来自 Shougo/neco-vim 插件.
+"    [A]  Around, 补全来自当前文件(buffer).
+"    [B]  Buffer, 补全来自其他已经打开的文件(buffer).
+"    [F]  File, 补全来自文件名自动检测.
+"      M  Module, 此条补全是一个模块.
+"      I  Interface, 是一个接口.
+"      S  Struct, 是一个结构体.
+"      f  func, 是一个函数.
+" **************************
+
+if &rtp =~ '/coc.nvim,'
+  " 设置隐藏模式, 未保存的 buffer (文件)可以被切换走或者关闭;
+  " 如果不设置这个, TextEdit 可能失败.
+  set hidden
+
+  " 底部命令模式的显示高度, 默认值 1.
+  " 设置为 2 是为了给提示信息更多的展示空间, 防止信息截断.
+  set cmdheight=2
+
+  " 不要将信息传递给 ins-completion-menu.
+  set shortmess+=c
+
+  " *** coc.nvim 扩展安装 ***
+  " 将需要安装的 coc.nvim 扩展(语言服务器等) 放到数组中,
+  " 打开 vim 时, coc.nvim 会自动对扩展进行自动安装.
+  " doc: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+  " 部分扩展说明:
+  "   coc-jedi: Python3.6.1+
+  "   coc-css: Css/Less/Sass
+  "   coc-vetur: 需要在 vue 项目根路径下运行: npm i eslint eslint-plugin-vue -D
+  "   coc-snippets: 需要安装 vim 插件: Plug 'honza/vim-snippets'
+  "   coc-ultisnips: 需要安装 vim 插件: Plug 'SirVer/ultisnips'
+  "   coc-gocode: 为 Go 提供代码片段补全的数据库.
+  "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
+  "   coc-xml: 系统中需要安装 java: brew install java
+  "   coc-tabnine: 基于 AI 的自动补全，可以辅助更快地撰写代码.
+  let g:coc_global_extensions = [
+    \ 'coc-json',
+    \ 'coc-git',
+    \ 'coc-go',
+    \ 'coc-gocode',
+    \ 'coc-rls',
+    \ 'coc-rust-analyzer',
+    \ 'coc-clangd',
+    \ 'coc-jedi',
+    \ 'coc-java',
+    \ 'coc-sh',
+    \ 'coc-perl',
+    \ 'coc-tsserver',
+    \ 'coc-css',
+    \ 'coc-cssmodules',
+    \ 'coc-emmet',
+    \ 'coc-html',
+    \ 'coc-vetur',
+    \ 'coc-sql',
+    \ 'coc-toml',
+    \ 'coc-yaml',
+    \ 'coc-xml',
+    \ 'coc-vimlsp',
+    \ 'coc-snippets',
+    \ 'coc-ultisnips',
+    \ 'coc-emoji',
+    \ 'coc-swagger',
+    \ 'coc-translator',
+    \ 'coc-tabnine',
+    \ ]
+  " *************************
+
+  " *** ~/.vim/coc-settings.json ***
+  "   该配置文件可对 coc.nvim 以及安装的各种扩展进行个性配置,
+  "   如果已经安装了 coc-json 扩展, 则该配置文件将支持自动补全和合法性检查,
+  "   方便我们进行配置.
+
+  " :C  打开 ~/.vim/coc-settings.json 配置文件.
+  function! SetupCommandAbbrs(from, to)
+    exec 'cnoreabbrev <expr> '.a:from
+      \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+      \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+  endfunction
+  call SetupCommandAbbrs('C', 'CocConfig')
+  " ********************************
+
+  " *** coc-tabnine ***
+  " doc: https://github.com/neoclide/coc-tabnine
+  "
+  " 1) 打开 TabNine 的配置文件
+  "    :CocCommand tabnine.openConfig
+  "    NOTE:
+  "    如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
+  "    需要先删除 ~/.config/coc/extensions/coc-tabnine-data,
+  "    然后重新安装 coc-tabnine, :CocInstall coc-tabnine
+  " 2) 为了使 coc.nvim 更好的配合 TabNine 工作, 将如下条目加入到 TabNine 的配置文件
+  "    "ignore_all_lsp": true
+  " 3) 成功安装配置后, 在代码补全的时候, 补全提示列表中会存在标识为 [TN] 的代码源.
+  " *******************
+
+  " *** coc-translator ***
+  " doc: https://github.com/voldikss/coc-translator
+  " NOTE: 有可能被google翻译禁止使用其接口导致翻译失败报错.
+
+  " normal 和 visual 模式下, 将光标下的单词以弹出漂浮窗口的方式显示翻译结果.
+  nmap ts <Plug>(coc-translator-p)
+  vmap ts <Plug>(coc-translator-pv)
+  " 在状态栏下面显示翻译的结果.
+  nmap tse <Plug>(coc-translator-e)
+  vmap tse <Plug>(coc-translator-ev)
+  " 将翻译结果替换掉光标下的单词.
+  nmap tsr <Plug>(coc-translator-r)
+  vmap tsr <Plug>(coc-translator-rv)
+  " **********************
+
+  " *** coc-css ***
+  autocmd FileType scss setl iskeyword+=@-@
+  " ***************
+
+  " *** coc-git ***
+  " navigate chunks of current buffer
+  nmap [g <Plug>(coc-git-prevchunk)
+  nmap ]g <Plug>(coc-git-nextchunk)
+  " navigate conflicts of current buffer
+  nmap [c <Plug>(coc-git-prevconflict)
+  nmap ]c <Plug>(coc-git-nextconflict)
+  " show chunk diff at current position
+  nmap <leader>gd <Plug>(coc-git-chunkinfo)
+  " show commit contains current position
+  nmap <leader>gc <Plug>(coc-git-commit)
+  " ***************
+
+  " 使用 tab 键触发补全, 选择补全.
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  " 使用 <CR>(回车键) 来自动选择补全条目的第一条并格式化代码.
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  " SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
+  " 实际上并不会用到这里设置的快捷键.
+  let g:UltiSnipsExpandTrigger="<leader>,,,f"
+
+  " gt  新建标签页的方式跳转到定义处.
+  nmap <silent> gt <Plug>(coc-definition)
+  " gy  跳转到类型定义处.
+  nmap <silent> gy <Plug>(coc-type-definition)
+  " gi  跳转到实现处.
+  nmap <silent> gi <Plug>(coc-implementation)
+  " gr  在 location list 中列出相关条目, 如果相关的只有1条, 则直接跳转过去.
+  nmap <silent> gr <Plug>(coc-references)
+
+  " ,rn  级联的对光标所在 symbol 进行重命名.
+  nmap <leader>rn <Plug>(coc-rename)
+
+  " K  在悬浮窗口中查看文档.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    " 使支持 tmux-plugins/vim-tmux 插件.
+    elseif (index(['tmux'], &filetype) >= 0)
+      call tmux#man()
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
+
+  " 突出显示光标所在 symbol 及其引用.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " 使用 <C-f> 和 <C-b> 在悬浮窗口向下和向上滚动, 每次滚动行数为 lines_count,
+  " 比如在查看较长的文档时出现了滚动条的场景下使用.
+  let lines_count=5
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+    \ coc#float#scroll(1, lines_count) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+    \ coc#float#scroll(0, lines_count) : "\<C-b>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+    \ coc#float#scroll(1, lines_count) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+    \ coc#float#scroll(0, lines_count) : "\<C-b>"
+  " insert 模式下, 代码补全提示的选项列表中,
+  " 通过 tab 选择一项所弹出来的详细说明窗口中如果出现滚动条,
+  " 则可以使用此快捷键进行内容滚动, 否则分别表示向右或向左移动一个字符.
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?
+    \ "\<c-r>=coc#float#scroll(1, lines_count)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?
+    \ "\<c-r>=coc#float#scroll(0, lines_count)\<cr>" : "\<Left>"
+
+  " *** CocList 相关命令快捷键映射 ***
+  " NOTE: 按快捷键出现相关列表后, 使用 ctrl j/k/f/b 进行浏览, 使用 tab 进行管理.
+  "
+  " space e  列出所有扩展.
+  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+  " space c  列出所有命令.
+  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+  " space s  列出当前所在文件类型有哪些代码补全数据源.
+  nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
+  " space p  重新列出上一次展示的 CocList.
+  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+endif
+
+" }}
+
+
+" 代码静态检查  Code Static Check {{
+
+" ale 用于替代 syntastic 插件.
+" NOTE: :ALEInfo  用于查看当前文件的语法检查配置情况,
+" 内容尾部是对当前文件内容执行检查的日志, 可通过这些日志排查问题.
+" doc: https://github.com/dense-analysis/ale
+
+if &rtp =~ '/ale,'
+  " 定制显示在行左侧的错误提示符和警告提示符.
+  " 默认值: '>>'
+  let g:ale_sign_error = '>>'
+  " 默认值: '--'
+  let g:ale_sign_warning = '--'
+
+  " 左侧的错误/警告提示列是否一直保持打开, 默认值: 0
+  let g:ale_sign_column_always = 0
+
+  " 用于错误或警告提示的字符串.
+  " 默认值: 'Error'
+  let g:ale_echo_msg_error_str = 'Error'
+  " 默认值: 'Warning'
+  let g:ale_echo_msg_warning_str = 'Warning'
+
+  " 设置提示信息的输出格式, 默认值: '%code: %%s'
+  let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
+
+  " 是否将 ale linter 发现的错误或警告的具体位置列表信息添加到 location list 中.
+  " 我们这里禁用, 以防止使用 gr 时, 破坏 gr 使用的 location list.
+  " 默认值: 1
+  let g:ale_set_loclist = 0
+
+  " 如果 location list 不为空, 是否打开一个独立的窗口显示其信息, 默认值: 0
+  let g:ale_open_list = 0
+  " 错误信息窗口的高度, 在 g:ale_open_list 设置为 1 时才有效果, 默认值: 10
+  let g:ale_list_window_size = 5
+
+  " 错误或警告信息全部修复后, 是否保留错误信息窗口, 1 表示保留, 默认值: 0
+  let g:ale_keep_list_window_open = 0
+
+  " 退出文件时, 如果仅剩错误信息窗口, 则其也一同退出(loclist).
+  augroup CloseLoclistWindowGroup
+    autocmd!
+    autocmd QuitPre * if empty(&buftype) | lclose | endif
+  augroup END
+
+  " 新打开文件时是否自动 lint, 默认值: 1
+  let g:ale_lint_on_enter = 1
+
+  " 保存文件时是否进行 lint, 默认值: 1
+  let g:ale_lint_on_save = 1
+
+  " 保存文件时是否进行 fix,  默认值: 0
+  let g:ale_fix_on_save = 1
+
+  " , k/j 在错误提示之间跳转.
+  nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+  nmap <silent> <leader>j <Plug>(ale_next_wrap)
+
+  " 针对不同语言的静态代码检查工具配置.
+  " NOTE:
+  "   1) 其他没有在这里配置的语言将使用 ale 默认配置的 linter,
+  "      可以使用 :ALEInfo 来查看当前文件使用了哪些默认的 linter.
+  "
+  "   2) 注意需要在本地安装涉及到的命令行工具:
+  "      brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
+  "      luarocks install luacheck
+  "      npm install -g eslint standard eslint-plugin-vue vls \
+  "          proselint alex write-good stylelint markdownlint jsonlint
+  "      pip3 install pylint flake8 yamllint
+  "      go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.39.0
+  "      go get -u github.com/mgechev/revive
+  "      sudo gem install mdl
+  "
+  "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
+  "      我们这里使用 standard 风格: eslint --init
+  "      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
+  "      将配置生成到 package.json 的 eslintConfig 字段.
+  "
+  "   4) prettier 配置文件, 项目根目录下的 .prettierrc.json:
+  "      {
+  "        "singleQuote": true,
+  "        "semi": false
+  "      }
+  "
+  "   5) 对于 Python 项目, 如果使用虚拟环境, 需要在虚拟环境下安装相关 linter 工具,
+  "      拿 Python 的依赖管理工具 poetry 举例:
+  "      poetry init
+  "      poetry shell
+  "      poetry add pylint flake8 autoimport black isort -D
+  let g:ale_linters = {
+    \  'go': ['golangci-lint', 'revive', 'gopls'],
+    \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
+    \  'python': ['pylint', 'flake8'],
+    \  'lua': ['luac', 'luacheck'],
+    \  'sh': ['shellcheck', 'language_server'],
+    \  'zsh': ['shellcheck', 'language_server'],
+    \  'javascript': ['eslint', 'standard'],
+    \  'vue': ['eslint', 'vls'],
+    \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
+    \  'yaml': ['yamllint'],
+    \  'json': ['jq', 'jsonlint'],
+    \  'jsonc': ['jq', 'jsonlint'],
+    \  'markdown': ['markdownlint'],
+    \ }
+
+  " golangci-lint 配置:
+  " 指定可执行文件的具体名称.
+  let g:ale_go_golangci_lint_executable = 'golangci-lint'
+  " golanci-lint run 命令不加额外参数, 解决默认加的 --enable-all 参数导致的错误.
+  let g:ale_go_golangci_lint_options = ''
+  " golangci-lint run 命令以包为单位进行检查,
+  " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
+  let g:ale_go_golangci_lint_package = 1
+
+  " flake8 配置:
+  " 指定允许的 Python 代码每行最大字符数, 默认值 79.
+  let g:ale_python_flake8_options = '--max-line-length 120'
+
+  " yamllint 配置:
+  " doc: https://yamllint.readthedocs.io/en/stable/configuration.html
+  " 指定可执行文件的具体名称.
+  let g:ale_yaml_yamllint_executable = 'yamllint'
+  " 配置参数.
+  let g:ale_yaml_yamllint_options = '-d "{
+    \ extends: relaxed,
+    \ rules: {
+    \   line-length: {max: 200},
+    \ },
+    \ }"'
+
+  " 针对不同语言的自动修复功能.
+  "    需要安装相关的命令行工具:
+  "       npm install -g prettier importjs lua-fmt
+  "       pip3 install black isort
+  "       go get mvdan.cc/sh/v3/cmd/shfmt
+  "
+  " NOTE:
+  "   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;
+  "      用于 python 的 isort, 可选择性使用, 我这里也不启用,
+  "      直接用 black 的 import 排版能力即可.
+  "   2) lua 的 luafmt 可进行自动格式化, 由于其格式化效果不符合我的审美要求,
+  "      我这里暂不启用.
+  "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
+  "      所以不用重复添加.
+  let g:ale_fixers = {
+    \  'go': ['gofmt', 'goimports'],
+    \  'rust': ['rustfmt'],
+    \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
+    \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'sh': ['shfmt'],
+    \  'javascript': ['eslint', 'importjs'],
+    \  'vue': ['eslint'],
+    \  'html': ['prettier'],
+    \  'json': ['jq'],
+    \  'jsonc': ['jq'],
+    \  'yaml': ['prettier'],
+    \  'markdown': ['prettier'],
+    \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'zsh': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'tmux': ['trim_whitespace', 'remove_trailing_lines'],
+    \ }
+endif
 
 " }}
 
@@ -3716,9 +3717,9 @@ endif
 "                     使变更马上生效.
 "                 ,E  上下分屏方式打开 ~/.vimrc 或 ~/.config/nvim/init.vim 文件.
 "             ctrl s  normal/insert 模式下, 打开/关闭英文拼写检查.
-"                 ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
-"                 ,v  normal 模式下, 在背景是透明和不透明之间切换.
 "       ctrl k/j/h/l  normal 模式下, 上下左右在多窗口之间跳转.
+"                 ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
+"                 ,o  normal 模式下, 在背景是透明和不透明之间切换.
 "
 " ** 标签页管理:
 "              g tab  normal 模式下切换到上一次访问的标签页.
@@ -3752,7 +3753,7 @@ endif
 """""""""" 插件提供的能力 {{
 "
 " ** neoclide/coc.nvim (https://github.com/neoclide/coc.nvim)
-"                 gd  跳转到定义处, ctrl o 跳转回来, ctrl i 再跳转过去.
+"                 gt  以新建标签页的方式跳转到定义处.
 "                 gy  跳转到类型定义处.
 "                 gi  跳转到接口实现处.
 "                 gr  在 location list 中列出相关条目, 如果只有 1 条, 则直接跳转过去.
@@ -3840,7 +3841,7 @@ endif
 "
 "   跳转到对象(函数)定义或声明处的几种方式:
 "                 gd  覆盖当前页面.
-"                 gl  新开一个标签页.
+"                 gt  新开一个标签页.
 "                 gs  在上方分屏.
 "                 gv  在右侧分屏.
 "
