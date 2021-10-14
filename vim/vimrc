@@ -813,7 +813,7 @@ endif
 " }}
 
 
-" 状态栏定制  Statusline Customization {{
+" 状态栏定制  Statusline&Tabline Customization {{
 
 """""" itchyny/lightline.vim
 " doc: https://github.com/itchyny/lightline.vim
@@ -825,6 +825,12 @@ if &rtp =~ '/lightline.vim'
   "     2: 总是
   " 默认值: 1, 为了单窗口也可以显示状态栏, 此处设置为2.
   set laststatus=2
+
+  " 指定何时显示页面标签, 默认值: 1
+  "   0: 永远不会
+  "   1: 至少有两个标签页时才会
+  "   2: 永远会
+  set showtabline=1
 
   " 由于此插件已经帮我们美化显示了当前的 Vim 模式, 所以 Vim 自带的模式显示可以去除.
   set noshowmode
@@ -911,23 +917,71 @@ if &rtp =~ '/lightline-ale,'
   endfunction
 endif
 
-"""""" 'mhinz/vim-startify'
-" doc: https://github.com/mhinz/vim-startify
-" :help vim-startify
+"""""" 状态栏和标签页栏的使用图标进行美化
 
-if &rtp =~ '/vim-startify,'
-  " 在状态栏添加适合的文件类型和文件格式图标.
-  let g:lightline.component_function.filetype = 'MyFiletype'
-  let g:lightline.component_function.fileformat = 'MyFileformat'
+" 在状态栏添加文件类型和文件格式图标.
+let g:lightline.component_function.filetype = 'MyFiletype'
+let g:lightline.component_function.fileformat = 'MyFileformat'
 
-  function! MyFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-  endfunction
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype
+    \ . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
 
-  function! MyFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-  endfunction
-endif
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+let g:lightline.tab_component_function = {
+  \ 'modified': 'LightlineTablineModified',
+  \ 'tabnum': 'LightlineTablineWebDevIcons',
+  \ }
+
+" 标签页数字自定义.
+let g:tabnum_map = {
+  \ 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴',
+  \ 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹',
+  \ 10: '¹⁰', 11: '¹¹', 12: '¹²', 13: '¹³',
+  \ 14: '¹⁴', 15: '¹⁵', 16: '¹⁶', 17: '¹⁷',
+  \ 18: '¹⁸', 19: '¹⁹', 20: '²⁰', 21: '²¹',
+  \ }
+
+" 标签页显示当前文件类型图标和标签序号.
+function! LightlineTablineWebDevIcons(n)
+  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  return g:tabnum_map[a:n] . " " . WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+endfunction
+
+" 标签页使用自定义图标表示正在修改、禁止修改和只读状态.
+let s:modified_icon = '✎'
+let s:unmodifiable_icon = ''
+let s:readonly_icon = ''
+
+function! LightlineTablineModified(n)
+  let l:window_number = tabpagewinnr(a:n, '$')
+  let l:modified = v:false
+  let l:unmodifiable = v:true
+  let l:readonly = v:true
+  for winnr in range(1, l:window_number)
+    let l:modified = l:modified || gettabwinvar(a:n, winnr, '&modified')
+    let l:unmodifiable = l:unmodifiable && !gettabwinvar(a:n, winnr, '&modifiable')
+    let l:readonly = l:readonly && gettabwinvar(a:n, winnr, '&readonly')
+  endfor
+  let l:string = ''
+  if l:unmodifiable
+    let l:string = s:unmodifiable_icon
+  elseif l:readonly
+    let l:string = s:readonly_icon
+  endif
+  if l:modified
+    if l:string != ""
+      let l:string = l:string . " " . s:modified_icon
+    else
+      let l:string = s:modified_icon
+    endif
+  endif
+  return l:string
+endfunction
 
 " }}
 
@@ -3072,12 +3126,6 @@ set relativenumber
 " 显示当前光标所在的行号和列号.
 set ruler
 
-" 指定何时显示页面标签, 默认值: 1
-"   0: 永远不会
-"   1: 至少有两个标签页时才会
-"   2: 永远会
-set showtabline=1
-
 " 命令行窗口的高度, 默认值7.
 " 命令行窗口打开的方法:
 "   1) command-line 模式下, 按快捷键 ctrl f 打开命令行窗口并显示命令历史记录.
@@ -3468,13 +3516,24 @@ noremap <silent> <leader>fp :tabprev<CR>
 
 " 标签页管理.
 "   ,fc  创建一个新的标签页文件;
-"   ,fq  关闭当前的标签页文件;
 "   ,fo  只保留当前的标签页, 关闭其他所有标签页;
 "   ,fh  向左移动标签页;
 "   ,fl  向右移动标签页.
+"   ,qq  关闭当前标签页.
+"   ,q 1/2/3  关闭指定序号的标签页.
 noremap <silent> <leader>fc :tabnew<CR>
-noremap <silent> <leader>fq :tabclose<CR>
 noremap <silent> <leader>fo :tabonly<CR>
+noremap <silent> <leader>qq :tabclose<CR>
+noremap <silent> <leader>q1 :tabclose 1<CR>
+noremap <silent> <leader>q2 :tabclose 2<CR>
+noremap <silent> <leader>q3 :tabclose 3<CR>
+noremap <silent> <leader>q4 :tabclose 4<CR>
+noremap <silent> <leader>q5 :tabclose 5<CR>
+noremap <silent> <leader>q6 :tabclose 6<CR>
+noremap <silent> <leader>q7 :tabclose 7<CR>
+noremap <silent> <leader>q8 :tabclose 8<CR>
+noremap <silent> <leader>q9 :tabclose 9<CR>
+noremap <silent> <leader>q0 :tabclose 10<CR>
 noremap <silent> <leader>fh :call Tab_MoveLeft()<CR>
 noremap <silent> <leader>fl :call Tab_MoveRight()<CR>
 function! Tab_MoveLeft()
@@ -3814,7 +3873,8 @@ endif
 "            , 1/2/3  normal 模式下切换到具体的某一个标签页.
 "   Option/Alt 1/2/3  normal/insert 模式下切换到具体的某一个标签页.
 "                ,fc  创建一个新的标签页文件.
-"                ,fq  关闭当前的标签页文件.
+"                ,qq  关闭当前的标签页文件.
+"           ,q 1/2/3  关闭某个序号标签页.
 "                ,fo  只保留当前的标签页, 关闭其他所有标签页.
 "                ,fn  切换到下一个标签页.
 "                ,fp  切换到上一个标签页.
