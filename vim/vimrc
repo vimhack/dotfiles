@@ -3537,6 +3537,31 @@ nnoremap Y y$
 " :W  普通用户没有权限时使用 sudo 权限保存文件.
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+" n/N/*/#  搜索关键字后每次跳转都将目标显示在屏幕中间区域.
+" Keep search pattern at the center of the screen.
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+
+" ,z  当一个界面上有多个窗口时, 可以放大或还原当前所在的子窗口.
+" Zoom windows.
+" from: http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
+nnoremap <silent> <leader>z :ZoomToggle<CR>
+
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+
 " }}
 
 """""" 其他配置  Other Settings {{
@@ -3647,6 +3672,12 @@ endif
 
 " 出错时, 发出视觉提示, 通常是屏幕闪烁.
 "set visualbell
+
+" 关闭方向键, 强制用 hjkl.
+"map <Left> <Nop>
+"map <Right> <Nop>
+"map <Up> <Nop>
+"map <Down> <Nop>
 
 " }}
 
