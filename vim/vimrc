@@ -2392,7 +2392,7 @@ au FileType go nmap <leader>gc <Plug>(go-coverage)
 
 " *** 代码语法高亮 ***
 
-" 以下指令默认值都是0.
+" 以下指令默认值都是 0.
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
 let g:go_highlight_extra_types = 1
@@ -2414,6 +2414,11 @@ let g:go_highlight_string_spellcheck = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 1
+
+" *** 其他 ***
+
+" 将 ctrl t 键绑定取消.
+let g:go_def_mapping_enabled = 0
 
 " }}
 
@@ -3117,12 +3122,6 @@ endif
 
 " 常用原生选项  Native Configuration {{
 
-" 显示行号.
-set nu
-
-" 显示相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
-set relativenumber
-
 " 显示当前光标所在的行号和列号.
 set ruler
 
@@ -3157,6 +3156,10 @@ set softtabstop=4
 
 " normal 模式下 >> 和 << 或 visual 模式下 > 和 < 每次缩进 4 个空格, 默认是 8 个空格.
 set shiftwidth=4
+
+" 缩进时取整.
+" Use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
 
 " 启用智能缩进, 按回车键后自动缩进,
 " 注意启用此模式后, 粘贴代码时要先 :set paste
@@ -3209,174 +3212,132 @@ set lazyredraw
 
 " 自定义配置  Custom Configuration {{
 
-" ,E  打开 vim 或 nvim 的配置文件.
-if has('nvim')
-  noremap <silent> <leader>E :e! ~/.config/nvim/init.vim<CR>
-else
-  noremap <silent> <leader>E :e! ~/.vimrc<CR>
-endif
+"""""" 设置行号  Number/RelativeNumber {{
 
-" ,R  变更配置文件后不需要退出再打开文件, 直接使用此命令进行 reload 生效.
-if has('nvim')
-  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>
-    \ :exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
-else
-  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>
-    \ :exe ":echo '~/.vimrc reloaded'"<CR>
-endif
+" 显示相对行号, 便于跨行的文本对象操作, 比如: [n]j/k/y/v/c/d 等.
+set relativenumber number
 
-" 解决中文乱码问题.
-let $LANG='en'
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-" 使查看帮助文档的窗口也显示相对行号.
+" 使查看 Vim 帮助文档的窗口也显示相对行号.
 augroup vim help
   autocmd!
   autocmd FileType help setlocal number
   autocmd FileType help setlocal relativenumber
 augroup END
 
-" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
-autocmd FileType * set colorcolumn=80
+" 失去焦点时(比如光标从当前 buffer 移走), 不显示相对行号, 而是显示正常行号.
+au FocusLost * :set norelativenumber number
+au FocusGained * :set relativenumber
 
-" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现多余的空白字符.
-function! SetList()
-  if &filetype != 'go'
-    set list listchars=tab:>-,trail:-
+" insert 模式下用绝对行号, normal 模式下用相对行号.
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
+
+" ,n  显示或隐藏行号.
+nnoremap <leader>n :call ToggleNumberShow()<CR>
+function! ToggleNumberShow()
+  if(&relativenumber == 1)
+    set norelativenumber nonumber
+  else
+    set relativenumber
   endif
-endfunction
-autocmd FileType * call SetList()
+endfunc
 
-" visual 模式下选择内容, 然后通过按 ,) 或 ,] 或 ,} 或 ," 或 ,' 或 ,`
-" 将选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
-vnoremap <leader>) <esc>`>a)<esc>`<i(<esc>
-vnoremap <leader>] <esc>`>a]<esc>`<i[<esc>
-vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
-vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
-vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
-vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
+" }}
 
-" insert 模式下使用 emacs 键位.
-" 光标移动:
-"   ctrl p 上
-"   ctrl n 下
-"   ctrl a 行首
-"   ctrl e 行尾
-" NOTE:
-"   1) 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a.
-"   2) 如下两个快捷键已在 coc.nvim 插件的配置中配置, 此处不要重复配置.
-"      ctrl b 左
-"      ctrl f 右
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
+"""""" 标签页管理 Tabs Management {{
 
-" Option/Alt b/f  insert 模式下将光标向左或向右移动一个单词.
-inoremap <M-b> <S-Left>
-inoremap <M-f> <S-Right>
+" 标签页切换:
+"
+"   g tab  normal 模式下切换到上一次访问的标签页;
+"   gt/gT  normal 模式下切换到下一个/上一个标签页;
+"
+"   , 1/2/3/4/5/6/7/8/9  normal 模式下切换到具体的某一个标签页;
+"   , 0  normal 模式下切换到最后一个标签页.
+noremap <silent> <leader>1 1gt<CR>
+noremap <silent> <leader>2 2gt<CR>
+noremap <silent> <leader>3 3gt<CR>
+noremap <silent> <leader>4 4gt<CR>
+noremap <silent> <leader>5 5gt<CR>
+noremap <silent> <leader>6 6gt<CR>
+noremap <silent> <leader>7 7gt<CR>
+noremap <silent> <leader>8 8gt<CR>
+noremap <silent> <leader>9 9gt<CR>
+noremap <silent> <leader>0 :tablast<CR>
 
-" insert 模式下的编辑动作:
-"   ctrl l 向右删除一个字符.
-"   ctrl d 从光标位置删除到行尾.
-" NOTE: 如下两个快捷键是默认行为, 无需额外配置.
-"   ctrl h 向左删除一个字符.
-"   ctrl w 向左删除一个单词.
-"   ctrl u 从光标位置删除到行首.
-inoremap <C-l> <Del>
-inoremap <C-d> <C-[>Di
+"   Option/Alt 1/2/3/4/5/6/7/8/9  normal/insert 模式下切换到具体的某一个标签页;
+"   Option/Alt 0  normal/insert 模式下切换到最后一个标签页.
+noremap <silent> <M-1> :tabn 1<CR>
+noremap <silent> <M-2> :tabn 2<CR>
+noremap <silent> <M-3> :tabn 3<CR>
+noremap <silent> <M-4> :tabn 4<CR>
+noremap <silent> <M-5> :tabn 5<CR>
+noremap <silent> <M-6> :tabn 6<CR>
+noremap <silent> <M-7> :tabn 7<CR>
+noremap <silent> <M-8> :tabn 8<CR>
+noremap <silent> <M-9> :tabn 9<CR>
+noremap <silent> <M-0> :tablast<CR>
+inoremap <silent> <M-1> <esc>:tabn 1<CR>
+inoremap <silent> <M-2> <esc>:tabn 2<CR>
+inoremap <silent> <M-3> <esc>:tabn 3<CR>
+inoremap <silent> <M-4> <esc>:tabn 4<CR>
+inoremap <silent> <M-5> <esc>:tabn 5<CR>
+inoremap <silent> <M-6> <esc>:tabn 6<CR>
+inoremap <silent> <M-7> <esc>:tabn 7<CR>
+inoremap <silent> <M-8> <esc>:tabn 8<CR>
+inoremap <silent> <M-9> <esc>:tabn 9<CR>
+inoremap <silent> <M-0> <esc>:tablast<CR>
 
-" command-line 模式下使用 emacs 键位, :h emacs-keys
-" 光标移动:
-"   ctrl a 移动到行首.
-"   ctrl e 移动到行尾.
-"   ctrl b 向左移动一个字符.
-"   ctrl f 向右移动一个字符.
-cnoremap <C-a>  <Home>
-cnoremap <C-e>  <End>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
+"   ,fn  切换到下一个标签页;
+"   ,fp  切换到上一个标签页.
+noremap <silent> <leader>fn :tabnext<CR>
+noremap <silent> <leader>fp :tabprev<CR>
 
-" Option/Alt b/f  command-line 模式下将光标向左或向右移动一个单词.
-cnoremap <M-b> <S-Left>
-cnoremap <M-f> <S-Right>
+" 标签页创建:
+"   Ctrl t  normal/insert 模式下创建新的标签页.
+noremap <silent> <C-t> :tabnew<CR>
+inoremap <silent> <C-t> <esc>:tabnew<CR>
 
-" command-line 模式下的编辑动作:
-"   ctrl l 删除光标右侧字符;
-" NOTE: 如下两个快捷键是默认行为, 无需额外配置.
-"   ctrl h 删除光标左侧字符;
-"   ctrl w 删除光标左侧一个单词.
-cnoremap <C-l>  <Del>
+" 标签页关闭:
+"   ,qo  只保留当前的标签页, 关闭其他所有标签页;
+"   ,qq  关闭当前标签页;
+"   ,q 1/2/3...  关闭指定序号的标签页;
+"   ,q 0  关闭最后一个标签页.
+noremap <silent> <leader>qo :tabonly<CR>
+noremap <silent> <leader>qq :tabclose<CR>
+noremap <silent> <leader>q1 :tabclose 1<CR>
+noremap <silent> <leader>q2 :tabclose 2<CR>
+noremap <silent> <leader>q3 :tabclose 3<CR>
+noremap <silent> <leader>q4 :tabclose 4<CR>
+noremap <silent> <leader>q5 :tabclose 5<CR>
+noremap <silent> <leader>q6 :tabclose 6<CR>
+noremap <silent> <leader>q7 :tabclose 7<CR>
+noremap <silent> <leader>q8 :tabclose 8<CR>
+noremap <silent> <leader>q9 :tabclose 9<CR>
+noremap <silent> <leader>q0 :tabclose $<CR>
 
-" normal/visual 模式下, 按 0 光标将回到当前行的第一个非空字符,
-"               如果光标已经在第一个非空字符, 则回到行首.
-" insert 模式下, 按 ctrl a 光标将回到当前行的第一个非空字符,
-"        如果光标已经在第一个非空字符, 则回到行首.
-function! GoToFirstNonBlankOrFirstColumn()
-  let cur_col = col('.')
-  normal! ^
-  if cur_col != 1 && cur_col == col('.')
-    normal! 0
+" 标签页移动:
+"   ,fh  向左移动标签页;
+"   ,fl  向右移动标签页.
+noremap <silent> <leader>fh :call Tab_MoveLeft()<CR>
+noremap <silent> <leader>fl :call Tab_MoveRight()<CR>
+
+function! Tab_MoveLeft()
+  let l:tabnr = tabpagenr() - 2
+  if l:tabnr >= 0
+    exec 'tabmove '.l:tabnr
   endif
-  return ''
-endfunction
-nnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
-vnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
-inoremap <silent> <C-a> <C-R>=GoToFirstNonBlankOrFirstColumn()<CR>
+endfunc
 
-" ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候,
-" 从默认的每次移动 1 行改为移动 3 行.
-noremap <C-e> 3<C-e>
-noremap <C-y> 3<C-y>
+function! Tab_MoveRight()
+  let l:tabnr = tabpagenr() + 1
+  if l:tabnr <= tabpagenr('$')
+    exec 'tabmove '.l:tabnr
+  endif
+endfunc
 
-" normal 模式下, 使用 Y 复制当前行光标之后的内容, 和 C 和 D 用法统一起来.
-nnoremap Y y$
+" }}
 
-" visual 模式下进行 > 和 < 缩进操作时,
-" 使不退出 visual 模式, 这样可方便执行多行的连续缩进.
-vnoremap < <gv
-vnoremap > >gv
-
-" 重新打开文件时, 光标恢复在上次离开时的位置.
-augroup resCur
-  autocmd!
-  autocmd BufReadPost * call setpos(".", getpos("'\""))
-augroup END
-
-" command-line 模式下, 操作指令按下 tab 键自动补全:
-" 第 1 次按下 tab, 会显示所有匹配的操作指令的清单, 第 2 次按下 tab, 会依次选择各个指令.
-set wildmenu
-set wildmode=longest:list,full
-
-" 忽略无用的编译类等文件.
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-  set wildignore+=.git\*,.hg\*,.svn\*
-else
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
-
-" insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题, 比如按 backspace 键无反应.
-set backspace=indent,eol,start
-set whichwrap+=<,>,h,l
-
-" :W  普通用户没有权限时使用 sudo 权限保存文件.
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
-
-" 保留撤销历史, Vim 会在编辑时保存操作历史, 用来供用户撤消更改;
-" 默认情况下, 操作记录只在本次编辑时有效, 一旦编辑结束、文件关闭, 操作历史就消失了;
-" 打开这个设置, 可以在文件关闭后, 操作记录保留在一个文件里面继续存在.
-" 这意味着, 重新打开一个文件, 可以撤销上一次编辑时的操作;
-" 撤消文件是跟原文件保存在一起的隐藏文件, 文件名以 .un~ 开头.
-set undofile
-set undodir=~/.vim/undo
-if !isdirectory(&undodir)
-  call mkdir(&undodir, 'p', 0700)
-endif
-
-" Undo Warnings {{
+"""""" 撤销更改提示  Undo Warnings {{
 "
 " from: https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/undowarnings.vim
 "
@@ -3440,6 +3401,197 @@ let &cpo = s:save_cpo
 
 " }}
 
+"""""" 光标移动  Cursor Movement {{
+
+" 将在多窗口之间进行上下左右跳转光标的快捷键重新映射:
+"   ctrl h  跳转到左边的窗口;
+"   ctrl l  跳转到右边的窗口;
+"   ctrl k  跳转到上面的窗口;
+"   ctrl j  跳转到下面的窗口.
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" insert 模式下使用 emacs 键位.
+" 光标移动:
+"   ctrl p 上
+"   ctrl n 下
+"   ctrl a 行首
+"   ctrl e 行尾
+" NOTE:
+"   1) 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a.
+"   2) 如下两个快捷键已在 coc.nvim 插件的配置中配置, 此处不要重复配置.
+"      ctrl b 左
+"      ctrl f 右
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+
+" Option/Alt b/f  insert 模式下将光标向左或向右移动一个单词.
+inoremap <M-b> <S-Left>
+inoremap <M-f> <S-Right>
+
+" command-line 模式下使用 emacs 键位, :h emacs-keys
+" 光标移动:
+"   ctrl a 移动到行首.
+"   ctrl e 移动到行尾.
+"   ctrl b 向左移动一个字符.
+"   ctrl f 向右移动一个字符.
+cnoremap <C-a>  <Home>
+cnoremap <C-e>  <End>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+
+" Option/Alt b/f  command-line 模式下将光标向左或向右移动一个单词.
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+
+" normal/visual 模式下, 按 0 光标将回到当前行的第一个非空字符,
+"               如果光标已经在第一个非空字符, 则回到行首.
+" insert 模式下, 按 ctrl a 光标将回到当前行的第一个非空字符,
+"        如果光标已经在第一个非空字符, 则回到行首.
+function! GoToFirstNonBlankOrFirstColumn()
+  let cur_col = col('.')
+  normal! ^
+  if cur_col != 1 && cur_col == col('.')
+    normal! 0
+  endif
+  return ''
+endfunction
+nnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
+vnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
+inoremap <silent> <C-a> <C-R>=GoToFirstNonBlankOrFirstColumn()<CR>
+
+" }}
+
+"""""" 文本编辑  Text Edit {{
+
+" insert 模式下的编辑动作:
+"   ctrl l 向右删除一个字符.
+"   ctrl d 从光标位置删除到行尾.
+" NOTE: 如下两个快捷键是默认行为, 无需额外配置.
+"   ctrl h 向左删除一个字符.
+"   ctrl w 向左删除一个单词.
+"   ctrl u 从光标位置删除到行首.
+inoremap <C-l> <Del>
+inoremap <C-d> <C-[>Di
+
+" command-line 模式下的编辑动作:
+"   ctrl l 删除光标右侧字符;
+" NOTE: 如下两个快捷键是默认行为, 无需额外配置.
+"   ctrl h 删除光标左侧字符;
+"   ctrl w 删除光标左侧一个单词.
+cnoremap <C-l> <Del>
+
+" visual 模式下进行 > 和 < 缩进操作时,
+" 使不退出 visual 模式, 这样可方便执行多行的连续缩进.
+vnoremap < <gv
+vnoremap > >gv
+
+" visual 模式下选择内容, 然后通过按 ,) 或 ,] 或 ,} 或 ," 或 ,' 或 ,`
+" 将选择的内容使用 () 或 [] 或 {} 或 "" 或 '' 或 `` 包裹.
+vnoremap <leader>) <esc>`>a)<esc>`<i(<esc>
+vnoremap <leader>] <esc>`>a]<esc>`<i[<esc>
+vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
+
+" }}
+
+"""""" 键位绑定  Other Keybindings {{
+
+" ,E  打开 vim 或 nvim 的配置文件.
+if has('nvim')
+  noremap <silent> <leader>E :e! ~/.config/nvim/init.vim<CR>
+else
+  noremap <silent> <leader>E :e! ~/.vimrc<CR>
+endif
+
+" ,R  变更配置文件后不需要退出再打开文件, 直接使用此命令进行 reload 生效.
+if has('nvim')
+  noremap <silent> <leader>R :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>
+    \ :exe ":echo '~/.config/nvim/init.vim reloaded'"<CR>
+else
+  noremap <silent> <leader>R :source ~/.vimrc<CR>:filetype detect<CR>
+    \ :exe ":echo '~/.vimrc reloaded'"<CR>
+endif
+
+" ctrl s  在 normal/insert 模式下打开/关闭英文的拼写检查.
+" NOTE:
+"   1) 有了 spell 后的 ! 就可以支持 toggle 了, 也就是既支持打开又支持关闭;
+"   2) <C-o> 和 :setlocal 之间不能有空格.
+nmap <silent> <C-s> :setlocal spell! spelllang=en,cjk<CR>
+imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
+
+" ctrl e/y  normal 模式下, 向下或向上移动屏幕阅读的时候,
+" 从默认的每次移动 1 行改为移动 3 行.
+noremap <C-e> 3<C-e>
+noremap <C-y> 3<C-y>
+
+" normal 模式下, 使用 Y 复制当前行光标之后的内容, 和 C 和 D 用法统一起来.
+nnoremap Y y$
+
+" :W  普通用户没有权限时使用 sudo 权限保存文件.
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" }}
+
+"""""" 其他配置  Other Settings {{
+
+" 解决中文乱码问题.
+let $LANG='en'
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" 第 80 列通过颜色标注, 提示我们对单行代码长度的掌控.
+autocmd FileType * set colorcolumn=80
+
+" tab 键显示为 >---, 行尾空格显示为 -, 帮助我们及时发现多余的空白字符.
+function! SetList()
+  if &filetype != 'go'
+    set list listchars=tab:>-,trail:-
+  endif
+endfunction
+autocmd FileType * call SetList()
+
+" 重新打开文件时, 光标恢复在上次离开时的位置.
+augroup resCur
+  autocmd!
+  autocmd BufReadPost * call setpos(".", getpos("'\""))
+augroup END
+
+" command-line 模式下, 操作指令按下 tab 键自动补全:
+" 第 1 次按下 tab, 会显示所有匹配的操作指令的清单, 第 2 次按下 tab, 会依次选择各个指令.
+set wildmenu
+set wildmode=longest:list,full
+
+" 忽略无用的编译类等文件.
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+  set wildignore+=.git\*,.hg\*,.svn\*
+else
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+" insert 模式下使用 <BS> <Del> <C-W> <C-U>, 解决无法回退删除等问题, 比如按 backspace 键无反应.
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" 保留撤销历史, Vim 会在编辑时保存操作历史, 用来供用户撤消更改;
+" 默认情况下, 操作记录只在本次编辑时有效, 一旦编辑结束、文件关闭, 操作历史就消失了;
+" 打开这个设置, 可以在文件关闭后, 操作记录保留在一个文件里面继续存在.
+" 这意味着, 重新打开一个文件, 可以撤销上一次编辑时的操作;
+" 撤消文件是跟原文件保存在一起的隐藏文件, 文件名以 .un~ 开头.
+set undofile
+set undodir=~/.vim/undo
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p', 0700)
+endif
+
 " normal 模式下的 nyy 复制(n 为数字), 或进入 visual 模式下选择内容后的 y 复制,
 " 除了可以将复制的内容粘贴(使用 p)到其他 Vim 实例,
 " 还可以将内容粘贴(command v)到系统的其他任何可输入窗口.
@@ -3455,105 +3607,13 @@ if has('clipboard')
   endif
 endif
 
-" ctrl s  在 normal/insert 模式下打开/关闭英文的拼写检查.
-" NOTE:
-"   1) 有了 spell 后的 ! 就可以支持 toggle 了, 也就是既支持打开又支持关闭;
-"   2) <C-o> 和 :setlocal 之间不能有空格.
-nmap <silent> <C-s> :setlocal spell! spelllang=en,cjk<CR>
-imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
-
-" 将在多窗口之间进行上下左右跳转光标的快捷键重新映射:
-"   ctrl h  跳转到左边的窗口;
-"   ctrl l  跳转到右边的窗口;
-"   ctrl k  跳转到上面的窗口;
-"   ctrl j  跳转到下面的窗口.
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" 标签页切换.
-"   g tab  normal 模式下切换到上一次访问的标签页;
-"   gt/gT  normal 模式下切换到下一个/上一个标签页;
-"
-"   , 1/2/3/4/5/6/7/8/9/0  normal 模式下切换到具体的某一个标签页.
-noremap <silent> <leader>1 1gt<CR>
-noremap <silent> <leader>2 2gt<CR>
-noremap <silent> <leader>3 3gt<CR>
-noremap <silent> <leader>4 4gt<CR>
-noremap <silent> <leader>5 5gt<CR>
-noremap <silent> <leader>6 6gt<CR>
-noremap <silent> <leader>7 7gt<CR>
-noremap <silent> <leader>8 8gt<CR>
-noremap <silent> <leader>9 9gt<CR>
-noremap <silent> <leader>0 10gt<CR>
-"   Option/Alt 1/2/3/4/5/6/7/8/9/0  normal/insert 模式下切换到具体的某一个标签页.
-noremap <silent> <M-1> :tabn 1<CR>
-noremap <silent> <M-2> :tabn 2<CR>
-noremap <silent> <M-3> :tabn 3<CR>
-noremap <silent> <M-4> :tabn 4<CR>
-noremap <silent> <M-5> :tabn 5<CR>
-noremap <silent> <M-6> :tabn 6<CR>
-noremap <silent> <M-7> :tabn 7<CR>
-noremap <silent> <M-8> :tabn 8<CR>
-noremap <silent> <M-9> :tabn 9<CR>
-noremap <silent> <M-0> :tabn 10<CR>
-inoremap <silent> <M-1> <ESC>:tabn 1<CR>
-inoremap <silent> <M-2> <ESC>:tabn 2<CR>
-inoremap <silent> <M-3> <ESC>:tabn 3<CR>
-inoremap <silent> <M-4> <ESC>:tabn 4<CR>
-inoremap <silent> <M-5> <ESC>:tabn 5<CR>
-inoremap <silent> <M-6> <ESC>:tabn 6<CR>
-inoremap <silent> <M-7> <ESC>:tabn 7<CR>
-inoremap <silent> <M-8> <ESC>:tabn 8<CR>
-inoremap <silent> <M-9> <ESC>:tabn 9<CR>
-inoremap <silent> <M-0> <ESC>:tabn 10<CR>
-
-"   ,fn  切换到下一个标签页;
-"   ,fp  切换到上一个标签页.
-noremap <silent> <leader>fn :tabnext<CR>
-noremap <silent> <leader>fp :tabprev<CR>
-
-" 标签页管理.
-"   ,fc  创建一个新的标签页文件;
-"   ,fo  只保留当前的标签页, 关闭其他所有标签页;
-"   ,fh  向左移动标签页;
-"   ,fl  向右移动标签页.
-"   ,qq  关闭当前标签页.
-"   ,q 1/2/3  关闭指定序号的标签页.
-noremap <silent> <leader>fc :tabnew<CR>
-noremap <silent> <leader>fo :tabonly<CR>
-noremap <silent> <leader>qq :tabclose<CR>
-noremap <silent> <leader>q1 :tabclose 1<CR>
-noremap <silent> <leader>q2 :tabclose 2<CR>
-noremap <silent> <leader>q3 :tabclose 3<CR>
-noremap <silent> <leader>q4 :tabclose 4<CR>
-noremap <silent> <leader>q5 :tabclose 5<CR>
-noremap <silent> <leader>q6 :tabclose 6<CR>
-noremap <silent> <leader>q7 :tabclose 7<CR>
-noremap <silent> <leader>q8 :tabclose 8<CR>
-noremap <silent> <leader>q9 :tabclose 9<CR>
-noremap <silent> <leader>q0 :tabclose 10<CR>
-noremap <silent> <leader>fh :call Tab_MoveLeft()<CR>
-noremap <silent> <leader>fl :call Tab_MoveRight()<CR>
-function! Tab_MoveLeft()
-  let l:tabnr = tabpagenr() - 2
-  if l:tabnr >= 0
-    exec 'tabmove '.l:tabnr
-  endif
-endfunc
-function! Tab_MoveRight()
-  let l:tabnr = tabpagenr() + 1
-  if l:tabnr <= tabpagenr('$')
-    exec 'tabmove '.l:tabnr
-  endif
-endfunc
-
 " 从额外的本地配置文件(如果存在的话)加载配置.
 let vimrc_local = $HOME . '/.vimrc.local'
 if filereadable(expand(vimrc_local))
   exec 'source' vimrc_local
 endif
+
+" }}
 
 " }}
 
