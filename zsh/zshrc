@@ -269,6 +269,7 @@ alias tv=toggle-vim-transparent
 alias to=toggle-alacritty-transparent
 alias c=colors-print
 alias hex=print-256-hex-colors
+alias icons=print-icons
 
 # 调节系统音量
 alias vol=audio-volume
