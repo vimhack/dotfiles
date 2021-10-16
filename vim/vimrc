@@ -3220,8 +3220,8 @@ set relativenumber number
 " 使查看 Vim 帮助文档的窗口也显示相对行号.
 augroup vim help
   autocmd!
-  autocmd FileType help setlocal number
-  autocmd FileType help setlocal relativenumber
+  autocmd FileType help,man setlocal number
+  autocmd FileType help,man setlocal relativenumber
 augroup END
 
 " 失去焦点时(比如光标从当前 buffer 移走), 不显示相对行号, 而是显示正常行号.
@@ -3531,8 +3531,25 @@ imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 noremap <C-e> 3<C-e>
 noremap <C-y> 3<C-y>
 
-" normal 模式下, 使用 Y 复制当前行光标之后的内容, 和 C 和 D 用法统一起来.
+" Y  normal 模式下, 使用 Y 复制当前行光标之后的内容, 和 C 和 D 用法统一起来.
 nnoremap Y y$
+
+" 选中当前文件所有行、当前行到最后一行、当前行到第一行,
+" 选中之后可以进行一系列编辑动作, 比如 y/d/c 等等.
+" ,va  Select all lines.
+map <Leader>va ggVG
+" ,vf  Select from the current line to the end of line.
+map <Leader>vf VG
+" ,vb  Select from the current line to the first of line.
+map <Leader>vb Vgg
+
+" 拷贝当前文件所有行、当前行到最后一行、当前行到第一行,
+" ,ya  Yank all lines.
+map <Leader>ya ggVGy
+" ,yf  Yank from the current line to the end of line.
+map <Leader>yf VGy
+" ,yb  Yank from the current line to the first of line.
+map <Leader>yb Vggy
 
 " :W  普通用户没有权限时使用 sudo 权限保存文件.
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
@@ -3682,7 +3699,7 @@ endif
 " }}
 
 
-" Vim/Neovim 使用技巧  Tips {{
+" 使用技巧  Tips {{
 
 """""""""" 常用命令行 {{
 "
