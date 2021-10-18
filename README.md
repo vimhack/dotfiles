@@ -24,6 +24,7 @@ The supported platforms currently are macOS and Linux.
     - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
     - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
     - [Print 256 colors](#Print-256-colors)
+    - [Print Icons](#Print-Icons)
   - [With Keyboard Shortcuts/Hotkey](#With-Keyboard-shortcutsHotkey)
     - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly)
     - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly)
@@ -50,7 +51,6 @@ The supported platforms currently are macOS and Linux.
     - [web-search](#web-search)
     - [colorize](#colorize)
     - [sudo](#sudo)
-    - [themes](#themes)
     - [copyfile](#copyfile)
     - [copydir](#copydir)
     - [aliases](#aliases)
@@ -75,7 +75,9 @@ The supported platforms currently are macOS and Linux.
     - [vimhack/tmux-audio-volume](#vimhacktmux-audio-volume)
     - [vimhack/tmux-battery](#vimhacktmux-battery)
     - [vimhack/tmux-cpu](#vimhacktmux-cpu)
+    - [vimhack/tmux-onlinestatus](#vimhacktmux-onlinestatus)
     - [vimhack/tmux-weather](#vimhacktmux-weather)
+    - [vimhack/tmux-moon-phase](#vimhacktmux-moon-phase)
   - [FQA](#FQA)
 - [Vim/Neovim](#VimNeovim)
   - [Leader Key](#Leader-Key)
@@ -339,6 +341,18 @@ or
 
 $ hex
 ```
+
+#### <a name="Print-Icons"></a>Print Icons [⌆](#In-Terminal-Command-Line)
+
+```sh
+$ print-icons
+
+or
+
+$ icons
+```
+
+<++>
 
 ### <a name="With-Keyboard-ShortcutsHotkey"></a>With Keyboard Shortcuts/Hotkey [⌅](#ColorschemeTheme)
 
@@ -650,16 +664,6 @@ Available search contexts are:
 
 Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc</kbd> twice.
 
-#### <a name="themes"></a>themes [⌆](#ohmyzsh-plugins)
-
-> ~/.oh-my-zsh/plugins/themes/README.md
-
-- `theme <theme_name>` : Changes the Zsh theme to specified theme.
-
-- `theme` : Changes the Zsh theme to some random theme.
-
-- `lstheme` : Lists installed Zsh themes.
-
 #### <a name="copyfile"></a>copyfile [⌆](#ohmyzsh-plugins)
 
 > ~/.oh-my-zsh/plugins/copyfile/README.md
@@ -871,9 +875,17 @@ Display battery status in the Tmux status line.
 
 Display cpu utilization and fan speed in the Tmux status line.
 
+#### <a name="vimhacktmux-onlinestatus"></a>[vimhack/tmux-onlinestatus](https://github.com/vimhack/tmux-onlinestatus) [⌆](#tmux-plugins)
+
+Display online status in the Tmux status line.
+
 #### <a name="vimhacktmux-weather"></a>[vimhack/tmux-weather](https://github.com/vimhack/tmux-weather) [⌆](#tmux-plugins)
 
 Display local weather information in the Tmux status line.
+
+#### <a name="vimhacktmux-moon-phase">[vimhack/tmux-moon-phase](https://github.com/vimhack/tmux-moon-phase) [⌆](#tmux-plugins)
+
+Display moon phase emoji or icon or text in the Tmux status line.
 
 ### <a name="FQA"></a>FQA [⌅](#Tmux)
 
@@ -909,14 +921,18 @@ The vim leader key has been changed from `\`(default) to `,`.
 - `Ctrl` `e`/`y` : Move the screen down or up by 3 lines step
 - `0` : Move the cursor to the first non-blank character, if already at the first character, then to the first character.
 - `,` `1`/`2`/`3`... : Go to the specific tab
+- `,` `0` : Go to the last tab
 - `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
-- `,` `fc` : Create new tab
-- `,` `fq` : Close current tab
-- `,` `fo` : Close all tabs except current one
+- `Option/Alt` `0` : Go to the last tab
 - `,` `fn` : Go to the next tab
 - `,` `fp` : Go to the previous tab
+- `Ctrl` `t` : Create new tab
 - `,` `fh` : Move the tab to the left
 - `,` `fl` : Move the tab to the right
+- `,` `qo` : Close all tabs except current one
+- `,` `qq` : Close current tab
+- `,` `q` `1`/`2`/`3` ... : Close the specific tab
+- `,` `q` `0` : Close the last tab
 
 #### <a name="Insert-Mode"></a>Insert Mode [⌆](#Custom-key-bindings)
 
@@ -932,6 +948,7 @@ The vim leader key has been changed from `\`(default) to `,`.
 - `Ctrl` `w` : Delete a word from left
 - `Ctrl` `s`: Toggle spell check
 - `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
+- `Option/Alt` `0` : Go to the last tab
 
 #### <a name="Visual-Mode"></a>Visual Mode [⌆](#Custom-key-bindings)
 
@@ -1053,8 +1070,6 @@ you can `UnPlug` them in `$HOME/.vimrc.plugins.local`.
 For example:
 
 ```vim
-" Disable smooth scroll feature.
-UnPlug 'terryma/vim-smooth-scroll'
 " Disable input method auto switch feature.
 UnPlug 'lyokha/vim-xkbswitch'
 " Disable vim hardtime feature.
