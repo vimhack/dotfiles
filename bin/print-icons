@@ -1,90 +1,14 @@
-#!/usr/bin/env python3
-"""
-Print icons.
-https://www.nerdfonts.com/cheat-sheet
-https://fontawesome.com/v5/cheatsheet
-"""
+#!/usr/bin/env zsh
+# print-icons
 
+script_dir="$(cd "$(dirname "$0")" && pwd)"
 
-def print_powerline_extra():
-    """
-    https://github.com/ryanoasis/powerline-extra-symbols
-    """
-    print("Powerline Extra Symbols:\n")
+cd "$script_dir/../icons" || exit 1
 
-    for c in range(0xE0A0, 0xE0A4):
-        print(f"{chr(c)}  ", end="")
+for file in *.md; do
+    echo "$file: \n" | sed 's/-/ /g;s/.md//'
 
-    print("\n")
+    grep '\u' "$file" | awk '{printf"%s  ",$6}'
 
-    for c in range(0xE0B0, 0xE0C9):
-        print(f"{chr(c)}   ", end="")
-
-    print(f"{chr(0xe0ca)}\n")
-
-    for c in range(0xE0CC, 0xE0D3):
-        print(f"{chr(c)}   ", end="")
-
-    print(f"{chr(0xe0d4)}")
-
-
-def print_symbols():
-    print("Symbols:\n")
-
-    for c in range(0xE5FA, 0xE62B):
-        print(f"{chr(c)}  ", end="")
-
-
-def print_devicons():
-    print("Devicons:\n")
-
-    for c in range(0xE700, 0xE7C6):
-        print(f"{chr(c)}  ", end="")
-
-
-def print_font_awesome():
-    print("Font Awesome:\n")
-
-    for c in range(0xF000, 0xF296):
-        print(f"{chr(c)}  ", end="")
-
-
-def print_octicons():
-    print("Octicons:\n")
-
-    for c in range(0xF400, 0xF4AA):
-        print(f"{chr(c)}  ", end="")
-
-
-def print_pomicons():
-    """
-    https://github.com/gabrielelana/pomicons
-    """
-    print("Pomicons:\n")
-
-    for c in range(0xE000, 0xE00B):
-        print(f"{chr(c)}  ", end="")
-
-
-def print_linux():
-    print("Linux:\n")
-
-    for c in range(0xF300, 0xF316):
-        print(f"{chr(c)}  ", end="")
-
-
-if __name__ == "__main__":
-    print_powerline_extra()
-    print("\n")
-    print_symbols()
-    print("\n")
-    print_devicons()
-    print("\n")
-    print_font_awesome()
-    print("\n")
-    print_octicons()
-    print("\n")
-    print_pomicons()
-    print("\n")
-    print_linux()
-    print("")
+    echo -e "\n"
+done
