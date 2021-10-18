@@ -475,9 +475,6 @@ Plug 'matze/vim-move'
 " 将代码从多行转换为单行或将单行转换为多行.
 Plug 'AndrewRadev/splitjoin.vim'
 
-" 使平滑的滚动内容.
-Plug 'terryma/vim-smooth-scroll'
-
 " }}
 
 " 加载自定义插件的配置文件.
@@ -798,16 +795,6 @@ if &rtp =~ '/vim-move,'
   "   C: Ctrl
   "   S: Shift
   let g:move_key_modifier = 'M'
-endif
-
-"""""" terryma/vim-smooth-scroll
-" doc: https://github.com/terryma/vim-smooth-scroll
-"
-" NOTE: 不要映射 <C-b> 和 <C-f>, 因为会和 coc.nvim 插件的配置相冲突.
-
-if &rtp =~ '/vim-smooth-scroll,'
-  noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-  noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 endif
 
 " }}
