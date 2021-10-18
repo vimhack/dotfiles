@@ -87,14 +87,23 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 ```bash
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions \
-    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 - zsh-syntax-highlighting
 
 ```bash
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+- powerlevel10k
+
+```sh
+git clone --depth=1 https://github.com/vimhack/powerlevel10k.git \
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+ln -sf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/p10k.zsh $HOME/.p10k.zsh
 ```
 
 - [fzf](https://github.com/junegunn/fzf)
