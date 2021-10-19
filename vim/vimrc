@@ -2198,7 +2198,7 @@ endif
 
 if &rtp =~ '/vim-floaterm,'
   " 显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
-  let g:floaterm_keymap_toggle = '<leader>t'
+  let g:floaterm_keymap_toggle = '<leader>,t'
 
   " 新建一个悬浮窗口.
   let g:floaterm_keymap_new = '<leader>tc'
@@ -4182,7 +4182,7 @@ endif
 "                 __  在 insert 模式下, 输入 __ 后按 ESC 来关闭 table mode.
 "
 " ** voldikss/vim-floaterm (https://github.com/voldikss/vim-floaterm)
-"                 ,t  显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
+"                ,,t  显示或隐藏悬浮终端窗口, 如果悬浮窗口还不存在则新建.
 "                ,tc  新建一个悬浮窗口.
 "                ,tk  关闭当前悬浮窗口.
 "                ,tn  切换到下一个悬浮窗口.
