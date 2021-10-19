@@ -2527,6 +2527,9 @@ autocmd bufnewfile *.sh call SetTitleForShell()
 
 """""""" Markdown {{
 
+" 缩进大小改为 2 个空格, insert 模式下将 tab 扩展为 2 个空格.
+au FileType markdown setlocal expandtab ts=2 sw=2 sts=2
+
 """"""" dhruvasagar/vim-table-mode
 " doc: https://github.com/dhruvasagar/vim-table-mode
 
