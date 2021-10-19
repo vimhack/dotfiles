@@ -475,6 +475,9 @@ Plug 'matze/vim-move'
 " 将代码从多行转换为单行或将单行转换为多行.
 Plug 'AndrewRadev/splitjoin.vim'
 
+" 浏览源代码时, 进行上下文提示, 使能掌握当前代码所属位置.
+Plug 'wellle/context.vim'
+
 " }}
 
 " 加载自定义插件的配置文件.
