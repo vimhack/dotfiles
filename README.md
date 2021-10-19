@@ -82,10 +82,10 @@ The supported platforms currently are macOS and Linux.
 - [Vim/Neovim](#VimNeovim)
   - [Leader Key](#Leader-Key)
   - [Custom Key Bindings](#Custom-key-bindings)
-    - [Normal Mode](#Normal-mode)
-    - [Insert Mode](#Insert-mode)
-    - [Visual Mode](#Visual-Mode)
-    - [Command-Line Mode](#Command-Line-Mode)
+    - [Tabs Management](#Tabs-management)
+    - [Cursor Movement](#Cursor-movement)
+    - [Text Edit](#Text-edit)
+    - [Others](#Others)
   - [Custom Snippets](#Custom-Snippets)
     - [Markdown](#Markdown)
   - [Vim/Neovim Plugins](#VimNeovim-Plugins)
@@ -351,8 +351,6 @@ or
 
 $ icons
 ```
-
-<++>
 
 ### <a name="With-Keyboard-ShortcutsHotkey"></a>With Keyboard Shortcuts/Hotkey [⌅](#ColorschemeTheme)
 
@@ -911,62 +909,104 @@ The vim leader key has been changed from `\`(default) to `,`.
 
 ### <a name="Custom-key-bindings"></a>Custom Key Bindings [⌅](#VimNeovim)
 
-#### <a name="Normal-Mode"></a>Normal Mode [⌆](#Custom-key-bindings)
+#### <a name="Tabs-management"></a>Tabs Management [⌆](#Custom-key-bindings)
 
-- `Y` : Copy from the cursor position to the end of the line
-- `E` : Edit `~/.vimrc` or `~/.config/nvim/init.vim` in the new split window
-- `R` : Reload `~/.vimrc` or `~/.config/nvim/init.vim`
-- `Ctrl` `s`: Toggle spell check
-- `Ctrl` `k`/`j`/`h`/`l` : Move the cursor to up/down/left/right window
-- `Ctrl` `e`/`y` : Move the screen down or up by 3 lines step
-- `0` : Move the cursor to the first non-blank character, if already at the first character, then to the first character.
-- `,` `1`/`2`/`3`... : Go to the specific tab
-- `,` `0` : Go to the last tab
-- `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
-- `Option/Alt` `0` : Go to the last tab
-- `,` `fn` : Go to the next tab
-- `,` `fp` : Go to the previous tab
-- `Ctrl` `t` : Create new tab
-- `,` `fh` : Move the tab to the left
-- `,` `fl` : Move the tab to the right
-- `,` `qo` : Close all tabs except current one
-- `,` `qq` : Close current tab
-- `,` `q` `1`/`2`/`3` ... : Close the specific tab
-- `,` `q` `0` : Close the last tab
+- Normal Mode
 
-#### <a name="Insert-Mode"></a>Insert Mode [⌆](#Custom-key-bindings)
+  - `Ctrl` `t` : Create new tab
+  - `,` `1`/`2`/`3`... : Go to the specific tab
+  - `,` `0` : Go to the last tab
+  - `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
+  - `Option/Alt` `0` : Go to the last tab
+  - `,` `fn` : Go to the next tab
+  - `,` `fp` : Go to the previous tab
+  - `,` `fh` : Move the tab to the left
+  - `,` `fl` : Move the tab to the right
+  - `,` `qo` : Close all tabs except current one
+  - `,` `qq` : Close current tab
+  - `,` `q` `1`/`2`/`3` ... : Close the specific tab
+  - `,` `q` `0` : Close the last tab
 
-- `Ctrl` `p`/`n`/`b`/`f` : Move the cursor to up/down/left/right
-- `Ctrl` `e` : Move the cursor to the end of the line
-- `Ctrl` `a`: Press twice for moving the cursor to the first non-blank character,
-  and press twice once again for moving the cursor to the first character.
-  > NOTE: Press twice coz `Ctrl` `a` is also the tmux prefix key.
-- `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
-- `Ctrl` `h`/`l` : Delete a character from left/right
-- `Ctrl` `d` : Delete from the cursor position to the end of the line.
-- `Ctrl` `u` : Delete from the cursor position to the head of the line.
-- `Ctrl` `w` : Delete a word from left
-- `Ctrl` `s`: Toggle spell check
-- `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
-- `Option/Alt` `0` : Go to the last tab
+- Insert Mode
 
-#### <a name="Visual-Mode"></a>Visual Mode [⌆](#Custom-key-bindings)
+  - `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
+  - `Option/Alt` `0` : Go to the last tab
 
-- `0` : Move the cursor to the first non-blank character, if it already at the first character,
-  then to the first character.
-- `>`/`<`: Use `>` or `<` to indent without exiting visual mode
-- `,` `)`/`]`/`}`/`"`/`'` : Surround the selected text by `)` or `]` or `}` or `"` or `'`
+#### <a name="Cursor-movement"></a>Cursor Movement [⌆](#Custom-key-bindings)
 
-#### <a name="Command-Line-Mode"></a>Command-Line Mode [⌆](#Custom-key-bindings)
+- Normal Mode
 
-- `Ctrl` `b`/`f` : Move the cursor to left/right
-- `Ctrl` `p`/`n` : Go through history commands from up/down
-- `Ctrl` `a`/`e` : Move the cursor to the first character or the end of the line
-- `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
-- `Ctrl` `h`/`l` : Delete a character from left/right
-- `Ctrl` `d` : Delete from the cursor position to the end of the line.
-- `Ctrl` `u` : Delete from the cursor position to the head of the line.
-- `Ctrl` `w` : Delete a word from left
+  - `Ctrl` `k`/`j`/`h`/`l` : Move the cursor to up/down/left/right window
+  - `Ctrl` `e`/`y` : Move the screen down or up by 3 lines step
+  - `0` : Move the cursor to the first non-blank character,
+    if already at the first character, then to the first character.
+
+- Insert Mode
+
+  - `Ctrl` `p`/`n`/`b`/`f` : Move the cursor to up/down/left/right
+  - `Ctrl` `e` : Move the cursor to the end of the line
+  - `Ctrl` `a`: Press twice for moving the cursor to the first non-blank character,
+    and press twice once again for moving the cursor to the first character.
+    > NOTE: Press twice coz `Ctrl` `a` is also the tmux prefix key.
+  - `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
+
+- Visual Mode
+
+  - `0` : Move the cursor to the first non-blank character,
+    if it already at the first character, then to the first character.
+
+- Command-Line Mode
+
+  - `Ctrl` `b`/`f` : Move the cursor to left/right
+  - `Ctrl` `p`/`n` : Go through history commands from up/down
+  - `Ctrl` `a`/`e` : Move the cursor to the first character or the end of the line
+  - `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
+
+#### <a name="Text-Edit"></a>Text Edit [⌆](#Custom-key-bindings)
+
+- Insert Mode
+
+  - `Ctrl` `h`/`l` : Delete a character from left/right
+  - `Ctrl` `d` : Delete from the cursor position to the end of the line.
+  - `Ctrl` `u` : Delete from the cursor position to the head of the line.
+  - `Ctrl` `w` : Delete a word from left
+
+- Visual Mode
+
+  - `,` `)`/`]`/`}`/`"`/`'` : Surround the selected text by `)` or `]` or `}` or `"` or `'`
+  - `>`/`<`: Use `>` or `<` to indent without exiting visual mode
+
+- Command-Line Mode
+
+  - `Ctrl` `h`/`l` : Delete a character from left/right
+  - `Ctrl` `d` : Delete from the cursor position to the end of the line.
+  - `Ctrl` `u` : Delete from the cursor position to the head of the line.
+  - `Ctrl` `w` : Delete a word from left
+
+#### <a name="Others"></a>Others [⌆](#Custom-key-bindings)
+
+- Normal Mode
+
+  - `E` : Edit `~/.vimrc` or `~/.config/nvim/init.vim` in the new split window
+  - `R` : Reload `~/.vimrc` or `~/.config/nvim/init.vim`
+  - `Y` : Copy from the cursor position to the end of the line
+  - `Ctrl` `s`: Toggle spell check
+  - `,` `z` : Zoom window
+  - `,` `n` : Toggle line number
+  - `,` `va` : Select all lines
+  - `,` `vf` : Select from the current line to the end of line
+  - `,` `vb` : Select from the current line to the first of line
+  - `,` `ya` : Yank all lines
+  - `,` `yf` : Yank from the current line to the end of line
+  - `,` `yb` : Yank from the current line to the first of line
+
+- Insert Mode
+
+  - `Ctrl` `s`: Toggle spell check
+
+- Command-Line Mode
+
+  - `:W` : Use sudo to save
 
 ### <a name="Custom-Snippets"></a>Custom Snippets [⌅](#VimNeovim)
 
