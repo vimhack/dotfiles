@@ -2330,11 +2330,12 @@ au FileType go nmap <leader>s <Plug>(go-implements)
 "   如果光标所在函数定义处就是在当前页面, 则直接在当前页内跳转, 并不打开新页面;
 "   如果在当前页面内跳转, 推荐使用 ctrl o/i 来回跳转切换, 以提高效率.
 "
-" gd  默认以覆盖当前页面的方式跳转到函数定义处, vim-go 插件默认行为(go-def), 无需配置.
 " gl  新开一个标签页的方式跳转到函数定义处, coc.nvim 提供的能力,
 "     这里我们不使用 vim-go 提供的 go-def-tab,
 "     因为 go-def-tab 经常会错误的以上下分屏的方式跳转到定义处.
 "
+" gd  以覆盖当前页面的方式跳转到函数定义处.
+au FileType go nmap <silent> gd <Plug>(go-def)
 " gs  上下分屏跳转到函数定义处.
 au FileType go nmap <silent> gs <Plug>(go-def-split)
 " gv  左右分屏跳转到函数定义处.
