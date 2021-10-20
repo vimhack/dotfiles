@@ -263,7 +263,7 @@ Plug 'pbrisbin/vim-colors-off'
 
 " }}
 
-" 代码补全  Code Completion {{
+" 代码补全  Code AutoCompletion {{
 
 " 速度更快, 体验更优且支持更多编程语言的代码补全平台.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -278,8 +278,8 @@ Plug 'honza/vim-snippets'
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 
-" 为几乎所有语言提供语法高亮支持.
-Plug 'sheerun/vim-polyglot'
+" 自动补全引号(单引号/双引号/反引号)、括号(小括号/中括号/大括号)的插件.
+Plug 'Raimondi/delimitMate'
 
 " }}
 
@@ -304,80 +304,10 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py
 
 " }}
 
-" 目录树等  UI Interface {{
+" 编程语言  Programming Languages {{
 
-" 目录树窗口插件.
-Plug 'preservim/nerdtree'
-
-" 使目录树支持 git 的插件.
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" 为正在编辑的文件生成大纲视图, 包括接口/方法/变量等,
-" 可选中快速跳转, 适合单个文件代码较多的场景.
-" 需要先在系统命令行安装 ctags, 比如如果是 macOS 系统, 则: brew install ctags
-Plug 'majutsushi/tagbar'
-
-" 深度集成 git 的插件.
-Plug 'tpope/vim-fugitive'
-
-" git 历史版本的浏览插件, 该插件依赖 vim-fugitive 插件.
-Plug 'junegunn/gv.vim'
-
-" 美化状态栏插件.
-Plug 'vimhack/lightline.vim'
-
-" 为 lightline 插件提供显示 ale 检查出来的错误或警告的统计信息;
-" 另外安装此插件可以解决 vim 打开文件同时显示目录树窗口的场景时,
-" 无法正常加载 lightline 状态栏的问题.
-Plug 'maximbaz/lightline-ale'
-
-" 彩虹括号插件, 层级较多的括号场景使用不同颜色区分.
-Plug 'luochen1990/rainbow'
-
-" 快速打开想要的文件, 类似grep搜索文件内容等, 替代ctrlp插件.
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" 集成 ranger 文件管理器.
-Plug 'francoiscabrol/ranger.vim'
-
-" 悬浮终端插件.
-Plug 'voldikss/vim-floaterm'
-
-" 显示缩进线插件.
-Plug 'Yggdroot/indentLine'
-
-" Vim 屏保 Matrix.
-Plug 'uguu-org/vim-matrix-screensaver'
-
-" 在文件内直接显示颜色代码所表示的颜色.
-" NOTE: 该插件需要操作系统有 Go 环境.
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-
-" 对 Vim 主题配色方案进行调整时, 可使用此工具获取光标下标识符当前配色方案的详细信息.
-Plug 'vim-scripts/SyntaxAttr.vim'
-
-" 日历插件.
-Plug 'itchyny/calendar.vim'
-
-" 提供开始界面.
-" The fancy start screen for Vim.
-Plug 'mhinz/vim-startify'
-
-" 为目录树、LeaderF、ranger、vim-startify 等插件显示文件类型.
-" NOTE:
-" 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
-"    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
-" 2) 此插件要安装在目录树、LeaderF 等插件的后面.
-Plug 'ryanoasis/vim-devicons'
-
-" 在 vim-devicons 插件的基础上, 根据文件类型的不同, 改变图标的颜色.
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-" }}
-
-" 编程语言  Programming Language {{
+" 为几乎所有语言提供语法高亮支持.
+Plug 'sheerun/vim-polyglot'
 
 """""""" Go
 " 搭建 Go 开发环境的 Vim 插件, 安装该插件的过程中,
@@ -422,13 +352,20 @@ Plug 'cespare/vim-toml'
 
 " }}
 
-" 效率相关  Efficiency Related {{
-
-" 代码注释插件.
-Plug 'preservim/nerdcommenter'
+" 光标移动  Cursor Movement {{
 
 " 光标高效跳转插件.
 Plug 'easymotion/vim-easymotion'
+
+" }}
+
+" 文本编辑  Text Editing {{
+
+" 多光标批量操作文本对象插件.
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+" 代码注释插件.
+Plug 'preservim/nerdcommenter'
 
 " 使用指定符号包围光标所在单词, 比如:
 " ys2w"  表示从光标位置开始的 2 个单词使用双引号包围.
@@ -436,17 +373,112 @@ Plug 'easymotion/vim-easymotion'
 "  cs"'  normal 模式下把光标所在周围的双引号替换为单引号.
 Plug 'tpope/vim-surround'
 
-" 多光标批量操作文本对象插件.
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" normal 模式下移动光标所在行, visual 模式下移动选择的行.
+Plug 'matze/vim-move'
 
-" 自动补全引号(单引号/双引号/反引号)、括号(小括号/中括号/大括号)的插件.
-Plug 'Raimondi/delimitMate'
+" 将代码从多行转换为单行或将单行转换为多行.
+Plug 'AndrewRadev/splitjoin.vim'
+
+" }}
+
+" 文件浏览  File Navigation {{
+
+" 目录树窗口插件.
+Plug 'preservim/nerdtree'
+
+" 快速打开想要的文件, 类似grep搜索文件内容等, 替代ctrlp插件.
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" 集成 ranger 文件管理器.
+Plug 'francoiscabrol/ranger.vim'
+
+" }}
+
+" Git相关  Git Related {{
+
+" 使目录树支持 git 的插件.
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" 深度集成 git 的插件.
+Plug 'tpope/vim-fugitive'
+
+" git 历史版本的浏览插件, 该插件依赖 vim-fugitive 插件.
+Plug 'junegunn/gv.vim'
+
+" 显示光标所在内容的 git commit 信息, 方便了解代码背景.
+Plug 'rhysd/git-messenger.vim'
+
+" }}
+
+" 用户接口  User Interface {{
+
+" 提供开始界面.
+" The fancy start screen for Vim.
+Plug 'mhinz/vim-startify'
+
+" 为正在编辑的文件生成大纲视图, 包括接口/方法/变量等,
+" 可选中快速跳转, 适合单个文件代码较多的场景.
+" 需要先在系统命令行安装 ctags, 比如如果是 macOS 系统, 则: brew install ctags
+Plug 'majutsushi/tagbar'
+
+" 美化状态栏插件.
+Plug 'vimhack/lightline.vim'
+
+" 为 lightline 插件提供显示 ale 检查出来的错误或警告的统计信息;
+" 另外安装此插件可以解决 vim 打开文件同时显示目录树窗口的场景时,
+" 无法正常加载 lightline 状态栏的问题.
+Plug 'maximbaz/lightline-ale'
+
+" 彩虹括号插件, 层级较多的括号场景使用不同颜色区分.
+Plug 'luochen1990/rainbow'
+
+" 悬浮终端插件.
+Plug 'voldikss/vim-floaterm'
+
+" 浏览源代码时, 进行上下文提示, 使能掌握当前代码所属位置.
+Plug 'wellle/context.vim'
+
+" 显示缩进线插件.
+Plug 'Yggdroot/indentLine'
+
+" 为行内跳转指令 f F t T 提供高亮字符显示.
+Plug 'unblevable/quick-scope'
 
 " 复制文本对象的时候, 高亮显示复制的文本对象.
 Plug 'machakann/vim-highlightedyank'
 
-" 为行内跳转指令 f F t T 提供高亮字符显示.
-Plug 'unblevable/quick-scope'
+" Vim 屏保 Matrix.
+Plug 'uguu-org/vim-matrix-screensaver'
+
+" 在文件内直接显示颜色代码所表示的颜色.
+" NOTE: 该插件需要操作系统有 Go 环境.
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+" 为目录树、LeaderF、ranger、vim-startify 等插件显示文件类型.
+" NOTE:
+" 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
+"    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
+" 2) 此插件要安装在目录树、LeaderF 等插件的后面.
+Plug 'ryanoasis/vim-devicons'
+
+" 在 vim-devicons 插件的基础上, 根据文件类型的不同, 改变图标的颜色.
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" }}
+
+" 其他  Others  {{
+
+" 异步任务插件.
+Plug 'skywind3000/asynctasks.vim'
+Plug 'skywind3000/asyncrun.vim'
+
+" 对 Vim 主题配色方案进行调整时, 可使用此工具获取光标下标识符当前配色方案的详细信息.
+Plug 'vim-scripts/SyntaxAttr.vim'
+
+" 日历插件.
+Plug 'itchyny/calendar.vim'
 
 " 切换到 normal 模式时切换到英文输入法.
 Plug 'lyokha/vim-xkbswitch'
@@ -458,25 +490,9 @@ Plug 'tmux-plugins/vim-tmux'
 " 强制你根据不同场景来思考使用更高效的命令的习惯.
 Plug 'takac/vim-hardtime'
 
-" 异步任务插件.
-Plug 'skywind3000/asynctasks.vim'
-Plug 'skywind3000/asyncrun.vim'
-
-" 显示光标所在内容的 git commit 信息, 方便了解代码背景.
-Plug 'rhysd/git-messenger.vim'
-
 " Vim 作者 Bram 写的一个小游戏, 用于演示 Vim8.2 的几个新功能.
 " NOTE: :Kill 启动游戏, 按说明玩既可, 只支持 Vim8.2+, 不支持 Neovim.
 Plug 'vim/killersheep'
-
-" normal 模式下移动光标所在行, visual 模式下移动选择的行.
-Plug 'matze/vim-move'
-
-" 将代码从多行转换为单行或将单行转换为多行.
-Plug 'AndrewRadev/splitjoin.vim'
-
-" 浏览源代码时, 进行上下文提示, 使能掌握当前代码所属位置.
-Plug 'wellle/context.vim'
 
 " }}
 
