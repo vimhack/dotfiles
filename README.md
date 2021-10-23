@@ -1,18 +1,28 @@
 # Vimhack/dotfiles 🍀
 
 Vimhack/dotfiles is a Fantastic Development Environment,
-built with Vim/Neovim, Tmux, Zsh, Alacritty
+built with [Vim][1]/[Neovim][2], [Tmux][3], [Zsh](4), [Alacritty][5]
 and many other related excellent open source softwares.
 
 The supported platforms currently are macOS and Linux.
 
 > For efficient and convenient use of shortcuts,
-> I strongly recommend using [HHKB](https://happyhackingkb.com/) keyboard,
+> I strongly recommend using [HHKB][6] keyboard,
 > or a keyboard capable of changing the key position and change <kbd>Caps</kbd> to <kbd>Ctrl</kbd>.
+> <br>
+> If you use MacBook, you can use [Karabiner-Elements][7]
+> to modify the <kbd>Caps</kbd> to left <kbd>Ctrl</kbd> easily.
+
+[1]: https://github.com/vim/vim
+[2]: https://github.com/neovim/neovim
+[3]: https://github.com/tmux/tmux
+[4]: https://ohmyz.sh/
+[5]: https://github.com/alacritty/alacritty
+[6]: https://happyhackingkb.com/
+[7]: https://github.com/pqrs-org/Karabiner-Elements
 
 ## Contents
 
-- [Powers](#Powers)
 - [Requirements Installation](#Requirements-Installation)
 - [Installation](#Installation)
 - [Colorscheme/Theme](#ColorschemeTheme)
@@ -188,13 +198,6 @@ The supported platforms currently are macOS and Linux.
     - [Disable Default Plugins](#Disable-Default-Plugins)
 - [Show](#show)
 - [License](#License)
-
-## 💝 <a name="powers"></a>Powers [↟](#Contents)
-
-- [Vim](https://github.com/vim/vim) or [Neovim](https://github.com/neovim/neovim)
-- [Tmux](https://github.com/tmux/tmux)
-- [Zsh](https://ohmyz.sh/)
-- [Alacritty](https://github.com/alacritty/alacritty)
 
 ## 📦 <a name="Requirements-Installation"></a>Requirements Installation [↟](#Contents)
 
@@ -1163,7 +1166,7 @@ pressing `,f` will jump the cursor to the placeholder and delete it at the same 
 - `,` `gd` : Show chunk diff at current position
 - `,` `gc` : Show commit contains current position
 - `<tab>` : Use tab for trigger completion with characters ahead and navigate
-- `g` `l` : Go to definition position by create new tab way
+- `g` `d`/`l` : Go to definition position by create new tab way
 - `g` `y` : Go to type definition
 - `g` `i` : Go to implementation position
 - `g` `r` : Show related items in location list, and select one to go to
