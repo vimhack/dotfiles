@@ -2823,7 +2823,8 @@ if &rtp =~ '/coc.nvim,'
   " 实际上并不会用到这里设置的快捷键.
   let g:UltiSnipsExpandTrigger="<leader>,,,f"
 
-  " gl  新建标签页的方式跳转到定义处.
+  " gd/gl  新建标签页的方式跳转到定义处.
+  nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gl <Plug>(coc-definition)
   " gy  跳转到类型定义处.
   nmap <silent> gy <Plug>(coc-type-definition)
@@ -3515,9 +3516,9 @@ vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 
 " ,E  打开 vim 或 nvim 的配置文件.
 if has('nvim')
-  noremap <silent> <leader>E :e! ~/.config/nvim/init.vim<CR>
+  noremap <silent> <leader>E :sp ~/.config/nvim/init.vim<CR>
 else
-  noremap <silent> <leader>E :e! ~/.vimrc<CR>
+  noremap <silent> <leader>E :sp ~/.vimrc<CR>
 endif
 
 " ,R  变更配置文件后不需要退出再打开文件, 直接使用此命令进行 reload 生效.
