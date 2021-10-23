@@ -6,6 +6,8 @@ and many other related excellent open source softwares.
 
 The supported platforms currently are macOS and Linux.
 
+![show](https://user-images.githubusercontent.com/6139938/138552166-102fe987-eb3a-4b6d-a872-1445bdb3f878.gif)
+
 > For efficient and convenient use of shortcuts,
 > I strongly recommend using [HHKB][6] keyboard,
 > or a keyboard capable of changing the key position and change <kbd>Caps</kbd> to <kbd>Ctrl</kbd>.
@@ -196,7 +198,6 @@ The supported platforms currently are macOS and Linux.
     - [Add More Plugins](#Add-More-Plugins)
     - [Add More Configurations](#Add-More-Configurations)
     - [Disable Default Plugins](#Disable-Default-Plugins)
-- [Show](#show)
 - [License](#License)
 
 ## 📦 <a name="Requirements-Installation"></a>Requirements Installation [↟](#Contents)
@@ -1274,32 +1275,6 @@ UnPlug 'lyokha/vim-xkbswitch'
 " Disable vim hardtime feature.
 UnPlug 'takac/vim-hardtime'
 ```
-
-## 🔮 <a name="Show"></a>Show [↟](#Contents)
-
-ColorScheme: `gruvbox`
-Opacity: `0.9`
-Font: `Hasklug_Light`
-FontSize: `12`
-VimBgTransparency: `1`
-
-![gruvbox](https://user-images.githubusercontent.com/6139938/131994883-47e0c72f-2a34-401d-acfe-0759a6c592e8.png)
-
-ColorScheme: `dracula`
-Opacity: `1`
-Font: `Hurmit_light`
-FontSize: `11`
-VimBgTransparency: `1`
-
-![dracula](https://user-images.githubusercontent.com/6139938/132120978-b1ec27f1-f79d-492f-955f-76dffd2c1e00.png)
-
-ColorScheme: `papercolor`
-Opacity: `0.85`
-Font: `Lekton_Regular`
-FontSize: `11.5`
-VimBgTransparency: `1`
-
-![papercolor](https://user-images.githubusercontent.com/6139938/132120994-61a63c06-03a3-4c96-996b-bf84b52cc039.png)
 
 ## ⚖️ <a name="License"></a>License [↟](#Contents)
 
