@@ -263,6 +263,8 @@ alias vi="nvim"
 alias cp='cp -i'
 alias mv='mv -i'
 
+alias ll="exa -l -g --icons --git"
+
 # *** dotfiles 项目可执行文件
 
 # 将 bin 目录加入到 PATH.

@@ -114,6 +114,12 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install
 ```
 
+```bash
+# For replace ls
+# doc: https://the.exa.website
+brew install exa
+```
+
 ### Alacritty
 
 - [alacritty 0.8.0+](https://github.com/alacritty/alacritty)
