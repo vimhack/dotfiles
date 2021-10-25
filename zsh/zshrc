@@ -293,10 +293,10 @@ alias s=ssh-sessions
 
 # *** 快速打开 dotfiles 的几种主要配置文件
 
-alias zshrc='nvim ~/.dotfiles/zsh/zshrc'
-alias vimrc='nvim ~/.dotfiles/vim/vimrc'
-alias tmuxconf='nvim ~/.dotfiles/tmux/tmux.conf'
-alias ala='nvim ~/.dotfiles/alacritty/alacritty.yml'
+alias zrc='nvim ~/.dotfiles/zsh/zshrc'
+alias vrc='nvim ~/.dotfiles/vim/vimrc'
+alias tconf='nvim ~/.dotfiles/tmux/tmux.conf'
+alias ayml='nvim ~/.dotfiles/alacritty/alacritty.yml'
 
 # *** 快速切换到常用的目录
 
