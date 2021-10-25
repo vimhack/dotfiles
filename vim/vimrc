@@ -281,6 +281,9 @@ Plug 'neoclide/coc-neco'
 " 自动补全引号(单引号/双引号/反引号)、括号(小括号/中括号/大括号)的插件.
 Plug 'Raimondi/delimitMate'
 
+" 自动补全各种括号引号以及代码的条件或循环语句的结束部分等.
+Plug 'cohama/lexima.vim'
+
 " }}
 
 " 代码检查  Code Static Check {{
