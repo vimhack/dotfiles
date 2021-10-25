@@ -1,7 +1,7 @@
 # Vimhack/dotfiles 🍀
 
 Vimhack/dotfiles is a Fantastic Development Environment,
-built with [Vim][1]/[Neovim][2], [Tmux][3], [Zsh](4), [Alacritty][5]
+built with [Vim][1]/[Neovim][2], [Tmux][3], [Zsh][4], [Alacritty][5]
 and many other related excellent open source softwares.
 
 The supported platforms currently are macOS and Linux.
@@ -43,7 +43,7 @@ The supported platforms currently are macOS and Linux.
     - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
     - [Increase Alacritty background transparent](#Increase-Alacritty-background-transparent)
     - [Decrease Alacritty background transparent](#Decrease-Alacritty-background-transparent)
-    - [Toggle Tmux status bar](#Toggle-Tmux-status-bar)
+    - [Toggle Tmux status line](#Toggle-Tmux-status-line)
     - [Toggle Tmux pane-border-status(pane name)](#Toggle-Tmux-pane-border-statuspane-name)
   - [In Vim Normal Mode](#In-Vim-Normal-Mode)
     - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark)
@@ -68,12 +68,13 @@ The supported platforms currently are macOS and Linux.
     - [aliases](#aliases)
 - [Tmux](#Tmux)
   - [Prefix Key](#Prefix-key)
-  - [Common](#Common)
-  - [Session](#Session)
-  - [Window](#Window)
-  - [Pane](#Pane)
-  - [Copy Mode](#Copy-Mode)
-  - [Sync Mode](#Sync-Mode)
+  - [Key Bindings](#Key-bindings)
+    - [Common](#Common)
+    - [Session](#Session)
+    - [Window](#Window)
+    - [Pane](#Pane)
+    - [Copy Mode](#Copy-Mode)
+    - [Sync Mode](#Sync-Mode)
   - [Tmux Plugins](#Tmux-Plugins)
     - [tmux-plugins/tpm](#tmux-pluginstpm)
     - [tmux-plugins/tmux-prefix-highlight](#tmux-pluginstmux-prefix-highlight)
@@ -483,7 +484,7 @@ ctrl a ctrl k
 ctrl a ctrl j
 ```
 
-#### <a name="Toggle-Tmux-status-bar"></a>Toggle Tmux status bar [⌆](#With-Keyboard-Shortcutshotkey)
+#### <a name="Toggle-Tmux-status-line"></a>Toggle Tmux status line [⌆](#With-Keyboard-Shortcutshotkey)
 
 ```text
 ctrl a b
@@ -792,7 +793,9 @@ All the following shortcuts keys must first press the prefix key.
 > Note that after pressing the prefix key, you need to release the prefix key first,
 > and then press other specific shortcut keys.
 
-### <a name="Common"></a>Common [⌅](#Tmux)
+### <a name="Key-bindings"></a>Key Bindings [⌅](#Tmux)
+
+#### <a name="Common"></a>Common [⌆](#Key-Bindings)
 
 - `?` : List key bindings
 - `r` : Reload `~/.tmux.conf`
@@ -800,7 +803,7 @@ All the following shortcuts keys must first press the prefix key.
 - `K` : View help documents of the object in `~/.tmux.conf`
 - `d` : Detach the current client
 
-### <a name="Session"></a>Session [⌅](#Tmux)
+#### <a name="Session"></a>Session [⌆](#Key-Bindings)
 
 - `s` : Choose a session from a list
 - `Option/Alt` `f` : Search session
@@ -808,7 +811,7 @@ All the following shortcuts keys must first press the prefix key.
 - `$` : Rename the current session
 - `b` : Toggle status line of the current session
 
-### <a name="Window"></a>Window [⌅](#Tmux)
+#### <a name="Window"></a>Window [⌆](#Key-Bindings)
 
 - `c` : Create new window
 - `,` : Rename current window
@@ -821,7 +824,7 @@ All the following shortcuts keys must first press the prefix key.
 - `f` : Search window
 - `i` : Display window information
 
-### <a name="Pane"></a>Pane [⌅](#Tmux)
+#### <a name="Pane"></a>Pane [⌆](#Key-Bindings)
 
 - `%` : Split window horizontally
 - `"` : Split window vertically
@@ -851,7 +854,7 @@ All the following shortcuts keys must first press the prefix key.
 - `Ctrl` `l` : Clear all the messages(include history messages) in the active pane
 - `Ctrl` `b` : Toggle pane name of the current window's all panes
 
-### <a name="Copy-Mode"></a>Copy Mode [⌅](#Tmux)
+#### <a name="Copy-Mode"></a>Copy Mode [⌆](#Key-Bindings)
 
 - `[` : Enter copy mode
 - `]` : Paste the most recent paste buffer
@@ -870,7 +873,7 @@ All the following shortcuts keys must first press the prefix key.
 
 Enabled `vi-mode`, many vi shortcuts can be used in this scenario.
 
-### <a name="Sync-mode"></a>Sync Mode [⌅](#Tmux)
+#### <a name="Sync-mode"></a>Sync Mode [⌆](#Key-Bindings)
 
 - `Ctrl` `y` : Toggle sync mode
 
