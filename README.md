@@ -853,6 +853,7 @@ All the following shortcuts keys must first press the prefix key.
 - `L` : Resize the pane right
 - `Ctrl` `l` : Clear all the messages(include history messages) in the active pane
 - `Ctrl` `b` : Toggle pane name of the current window's all panes
+- `Ctrl` `t` : Create a new pane that is 16% of the size of the current pane and below the current pane
 
 #### <a name="Copy-Mode"></a>Copy Mode [⌆](#Key-Bindings)
 
