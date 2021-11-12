@@ -6,20 +6,26 @@ Install requirements for vimhack/dotfiles.
 
 ### Vim/Neovim
 
-- Vim 8.2+ and [Neovim 0.4.0+](https://github.com/neovim/neovim)
+- [Vim 8.2+](https://github.com/vim/vim)
 
-```bash
+```sh
 brew install cmake python poetry mono go ruby lua@5.3 nodejs yarn ctags rg
 
 brew install macvim
+```
 
-brew install neovim
-pip3 install neovim
+- [Neovim 0.6+](https://github.com/neovim/neovim)
+
+```sh
+brew uninstall neovim
+
+brew install --HEAD luajit
+brew install --HEAD neovim
 ```
 
 - xkbswitch-macosx
 
-```bash
+```sh
 git clone --depth=1 https://github.com/myshov/xkbswitch-macosx.git
 cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
 
@@ -29,7 +35,7 @@ cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
 
 - ale linters
 
-```bash
+```sh
 brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
 
 luarocks install luacheck
@@ -47,7 +53,7 @@ sudo gem install mdl
 
 - ale fixers
 
-```bash
+```sh
 npm install -g prettier importjs lua-fmt
 pip3 install black isort
 go get mvdan.cc/sh/v3/cmd/shfmt
@@ -57,20 +63,20 @@ go get mvdan.cc/sh/v3/cmd/shfmt
 
 - [tmux 3.0+](https://github.com/tmux/tmux)
 
-```bash
+```sh
 brew install tmux
 ```
 
 - iStats
 
-```bash
+```sh
 # For showing cpu temperature and fan speed in the tmux status bar.
 sudo gem install iStats
 ```
 
 - switchaudio-osx
 
-```bash
+```sh
 # For showing audio volume status in the tmux status bar.
 brew install switchaudio-osx
 ```
@@ -79,20 +85,20 @@ brew install switchaudio-osx
 
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 
-```bash
+```sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 - zsh-autosuggestions
 
-```bash
+```sh
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 - zsh-syntax-highlighting
 
-```bash
+```sh
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
@@ -108,13 +114,13 @@ ln -sf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/p10k.zsh $HOM
 
 - [fzf](https://github.com/junegunn/fzf)
 
-```bash
+```sh
 brew install fzf
 # To install useful key bindings and fuzzy completion:
 $(brew --prefix)/opt/fzf/install
 ```
 
-```bash
+```sh
 # For replace ls
 # doc: https://the.exa.website
 brew install exa
@@ -124,13 +130,13 @@ brew install exa
 
 - [alacritty 0.8.0+](https://github.com/alacritty/alacritty)
 
-```bash
+```sh
 brew install alacritty
 ```
 
 - Install fonts
 
-```bash
+```sh
 git clone --depth=1 https://github.com/vimhack/nerd-fonts-patched.git
 
 cd nerd-fonts-patched

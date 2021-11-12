@@ -280,6 +280,12 @@ Plug 'Raimondi/delimitMate'
 " 自动补全各种括号引号以及代码的条件或循环语句的结束部分等.
 Plug 'cohama/lexima.vim'
 
+" 著名的 AI 补全插件.
+" doc: https://copilot.github.com
+" Start Neovim and invoke :Copilot setup
+" NOTE: 只支持 neovim 0.6+ 版本.
+Plug 'github/copilot.vim'
+
 " }}
 
 " 代码检查  Code Static Check {{
