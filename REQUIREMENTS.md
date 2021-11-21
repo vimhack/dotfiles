@@ -4,6 +4,13 @@ Install requirements for vimhack/dotfiles.
 
 ## For MacOS
 
+Install homebrew first if you have not installed homebrew:
+
+```sh
+# https://brew.sh/
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
 ### Vim/Neovim
 
 - [Vim 8.2+](https://github.com/vim/vim)
