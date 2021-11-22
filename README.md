@@ -214,7 +214,11 @@ To install, run the following from your terminal:
 # Make sure the target directory is '~/.dotfiles'
 git clone --depth=1 https://github.com/vimhack/dotfiles.git ~/.dotfiles
 
+# zsh
+ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
+
 # vim
+mkdir ~/.vim
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
 
@@ -225,10 +229,8 @@ ln -sf ~/.dotfiles/vim/coc-settings.json ~/.config/nvim/coc-settings.json
 # tmux
 ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
-# zsh
-ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
-
 # alacritty
+mkdir -p ~/.dotfiles/alacritty
 \cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 \cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 ```

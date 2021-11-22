@@ -11,12 +11,64 @@ Install homebrew first if you have not installed homebrew:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+Install necessary packages:
+
+```sh
+brew install python poetry go ruby lua@5.3 nodejs
+brew install cmake mono yarn ctags rg gsed
+```
+
+### Zsh
+
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+- zsh-autosuggestions
+
+```sh
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions \
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+- zsh-syntax-highlighting
+
+```sh
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+- powerlevel10k
+
+```sh
+git clone --depth=1 https://github.com/vimhack/powerlevel10k.git \
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+ln -sf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/p10k.zsh $HOME/.p10k.zsh
+```
+
+- [fzf](https://github.com/junegunn/fzf)
+
+```sh
+brew install fzf
+# To install useful key bindings and fuzzy completion:
+$(brew --prefix)/opt/fzf/install
+```
+
+```sh
+# For replace ls
+# doc: https://the.exa.website
+brew install exa
+```
+
 ### Vim/Neovim
 
 - [Vim 8.2+](https://github.com/vim/vim)
 
 ```sh
-brew install cmake python poetry mono go ruby lua@5.3 nodejs yarn ctags rg
+export PATH="/usr/local/opt/python3/bin:$PATH"
 
 brew install macvim
 ```
@@ -24,10 +76,12 @@ brew install macvim
 - [Neovim 0.6+](https://github.com/neovim/neovim)
 
 ```sh
-brew uninstall neovim
+export PATH="/usr/local/opt/python3/bin:$PATH"
 
 brew install --HEAD luajit
 brew install --HEAD neovim
+
+pip3 install neovim
 ```
 
 - xkbswitch-macosx
@@ -86,51 +140,6 @@ sudo gem install iStats
 ```sh
 # For showing audio volume status in the tmux status bar.
 brew install switchaudio-osx
-```
-
-### Zsh
-
-- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-
-```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-- zsh-autosuggestions
-
-```sh
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-```
-
-- zsh-syntax-highlighting
-
-```sh
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-- powerlevel10k
-
-```sh
-git clone --depth=1 https://github.com/vimhack/powerlevel10k.git \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-ln -sf ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/p10k.zsh $HOME/.p10k.zsh
-```
-
-- [fzf](https://github.com/junegunn/fzf)
-
-```sh
-brew install fzf
-# To install useful key bindings and fuzzy completion:
-$(brew --prefix)/opt/fzf/install
-```
-
-```sh
-# For replace ls
-# doc: https://the.exa.website
-brew install exa
 ```
 
 ### Alacritty
