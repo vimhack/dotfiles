@@ -211,25 +211,27 @@ To install, run the following from your terminal:
 (please backup your existing dotfiles first)
 
 ```sh
-# Make sure the target directory is '~/.dotfiles'
+# Make sure the target directory is '~/.dotfiles'.
 git clone --depth=1 https://github.com/vimhack/dotfiles.git ~/.dotfiles
 
-# zsh
+# Zsh
 ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 
-# vim
+# Vim
 mkdir ~/.vim
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
 
-# neovim
+# Neovim
 mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.config/nvim/coc-settings.json
 
-# tmux
+# Tmux
 ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+# Add your own configurations in this file.
+touch ~/.tmux.local.conf
 
-# alacritty
+# Alacritty
 mkdir -p ~/.dotfiles/alacritty
 \cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 \cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
