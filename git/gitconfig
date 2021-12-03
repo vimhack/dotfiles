@@ -43,3 +43,6 @@
     # 这类字符在 Git 输出到终端的时候默认是用 8 进制转义字符输出的(防止乱码), 
     # 但现在的终端多数都支持直接显示非 ASCII 字符, 所以可以关闭掉这个特性.
     quotepath = off
+
+[init]
+	defaultBranch = main
