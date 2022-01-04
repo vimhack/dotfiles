@@ -115,6 +115,7 @@ set nocompatible
 
 " 设置 Vim 内部使用的字符编码, 默认值 latin1 或者操作系统 $LANG 环境变量对应的编码.
 set encoding=utf-8
+set fileencodings=utf8,ucs-bom,utf-8,cp936,latin1
 
 " Vim 保存多少个历史命令, 一般保存在 ~/.viminfo 隐藏文件中.
 set history=1000
