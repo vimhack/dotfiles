@@ -330,6 +330,9 @@ alias ff="vim \$(fzf)"
 # Useful key bindings and fuzzy completion.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Enable shell completion.
+autoload -U compinit; compinit
+
 # }}
 
 
