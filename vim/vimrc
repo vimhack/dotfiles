@@ -2099,7 +2099,8 @@ if &rtp =~ '/ale,'
   "      拿 Python 的依赖管理工具 poetry 举例:
   "      poetry init
   "      poetry shell
-  "      poetry add pylint flake8 autoimport black isort -D
+  "      poetry add pylint flake8 autoimport black isort -D -vvv
+  "      如果要使用 neovim, 还需要 poetry add neovim -D -vvv
   let g:ale_linters = {
     \  'go': ['golangci-lint', 'revive', 'gopls'],
     \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
