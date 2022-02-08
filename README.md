@@ -105,6 +105,10 @@ The supported platforms currently are macOS and Linux.
     - [Others](#Others)
   - [Custom Snippets](#Custom-Snippets)
     - [Markdown](#Markdown)
+  - [Put Your Own Customization](#Put-Your-Own-Customization)
+    - [Add More Plugins](#Add-More-Plugins)
+    - [Add More Configurations](#Add-More-Configurations)
+    - [Disable Default Plugins](#Disable-Default-Plugins)
   - [Vim/Neovim Plugins](#VimNeovim-Plugins)
     - [Code AutoCompletion](#Code-AutoCompletion)
       - [neoclide/coc.nvim](#neoclidecoc.nvim)
@@ -199,10 +203,6 @@ The supported platforms currently are macOS and Linux.
       - [vim/killersheep](#vimkillersheep)
       - [skywind3000/asynctasks.vim](#skywind3000asynctasks.vim)
       - [skywind3000/asyncrun.vim](#skywind3000asyncrun.vim)
-  - [Put Your Own Customization](#Put-Your-Own-Customization)
-    - [Add More Plugins](#Add-More-Plugins)
-    - [Add More Configurations](#Add-More-Configurations)
-    - [Disable Default Plugins](#Disable-Default-Plugins)
 - [License](#License)
 
 ## 📦 <a name="Requirements-Installation"></a>Requirements Installation [↟](#Contents)
@@ -1147,71 +1147,6 @@ pressing `,f` will jump the cursor to the placeholder and delete it at the same 
 > **NOTE:** <br>
 > All above shortcuts are in the _Vim Insert Mode_.
 
-### <a name="VimNeovim-Plugins"></a>Vim/Neovim Plugins [⌅](#VimNeovim)
-
-#### <a name="Code-AutoCompletion"></a>Code AutoCompletion [⌅](#VimNeovim)
-
-##### <a name="neoclidecoc.nvim"></a>[neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) [⌆](#Code-AutoCompletion)
-
-###### 1. Symbol description of the completion menu
-
-```text
-   [LS]  Language Server
-    [S]  Snippets
-   [US]  UltiSnips
-   [TN]  TabNine
-  [GOC]  Gocode
-  [NEC]  Neco-vim
-    [A]  Around
-    [B]  Buffer
-    [F]  File
-      M  Module
-      I  Interface
-      S  Struct
-      f  func
-```
-
-###### 2. Key bindings
-
-- `:C` : Open ~/.vim/coc-settings.json
-- `[`/`]` `g` : Navigate chunks of current buffer
-- `[`/`]` `c` : Navigate conflicts of current buffer
-- `,` `gd` : Show chunk diff at current position
-- `,` `gc` : Show commit contains current position
-- `<tab>` : Use tab for trigger completion with characters ahead and navigate
-- `g` `d`/`l` : Go to definition position by create new tab way
-- `g` `y` : Go to type definition
-- `g` `i` : Go to implementation position
-- `g` `r` : Show related items in location list, and select one to go to
-- `K` : Use K to show documentation in preview window
-- `,` `rn` : Symbol renaming
-- `Ctrl` `f`/`b`: Scroll float windows/popups
-- `<Space>` `e` : Show all coc extensions
-- `<Space>` `c` : Show all coc commands
-- `<Space>` `s` : Show all completion sources of the current file type
-- `<Space>` `p` : Resume latest coc list
-
-##### <a name="SirVerultisnips"></a>[SirVer/ultisnips](https://github.com/SirVer/ultisnips) [⌆](#Code-AutoCompletion)
-
-UltiSnips is the ultimate solution for snippets in Vim.
-
-##### <a name="honzavim-snippets"></a>[honza/vim-snippets](https://github.com/honza/vim-snippets) [⌆](#Code-AutoCompletion)
-
-- `snippets/*` : snippets using snipMate format
-- `UltiSnips/*` : snippets using UltiSnips format
-
-##### <a name="Shougoneco-vim"></a>[Shougo/neco-vim](https://github.com/Shougo/neco-vim) [⌆](#Code-AutoCompletion)
-
-The Vim Script completion source.
-
-##### <a name="neoclidecoc-neco"></a>[neoclide/coc-neco](https://github.com/neoclide/coc-neco) [⌆](#Code-AutoCompletion)
-
-Vim completon source for coc.nvim using [neco-vim](https://github.com/Shougo/neco-vim).
-
-##### <a name="RaimondidelimitMate"></a>[Raimondi/delimitMate](https://github.com/Raimondi/delimitMate) [⌆](#Code-AutoCompletion)
-
-Provides insert mode auto-completion for quotes, parens, brackets, etc.
-
 ### <a name="Put-Your-Own-Customization"></a>Put Your Own Customization [⌅](#VimNeovim)
 
 #### <a name="Add-More-Plugins"></a>Add More Plugins [⌆](#Put-your-own-customization)
@@ -1287,6 +1222,71 @@ UnPlug 'lyokha/vim-xkbswitch'
 " Disable vim hardtime feature.
 UnPlug 'takac/vim-hardtime'
 ```
+
+### <a name="VimNeovim-Plugins"></a>Vim/Neovim Plugins [⌅](#VimNeovim)
+
+#### <a name="Code-AutoCompletion"></a>Code AutoCompletion [⌅](#VimNeovim)
+
+##### <a name="neoclidecoc.nvim"></a>[neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) [⌆](#Code-AutoCompletion)
+
+###### 1. Symbol description of the completion menu
+
+```text
+   [LS]  Language Server
+    [S]  Snippets
+   [US]  UltiSnips
+   [TN]  TabNine
+  [GOC]  Gocode
+  [NEC]  Neco-vim
+    [A]  Around
+    [B]  Buffer
+    [F]  File
+      M  Module
+      I  Interface
+      S  Struct
+      f  func
+```
+
+###### 2. Key bindings
+
+- `:C` : Open ~/.vim/coc-settings.json
+- `[`/`]` `g` : Navigate chunks of current buffer
+- `[`/`]` `c` : Navigate conflicts of current buffer
+- `,` `gd` : Show chunk diff at current position
+- `,` `gc` : Show commit contains current position
+- `<tab>` : Use tab for trigger completion with characters ahead and navigate
+- `g` `d`/`l` : Go to definition position by create new tab way
+- `g` `y` : Go to type definition
+- `g` `i` : Go to implementation position
+- `g` `r` : Show related items in location list, and select one to go to
+- `K` : Use K to show documentation in preview window
+- `,` `rn` : Symbol renaming
+- `Ctrl` `f`/`b`: Scroll float windows/popups
+- `<Space>` `e` : Show all coc extensions
+- `<Space>` `c` : Show all coc commands
+- `<Space>` `s` : Show all completion sources of the current file type
+- `<Space>` `p` : Resume latest coc list
+
+##### <a name="SirVerultisnips"></a>[SirVer/ultisnips](https://github.com/SirVer/ultisnips) [⌆](#Code-AutoCompletion)
+
+UltiSnips is the ultimate solution for snippets in Vim.
+
+##### <a name="honzavim-snippets"></a>[honza/vim-snippets](https://github.com/honza/vim-snippets) [⌆](#Code-AutoCompletion)
+
+- `snippets/*` : snippets using snipMate format
+- `UltiSnips/*` : snippets using UltiSnips format
+
+##### <a name="Shougoneco-vim"></a>[Shougo/neco-vim](https://github.com/Shougo/neco-vim) [⌆](#Code-AutoCompletion)
+
+The Vim Script completion source.
+
+##### <a name="neoclidecoc-neco"></a>[neoclide/coc-neco](https://github.com/neoclide/coc-neco) [⌆](#Code-AutoCompletion)
+
+Vim completon source for coc.nvim using [neco-vim](https://github.com/Shougo/neco-vim).
+
+##### <a name="RaimondidelimitMate"></a>[Raimondi/delimitMate](https://github.com/Raimondi/delimitMate) [⌆](#Code-AutoCompletion)
+
+Provides insert mode auto-completion for quotes, parens, brackets, etc.
 
 ## ⚖️ <a name="License"></a>License [↟](#Contents)
 
