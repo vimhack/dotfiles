@@ -2084,6 +2084,11 @@ if &rtp =~ '/ale,'
   "      go get -u github.com/mgechev/revive
   "      sudo gem install mdl
   "
+  "      " for terraform
+  "      brew install terraform
+  "      brew install hashicorp/tap/terraform-ls
+  "      brew install tflint
+  "
   "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
   "      我们这里使用 standard 风格: eslint --init
   "      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
@@ -2115,6 +2120,7 @@ if &rtp =~ '/ale,'
     \  'json': ['jq', 'jsonlint'],
     \  'jsonc': ['jq', 'jsonlint'],
     \  'markdown': ['markdownlint'],
+    \  'terraform': ['terraform', 'terraform_ls', 'tflint'],
     \ }
 
   " golangci-lint 配置:
@@ -2172,6 +2178,7 @@ if &rtp =~ '/ale,'
     \  'vim': ['trim_whitespace', 'remove_trailing_lines'],
     \  'zsh': ['trim_whitespace', 'remove_trailing_lines'],
     \  'tmux': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'terraform': ['terraform', 'trim_whitespace', 'remove_trailing_lines'],
     \ }
 endif
 
