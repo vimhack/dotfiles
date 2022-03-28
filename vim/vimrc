@@ -2456,9 +2456,6 @@ autocmd bufnewfile *.lua call SetTitleForLua()
 
 """""""" Javascript/vue/html/css {{
 
-" 将 .json 文件设置为 jsonc 文件类型, 这样就可以在其中进行 // 或 /**/ 注释了.
-autocmd BufRead,BufNewFile *.json set filetype=jsonc
-
 " css
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
