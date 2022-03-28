@@ -2664,6 +2664,12 @@ if &rtp =~ '/vim-move,'
   let g:move_key_modifier = 'M'
 endif
 
+"""""" tpope/vim-commentary
+" doc: https://github.com/tpope/vim-commentary
+
+" 对于jsonc文件类型, 定制注释标识符为: //
+autocmd FileType jsonc setlocal commentstring=//\ %s
+
 " }}
 
 " 文件浏览  File Navigation {{
