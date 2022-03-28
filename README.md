@@ -161,7 +161,7 @@ The supported platforms currently are macOS and Linux.
       - [francoiscabrol/ranger.vim](#francoiscabrolranger.vim)
     - [Text Editing](#Text-Editing)
       - [mg979/vim-visual-multi](#mg979vim-visual-multi)
-      - [preservim/nerdcommenter](#preservimnerdcommenter)
+      - [tpope/vim-commentary](#tpopevim-commentary)
       - [tpope/vim-surround](#tpopevim-surround)
       - [matze/vim-move](#matzevim-move)
       - [AndrewRadev/splitjoin.vim](#AndrewRadevsplitjoin.vim)

@@ -371,7 +371,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " 代码注释插件.
-Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
+" 解决类似vue文件中存在多种语言场景的注释问题.
+Plug 'suy/vim-context-commentstring'
 
 " 使用指定符号包围光标所在单词, 比如:
 " ys2w"  表示从光标位置开始的 2 个单词使用双引号包围.
@@ -2113,7 +2115,7 @@ if &rtp =~ '/ale,'
     \  'lua': ['luac', 'luacheck'],
     \  'sh': ['shellcheck', 'language_server'],
     \  'zsh': ['shellcheck', 'language_server'],
-    \  'javascript': ['eslint', 'standard'],
+    \  'javascript': ['eslint'],
     \  'vue': ['eslint', 'vls'],
     \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
     \  'yaml': ['yamllint'],
@@ -2166,7 +2168,7 @@ if &rtp =~ '/ale,'
     \  'go': ['gofmt', 'goimports'],
     \  'rust': ['rustfmt'],
     \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
-    \  'lua': ['trim_whitespace', 'remove_trailing_lines'],
+    \  'lua': ['luafmt'],
     \  'sh': ['shfmt'],
     \  'javascript': ['eslint', 'importjs'],
     \  'vue': ['eslint'],
@@ -2272,9 +2274,9 @@ autocmd FileType go set list lcs=tab:\¦\ " 注意结尾有一个空格.
 " :GoTestsAll to generate tests for all functions in the current buffer.
 
 " normal 或 visual 模式下按 gc 生成光标所在函数或选择的函数的单元测试模版代码.
-noremap <silent> gc :GoTests<CR>
+noremap <leader>gc :GoTests<CR>
 " normal 或 visual 模式下按 gcc 生成当前 Go 文件的所有函数的单元测试模版代码.
-noremap <silent> gcc :GoTestsAll<CR>
+noremap <leader>gcc :GoTestsAll<CR>
 
 """""" fatih/vim-go
 " doc: https://github.com/fatih/vim-go
@@ -2356,8 +2358,6 @@ au FileType go nmap <leader>gr <Plug>(go-run)
 au FileType go nmap <leader>gb <Plug>(go-build)
 " ,gt  go test 当前的 go 文件.
 au FileType go nmap <leader>gt <Plug>(go-test)
-" ,gc  查看当前代码文件的测试覆盖率.
-au FileType go nmap <leader>gc <Plug>(go-coverage)
 
 " *** 代码语法高亮 ***
 
@@ -2662,35 +2662,6 @@ if &rtp =~ '/vim-move,'
   "   C: Ctrl
   "   S: Shift
   let g:move_key_modifier = 'M'
-endif
-
-"""""" preservim/nerdcommenter
-" doc: https://github.com/preservim/nerdcommenter
-
-if &rtp =~ '/nerdcommenter,'
-  " 解决 vue 类型文件的代码注释问题.
-  " from: https://github.com/posva/vim-vue#how-can-i-use-nerdcommenter-in-vue-files
-  let g:ft = ''
-
-  function! NERDCommenter_before()
-    if &ft == 'vue'
-      let g:ft = 'vue'
-      let stack = synstack(line('.'), col('.'))
-      if len(stack) > 0
-        let syn = synIDattr((stack)[0], 'name')
-        if len(syn) > 0
-          exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-        endif
-      endif
-    endif
-  endfunction
-
-  function! NERDCommenter_after()
-    if g:ft == 'vue'
-      setf vue
-      let g:ft = ''
-    endif
-  endfunction
 endif
 
 " }}
@@ -4104,14 +4075,12 @@ endif
 "                 ,h  标记当前行光标左侧的字符.
 "                  s  输入1个目标字符即可高亮定位, 支持多窗口同时定位.
 "
-" ** preservim/nerdcommenter (https://github.com/preservim/nerdcommenter)
-"       [n],c<space>  注释或取消注释光标所在行,
-"                     或 visual 模式下选择多行来注释或取消注释.
-"             [n],cc  只注释, 如果原来就有注释则多一层注释.
-"             [n],cm  对被选区域用一对注释符进行注释, 比如由 // 改为 /* */.
-"             [n],cs  添加较美观的注释.
-"             [n],cy  添加注释并复制被被注释的部分.
-"             [n],cA  跳转到该行结尾添加注释符号，并进入 insert 模式.
+" ** tpope/vim-commentary (https://github.com/tpope/vim-commentary)
+"             [n]gcc  注释或取消注释光标所在行或包含当前行的下n行.
+"                 gc  visual 模式下选择多行来注释或取消注释.
+"          gc[space]  normal 模式下注释或取消注释当前行.
+"             gc[n]k  normal 模式下注释或取消注释当前行以及上n行, n默认为1.
+"             gc[n]j  normal 模式下注释或取消注释当前行以及下n行, n默认为1.
 "
 " ** skywind3000/asyncrun.vim (https://github.com/skywind3000/asyncrun.vim)
 "                ,ar  command-line 模式下异步运行命令, 并在当前窗口底部输出执行结果.
