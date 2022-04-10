@@ -2091,6 +2091,9 @@ if &rtp =~ '/ale,'
   "      brew install hashicorp/tap/terraform-ls
   "      brew install tflint
   "
+  "      " for css
+  "      npm install --save-dev stylelint stylelint-config-standard
+  "
   "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
   "      我们这里使用 standard 风格: eslint --init
   "      或 vue create project-demo(需要选择手动配置, 选择 standard 风格),
@@ -2108,6 +2111,12 @@ if &rtp =~ '/ale,'
   "      poetry shell
   "      poetry add pylint flake8 autoimport black isort -D -vvv
   "      如果要使用 neovim, 还需要 poetry add neovim -D -vvv
+  "
+  "   6) css 工具 stylint 配置:
+  "      stylelint 配置文件, 项目根目录下的 .stylelintrc.json:
+  "      {
+  "         extends": "stylelint-config-standard"
+  "      }
   let g:ale_linters = {
     \  'go': ['golangci-lint', 'revive', 'gopls'],
     \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
@@ -2118,6 +2127,10 @@ if &rtp =~ '/ale,'
     \  'javascript': ['eslint'],
     \  'vue': ['eslint', 'vls'],
     \  'html': ['tidy', 'stylelint', 'alex', 'writegood', 'proselint'],
+    \  'css': ['stylelint'],
+    \  'scss': ['stylelint'],
+    \  'sass': ['stylelint'],
+    \  'less': ['stylelint'],
     \  'yaml': ['yamllint'],
     \  'json': ['jq', 'jsonlint'],
     \  'jsonc': ['jq', 'jsonlint'],
@@ -2150,6 +2163,9 @@ if &rtp =~ '/ale,'
     \ },
     \ }"'
 
+  " scss 配置, 允许//注释.
+  let g:ale_scss_stylelint_options = '--comment-no-loud true'
+
   " 针对不同语言的自动修复功能.
   "    需要安装相关的命令行工具:
   "       npm install -g prettier importjs lua-fmt
@@ -2173,6 +2189,10 @@ if &rtp =~ '/ale,'
     \  'javascript': ['eslint', 'importjs'],
     \  'vue': ['eslint'],
     \  'html': ['prettier'],
+    \  'css': ['stylelint', 'prettier'],
+    \  'scss': ['stylelint', 'prettier'],
+    \  'sass': ['stylelint', 'prettier'],
+    \  'less': ['stylelint', 'prettier'],
     \  'json': ['jq'],
     \  'jsonc': ['jq'],
     \  'yaml': ['prettier'],
