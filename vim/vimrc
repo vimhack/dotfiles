@@ -2479,6 +2479,10 @@ autocmd bufnewfile *.lua call SetTitleForLua()
 " css
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
+" 将 json 类型文件自动转换为 jsonc 类型, 这样就可以使用 // 和 /* */ 来注释了.
+" NOTE: jsconfig.json 文件除外, 该文件不需要转换就是 jsonc 类型, 强制转化会报错.
+autocmd BufNewFile,BufRead [^jsconfig]*.json set ft=jsonc
+
 """""" posva/vim-vue 插件
 " 解决 vim-vue 插件导致的 Vim 速度变慢的问题.
 let g:vue_pre_processors = []
