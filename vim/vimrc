@@ -2092,7 +2092,7 @@ if &rtp =~ '/ale,'
   "      brew install tflint
   "
   "      " for css
-  "      npm install --save-dev stylelint stylelint-config-standard
+  "      npm install --save-dev stylelint stylelint-config-standard stylelint-config-standard-scss
   "
   "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
   "      我们这里使用 standard 风格: eslint --init
@@ -2115,8 +2115,13 @@ if &rtp =~ '/ale,'
   "   6) css 工具 stylint 配置:
   "      stylelint 配置文件, 项目根目录下的 .stylelintrc.json:
   "      {
-  "         extends": "stylelint-config-standard"
+  "        "extends": "stylelint-config-standard-scss"
+  "        "rules": {
+  "          "color-function-notation": "legacy",
+  "          "selector-class-pattern": "^[a-zA-Z][a-zA-Z0-9-_]*$"
+  "        }
   "      }
+  "      配置规则参考: https://github.com/stylelint/stylelint/blob/main/docs/user-guide/rules/list.md
   let g:ale_linters = {
     \  'go': ['golangci-lint', 'revive', 'gopls'],
     \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
@@ -2163,8 +2168,8 @@ if &rtp =~ '/ale,'
     \ },
     \ }"'
 
-  " scss 配置, 允许//注释.
-  let g:ale_scss_stylelint_options = '--comment-no-loud true'
+  "  scss 使用系统全局的 stylelint 命令.
+  let g:ale_scss_stylelint_use_global = 1
 
   " 针对不同语言的自动修复功能.
   "    需要安装相关的命令行工具:
@@ -2189,10 +2194,10 @@ if &rtp =~ '/ale,'
     \  'javascript': ['eslint', 'importjs'],
     \  'vue': ['eslint'],
     \  'html': ['prettier'],
-    \  'css': ['stylelint', 'prettier'],
-    \  'scss': ['stylelint', 'prettier'],
-    \  'sass': ['stylelint', 'prettier'],
-    \  'less': ['stylelint', 'prettier'],
+    \  'css': ['stylelint'],
+    \  'scss': ['stylelint'],
+    \  'sass': ['stylelint'],
+    \  'less': ['stylelint'],
     \  'json': ['jq'],
     \  'jsonc': ['jq'],
     \  'yaml': ['prettier'],
@@ -3723,6 +3728,22 @@ endif
 "map <Right> <Nop>
 "map <Up> <Nop>
 "map <Down> <Nop>
+
+" 根据光标所在的不同tag, 动态变更文件类型.
+" function! s:setFileType()
+"   if searchpair('<script', '', '</script>', 'bnW')
+"     set ft=javascript
+"   elseif searchpair('<style', '', '</style>', 'bnW')
+"     set ft=css
+"   else
+"     set ft=html
+"   endif
+" endfunction
+
+" augroup vueBinds
+"   au!
+"   au CursorMoved,CursorMovedI *.vue call s:setFileType()
+" augroup END
 
 " }}
 
