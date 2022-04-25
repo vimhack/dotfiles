@@ -190,6 +190,9 @@ window:
   # Default: Windowed
   startup_mode: Maximized
 
+  # 背景透明度配置, 取值范围: 0.0 到 1.0
+  opacity: 0.9
+
 # }}
 
 # 字体样式配置 {{
@@ -1446,9 +1449,6 @@ schemes:
 
 # 从 Color Schemes 中选则一个使用.
 colors: *dracula
-
-# 背景透明度配置, 取值范围: 0.0 到 1.0
-background_opacity: 0.9
 
 # }}
 

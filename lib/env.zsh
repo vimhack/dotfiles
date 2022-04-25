@@ -41,7 +41,7 @@ fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | awk -F:: '{print $1}' | xargs))
 }
 
 current_colorscheme=$(awk -F'*' '/^colors:/{print $2}' $alacritty_conf)
-current_opacity=$(awk '/^background_opacity/{print $NF}' $alacritty_conf)
+current_opacity=$(awk '/^  opacity/{print $NF}' $alacritty_conf)
 current_font_size=$(awk '/^  size:/{print $NF}' $alacritty_conf)
 
 current_offset_x=$(gsed -n  '/^  offset:$/{N;N;p}' $alacritty_conf |
@@ -115,7 +115,7 @@ update_config_for_alacritty() {
 
     gsed -i "/^colors/s/^.*$/colors: *$current_colorscheme/;
         /^  size:/s/^.*$/  size: $current_font_size/;
-        /^background_opacity/s/^.*$/background_opacity: $current_opacity/;
+        /^  opacity/s/^.*$/  opacity: $current_opacity/;
         / family:/s/^.*$/    family: $current_font_family Nerd Font/;
         ${regular_style_ln}s/^.*$/    style: $regular_style/;
         ${bold_style_ln}s/^.*$/    style: $bold_style/;
@@ -205,16 +205,16 @@ colorscheme ${to_colorscheme}" >$vim_colorscheme_file
 
 change_opacity_for_alacritty() {
     local to_opacity=$1
-    gsed -i "/^background_opacity/s/^.*$/background_opacity: $to_opacity/" \
+    gsed -i "/^  opacity/s/^.*$/  opacity: $to_opacity/" \
         $alacritty_conf
 }
 
 toggle_transparancy_for_alacritty() {
     if [[ $current_opacity = "1.0" ]] || [[ $current_opacity = "1" ]]; then
-        gsed -i "/^background_opacity/s/^.*$/background_opacity: $last_opacity/" \
+        gsed -i "/^  opacity/s/^.*$/  opacity: $last_opacity/" \
             $alacritty_conf
     else
-        gsed -i "/^background_opacity/s/^.*$/background_opacity: 1/" \
+        gsed -i "/^  opacity/s/^.*$/  opacity: 1/" \
             $alacritty_conf
         echo "$current_opacity" >$last_opacity_file
     fi

@@ -144,7 +144,7 @@ brew install switchaudio-osx
 
 ### Alacritty
 
-- [alacritty 0.8.0+](https://github.com/alacritty/alacritty)
+- [alacritty 0.10.1+](https://github.com/alacritty/alacritty)
 
 ```sh
 brew install alacritty
