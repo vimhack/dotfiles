@@ -284,7 +284,14 @@ Plug 'cohama/lexima.vim'
 " 著名的 AI 补全插件.
 " doc: https://copilot.github.com
 " Start Neovim and invoke :Copilot setup
-" NOTE: 只支持 neovim 0.6+ 版本.
+" NOTE:
+"   1. 首次安装需要等待官方授权才能使用.
+"   2. 只支持 neovim 0.6+ 版本.
+"   3. 没有任何补全提示的原因排查:
+"      :help Copilot
+"      :Copilot status
+"      :Copilot log
+"   4. 卸载该插件再重新安装可解决大部分问题.
 Plug 'github/copilot.vim'
 
 " }}
