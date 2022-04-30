@@ -291,7 +291,11 @@ Plug 'cohama/lexima.vim'
 "      :help Copilot
 "      :Copilot status
 "      :Copilot log
-"   4. 卸载该插件再重新安装可解决大部分问题.
+"   4. 更新此插件, 可解决部分问题:
+"      :PlugUpdate copilot.vim
+"   5. 重新安装此插件可解决大部分问题, 方法:
+"      先注释此行, 重新打开此文件, 执行 :PlugClean 进行卸载;
+"      再取消注释, 执行 :PlugInstall 进行安装.
 Plug 'github/copilot.vim'
 
 " }}
@@ -4058,6 +4062,11 @@ endif
 "                 ,f  以上几乎每一个快捷键都会生成一个占位符(<++>),
 "                     按 ,f 光标会跳转到占位符, 并同时删除占位符.
 "                 ,w  相比于 ,f 此快捷键还会增加一个换行动作.
+"
+" ** 其他常用技巧
+"             ctrl g  状态栏显示当前buffer(文件)的文件名.
+"           1 ctrl g  状态栏显示当前buffer(文件)的全路径文件名.
+"           2 ctrl g  状态栏显示当前buffer(文件)的全路径文件名, 并且显示buffer编号.
 "
 " }}
 
