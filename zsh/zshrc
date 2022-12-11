@@ -66,6 +66,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 typeset -U PATH
 
 # oh-my-zsh 安装路径.
+# NOTE:
+#   $ZSH/cache/completions 路径默认在 $FPATH 中, 以后有新命令的补全文件可以放在此路径下, 比如:
+#     gopass completion zsh > $ZSH/cache/completions/_gopass
+#     exec zsh 或 omz reload
 export ZSH="$HOME/.oh-my-zsh"
 
 # 为 zsh 定制的内容的放置目录.
@@ -74,26 +78,27 @@ export ZSH_CUSTOM="$ZSH/custom"
 # 标准插件存放在: $ZSH/plugins/
 # 定制插件存放在: $ZSH_CUSTOM/plugins/
 # NOTE:
-# 光标移到下面的 README.md 文件, 按 gf 可以打开帮助文件, 按 ctrl o 返回到当前文件.
-# vi-mode:  ~/.oh-my-zsh/plugins/vi-mode/README.md
-# tmux:  ~/.oh-my-zsh/plugins/tmux/README.md
-# git:  ~/.oh-my-zsh/plugins/git/README.md
-# gitignore: ~/.oh-my-zsh/plugins/gitignore/README.md
-# history: ~/.oh-my-zsh/plugins/history/README.md
-# brew:  ~/.oh-my-zsh/plugins/brew/README.md
-# extract:  ~/.oh-my-zsh/plugins/extract/README.md
-# web-search: ~/.oh-my-zsh/plugins/web-search/README.md
-# emoji: ~/.oh-my-zsh/plugins/emoji/README.md
-# colorize: ~/.oh-my-zsh/plugins/colorize/README.md
-# colored-man-pages: ~/.oh-my-zsh/plugins/colored-man-pages/README.md
-# zsh_reload: ~/.oh-my-zsh/plugins/zsh_reload/README.md
-# sudo: ~/.oh-my-zsh/plugins/sudo/README.md
-# timer: ~/.oh-my-zsh/plugins/timer/README.md
-# themes: ~/.oh-my-zsh/plugins/themes/README.md
-# urltools: ~/.oh-my-zsh/plugins/urltools/README.md
-# copyfile: ~/.oh-my-zsh/plugins/copyfile/README.md
-# copypath: ~/.oh-my-zsh/plugins/copypath/README.md
-# aliases: ~/.oh-my-zsh/plugins/aliases/README.md
+# 1) 光标移到下面的 README.md 文件, 按 gf 可以打开帮助文件, 按 ctrl o 返回到当前文件.
+#   vi-mode:  ~/.oh-my-zsh/plugins/vi-mode/README.md
+#   tmux:  ~/.oh-my-zsh/plugins/tmux/README.md
+#   git:  ~/.oh-my-zsh/plugins/git/README.md
+#   gitignore: ~/.oh-my-zsh/plugins/gitignore/README.md
+#   history: ~/.oh-my-zsh/plugins/history/README.md
+#   brew:  ~/.oh-my-zsh/plugins/brew/README.md
+#   extract:  ~/.oh-my-zsh/plugins/extract/README.md
+#   web-search: ~/.oh-my-zsh/plugins/web-search/README.md
+#   emoji: ~/.oh-my-zsh/plugins/emoji/README.md
+#   colorize: ~/.oh-my-zsh/plugins/colorize/README.md
+#   colored-man-pages: ~/.oh-my-zsh/plugins/colored-man-pages/README.md
+#   zsh_reload: ~/.oh-my-zsh/plugins/zsh_reload/README.md
+#   sudo: ~/.oh-my-zsh/plugins/sudo/README.md
+#   timer: ~/.oh-my-zsh/plugins/timer/README.md
+#   themes: ~/.oh-my-zsh/plugins/themes/README.md
+#   urltools: ~/.oh-my-zsh/plugins/urltools/README.md
+#   copyfile: ~/.oh-my-zsh/plugins/copyfile/README.md
+#   copypath: ~/.oh-my-zsh/plugins/copypath/README.md
+#   aliases: ~/.oh-my-zsh/plugins/aliases/README.md
+# 2) 启用的插件, 会将插件目录加入到环境变量 $FPATH 中.
 plugins=(
     vi-mode
     tmux
@@ -429,5 +434,10 @@ autoload -U compinit; compinit
 #                    vol  调整系统音量大小.
 #         ssh-sessions/s  便捷的批量 ssh 连接远程服务器.
 #               lsof_tcp  查看当前监听的端口信息.
+#
+# *** 为新命令增加命令补全功能, 将补全脚本放到 $ZSH/cache/completions/ 路径下, 以gopass为例:
+#     gopass completion zsh > $ZSH/cache/completions/_gopass
+#     exec zsh 或 omz reload
+#
 
 # }}
