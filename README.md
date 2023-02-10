@@ -29,187 +29,187 @@ The supported platforms currently are macOS and Linux.
 
 ## Contents
 
-- [Requirements Installation](#Requirements-Installation)
-- [Installation](#Installation)
-- [Colorscheme/Theme](#ColorschemeTheme)
-  - [In Terminal Command Line](#In-Terminal-Command-Line)
-    - [Change colorscheme of Vim/Neovim and Alacritty](#Change-colorscheme-of-VimNeovim-and-Alacritty)
-    - [Change font of Alacritty](#Change-font-of-Alacritty)
-    - [Change font size of Alacritty](#Change-font-size-of-Alacritty)
-    - [Change opacity of Alacritty](#Change-opacity-of-Alacritty)
-    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
-    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
-    - [Print 256 colors](#Print-256-colors)
-    - [Print Icons](#Print-Icons)
-  - [With Keyboard Shortcuts/Hotkey](#With-Keyboard-shortcutsHotkey)
-    - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly)
-    - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly)
-    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent)
-    - [Increase Alacritty background transparent](#Increase-Alacritty-background-transparent)
-    - [Decrease Alacritty background transparent](#Decrease-Alacritty-background-transparent)
-    - [Toggle Tmux status line](#Toggle-Tmux-status-line)
-    - [Toggle Tmux pane-border-status(pane name)](#Toggle-Tmux-pane-border-statuspane-name)
-  - [In Vim Normal Mode](#In-Vim-Normal-Mode)
-    - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark)
-    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent)
-- [Alacritty](#Alacritty)
-  - [Keyboard Shortcuts](#Keyboard-Shortcuts)
-- [Zsh(OhMyZsh)](#ZshOhMyZsh)
-  - [Reload ~/.zshrc](#Reload-zshrc)
-  - [fzf](#fzf)
-  - [Custom Commands](#Custom-Commands)
-    - [Adjust the system volume](#Adjust-the-system-volume)
-    - [Batch ssh remote hosts in multi-tmux-panes](#Batch-ssh-remote-hosts-in-multi-tmux-panes)
-  - [OhMyZsh Plugins](#OhMyZsh-Plugins)
-    - [vi-mode](#vi-mode)
-    - [git](#git)
-    - [gitignore](#gitignore)
-    - [web-search](#web-search)
-    - [colorize](#colorize)
-    - [sudo](#sudo)
-    - [copyfile](#copyfile)
-    - [copydir](#copydir)
-    - [aliases](#aliases)
-- [Tmux](#Tmux)
-  - [Prefix Key](#Prefix-key)
-  - [Key Bindings](#Key-bindings)
-    - [Common](#Common)
-    - [Session](#Session)
-    - [Window](#Window)
-    - [Pane](#Pane)
-    - [Copy Mode](#Copy-Mode)
-    - [Sync Mode](#Sync-Mode)
-  - [Tmux Plugins](#Tmux-Plugins)
-    - [tmux-plugins/tpm](#tmux-pluginstpm)
-    - [tmux-plugins/tmux-prefix-highlight](#tmux-pluginstmux-prefix-highlight)
-    - [tmux-plugins/tmux-resurrect](#tmux-pluginstmux-resurrect)
-    - [tmux-plugins/tmux-continuum](#tmux-pluginstmux-continuum)
-    - [tmux-plugins/tmux-copycat](#tmux-pluginstmux-copycat)
-    - [tmux-plugins/tmux-yank](#tmux-pluginstmux-yank)
-    - [tmux-plugins/tmux-open](#tmux-pluginstmux-open)
-    - [ki-chi/tmux-inputmethod](#ki-chitmux-inputmethod)
-    - [vimhack/tmux-show-colorscheme](#vimhacktmux-show-colorscheme)
-    - [vimhack/tmux-audio-volume](#vimhacktmux-audio-volume)
-    - [vimhack/tmux-battery](#vimhacktmux-battery)
-    - [vimhack/tmux-cpu](#vimhacktmux-cpu)
-    - [vimhack/tmux-onlinestatus](#vimhacktmux-onlinestatus)
-    - [vimhack/tmux-weather](#vimhacktmux-weather)
-    - [vimhack/tmux-moon-phase](#vimhacktmux-moon-phase)
-  - [FQA](#FQA)
-- [Vim/Neovim](#VimNeovim)
-  - [Leader Key](#Leader-Key)
-  - [Custom Key Bindings](#Custom-key-bindings)
-    - [Tabs Management](#Tabs-management)
-    - [Cursor Movement](#Cursor-movement)
-    - [Text Edit](#Text-edit)
-    - [Others](#Others)
-  - [Custom Snippets](#Custom-Snippets)
-    - [Markdown](#Markdown)
-  - [Put Your Own Customization](#Put-Your-Own-Customization)
-    - [Add More Plugins](#Add-More-Plugins)
-    - [Add More Configurations](#Add-More-Configurations)
-    - [Disable Default Plugins](#Disable-Default-Plugins)
-  - [Vim/Neovim Plugins](#VimNeovim-Plugins)
-    - [Code AutoCompletion](#Code-AutoCompletion)
-      - [neoclide/coc.nvim](#neoclidecoc.nvim)
-      - [SirVer/ultisnips](#SirVerultisnips)
-      - [honza/vim-snippets](#honzavim-snippets)
-      - [Shougo/neco-vim](#Shougoneco-vim)
-      - [neoclide/coc-neco](#neoclidecoc-neco)
-      - [Raimondi/delimitMate](#RaimondidelimitMate)
-    - [Code Static Check](#Code-Static-Check)
-      - [dense-analysis/ale](#dense-analysisale)
-    - [Code Debug](#Code-Debug)
-      - [puremourning/vimspector](#puremourningvimspector)
-    - [User Interface](#User-Interface)
-      - [mhinz/vim-startify](#mhinzvim-startify)
-      - [voldikss/vim-floaterm](#voldikssvim-floaterm)
-      - [majutsushi/tagbar](#majutsushitagbar)
-      - [vimhack/lightline.vim](#vimhacklightline.vim)
-      - [maximbaz/lightline-ale](#maximbazlightline-ale)
-      - [luochen1990/rainbow](#luochen1990rainbow)
-      - [Yggdroot/indentLine](#YggdrootindentLine)
-      - [machakann/vim-highlightedyank](#machakannvim-highlightedyank)
-      - [unblevable/quick-scope](#unblevablequick-scope)
-      - [wellle/context.vim](#welllecontext.vim)
-      - [uguu-org/vim-matrix-screensaver](#uguu-orgvim-matrix-screensaver)
-      - [rrethy/vim-hexokinase](#rrethyvim-hexokinase)
-      - [ryanoasis/vim-devicons](#ryanoasisvim-devicons)
-      - [tiagofumo/vim-nerdtree-syntax-highlight](#tiagofumovim-nerdtree-syntax-highlight)
-    - [Programming Languages](#Programming-Languages)
-      - [Go](#Go)
-        - [fatih/vim-go](#fatihvim-go)
-        - [buoto/gotests-vim](#buotogotests-vim)
-      - [Rust](#Rust)
-        - [rust-lang/rust.vim](#rust-langrust.vim)
-        - [mhinz/vim-crates](#mhinzvim-crates)
-      - [OpenResty](#OpenResty)
-        - [spacewander/openresty-vim](#spacewanderopenresty-vim)
-      - [JS/CSS/Vue/HTML/JSON](#JSCSSVueHTMLJSON)
-        - [mattn/emmet-vim](#mattnemmet-vim)
-        - [neoclide/jsonc.vim](#neoclidejsonc.vim)
-      - [Markdown](#Markdown)
-        - [instant-markdown/vim-instant-markdown](#instant-markdownvim-instant-markdown)
-        - [dhruvasagar/vim-table-mode](#dhruvasagarvim-table-mode)
-      - [Toml](#Toml)
-        - [cespare/vim-toml](#cesparevim-toml)
-      - [Others](#Others)
-        - [sheerun/vim-polyglot](#sheerunvim-polyglot)
-    - [File Navigation](#File-Navigation)
-      - [preservim/nerdtree](#preservimnerdtree)
-      - [Yggdroot/LeaderF](#YggdrootLeaderF)
-      - [francoiscabrol/ranger.vim](#francoiscabrolranger.vim)
-    - [Text Editing](#Text-Editing)
-      - [mg979/vim-visual-multi](#mg979vim-visual-multi)
-      - [tpope/vim-commentary](#tpopevim-commentary)
-      - [tpope/vim-surround](#tpopevim-surround)
-      - [matze/vim-move](#matzevim-move)
-      - [AndrewRadev/splitjoin.vim](#AndrewRadevsplitjoin.vim)
-    - [Cursor Movement](#Cursor-movement)
-      - [easymotion/vim-easymotion](#easymotionvim-easymotion)
-    - [Git Related](#Git-related)
-      - [Xuyuanp/nerdtree-git-plugin](#Xuyuanpnerdtree-git-plugin)
-      - [tpope/vim-fugitive](#tpopevim-fugitive)
-      - [junegunn/gv.vim](#junegunngv.vim)
-      - [rhysd/git-messenger.vim](#rhysdgit-messenger.vim)
-    - [Colorschemes](#Colorschemes)
-      - [dracula/vim](#draculavim)
-      - [morhetz/gruvbox](#morhetzgruvbox)
-      - [vimhack/molokai](#vimhackmolokai)
-      - [sickill/vim-monokai](#sickillvim-monokai)
-      - [lifepillar/vim-solarized8](#lifepillarvim-solarized8)
-      - [rakr/vim-one](#rakrvim-one)
-      - [sonph/onehalf](#sonphonehalf)
-      - [cocopon/iceberg.vim](#cocoponiceberg.vim)
-      - [nanotech/jellybeans.vim](#nanotechjellybeans.vim)
-      - [arcticicestudio/nord-vim](#arcticicestudionord-vim)
-      - [NLKNguyen/papercolor-theme](#NLKNguyenpapercolor-theme)
-      - [ayu-theme/ayu-vim](#ayu-themeayu-vim)
-      - [Rigellute/rigel](#Rigelluterigel)
-      - [preservim/vim-colors-pencil](#preservimvim-colors-pencil)
-      - [cormacrelf/vim-colors-github](#cormacrelfvim-colors-github)
-      - [srcery-colors/srcery-vim](#srcery-colorssrcery-vim)
-      - [rhysd/vim-color-spring-night](#rhysdvim-color-spring-night)
-      - [google/vim-colorscheme-primary](#googlevim-colorscheme-primary)
-      - [embark-theme/vim](#embark-themevim)
-      - [chriskempson/base16-vim](#chriskempsonbase16-vim)
-      - [pbrisbin/vim-colors-off](#pbrisbinvim-colors-off)
-    - [Others](#Others)
-      - [vim-scripts/SyntaxAttr.vim](#vim-scriptsSyntaxAttr.vim)
-      - [itchyny/calendar.vim](#itchynycalendar.vim)
-      - [lyokha/vim-xkbswitch](#lyokhavim-xkbswitch)
-      - [tmux-plugins/vim-tmux](#tmux-pluginsvim-tmux)
-      - [takac/vim-hardtime](#takacvim-hardtime)
-      - [vim/killersheep](#vimkillersheep)
-      - [skywind3000/asynctasks.vim](#skywind3000asynctasks.vim)
-      - [skywind3000/asyncrun.vim](#skywind3000asyncrun.vim)
-- [License](#License)
+- [Requirements Installation](#-requirements-installation-)
+- [Installation](#-Installation-)
+- [Colorscheme/Theme](#-ColorschemeTheme-)
+  - [In Terminal Command Line](#In-Terminal-Command-Line-)
+    - [Change colorscheme of Vim/Neovim and Alacritty](#Change-colorscheme-of-VimNeovim-and-Alacritty-)
+    - [Change font of Alacritty](#Change-font-of-Alacritty-)
+    - [Change font size of Alacritty](#Change-font-size-of-Alacritty-)
+    - [Change opacity of Alacritty](#Change-opacity-of-Alacritty-)
+    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent-)
+    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent-)
+    - [Print 256 colors](#Print-256-colors-)
+    - [Print Icons](#Print-Icons-)
+  - [With Keyboard Shortcuts/Hotkey](#With-Keyboard-shortcutsHotkey-)
+    - [Change colorscheme of Vim/Neovim and Alacritty randomly](#Change-colorscheme-of-VimNeovim-and-Alacritty-randomly-)
+    - [Change font of Alacritty randomly](#Change-font-of-Alacritty-randomly-)
+    - [Toggle Alacritty background transparent](#Toggle-Alacritty-background-transparent-)
+    - [Increase Alacritty background transparent](#Increase-Alacritty-background-transparent-)
+    - [Decrease Alacritty background transparent](#Decrease-Alacritty-background-transparent-)
+    - [Toggle Tmux status line](#Toggle-Tmux-status-line-)
+    - [Toggle Tmux pane-border-status(pane name)](#Toggle-Tmux-pane-border-statuspane-name-)
+  - [In Vim Normal Mode](#In-Vim-Normal-Mode-)
+    - [Toggle Vim/Neovim background color(light or dark)](#Toggle-VimNeovim-background-colorlight-or-dark-)
+    - [Toggle Vim/Neovim background transparent](#Toggle-VimNeovim-background-transparent-)
+- [Alacritty](#-Alacritty-)
+  - [Keyboard Shortcuts](#Keyboard-Shortcuts-)
+- [Zsh(OhMyZsh)](#-ZshOhMyZsh-)
+  - [Reload ~/.zshrc](#Reload-zshrc-)
+  - [fzf](#fzf-)
+  - [Custom Commands](#Custom-Commands-)
+    - [Adjust the system volume](#Adjust-the-system-volume-)
+    - [Batch ssh remote hosts in multi-tmux-panes](#Batch-ssh-remote-hosts-in-multi-tmux-panes-)
+  - [OhMyZsh Plugins](#OhMyZsh-Plugins-)
+    - [vi-mode](#vi-mode-)
+    - [git](#git-)
+    - [gitignore](#gitignore-)
+    - [web-search](#web-search-)
+    - [colorize](#colorize-)
+    - [sudo](#sudo-)
+    - [copyfile](#copyfile-)
+    - [copydir](#copydir-)
+    - [aliases](#aliases-)
+- [Tmux](#-Tmux-)
+  - [Prefix Key](#Prefix-key-)
+  - [Key Bindings](#Key-bindings-)
+    - [Common](#Common-)
+    - [Session](#Session-)
+    - [Window](#Window-)
+    - [Pane](#Pane-)
+    - [Copy Mode](#Copy-Mode-)
+    - [Sync Mode](#Sync-Mode-)
+  - [Tmux Plugins](#Tmux-Plugins-)
+    - [tmux-plugins/tpm](#tmux-pluginstpm-)
+    - [tmux-plugins/tmux-prefix-highlight](#tmux-pluginstmux-prefix-highlight-)
+    - [tmux-plugins/tmux-resurrect](#tmux-pluginstmux-resurrect-)
+    - [tmux-plugins/tmux-continuum](#tmux-pluginstmux-continuum-)
+    - [tmux-plugins/tmux-copycat](#tmux-pluginstmux-copycat-)
+    - [tmux-plugins/tmux-yank](#tmux-pluginstmux-yank-)
+    - [tmux-plugins/tmux-open](#tmux-pluginstmux-open-)
+    - [ki-chi/tmux-inputmethod](#ki-chitmux-inputmethod-)
+    - [vimhack/tmux-show-colorscheme](#vimhacktmux-show-colorscheme-)
+    - [vimhack/tmux-audio-volume](#vimhacktmux-audio-volume-)
+    - [vimhack/tmux-battery](#vimhacktmux-battery-)
+    - [vimhack/tmux-cpu](#vimhacktmux-cpu-)
+    - [vimhack/tmux-onlinestatus](#vimhacktmux-onlinestatus-)
+    - [vimhack/tmux-weather](#vimhacktmux-weather-)
+    - [vimhack/tmux-moon-phase](#vimhacktmux-moon-phase-)
+  - [FQA](#FQA-)
+- [Vim/Neovim](#-VimNeovim-)
+  - [Leader Key](#Leader-Key-)
+  - [Custom Key Bindings](#Custom-key-bindings-)
+    - [Tabs Management](#Tabs-management-)
+    - [Cursor Movement](#Cursor-movement-)
+    - [Text Edit](#Text-edit-)
+    - [Others](#Others-)
+  - [Custom Snippets](#Custom-Snippets-)
+    - [Markdown](#Markdown-)
+  - [Put Your Own Customization](#Put-Your-Own-Customization-)
+    - [Add More Plugins](#Add-More-Plugins-)
+    - [Add More Configurations](#Add-More-Configurations-)
+    - [Disable Default Plugins](#Disable-Default-Plugins-)
+  - [Vim/Neovim Plugins](#VimNeovim-Plugins-)
+    - [Code AutoCompletion](#Code-AutoCompletion-)
+      - [neoclide/coc.nvim](#neoclidecoc.nvim-)
+      - [SirVer/ultisnips](#SirVerultisnips-)
+      - [honza/vim-snippets](#honzavim-snippets-)
+      - [Shougo/neco-vim](#Shougoneco-vim-)
+      - [neoclide/coc-neco](#neoclidecoc-neco-)
+      - [Raimondi/delimitMate](#RaimondidelimitMate-)
+    - [Code Static Check](#Code-Static-Check-)
+      - [dense-analysis/ale](#dense-analysisale-)
+    - [Code Debug](#Code-Debug-)
+      - [puremourning/vimspector](#puremourningvimspector-)
+    - [User Interface](#User-Interface-)
+      - [mhinz/vim-startify](#mhinzvim-startify-)
+      - [voldikss/vim-floaterm](#voldikssvim-floaterm-)
+      - [majutsushi/tagbar](#majutsushitagbar-)
+      - [vimhack/lightline.vim](#vimhacklightline.vim-)
+      - [maximbaz/lightline-ale](#maximbazlightline-ale-)
+      - [luochen1990/rainbow](#luochen1990rainbow-)
+      - [Yggdroot/indentLine](#YggdrootindentLine-)
+      - [machakann/vim-highlightedyank](#machakannvim-highlightedyank-)
+      - [unblevable/quick-scope](#unblevablequick-scope-)
+      - [wellle/context.vim](#welllecontext.vim-)
+      - [uguu-org/vim-matrix-screensaver](#uguu-orgvim-matrix-screensaver-)
+      - [rrethy/vim-hexokinase](#rrethyvim-hexokinase-)
+      - [ryanoasis/vim-devicons](#ryanoasisvim-devicons-)
+      - [tiagofumo/vim-nerdtree-syntax-highlight](#tiagofumovim-nerdtree-syntax-highlight-)
+    - [Programming Languages](#Programming-Languages-)
+      - [Go](#Go-)
+        - [fatih/vim-go](#fatihvim-go-)
+        - [buoto/gotests-vim](#buotogotests-vim-)
+      - [Rust](#Rust-)
+        - [rust-lang/rust.vim](#rust-langrust.vim-)
+        - [mhinz/vim-crates](#mhinzvim-crates-)
+      - [OpenResty](#OpenResty-)
+        - [spacewander/openresty-vim](#spacewanderopenresty-vim-)
+      - [JS/CSS/Vue/HTML/JSON](#JSCSSVueHTMLJSON-)
+        - [mattn/emmet-vim](#mattnemmet-vim-)
+        - [neoclide/jsonc.vim](#neoclidejsonc.vim-)
+      - [Markdown](#Markdown-)
+        - [instant-markdown/vim-instant-markdown](#instant-markdownvim-instant-markdown-)
+        - [dhruvasagar/vim-table-mode](#dhruvasagarvim-table-mode-)
+      - [Toml](#Toml-)
+        - [cespare/vim-toml](#cesparevim-toml-)
+      - [Others](#Others-)
+        - [sheerun/vim-polyglot](#sheerunvim-polyglot-)
+    - [File Navigation](#File-Navigation-)
+      - [preservim/nerdtree](#preservimnerdtree-)
+      - [Yggdroot/LeaderF](#YggdrootLeaderF-)
+      - [francoiscabrol/ranger.vim](#francoiscabrolranger.vim-)
+    - [Text Editing](#Text-Editing-)
+      - [mg979/vim-visual-multi](#mg979vim-visual-multi-)
+      - [tpope/vim-commentary](#tpopevim-commentary-)
+      - [tpope/vim-surround](#tpopevim-surround-)
+      - [matze/vim-move](#matzevim-move-)
+      - [AndrewRadev/splitjoin.vim](#AndrewRadevsplitjoin.vim-)
+    - [Cursor Movement](#Cursor-movement-)
+      - [easymotion/vim-easymotion](#easymotionvim-easymotion-)
+    - [Git Related](#Git-related-)
+      - [Xuyuanp/nerdtree-git-plugin](#Xuyuanpnerdtree-git-plugin-)
+      - [tpope/vim-fugitive](#tpopevim-fugitive-)
+      - [junegunn/gv.vim](#junegunngv.vim-)
+      - [rhysd/git-messenger.vim](#rhysdgit-messenger.vim-)
+    - [Colorschemes](#Colorschemes-)
+      - [dracula/vim](#draculavim-)
+      - [morhetz/gruvbox](#morhetzgruvbox-)
+      - [vimhack/molokai](#vimhackmolokai-)
+      - [sickill/vim-monokai](#sickillvim-monokai-)
+      - [lifepillar/vim-solarized8](#lifepillarvim-solarized8-)
+      - [rakr/vim-one](#rakrvim-one-)
+      - [sonph/onehalf](#sonphonehalf-)
+      - [cocopon/iceberg.vim](#cocoponiceberg.vim-)
+      - [nanotech/jellybeans.vim](#nanotechjellybeans.vim-)
+      - [arcticicestudio/nord-vim](#arcticicestudionord-vim-)
+      - [NLKNguyen/papercolor-theme](#NLKNguyenpapercolor-theme-)
+      - [ayu-theme/ayu-vim](#ayu-themeayu-vim-)
+      - [Rigellute/rigel](#Rigelluterigel-)
+      - [preservim/vim-colors-pencil](#preservimvim-colors-pencil-)
+      - [cormacrelf/vim-colors-github](#cormacrelfvim-colors-github-)
+      - [srcery-colors/srcery-vim](#srcery-colorssrcery-vim-)
+      - [rhysd/vim-color-spring-night](#rhysdvim-color-spring-night-)
+      - [google/vim-colorscheme-primary](#googlevim-colorscheme-primary-)
+      - [embark-theme/vim](#embark-themevim-)
+      - [chriskempson/base16-vim](#chriskempsonbase16-vim-)
+      - [pbrisbin/vim-colors-off](#pbrisbinvim-colors-off-)
+    - [Others](#Others-)
+      - [vim-scripts/SyntaxAttr.vim](#vim-scriptsSyntaxAttr.vim-)
+      - [itchyny/calendar.vim](#itchynycalendar.vim-)
+      - [lyokha/vim-xkbswitch](#lyokhavim-xkbswitch-)
+      - [tmux-plugins/vim-tmux](#tmux-pluginsvim-tmux-)
+      - [takac/vim-hardtime](#takacvim-hardtime-)
+      - [vim/killersheep](#vimkillersheep-)
+      - [skywind3000/asynctasks.vim](#skywind3000asynctasks.vim-)
+      - [skywind3000/asyncrun.vim](#skywind3000asyncrun.vim-)
+- [License](#%EF%B8%8F-license-)
 
-## 📦 <a name="Requirements-Installation"></a>Requirements Installation [↟](#Contents)
+## 📦 Requirements Installation [↟](#Contents)
 
 See [here](REQUIREMENTS.md).
 
-## 📀 <a name="Installation"></a>Installation [↟](#Contents)
+## 📀 Installation [↟](#Contents)
 
 To install, run the following from your terminal:
 (please backup your existing dotfiles first)
@@ -258,11 +258,11 @@ git pull
 
 Enjoy it😘
 
-## 🍀 <a name="ColorschemeTheme"></a>Colorscheme/Theme [↟](#Contents)
+## 🍀 Colorscheme/Theme [↟](#Contents)
 
-### <a name="In-Terminal-Command-Line"></a>In Terminal Command Line [⌅](#ColorschemeTheme)
+### In Terminal Command Line [⌅](#-ColorschemeTheme-)
 
-#### <a name="Change-colorscheme-of-VimNeovim-and-Alacritty"></a>Change colorscheme of Vim/Neovim and Alacritty [⌆](#In-Terminal-Command-Line)
+#### Change colorscheme of Vim/Neovim and Alacritty [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ colorscheme
@@ -322,7 +322,7 @@ $ cs atelierdune_light
 
 💡 Light colorschemes are good in the morning or at a place with natural light.
 
-#### <a name="Change-font-of-Alacritty"></a>Change font of Alacritty [⌆](#In-Terminal-Command-Line)
+#### Change font of Alacritty [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ font
@@ -380,7 +380,7 @@ or
 $ ft Monofur_Book
 ```
 
-#### <a name="Change-font-size-of-Alacritty"></a>Change font size of Alacritty [⌆](#In-Terminal-Command-Line)
+#### Change font size of Alacritty [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ font-size
@@ -396,7 +396,7 @@ $ fs number
 * number must between 1 and  200
 ```
 
-#### <a name="Change-opacity-of-Alacritty"></a>Change opacity of Alacritty [⌆](#In-Terminal-Command-Line)
+#### Change opacity of Alacritty [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ opacity
@@ -412,7 +412,7 @@ $ o number
 * number must between 0 and 1
 ```
 
-#### <a name="Toggle-VimNeovim-background-transparent"></a>Toggle Vim/Neovim background transparent [⌆](#In-Terminal-Command-Line)
+#### Toggle Vim/Neovim background transparent [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ toggle-vim-transparent
@@ -422,7 +422,7 @@ or
 $ tv
 ```
 
-#### <a name="Toggle-Alacritty-background-transparent"></a>Toggle Alacritty background transparent [⌆](#In-Terminal-Command-Line)
+#### Toggle Alacritty background transparent [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ toggle-alacritty-transparent
@@ -432,7 +432,7 @@ or
 $ to
 ```
 
-#### <a name="Print-256-colors"></a>Print 256 colors [⌆](#In-Terminal-Command-Line)
+#### Print 256 colors [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ colors-print
@@ -448,7 +448,7 @@ or
 $ hex
 ```
 
-#### <a name="Print-Icons"></a>Print Icons [⌆](#In-Terminal-Command-Line)
+#### Print Icons [⌆](#In-Terminal-Command-Line-)
 
 ```sh
 $ print-icons
@@ -458,55 +458,55 @@ or
 $ icons
 ```
 
-### <a name="With-Keyboard-ShortcutsHotkey"></a>With Keyboard Shortcuts/Hotkey [⌅](#ColorschemeTheme)
+### With Keyboard Shortcuts/Hotkey [⌅](#-ColorschemeTheme-)
 
 > `ctrl a` follows is the tmux prefix key.
 
-#### <a name="Change-colorscheme-of-VimNeovim-and-Alacritty-randomly"></a>Change colorscheme of Vim/Neovim and Alacritty randomly [⌆](#With-Keyboard-Shortcutshotkey)
+#### Change colorscheme of Vim/Neovim and Alacritty randomly [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a v
 ```
 
-#### <a name="Change-font-of-Alacritty-randomly"></a>Change font of Alacritty randomly [⌆](#With-Keyboard-Shortcutshotkey)
+#### Change font of Alacritty randomly [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a shift f
 ```
 
-#### <a name="Toggle-Alacritty-background-transparent"></a>Toggle Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey)
+#### Toggle Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a shift o
 ```
 
-#### <a name="Increase-Alacritty-background-transparent"></a>Increase Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey)
+#### Increase Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a ctrl k
 ```
 
-#### <a name="Decrease-Alacritty-background-transparent"></a>Decrease Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey)
+#### Decrease Alacritty background transparent [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a ctrl j
 ```
 
-#### <a name="Toggle-Tmux-status-line"></a>Toggle Tmux status line [⌆](#With-Keyboard-Shortcutshotkey)
+#### Toggle Tmux status line [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a b
 ```
 
-#### <a name="Toggle-Tmux-pane-border-statuspane-name"></a>Toggle Tmux pane-border-status(pane name) [⌆](#With-Keyboard-Shortcutshotkey)
+#### Toggle Tmux pane-border-status(pane name) [⌆](#With-Keyboard-Shortcutshotkey-)
 
 ```text
 ctrl a ctrl b
 ```
 
-### <a name="In-Vim-Normal-Mode"></a>In Vim Normal Mode [⌅](#ColorschemeTheme)
+### In Vim Normal Mode [⌅](#-ColorschemeTheme-)
 
-#### <a name="Toggle-VimNeovim-background-colorlight-or-dark"></a>Toggle Vim/Neovim background color(light or dark) [⌆](#In-Vim-Normal-Mode)
+#### Toggle Vim/Neovim background color(light or dark) [⌆](#In-Vim-Normal-Mode-)
 
 ```text
 ,b
@@ -514,7 +514,7 @@ ctrl a ctrl b
 
 💡 Only support colorschemes that have both dark and light background color.
 
-#### <a name="Toggle-VimNeovim-background-transparent"></a>Toggle Vim/Neovim background transparent [⌆](#In-Vim-Normal-Mode)
+#### Toggle Vim/Neovim background transparent [⌆](#In-Vim-Normal-Mode-)
 
 ```text
 ,o
@@ -522,7 +522,7 @@ ctrl a ctrl b
 
 💡 Opacity of Alacritty(terminal) must be less than 1.
 
-## 📺 <a name="Alacritty"></a>Alacritty [↟](#Contents)
+## 📺 Alacritty [↟](#Contents)
 
 ### Keyboard Shortcuts
 
@@ -538,9 +538,9 @@ ctrl a ctrl b
 | `Ctrl` `l`             | Clear warning/error messages of Alacritty in status line |
 | `Command` `Option` `h` | Hiding all windows other than the current Alacritty      |
 
-## 🐚 <a name="ZshOhMyZsh"></a>Zsh(OhMyZsh) [↟](#Contents)
+## 🐚 Zsh(OhMyZsh) [↟](#Contents)
 
-### <a name="Reload-zshrc"></a>Reload `~/.zshrc` [⌅](#zshohmyzsh)
+### Reload `~/.zshrc` [⌅](#-zshohmyzsh-)
 
 ```sh
 $ omz reload
@@ -552,7 +552,7 @@ or
 $ exec zsh
 ```
 
-### <a name="fzf"></a>[fzf](https://github.com/junegunn/fzf) [⌅](#zshohmyzsh)
+### [fzf](https://github.com/junegunn/fzf) [⌅](#-zshohmyzsh-)
 
 - `$ ff`
 
@@ -585,7 +585,7 @@ $ exec zsh
 
   Quit from file/dir list or history command list.
 
-### <a name="Custom-Commands"></a>Custom Commands [⌅](#zshohmyzsh)
+### Custom Commands [⌅](#-zshohmyzsh-)
 
 #### Adjust the system volume
 
@@ -629,9 +629,9 @@ Examples:
     $ ssh-sessions ~/xxxhosts
 ```
 
-### <a name="OhMyZsh-Plugins"></a>OhMyZsh Plugins [⌅](#zshohmyzsh)
+### OhMyZsh Plugins [⌅](#-zshohmyzsh-)
 
-#### <a name="vi-mode"></a>vi-mode [⌆](#ohmyzsh-plugins)
+#### vi-mode [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/web-search/README.md
 
@@ -692,7 +692,7 @@ First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 - `x` : Delete `count` characters under and after the cursor
 - `X` : Delete `count` characters before the cursor
 
-#### <a name="git"></a>git [⌆](#ohmyzsh-plugins)
+#### git [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/git/README.md
 
@@ -706,7 +706,7 @@ First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 - `glog` : git log --oneline --decorate --graph
 - `gl` : git pull
 
-#### <a name="gitignore"></a>gitignore [⌆](#ohmyzsh-plugins)
+#### gitignore [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/gitignore/README.md
 
@@ -714,7 +714,7 @@ First of all, use <kbd>esc</kbd> or `Ctrl [` to enter `Normal mode`.
 - `gi [TEMPLATENAME]`: Show git-ignore output on the command line, e.g. `gi java` to exclude class and package files.
 - `gi [TEMPLATENAME] >> .gitignore`: Appending programming language settings to your projects .gitignore.
 
-#### <a name="web-search"></a>web-search [⌆](#ohmyzsh-plugins)
+#### web-search [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/web-search/README.md
 
@@ -751,7 +751,7 @@ Available search contexts are:
 | `archive`             | `https://web.archive.org/web/*/`         |
 | `scholar`             | `https://scholar.google.com/scholar?q=`  |
 
-#### <a name="colorize"></a>colorize [⌆](#ohmyzsh-plugins)
+#### colorize [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/colorize/README.md
 
@@ -762,25 +762,25 @@ Available search contexts are:
   If no files are passed it will colorize the standard input.
   The LESSOPEN and LESSCLOSE will be overwritten for this to work, but only in a local scope.
 
-#### <a name="sudo"></a>sudo [⌆](#ohmyzsh-plugins)
+#### sudo [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/sudo/README.md
 
 Easily prefix your current or previous commands with `sudo` by pressing <kbd>esc</kbd> twice.
 
-#### <a name="copyfile"></a>copyfile [⌆](#ohmyzsh-plugins)
+#### copyfile [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/copyfile/README.md
 
 - `copyfile <filename>` : Puts the contents of a file in your system clipboard so you can paste it anywhere.
 
-#### <a name="copydir"></a>copydir [⌆](#ohmyzsh-plugins)
+#### copydir [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/copydir/README.md
 
 - `copydir` : Copy the $PWD to the system clipboard.
 
-#### <a name="aliases"></a>aliases [⌆](#ohmyzsh-plugins)
+#### aliases [⌆](#ohmyzsh-plugins-)
 
 > ~/.oh-my-zsh/plugins/aliases/README.md
 
@@ -790,9 +790,9 @@ that are currently available based on the plugins you have enabled.
 - `acs` : Group all alias
 - `acs <keyword>` : Quickly filter alias & highlight
 
-## 🎹 <a name="Tmux"></a>Tmux [↟](#Contents)
+## 🎹 Tmux [↟](#Contents)
 
-### <a name="Prefix-Key"></a>Prefix Key [⌅](#Tmux)
+### Prefix Key [⌅](#-Tmux-)
 
 Prefix Key: `Ctrl a`
 
@@ -801,9 +801,9 @@ All the following shortcuts keys must first press the prefix key.
 > Note that after pressing the prefix key, you need to release the prefix key first,
 > and then press other specific shortcut keys.
 
-### <a name="Key-bindings"></a>Key Bindings [⌅](#Tmux)
+### Key Bindings [⌅](#-Tmux-)
 
-#### <a name="Common"></a>Common [⌆](#Key-Bindings)
+#### Common [⌆](#Key-Bindings-)
 
 - `?` : List key bindings
 - `r` : Reload `~/.tmux.conf`
@@ -811,7 +811,7 @@ All the following shortcuts keys must first press the prefix key.
 - `K` : View help documents of the object in `~/.tmux.conf`
 - `d` : Detach the current client
 
-#### <a name="Session"></a>Session [⌆](#Key-Bindings)
+#### Session [⌆](#Key-Bindings-)
 
 - `s` : Choose a session from a list
 - `Option/Alt` `f` : Search session
@@ -819,7 +819,7 @@ All the following shortcuts keys must first press the prefix key.
 - `$` : Rename the current session
 - `b` : Toggle status line of the current session
 
-#### <a name="Window"></a>Window [⌆](#Key-Bindings)
+#### Window [⌆](#Key-Bindings-)
 
 - `c` : Create new window
 - `,` : Rename current window
@@ -832,7 +832,7 @@ All the following shortcuts keys must first press the prefix key.
 - `f` : Search window
 - `i` : Display window information
 
-#### <a name="Pane"></a>Pane [⌆](#Key-Bindings)
+#### Pane [⌆](#Key-Bindings-)
 
 - `%` : Split window horizontally
 - `"` : Split window vertically
@@ -863,7 +863,7 @@ All the following shortcuts keys must first press the prefix key.
 - `Ctrl` `b` : Toggle pane name of the current window's all panes
 - `Ctrl` `t` : Create a new pane that is 16% of the size of the current pane and below the current pane
 
-#### <a name="Copy-Mode"></a>Copy Mode [⌆](#Key-Bindings)
+#### Copy Mode [⌆](#Key-Bindings-)
 
 - `[` : Enter copy mode
 - `]` : Paste the most recent paste buffer
@@ -882,13 +882,13 @@ All the following shortcuts keys must first press the prefix key.
 
 Enabled `vi-mode`, many vi shortcuts can be used in this scenario.
 
-#### <a name="Sync-mode"></a>Sync Mode [⌆](#Key-Bindings)
+#### Sync Mode [⌆](#Key-Bindings-)
 
 - `Ctrl` `y` : Toggle sync mode
 
-### <a name="Tmux-Plugins"></a>Tmux Plugins [⌅](#Tmux)
+### Tmux Plugins [⌅](#-Tmux-)
 
-#### <a name="tmux-pluginstpm"></a>[tmux-plugins/tpm](https://github.com/tmux-plugins/tpm) [⌆](#tmux-plugins)
+#### [tmux-plugins/tpm](https://github.com/tmux-plugins/tpm) [⌆](#tmux-plugins-)
 
 Tmux Plugin Manager.
 
@@ -896,22 +896,22 @@ Tmux Plugin Manager.
 - `U` : Update all plugins
 - `u` : Uninstall plugins that not in `~/.tmux.conf`
 
-#### <a name="tmux-pluginstmux-prefix-highlight"></a>[tmux-plugins/tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight) [⌆](#tmux-plugins)
+#### [tmux-plugins/tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight) [⌆](#tmux-plugins-)
 
 Plugin that highlights when you press tmux prefix key.
 
-#### <a name="tmux-pluginstmux-resurrect"></a>[tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) [⌆](#tmux-plugins)
+#### [tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) [⌆](#tmux-plugins-)
 
 This plugin saves all the little details from your tmux environment so it can be completely restored after a system restart (or when you feel like it).
 
 - `Ctrl` `s` : Save sessions
 - `Ctrl` `r` : Restore sessions from local backup
 
-#### <a name="tmux-pluginstmux-continuum"></a>[tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) [⌆](#tmux-plugins)
+#### [tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) [⌆](#tmux-plugins-)
 
 Continuous saving of tmux environment. Automatic restore when tmux is started.
 
-#### <a name="tmux-pluginstmux-copycat"></a>[tmux-plugins/tmux-copycat](https://github.com/tmux-plugins/tmux-copycat) [⌆](#tmux-plugins)
+#### [tmux-plugins/tmux-copycat](https://github.com/tmux-plugins/tmux-copycat) [⌆](#tmux-plugins-)
 
 ##### Search
 
@@ -942,7 +942,7 @@ These are enabled when you search with copycat:
 - `N` : Jumps to the previous match
 - `enter` : Copy a highlighted match
 
-#### <a name="tmux-pluginstmux-yank"></a>[tmux-plugins/tmux-yank](https://github.com/tmux-plugins/tmux-yank) [⌆](#tmux-plugins)
+#### [tmux-plugins/tmux-yank](https://github.com/tmux-plugins/tmux-yank) [⌆](#tmux-plugins-)
 
 - Tmux Normal Mode
   - `y` : Copies text from the command line to the clipboard.
@@ -951,7 +951,7 @@ These are enabled when you search with copycat:
   - `y` : Copy selection to system clipboard.
   - `Y` : Equivalent to copying a selection, and pasting it to the command line.
 
-#### <a name="tmux-pluginstmux-open"></a>[tmux-plugins/tmux-open](https://github.com/tmux-plugins/tmux-open) [⌆](#tmux-plugins)
+#### [tmux-plugins/tmux-open](https://github.com/tmux-plugins/tmux-open) [⌆](#tmux-plugins-)
 
 Plugin for opening highlighted selection directly from Tmux copy mode.
 
@@ -962,39 +962,39 @@ In Tmux Copy Mode:
 - `S` : Search the highlighted selection directly by Google
 - `B` : Search the highlighted selection directly by Bing
 
-#### <a name="ki-chitmux-inputmethod"></a>[ki-chi/tmux-inputmethod](https://github.com/ki-chi/tmux-inputmethod) [⌆](#tmux-plugins)
+#### [ki-chi/tmux-inputmethod](https://github.com/ki-chi/tmux-inputmethod) [⌆](#tmux-plugins-)
 
 Display current input method in the Tmux status line.
 
-#### <a name="vimhacktmux-show-colorscheme"></a>[vimhack/tmux-show-colorscheme](https://github.com/vimhack/tmux-show-colorscheme#main) [⌆](#tmux-plugins)
+#### [vimhack/tmux-show-colorscheme](https://github.com/vimhack/tmux-show-colorscheme#main) [⌆](#tmux-plugins-)
 
 Display current colorscheme/opacity/font/font-size of Vim and Alacritty in the Tmux status line.
 
-#### <a name="vimhacktmux-audio-volume"></a>[vimhack/tmux-audio-volume](https://github.com/vimhack/tmux-audio-volume) [⌆](#tmux-plugins)
+#### [vimhack/tmux-audio-volume](https://github.com/vimhack/tmux-audio-volume) [⌆](#tmux-plugins-)
 
 Display system volume in the Tmux status line.
 
-#### <a name="vimhacktmux-battery"></a>[vimhack/tmux-battery](https://github.com/vimhack/tmux-battery) [⌆](#tmux-plugins)
+#### [vimhack/tmux-battery](https://github.com/vimhack/tmux-battery) [⌆](#tmux-plugins-)
 
 Display battery status in the Tmux status line.
 
-#### <a name="vimhacktmux-cpu"></a>[vimhack/tmux-cpu](https://github.com/vimhack/tmux-cpu) [⌆](#tmux-plugins)
+#### [vimhack/tmux-cpu](https://github.com/vimhack/tmux-cpu) [⌆](#tmux-plugins-)
 
 Display cpu utilization and fan speed in the Tmux status line.
 
-#### <a name="vimhacktmux-onlinestatus"></a>[vimhack/tmux-onlinestatus](https://github.com/vimhack/tmux-onlinestatus) [⌆](#tmux-plugins)
+#### [vimhack/tmux-onlinestatus](https://github.com/vimhack/tmux-onlinestatus) [⌆](#tmux-plugins-)
 
 Display online status in the Tmux status line.
 
-#### <a name="vimhacktmux-weather"></a>[vimhack/tmux-weather](https://github.com/vimhack/tmux-weather) [⌆](#tmux-plugins)
+#### [vimhack/tmux-weather](https://github.com/vimhack/tmux-weather) [⌆](#tmux-plugins-)
 
 Display local weather information in the Tmux status line.
 
-#### <a name="vimhacktmux-moon-phase">[vimhack/tmux-moon-phase](https://github.com/vimhack/tmux-moon-phase) [⌆](#tmux-plugins)
+#### [vimhack/tmux-moon-phase](https://github.com/vimhack/tmux-moon-phase) [⌆](#tmux-plugins-)
 
 Display moon phase emoji or icon or text in the Tmux status line.
 
-### <a name="FQA"></a>FQA [⌅](#Tmux)
+### FQA [⌅](#-Tmux-)
 
 - In some cases, modifying `~/.tmux.conf` cannot take effect after reload or restart Tmux, how to fix it?
 
@@ -1008,17 +1008,17 @@ $ tmux kill-server
 $ ps axu|grep -v grep|grep tmux|awk '{print $2}'|xargs kill -9
 ```
 
-## 💯 <a name="VimNeovim"></a>Vim/Neovim [↟](#Contents)
+## 💯 Vim/Neovim [↟](#Contents)
 
-### <a name="Leader-Key"></a>Leader Key [⌅](#VimNeovim)
+### Leader Key [⌅](#-VimNeovim-)
 
 The vim leader key has been changed from `\`(default) to `,`.
 
 `,` in the following shortcut keys represent the leader key.
 
-### <a name="Custom-key-bindings"></a>Custom Key Bindings [⌅](#VimNeovim)
+### Custom Key Bindings [⌅](#-VimNeovim-)
 
-#### <a name="Tabs-management"></a>Tabs Management [⌆](#Custom-key-bindings)
+#### Tabs Management [⌆](#Custom-key-bindings-)
 
 - Normal Mode
 
@@ -1041,7 +1041,7 @@ The vim leader key has been changed from `\`(default) to `,`.
   - `Option/Alt` `1`/`2`/`3`... : Go to the specific tab
   - `Option/Alt` `0` : Go to the last tab
 
-#### <a name="Cursor-movement"></a>Cursor Movement [⌆](#Custom-key-bindings)
+#### Cursor Movement [⌆](#Custom-key-bindings-)
 
 - Normal Mode
 
@@ -1071,7 +1071,7 @@ The vim leader key has been changed from `\`(default) to `,`.
   - `Ctrl` `a`/`e` : Move the cursor to the first character or the end of the line
   - `Option/Alt` `b`/`f` : Move the cursor to left/right by one word step
 
-#### <a name="Text-Edit"></a>Text Edit [⌆](#Custom-key-bindings)
+#### Text Edit [⌆](#Custom-key-bindings-)
 
 - Insert Mode
 
@@ -1092,7 +1092,7 @@ The vim leader key has been changed from `\`(default) to `,`.
   - `Ctrl` `u` : Delete from the cursor position to the head of the line.
   - `Ctrl` `w` : Delete a word from left
 
-#### <a name="Others"></a>Others [⌆](#Custom-key-bindings)
+#### Others [⌆](#Custom-key-bindings-)
 
 - Normal Mode
 
@@ -1117,9 +1117,9 @@ The vim leader key has been changed from `\`(default) to `,`.
 
   - `:W` : Use sudo to save
 
-### <a name="Custom-Snippets"></a>Custom Snippets [⌅](#VimNeovim)
+### Custom Snippets [⌅](#-VimNeovim-)
 
-#### <a name="Markdown"></a>Markdown [⌆](#Custom-Snippets)
+#### Markdown [⌆](#Custom-Snippets-)
 
 | Shortcut | Output        |
 | -------- | ------------- |
@@ -1147,9 +1147,9 @@ pressing `,f` will jump the cursor to the placeholder and delete it at the same 
 > **NOTE:** <br>
 > All above shortcuts are in the _Vim Insert Mode_.
 
-### <a name="Put-Your-Own-Customization"></a>Put Your Own Customization [⌅](#VimNeovim)
+### Put Your Own Customization [⌅](#-VimNeovim-)
 
-#### <a name="Add-More-Plugins"></a>Add More Plugins [⌆](#Put-your-own-customization)
+#### Add More Plugins [⌆](#Put-your-own-customization-)
 
 If you want to use other plugins that not in `$HOME/.vimrc` or `$HOME/.config/nvim/init.vim`,
 you can put them in `$HOME/.vimrc.plugins.local`.
@@ -1165,7 +1165,7 @@ Plug 'junegunn/goyo.vim'
 > Do not put other configurations in `$HOME/.vimrc.plugins.local`,
 > you should put them in `$HOME/.vimrc.local`.
 
-#### <a name="Add-More-Configurations"></a>Add More Configurations [⌆](#Put-your-own-customization)
+#### Add More Configurations [⌆](#Put-your-own-customization-)
 
 You can put your own configurations in `$HOME/.vimrc.local`,
 it will be soured at the end of `$HOME/.vimrc` or `$HOME/.config/nvim/init.vim`.
@@ -1209,7 +1209,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " **********************************
 ```
 
-#### <a name="Disable-Default-Plugins"></a>Disable Default Plugins [⌆](#Put-your-own-customization)
+#### Disable Default Plugins [⌆](#Put-your-own-customization-)
 
 If you want to disable some plugins in `$HOME/.vimrc` or `$HOME/.config/nvim/init.vim`,
 you can `UnPlug` them in `$HOME/.vimrc.plugins.local`.
@@ -1223,11 +1223,11 @@ UnPlug 'lyokha/vim-xkbswitch'
 UnPlug 'takac/vim-hardtime'
 ```
 
-### <a name="VimNeovim-Plugins"></a>Vim/Neovim Plugins [⌅](#VimNeovim)
+### Vim/Neovim Plugins [⌅](#-VimNeovim-)
 
-#### <a name="Code-AutoCompletion"></a>Code AutoCompletion [⌅](#VimNeovim)
+#### Code AutoCompletion [⌅](#-VimNeovim-)
 
-##### <a name="neoclidecoc.nvim"></a>[neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) [⌆](#Code-AutoCompletion)
+##### [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim) [⌆](#Code-AutoCompletion-)
 
 ###### 1. Symbol description of the completion menu
 
@@ -1267,28 +1267,28 @@ UnPlug 'takac/vim-hardtime'
 - `<Space>` `s` : Show all completion sources of the current file type
 - `<Space>` `p` : Resume latest coc list
 
-##### <a name="SirVerultisnips"></a>[SirVer/ultisnips](https://github.com/SirVer/ultisnips) [⌆](#Code-AutoCompletion)
+##### [SirVer/ultisnips](https://github.com/SirVer/ultisnips) [⌆](#Code-AutoCompletion-)
 
 UltiSnips is the ultimate solution for snippets in Vim.
 
-##### <a name="honzavim-snippets"></a>[honza/vim-snippets](https://github.com/honza/vim-snippets) [⌆](#Code-AutoCompletion)
+##### [honza/vim-snippets](https://github.com/honza/vim-snippets) [⌆](#Code-AutoCompletion-)
 
 - `snippets/*` : snippets using snipMate format
 - `UltiSnips/*` : snippets using UltiSnips format
 
-##### <a name="Shougoneco-vim"></a>[Shougo/neco-vim](https://github.com/Shougo/neco-vim) [⌆](#Code-AutoCompletion)
+##### [Shougo/neco-vim](https://github.com/Shougo/neco-vim) [⌆](#Code-AutoCompletion-)
 
 The Vim Script completion source.
 
-##### <a name="neoclidecoc-neco"></a>[neoclide/coc-neco](https://github.com/neoclide/coc-neco) [⌆](#Code-AutoCompletion)
+##### [neoclide/coc-neco](https://github.com/neoclide/coc-neco) [⌆](#Code-AutoCompletion-)
 
 Vim completon source for coc.nvim using [neco-vim](https://github.com/Shougo/neco-vim).
 
-##### <a name="RaimondidelimitMate"></a>[Raimondi/delimitMate](https://github.com/Raimondi/delimitMate) [⌆](#Code-AutoCompletion)
+##### [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate) [⌆](#Code-AutoCompletion-)
 
 Provides insert mode auto-completion for quotes, parens, brackets, etc.
 
-## ⚖️ <a name="License"></a>License [↟](#Contents)
+## ⚖️ License [↟](#Contents)
 
 This project is under the MIT License.
 See the [LICENSE](LICENSE) file for the full license text.
