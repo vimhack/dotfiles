@@ -102,7 +102,7 @@ export ZSH_CUSTOM="$ZSH/custom"
 plugins=(
     vi-mode
     tmux
-    git
+    # git
     gitignore
     z
     history
@@ -239,9 +239,9 @@ alias luarocks="luarocks  --lua-dir=/usr/local/opt/lua@5.3"
 export PATH=$HOME/.luarocks/bin:$PATH
 
 # ****** node ******
-# brew install node@14
+# brew install node@16
 
-export PATH="/usr/local/opt/node@14/bin:$PATH"
+export PATH="/usr/local/opt/node@16/bin:$PATH"
 
 # ****** ruby ******
 # brew install ruby
@@ -318,6 +318,15 @@ alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
 # brew install jesseduffield/lazygit/lazygit
 # doc: https://github.com/jesseduffield/lazygit
 alias lg=lazygit
+
+alias gst="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gpf="git push -f"
+alias gl="git pull"
+alias gd="git diff"
+alias gs="git log --numstat --author"
 
 # }}
 
