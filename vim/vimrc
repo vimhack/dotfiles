@@ -281,8 +281,8 @@ Plug 'Raimondi/delimitMate'
 " 自动补全各种括号引号以及代码的条件或循环语句的结束部分等.
 Plug 'cohama/lexima.vim'
 
-" 著名的 AI 补全插件.
-" doc: https://copilot.github.com
+" 著名的 AI 补全插件 copilot(已收费).
+" doc: https://copilot.github.com, https://docs.github.com/en/copilot/getting-started-with-github-copilot?tool=neovim
 " Start Neovim and invoke :Copilot setup
 " NOTE:
 "   1. 首次安装需要等待官方授权才能使用.
@@ -296,7 +296,14 @@ Plug 'cohama/lexima.vim'
 "   5. 重新安装此插件可解决大部分问题, 方法:
 "      先注释此行, 重新打开此文件, 执行 :PlugClean 进行卸载;
 "      再取消注释, 执行 :PlugInstall 进行安装.
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+
+" 个人免费的AI补全插件, 可替代copilot.
+" doc: https://github.com/Exafunction/codeium.vim
+" NOTE:
+"   1. Run `:Codeium Auth` to set up the plugin and start using Codeium;
+"   2. Run `:help codeium` for a full list of commands and configuration options.
+Plug 'Exafunction/codeium.vim'
 
 " }}
 
@@ -589,6 +596,7 @@ if &rtp =~ '/lightline-ale,'
   let g:lightline.active = {
     \  'left': [ [ 'mode', 'paste' ],
     \            [ 'git', 'bgit', 'method', 'readonly', 'filename', 'modified' ],
+    \            [ 'codeium' ],
     \  ],
     \  'right': [ [ 'lineinfo' ],
     \             [ 'percent' ],
@@ -604,6 +612,7 @@ if &rtp =~ '/lightline-ale,'
     \  'git': 'LightlineGitStatus',
     \  'bgit': 'LightlineBufferGitStatus',
     \  'blame': 'LightlineGitBlame',
+    \  'codeium': 'codeium#GetStatusString',
     \ }
 
   " 如果状态栏内容过多, 从右侧砍掉部分内容.
@@ -1782,6 +1791,26 @@ nnoremap <silent> <leader>o :call ToggleBGTransparent()<CR>
 " }}
 
 " 代码自动补全  Code Completion {{
+
+"""""""" Exafunction/codeium.vim
+" A free AI Completion
+" doc: https://github.com/Exafunction/codeium.vim
+
+" Disable default keybindings
+let g:codeium_disable_bindings = 1
+
+" <C-]>  Manually trigger suggestion
+imap <C-]> <Cmd>call codeium#Complete()<CR>
+" <C-j>  Next suggestion
+imap <C-j> <Plug>(codeium-next)
+" <C-k>  Previous suggestion
+imap <C-k> <Plug>(codeium-previous)
+" <C-x>  Clear current suggestion
+imap <C-x> <Plug>(codeium-dismiss)
+
+" <C-y>  Insert suggestion
+imap <script><silent><nowait><expr> <C-y> codeium#Accept()
+
 
 """""""" neoclide/coc.nvim
 " CoC 的全称是: Conqure of Completion
