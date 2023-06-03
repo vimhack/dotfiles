@@ -341,9 +341,10 @@ schemes:
       focused_match:
         foreground: "#ffffff"
         background: "#000000"
-      bar:
-        background: "#c5c8c6"
-        foreground: "#1d1f21"
+      colors:
+        footer_bar:
+          background: "#c5c8c6"
+          foreground: "#1d1f21"
     hints:
       start:
         foreground: "#1d1f21"
@@ -454,9 +455,10 @@ schemes:
       focused_match:
         foreground: "0x44475a"
         background: "0xffb86c"
-      bar:
-        background: "0x282a36"
-        foreground: "0xf8f8f2"
+      colors:
+        footer_bar:
+          background: "0x282a36"
+          foreground: "0xf8f8f2"
     line_indicator:
       foreground: None
       background: None
@@ -636,9 +638,10 @@ schemes:
         focused_match:
           foreground: CellBackground
           background: CellForeground
-        bar:
-          background: ""
-          foreground: ""
+        colors:
+          footer_bar:
+            background: ""
+            foreground: ""
       line_indicator:
         foreground: None
         background: None

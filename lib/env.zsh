@@ -37,6 +37,7 @@ colorschemes=($(grep -Ev '#|//|"|^$' "$colorschemes_file" | xargs))
 fonts=($(grep -Ev '#|//|"|^$' "$fonts_file" | awk -F:: '{print $1}' | xargs))
 
 [[ ! -f "$alacritty_conf" ]] && {
+    mkdir -p $(dirname $alacritty_conf)
     \cp "$dotfiles_dir"/alacritty/alacritty.yml $alacritty_conf
 }
 
