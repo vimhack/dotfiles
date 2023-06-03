@@ -225,6 +225,11 @@ ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 mkdir ~/.vim
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
+# I suggest regularly updating Vim plugins and Coc plugins in Vim's command-line mode.
+# Update vim plugins
+:PlugUpdate
+# Update coc plugins
+:CocUpdate
 
 # Neovim
 mkdir -p ~/.config/nvim && ln -sf ~/.dotfiles/vim/vimrc ~/.config/nvim/init.vim

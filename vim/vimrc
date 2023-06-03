@@ -1873,7 +1873,7 @@ if &rtp =~ '/coc.nvim,'
   "   coc-vetur: 需要在 vue 项目根路径下运行: npm i eslint eslint-plugin-vue -D
   "   coc-snippets: 需要安装 vim 插件: Plug 'honza/vim-snippets'
   "   coc-ultisnips: 需要安装 vim 插件: Plug 'SirVer/ultisnips'
-  "   coc-gocode: 为 Go 提供代码片段补全的数据库.
+  "   coc-gocode: 为 Go 提供代码片段补全的数据库, 需安装gocode: go install github.com/nsf/gocode@latest
   "   coc-emoji: Emoji words, 默认只对 markdown 类型文件开启, 通过 : 触发.
   "   coc-xml: 系统中需要安装 java: brew install java
   "   coc-tabnine: 基于 AI 的自动补全，可以辅助更快地撰写代码.

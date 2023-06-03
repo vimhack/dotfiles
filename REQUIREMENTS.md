@@ -120,6 +120,24 @@ pip3 install black isort
 go get mvdan.cc/sh/v3/cmd/shfmt
 ```
 
+- coc.nvim
+
+```sh
+# for Lua
+luarocks install --server=http://luarocks.org/dev lua-lsp
+luarocks install luacheck
+luarocks install lcf
+
+# for dockerfile
+npm i -g dockerfile-language-server-nodejs
+
+# for coc-gocode
+go install github.com/nsf/gocode@latest
+
+# for coc-java, coc-xml
+brew install java
+```
+
 ### Tmux
 
 - [tmux 3.0+](https://github.com/tmux/tmux)
