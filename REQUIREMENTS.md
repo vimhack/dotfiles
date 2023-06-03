@@ -84,14 +84,11 @@ brew install --HEAD neovim
 pip3 install neovim
 ```
 
-- xkbswitch-macosx
+- im-select
 
 ```sh
-git clone --depth=1 https://github.com/myshov/xkbswitch-macosx.git
-cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
-
-git clone --depth=1 https://github.com/myshov/libxkbswitch-macosx
-cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
+curl -Ls -o /usr/local/bin/im-select https://github.com/daipeihust/im-select/raw/master/macOS/out/apple/im-select
+chmod 755 /usr/local/bin/im-select
 ```
 
 - ale linters

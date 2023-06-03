@@ -19,12 +19,6 @@
 "      # 用于目录树文件图标显示的依赖安装
 "      brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 "
-"      # 从 insert 切换到 normal 模式时自动切换输入法功能需要的系统依赖安装
-"      git clone https://github.com/myshov/xkbswitch-macosx.git
-"      cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
-"      git clone https://github.com/myshov/libxkbswitch-macosx
-"      cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
-"
 "      # 安装其他依赖
 "      brew install cmake python mono go nodejs yarn
 "      brew install ctags rg
@@ -505,9 +499,6 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 
 " 日历插件.
 Plug 'itchyny/calendar.vim'
-
-" 切换到 normal 模式时切换到英文输入法.
-Plug 'lyokha/vim-xkbswitch'
 
 " 在 .tmux.conf 中直接通过 K 查看 tmux 文档等功能.
 Plug 'tmux-plugins/vim-tmux'
@@ -3078,40 +3069,6 @@ endif
 
 " 其他插件配置  Configuration Other Plugins {{
 
-"""""" lyokha/vim-xkbswitch
-" doc: https://github.com/lyokha/vim-xkbswitch
-" 功能:
-"   从 insert 模式切换到 normal 模式时, 如果 insert 模式下为中文输入法,
-"   则自动切换为英文输入法, 然后从 normal 模式重新进入 insert 模式时,
-"   还原上一次 insert 模式下的输入法.
-" 系统依赖安装(macOS):
-"   git clone https://github.com/myshov/xkbswitch-macosx.git
-"   cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin/
-"   git clone https://github.com/myshov/libxkbswitch-macosx
-"   cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib/
-
-if &rtp =~ '/vim-xkbswitch,'
-  " 是否开启输入法切换功能.
-  let g:XkbSwitchEnabled = 1
-
-  " 依赖的库文件.
-  let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
-
-  " 默认情况从 insert 模式到 normal 模式, 将还原 normal 的上一次输入法,
-  " 如果 normal 上一次是中文, 这次还是中文;
-  " 添加此指令后, 将始终保持 normal 模式是英文输入法.
-  let g:XkbSwitchNLayout = 'us'
-
-  " 同上一条, 区别是这条指令针对的是 insert 模式,
-  " 目前的输入体验是不建议启用这条指令, 可根据自身的使用场景调整.
-  "let g:XkbSwitchILayout = 'us'
-
-  " 默认情况下, 从 insert 模式切换到 normal 模式,
-  " 输入法从中文切换到英文有一定的延迟, 非常影响体验,
-  " 此条指令解决这个问题, 可以将数字改的更小以或得更快的切换体验.
-  set ttimeoutlen=5
-endif
-
 """""" skywind3000/asyncrun.vim
 " doc: https://github.com/skywind3000/asyncrun.vim
 
@@ -3665,6 +3622,12 @@ command! ZoomToggle call s:ZoomToggle()
 " }}
 
 """""" 其他配置  Other Settings {{
+
+" 每次从insert模式切换到normal模式时自动切换输入法为英文.
+" 需提前安装im-select命令:
+" curl -Ls -o /usr/local/bin/im-select https://github.com/daipeihust/im-select/raw/master/macOS/out/apple/im-select
+" chmod 755 /usr/local/bin/im-select
+autocmd InsertLeave * :silent !/usr/local/bin/im-select com.apple.keylayout.ABC
 
 " 解决中文乱码问题.
 let $LANG='en'

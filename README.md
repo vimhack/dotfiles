@@ -197,7 +197,6 @@ The supported platforms currently are macOS and Linux.
     - [Others](#Others-)
       - [vim-scripts/SyntaxAttr.vim](#vim-scriptsSyntaxAttr.vim-)
       - [itchyny/calendar.vim](#itchynycalendar.vim-)
-      - [lyokha/vim-xkbswitch](#lyokhavim-xkbswitch-)
       - [tmux-plugins/vim-tmux](#tmux-pluginsvim-tmux-)
       - [takac/vim-hardtime](#takacvim-hardtime-)
       - [vim/killersheep](#vimkillersheep-)
@@ -1222,8 +1221,6 @@ you can `UnPlug` them in `$HOME/.vimrc.plugins.local`.
 For example:
 
 ```vim
-" Disable input method auto switch feature.
-UnPlug 'lyokha/vim-xkbswitch'
 " Disable vim hardtime feature.
 UnPlug 'takac/vim-hardtime'
 ```
