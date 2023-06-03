@@ -365,7 +365,7 @@ Plug 'neoclide/jsonc.vim'
 
 """""""" markdown
 " 通过浏览器实时预览 Markdown 文本的插件.
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown'}
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 " 在 markdown 中高效编辑表格.
 Plug 'dhruvasagar/vim-table-mode'
@@ -1969,13 +1969,16 @@ if &rtp =~ '/coc.nvim,'
   nmap <leader>gc <Plug>(coc-git-commit)
   " ***************
 
-  " 使用 tab 键触发补全, 选择补全.
+  " 使用 tab 在弹出的补全列表中向下选择,
+  " 如果光标在行首或光标前是空白字符, 则输入tab.
   inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
+    \ HasSpaceOrInBOL() ? "\<TAB>" :
     \ coc#refresh()
+  " 使用 shift + tab 在弹出的补全列表中向上选择.
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  function! s:check_back_space() abort
+  " 判断光标是否在行首或光标前是否有空白.
+  function! HasSpaceOrInBOL() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
@@ -2581,7 +2584,7 @@ au FileType markdown setlocal expandtab ts=2 sw=2 sts=2
 " normal 模式下, 默认以 ,tm 来开启或关闭 table mode.
 noremap <leader>tm :TableModeToggle<CR>
 
-" 在 insert 模式下, 输入 || 后按 ESC 来开启 table mode,
+" 在 insert 模式下, 输入 ||| 后按 ESC 来开启 table mode,
 " 输入 __ 后按 ESC 关闭 table mode.
 function! s:isAtStartOfLine(mapping)
   let text_before_cursor = getline('.')[0 : col('.')-1]
