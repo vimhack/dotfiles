@@ -13,6 +13,12 @@
   // edit, split, vsplit, tab drop
   "coc.preferences.jumpCommand": "tab drop",
 
+  // 彻底禁用coc.nvim提供的代码错误提示功能
+  "diagnostic.enable": false,
+  // 将coc.nvim提供的代码错误提示通过vim的ale插件提示,
+  // 只在 diagnostic.enable 为 true 时有效.
+  "diagnostic.displayByAle": true,
+
   "git.addGBlameToBufferVar": true,
   "git.showCommitInFloating": true,
   "git.addedSign.hlGroup": "GitAddSign",
@@ -24,7 +30,6 @@
   // Rust
   // doc: https://github.com/fannheyward/coc-rust-analyzer
   "rust-analyzer.enable": true,
-  "rust-analyzer.inlayHints.enable": false,
 
   "languageserver": {
     // luarocks install --server=http://luarocks.org/dev lua-lsp

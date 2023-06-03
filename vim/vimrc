@@ -2082,6 +2082,12 @@ if &rtp =~ '/ale,'
   " 设置提示信息的输出格式, 默认值: '%code: %%s'
   let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
 
+  " 2 - Show problems for all lines. Default
+  " 1 - Show problems for the current line.
+  " 0 - Do not show problems with virtual-text.
+  let g:ale_virtualtext_cursor = 1
+  let g:ale_virtualtext_prefix = '%comment% %type%: '
+
   " 是否将 ale linter 发现的错误或警告的具体位置列表信息添加到 location list 中.
   " 我们这里禁用, 以防止使用 gr 时, 破坏 gr 使用的 location list.
   " 默认值: 1
@@ -2166,7 +2172,7 @@ if &rtp =~ '/ale,'
   "      }
   "      配置规则参考: https://github.com/stylelint/stylelint/blob/main/docs/user-guide/rules/list.md
   let g:ale_linters = {
-    \  'go': ['golangci-lint', 'revive', 'gopls'],
+    \  'go': ['golangci-lint', 'gopls'],
     \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
     \  'python': ['pylint', 'flake8'],
     \  'lua': ['luac', 'luacheck'],
