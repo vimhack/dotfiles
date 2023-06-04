@@ -2192,6 +2192,13 @@ if &rtp =~ '/ale,'
   " 解决默认以文件方式检查时的 typecheck 错误误报的问题.
   let g:ale_go_golangci_lint_package = 1
 
+  " Put imports beginning with this string after 3rd-party packages;
+  " comma-separated list
+  " 执行goimports格式化时, 增加 -local 参数, 将指定前缀的包自动分组到第三方包后.
+  " NOTE:
+  "   强烈建议在~/.vimrc.local中添加此条指令覆盖此配置, 而不是直接更改本配置文件.
+  let g:ale_go_goimports_options = '-local github.com/windvalley'
+
   " flake8 配置:
   " 指定允许的 Python 代码每行最大字符数, 默认值 79.
   let g:ale_python_flake8_options = '--max-line-length 120'
@@ -2226,7 +2233,7 @@ if &rtp =~ '/ale,'
   "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
   "      所以不用重复添加.
   let g:ale_fixers = {
-    \  'go': ['gofmt', 'goimports'],
+    \  'go': ['gofmt', 'goimports', 'gopls'],
     \  'rust': ['rustfmt'],
     \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
     \  'lua': ['luafmt'],
