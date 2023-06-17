@@ -272,9 +272,6 @@ Plug 'neoclide/coc-neco'
 " 自动补全引号(单引号/双引号/反引号)、括号(小括号/中括号/大括号)的插件.
 Plug 'Raimondi/delimitMate'
 
-" 自动补全各种括号引号以及代码的条件或循环语句的结束部分等.
-Plug 'cohama/lexima.vim'
-
 " 著名的 AI 补全插件 copilot(已收费).
 " doc: https://copilot.github.com, https://docs.github.com/en/copilot/getting-started-with-github-copilot?tool=neovim
 " Start Neovim and invoke :Copilot setup
@@ -1960,23 +1957,30 @@ if &rtp =~ '/coc.nvim,'
   nmap <leader>gc <Plug>(coc-git-commit)
   " ***************
 
-  " 使用 tab 在弹出的补全列表中向下选择,
-  " 如果光标在行首或光标前是空白字符, 则输入tab.
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE:
+  "   1) There's always complete item selected by default, you may want to enable
+  "      no select by `"suggest.noselect": true` in your configuration file.
+  "   2) Use command ':verbose imap <tab>' to make sure <tab> is not mapped by
+  "      other plugin before putting this into your config.
   inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ HasSpaceOrInBOL() ? "\<TAB>" :
+    \ coc#pum#visible() ? coc#pum#next(1) :
+    \ CheckBackspace() ? "\<Tab>" :
     \ coc#refresh()
-  " 使用 shift + tab 在弹出的补全列表中向上选择.
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  " 判断光标是否在行首或光标前是否有空白.
-  function! HasSpaceOrInBOL() abort
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+  " Make <CR> to accept selected completion item or notify coc.nvim to format
+  " <C-g>u breaks current undo, please make your own choice.
+  " NOTE:
+  "   Use command ':verbose imap <cr>' to make sure <cr> is not mapped by other plugin
+  "   before putting this into your config.
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  function! CheckBackspace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
-
-  " 使用 <CR>(回车键) 来自动选择补全条目的第一条并格式化代码.
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
   " SirVer/ultisnips 插件触发补全的默认配置是 tab 键, 会和 coc 的冲突, 需要修改掉.
   " 实际上并不会用到这里设置的快捷键.
@@ -2043,6 +2047,7 @@ if &rtp =~ '/coc.nvim,'
   nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
   " space p  重新列出上一次展示的 CocList.
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
 endif
 
 " }}
