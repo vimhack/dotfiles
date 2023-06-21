@@ -3367,26 +3367,6 @@ noremap <silent> <leader>q8 :tabclose 8<CR>
 noremap <silent> <leader>q9 :tabclose 9<CR>
 noremap <silent> <leader>q0 :tabclose $<CR>
 
-" 标签页移动:
-"   ,fh  向左移动标签页;
-"   ,fl  向右移动标签页.
-noremap <silent> <leader>fh :call Tab_MoveLeft()<CR>
-noremap <silent> <leader>fl :call Tab_MoveRight()<CR>
-
-function! Tab_MoveLeft()
-  let l:tabnr = tabpagenr() - 2
-  if l:tabnr >= 0
-    exec 'tabmove '.l:tabnr
-  endif
-endfunc
-
-function! Tab_MoveRight()
-  let l:tabnr = tabpagenr() + 1
-  if l:tabnr <= tabpagenr('$')
-    exec 'tabmove '.l:tabnr
-  endif
-endfunc
-
 " }}
 
 """""" 撤销更改提示  Undo Warnings {{
@@ -4058,8 +4038,6 @@ endif
 "                ,fo  只保留当前的标签页, 关闭其他所有标签页.
 "                ,fn  切换到下一个标签页.
 "                ,fp  切换到上一个标签页.
-"                ,fh  向左移动标签页;
-"                ,fl  向右移动标签页.
 "
 " ** 快速输入 Markdown 语法标识符的自定义快捷键:
 "                 ,b  生成粗体字标识符.
