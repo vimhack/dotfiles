@@ -1833,10 +1833,13 @@ imap <script><silent><nowait><expr> <C-y> codeium#Accept()
 "    [A]  Around, 补全来自当前文件(buffer).
 "    [B]  Buffer, 补全来自其他已经打开的文件(buffer).
 "    [F]  File, 补全来自文件名自动检测.
-"      M  Module, 此条补全是一个模块.
+"      M  Module, 此条补全会导入一个模块.
+"      m  method, 是一个方法名.
 "      I  Interface, 是一个接口.
 "      S  Struct, 是一个结构体.
 "      f  func, 是一个函数.
+"      v  variable, 是一个变量.
+"      C  custom, 是一个自定义的类型.
 " **************************
 
 if &rtp =~ '/coc.nvim,'
@@ -2136,6 +2139,9 @@ if &rtp =~ '/ale,'
   "      brew install hashicorp/tap/terraform-ls
   "      brew install tflint
   "
+  "      " for c
+  "      brew install clang-format
+  "
   "      " for css
   "      npm install --save-dev stylelint stylelint-config-standard stylelint-config-standard-scss
   "
@@ -2169,6 +2175,7 @@ if &rtp =~ '/ale,'
   "      配置规则参考: https://github.com/stylelint/stylelint/blob/main/docs/user-guide/rules/list.md
   let g:ale_linters = {
     \  'go': ['golangci-lint', 'gopls'],
+    \  'c': ['cc', 'clangd'],
     \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
     \  'python': ['pylint', 'flake8'],
     \  'lua': ['luac', 'luacheck'],
@@ -2239,6 +2246,7 @@ if &rtp =~ '/ale,'
   "      所以不用重复添加.
   let g:ale_fixers = {
     \  'go': ['gofmt', 'goimports', 'gopls'],
+    \  'c': ['clang-format'],
     \  'rust': ['rustfmt'],
     \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
     \  'lua': ['luafmt'],
