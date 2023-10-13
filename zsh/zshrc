@@ -102,7 +102,7 @@ export ZSH_CUSTOM="$ZSH/custom"
 plugins=(
     vi-mode
     tmux
-    # git
+    git
     gitignore
     z
     history
@@ -160,7 +160,8 @@ gsed -i '/^#Host github.com/{s/^#//;n;s/^#//}' ~/.ssh/config"
 
 # brew 资源镜像配置, 使用代理的时候不使用此资源镜像.
 [[ -z "$ALL_PROXY" ]] &&
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles ||
+        export HOMEBREW_BOTTLE_DOMAIN=
 
 # }}
 
@@ -318,14 +319,13 @@ alias lsof_tcp="lsof -aP -i TCP -s TCP:LISTEN"
 # doc: https://github.com/jesseduffield/lazygit
 alias lg=lazygit
 
-alias gst="git status"
-alias ga="git add"
-alias gc="git commit"
-alias gp="git push"
-alias gpf="git push -f"
-alias gl="git pull"
-alias gd="git diff"
+# 用来统计某个用户提交的代码行数信息. i.e. $ gs someusername
 alias gs="git log --numstat --author"
+
+# For GoFrame Cli: gf
+# NOTE: 设置此alias的意义在于覆盖git插件提供的alias gf="git fetch",
+# 从而使能正常使用GoFrame的gf命令.
+alias gf=gf
 
 # }}
 
