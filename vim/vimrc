@@ -275,25 +275,23 @@ Plug 'Raimondi/delimitMate'
 " 著名的 AI 补全插件 copilot(已收费).
 " doc: https://copilot.github.com, https://docs.github.com/en/copilot/getting-started-with-github-copilot?tool=neovim
 " Start Neovim and invoke :Copilot setup
-" NOTE:
-"   1. 首次安装需要等待官方授权才能使用.
-"   2. 只支持 neovim 0.6+ 版本.
-"   3. 没有任何补全提示的原因排查:
-"      :help Copilot
-"      :Copilot status
-"      :Copilot log
-"   4. 更新此插件, 可解决部分问题:
-"      :PlugUpdate copilot.vim
-"   5. 重新安装此插件可解决大部分问题, 方法:
-"      先注释此行, 重新打开此文件, 执行 :PlugClean 进行卸载;
-"      再取消注释, 执行 :PlugInstall 进行安装.
+" NOTE: 1. 首次安装需要等待官方授权才能使用.
+" 2. 只支持 neovim 0.6+ 版本.
+" 3. 没有任何补全提示的原因排查:
+"    :help Copilot
+"    :Copilot status
+"    :Copilot log
+" 4. 更新此插件, 可解决部分问题:
+"    :PlugUpdate copilot.vim
+" 5. 重新安装此插件可解决大部分问题, 方法:
+"    先注释此行, 重新打开此文件, 执行 :PlugClean 进行卸载;
+"    再取消注释, 执行 :PlugInstall 进行安装.
 " Plug 'github/copilot.vim'
 
 " 个人免费的AI补全插件, 可替代copilot.
 " doc: https://github.com/Exafunction/codeium.vim
-" NOTE:
-"   1. Run `:Codeium Auth` to set up the plugin and start using Codeium;
-"   2. Run `:help codeium` for a full list of commands and configuration options.
+" NOTE: 1. Run `:Codeium Auth` to set up the plugin and start using Codeium;
+" 2. Run `:help codeium` for a full list of commands and configuration options.
 Plug 'Exafunction/codeium.vim'
 
 " }}
@@ -474,9 +472,8 @@ Plug 'uguu-org/vim-matrix-screensaver'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " 为目录树、LeaderF、ranger、vim-startify 等插件显示文件类型.
-" NOTE:
-" 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
-"    # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
+" NOTE: 1) 需安装 nerd-fonts, 并设置终端模拟器的字体为相关字体.
+" # doc: https://github.com/ryanoasis/nerd-fonts#font-installation
 " 2) 此插件要安装在目录树、LeaderF 等插件的后面.
 Plug 'ryanoasis/vim-devicons'
 
@@ -727,8 +724,7 @@ endfunction
 "   embark: https://github.com/embark-theme/vim
 "   off: https://github.com/pbrisbin/vim-colors-off
 "
-" NOTE:
-"   使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
+" NOTE: 使用颜色主题(colorscheme), 同时请将终端也设置成对应的主题, 这样才能获得更好的视觉效果.
 
 " 代码高亮显示.
 syntax enable
@@ -758,9 +754,8 @@ set t_ZR=[23m
 
 " *** colorschemes 优化方法集合 ***
 "
-" NOTE:
-"   方法结尾是 Before 的代表需要放在 colorscheme 指令之前执行;
-"   方法结尾是 After 的代表需要放在 colorscheme 指令之后执行.
+" NOTE: 方法结尾是 Before 的代表需要放在 colorscheme 指令之前执行;
+" 方法结尾是 After 的代表需要放在 colorscheme 指令之后执行.
 
 " 通用方法 {{
 
@@ -1919,8 +1914,7 @@ if &rtp =~ '/coc.nvim,'
   "
   " 1) 打开 TabNine 的配置文件
   "    :CocCommand tabnine.openConfig
-  "    NOTE:
-  "    如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
+  "    NOTE: 如果如上命令无法打开 TabNine 的配置文件, 说明 TabNine 没有正确安装.
   "    需要先删除 ~/.config/coc/extensions/coc-tabnine-data,
   "    然后重新安装 coc-tabnine, :CocInstall coc-tabnine
   " 2) 为了使 coc.nvim 更好的配合 TabNine 工作, 将如下条目加入到 TabNine 的配置文件
@@ -1961,11 +1955,10 @@ if &rtp =~ '/coc.nvim,'
   " ***************
 
   " Use tab for trigger completion with characters ahead and navigate.
-  " NOTE:
-  "   1) There's always complete item selected by default, you may want to enable
-  "      no select by `"suggest.noselect": true` in your configuration file.
-  "   2) Use command ':verbose imap <tab>' to make sure <tab> is not mapped by
-  "      other plugin before putting this into your config.
+  " NOTE: 1) There's always complete item selected by default, you may want to enable
+  " no select by `"suggest.noselect": true` in your configuration file.
+  " 2) Use command ':verbose imap <tab>' to make sure <tab> is not mapped by
+  " other plugin before putting this into your config.
   inoremap <silent><expr> <TAB>
     \ coc#pum#visible() ? coc#pum#next(1) :
     \ CheckBackspace() ? "\<Tab>" :
@@ -1974,9 +1967,8 @@ if &rtp =~ '/coc.nvim,'
 
   " Make <CR> to accept selected completion item or notify coc.nvim to format
   " <C-g>u breaks current undo, please make your own choice.
-  " NOTE:
-  "   Use command ':verbose imap <cr>' to make sure <cr> is not mapped by other plugin
-  "   before putting this into your config.
+  " NOTE: Use command ':verbose imap <cr>' to make sure <cr> is not mapped by other plugin
+  " before putting this into your config.
   inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
     \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -1995,6 +1987,7 @@ if &rtp =~ '/coc.nvim,'
   " gy  跳转到类型定义处.
   nmap <silent> gy <Plug>(coc-type-definition)
   " gi  跳转到实现处.
+  " NOTE: 对于Go语言特别有用, 可以直接跳转到方法的实现处, 而不是方法所在接口的定义处.
   nmap <silent> gi <Plug>(coc-implementation)
   " gr  在 location list 中列出相关条目, 如果相关的只有1条, 则直接跳转过去.
   nmap <silent> gr <Plug>(coc-references)
@@ -2120,9 +2113,8 @@ if &rtp =~ '/ale,'
   nmap <silent> <leader>j <Plug>(ale_next_wrap)
 
   " 针对不同语言的静态代码检查工具配置.
-  " NOTE:
-  "   1) 其他没有在这里配置的语言将使用 ale 默认配置的 linter,
-  "      可以使用 :ALEInfo 来查看当前文件使用了哪些默认的 linter.
+  " NOTE: 1) 其他没有在这里配置的语言将使用 ale 默认配置的 linter,
+  "   可以使用 :ALEInfo 来查看当前文件使用了哪些默认的 linter.
   "
   "   2) 注意需要在本地安装涉及到的命令行工具:
   "      brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
@@ -2207,8 +2199,7 @@ if &rtp =~ '/ale,'
   " Put imports beginning with this string after 3rd-party packages;
   " comma-separated list
   " 执行goimports格式化时, 增加 -local 参数, 将指定前缀的包自动分组到第三方包后.
-  " NOTE:
-  "   强烈建议在~/.vimrc.local中添加此条指令覆盖此配置, 而不是直接更改本配置文件.
+  " NOTE: 强烈建议在~/.vimrc.local中添加此条指令覆盖此配置, 而不是直接更改本配置文件.
   let g:ale_go_goimports_options = '-local github.com/windvalley'
 
   " flake8 配置:
@@ -2230,13 +2221,16 @@ if &rtp =~ '/ale,'
   "  scss 使用系统全局的 stylelint 命令.
   let g:ale_scss_stylelint_use_global = 1
 
+  " 使用 shfmt 进行代码格式化时, 代码缩进使用4个空格替代默认的tab.
+  let g:ale_sh_shfmt_options = '-i 4'
+
   " 针对不同语言的自动修复功能.
   "    需要安装相关的命令行工具:
   "       npm install -g prettier importjs lua-fmt
   "       pip3 install black isort
-  "       go get mvdan.cc/sh/v3/cmd/shfmt
+  "       go install mvdan.cc/sh/v3/cmd/shfmt@latest
   "
-  " NOTE:
+  " NOTE: g:ale_fixers注意事项:
   "   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;
   "      用于 python 的 isort, 可选择性使用, 我这里也不启用,
   "      直接用 black 的 import 排版能力即可.
@@ -2390,8 +2384,7 @@ au FileType go nmap <leader>cl :GoCallers<CR>
 " ,s  查看光标所在的类型实现了哪些接口, 注意光标只能在类型或类型的方法上.
 au FileType go nmap <leader>s <Plug>(go-implements)
 
-" NOTE:
-"   Go 跳转到光标所在函数定义处的 4 种方式均由 vim-go 插件提供.
+" NOTE: Go 跳转到光标所在函数定义处的 4 种方式均由 vim-go 插件提供.
 "   如果光标所在函数定义处就是在当前页面, 则直接在当前页内跳转, 并不打开新页面;
 "   如果在当前页面内跳转, 推荐使用 ctrl o/i 来回跳转切换, 以提高效率.
 "
@@ -2798,14 +2791,13 @@ if &rtp =~ '/nerdtree,'
     \ && b:NERDTree.isTabTree() | quit | endif
 
   " 每新打开一个标签页都显示当前已存在的目录树窗口.
-  " NOTE:
-  "   1)官方提供的指令是: autocmd BufWinEnter * silent NERDTreeMirror,
-  "     但经过实测, 会和以下2条指令产生冲突, 当 gd 或 gr 打开新的 buffer 时会报错:
-  "     冲突的2条指令是:
-  "         1) let g:ale_set_loclist = 1
-  "         2) map gr :YcmCompleter GoToReferences<CR>
-  "     修改为当前指令后, 可修复此问题.
-  "   2) 如果使用 tmux, 不建议启用此条配置.
+  " NOTE: 1)官方提供的指令是: autocmd BufWinEnter * silent NERDTreeMirror,
+  " 但经过实测, 会和以下2条指令产生冲突, 当 gd 或 gr 打开新的 buffer 时会报错:
+  " 冲突的2条指令是:
+  "   1) let g:ale_set_loclist = 1
+  "   2) map gr :YcmCompleter GoToReferences<CR>
+  " 修改为当前指令后, 可修复此问题.
+  " 2) 如果使用 tmux, 不建议启用此条配置.
   "autocmd BufWinEnter *.* silent NERDTreeMirror
 
   " 当项目下新增或删除文件时, 目录树窗口中自动更新变化,
@@ -3071,11 +3063,10 @@ endif
 
 """""" 'ryanoasis/vim-devicons'
 " doc: https://github.com/ryanoasis/vim-devicons
-" NOTE:
-"   1. 需要提前为你的终端模拟器(terminal emulator)设置如下字体:
-"      Hack Nerd Font 或 Hack Nerd Font Mono
-"   2. Hack Nerd Font 字体安装(macOS):
-"      brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
+" NOTE: 1. 需要提前为你的终端模拟器(terminal emulator)设置如下字体:
+"   Hack Nerd Font 或 Hack Nerd Font Mono
+" 2. Hack Nerd Font 字体安装(macOS):
+"   brew tap homebrew/cask-fonts && brew install font-hack-nerd-font
 
 if &rtp =~ '/vim-devicons,'
   " 是否启用文件类型图标显示, 默认值: 1, 表示启用.
@@ -3459,11 +3450,10 @@ noremap <C-l> <C-w>l
 "   ctrl n 下
 "   ctrl a 行首
 "   ctrl e 行尾
-" NOTE:
-"   1) 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a.
-"   2) 如下两个快捷键已在 coc.nvim 插件的配置中配置, 此处不要重复配置.
-"      ctrl b 左
-"      ctrl f 右
+" NOTE: 1) 如果 tmux 将 ctrl a 作为 prefix, 则这里需要按两次 ctrl a.
+" 2) 如下两个快捷键已在 coc.nvim 插件的配置中配置, 此处不要重复配置.
+"    ctrl b 左
+"    ctrl f 右
 inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-a> <Home>
@@ -3560,9 +3550,8 @@ else
 endif
 
 " ctrl s  在 normal/insert 模式下打开/关闭英文的拼写检查.
-" NOTE:
-"   1) 有了 spell 后的 ! 就可以支持 toggle 了, 也就是既支持打开又支持关闭;
-"   2) <C-o> 和 :setlocal 之间不能有空格.
+" NOTE: 1) 有了 spell 后的 ! 就可以支持 toggle 了, 也就是既支持打开又支持关闭;
+" 2) <C-o> 和 :setlocal 之间不能有空格.
 nmap <silent> <C-s> :setlocal spell! spelllang=en,cjk<CR>
 imap <silent> <C-s> <C-o>:setlocal spell! spelllang=en,cjk<CR>
 
