@@ -2120,7 +2120,7 @@ if &rtp =~ '/ale,'
   "      brew install golangci-lint lua luarocks tidy-html5 shellcheck jq
   "      luarocks install luacheck
   "      npm install -g eslint standard eslint-plugin-vue vls \
-  "          proselint alex write-good stylelint markdownlint jsonlint
+  "          proselint alex write-good stylelint jsonlint
   "      pip3 install pylint flake8 yamllint
   "      go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.39.0
   "      go get -u github.com/mgechev/revive
@@ -2136,6 +2136,9 @@ if &rtp =~ '/ale,'
   "
   "      " for css
   "      npm install --save-dev stylelint stylelint-config-standard stylelint-config-standard-scss
+  "      " for markdown: https://github.com/igorshubovych/markdownlint-cli
+  "      " NOTE: 安装完成后的二进制文件是markdownlint
+  "      brew install markdownlint-cli
   "
   "   3) eslint 配置文件, 项目根目录下的 .eslintrc.json, 需要通过如下命令生成,
   "      我们这里使用 standard 风格: eslint --init
@@ -2218,6 +2221,12 @@ if &rtp =~ '/ale,'
     \ },
     \ }"'
 
+  " markdownlint 配置:
+  " 指定可执行文件的具体名称.
+  let g:ale_markdown_markdownlint_executable = 'markdownlint'
+  " 增加配置文件.
+  let g:ale_markdown_markdownlint_options = '-c ~/.markdownlint.yaml'
+
   "  scss 使用系统全局的 stylelint 命令.
   let g:ale_scss_stylelint_use_global = 1
 
@@ -2229,6 +2238,7 @@ if &rtp =~ '/ale,'
   "       npm install -g prettier importjs lua-fmt
   "       pip3 install black isort
   "       go install mvdan.cc/sh/v3/cmd/shfmt@latest
+  "       brew install pandoc
   "
   " NOTE: g:ale_fixers注意事项:
   "   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;

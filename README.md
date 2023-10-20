@@ -224,6 +224,7 @@ ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
 mkdir ~/.vim
 ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim/coc-settings.json ~/.vim/coc-settings.json
+ln -sf ~/.dotfiles/vim/markdownlint.yaml ~/.markdownlint.yaml
 # I suggest regularly updating Vim plugins and Coc plugins in Vim's command-line mode.
 # Update vim plugins
 :PlugUpdate
