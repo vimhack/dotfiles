@@ -3444,6 +3444,11 @@ let &cpo = s:save_cpo
 
 """""" 光标移动  Cursor Movement {{
 
+" ctrl u/d  normal 模式下, 光标向上或向下移动的时候,
+" 从默认的每次移动半屏改为移动 10 行.
+noremap <C-u> 10k
+noremap <C-d> 10j
+
 " 将在多窗口之间进行上下左右跳转光标的快捷键重新映射:
 "   ctrl h  跳转到左边的窗口;
 "   ctrl l  跳转到右边的窗口;
@@ -3503,6 +3508,13 @@ endfunction
 nnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
 vnoremap <silent> 0 :call GoToFirstNonBlankOrFirstColumn()<CR>
 inoremap <silent> <C-a> <C-R>=GoToFirstNonBlankOrFirstColumn()<CR>
+
+" n/N/*/#  搜索关键字后每次跳转都将目标显示在屏幕中间区域.
+" Keep search pattern at the center of the screen.
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
 
 " }}
 
@@ -3590,15 +3602,11 @@ map <Leader>yf VGy
 " ,yb  Yank from the current line to the first of line.
 map <Leader>yb Vggy
 
+" 拷贝当前文件全路径.
+map <silent> <Leader>cp :let @+=expand("%:p")<CR>
+
 " :W  普通用户没有权限时使用 sudo 权限保存文件.
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
-
-" n/N/*/#  搜索关键字后每次跳转都将目标显示在屏幕中间区域.
-" Keep search pattern at the center of the screen.
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
 
 " ,z  当一个界面上有多个窗口时, 可以放大或还原当前所在的子窗口.
 " Zoom windows.
@@ -4032,6 +4040,7 @@ endif
 "       ctrl k/j/h/l  normal 模式下, 上下左右在多窗口之间跳转.
 "                 ,b  normal 模式下, 在背景是 dark 和 light 之间切换.
 "                 ,o  normal 模式下, 在背景是透明和不透明之间切换.
+"                ,cp  normal 模式下, 拷贝当前文件全路径到剪贴板.
 "
 " ** 标签页管理:
 "              g tab  normal 模式下切换到上一次访问的标签页.
