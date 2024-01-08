@@ -202,7 +202,7 @@ GOPRIVATE=
 # 确保拉取到的 Go 包未经过篡改, 如果不需要校验, 则设置为 off.
 GOSUMDB=sum.golang.org
 
-PATH="$GOBIN:$PATH"
+PATH="/usr/local/opt/go/bin:$GOBIN:$PATH"
 
 export GOPATH GOBIN GOPROXY GOPRIVATE GOSUMDB PATH
 
@@ -345,6 +345,9 @@ alias ff="vim \$(fzf)"
 
 # Enable shell completion.
 autoload -U compinit; compinit
+
+# 当在命令行中输入无法匹配的文件名时，shell 不会生成任何错误消息，而只是将该字符串作为参数传递给命令.
+setopt no_nomatch
 
 # }}
 
