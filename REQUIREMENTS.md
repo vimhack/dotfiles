@@ -159,10 +159,11 @@ brew install switchaudio-osx
 
 ### Alacritty
 
-- [alacritty 0.10.1+](https://github.com/alacritty/alacritty)
+- [0.10.1 <= alacritty <= 0.12.3](https://github.com/alacritty/alacritty/releases)
 
 ```sh
-brew install alacritty
+# Download first, then install it.
+wget https://github.com/alacritty/alacritty/releases/download/v0.12.3/Alacritty-v0.12.3.dmg
 ```
 
 - Install fonts

@@ -1,7 +1,6 @@
 # Vimhack/dotfiles 🍀
 
 ![Page Views](https://views.whatilearened.today/views/github/vimhack/dotfiles.svg)
-[![Clones](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.sre.im%2Fv1%2Fgithub%2Ftraffic%2Fclones%2Ftotal%3Fgit_user%3Dvimhack%26git_repo%3Ddotfiles%26type%3Dcount%26label%3Dclones)](https://github.com/windvalley/traffic-clones-api)
 [![LICENSE](https://img.shields.io/github/license/vimhack/dotfiles)](LICENSE)
 
 Vimhack/dotfiles is a Fantastic Development Environment,
@@ -241,7 +240,7 @@ ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 touch ~/.tmux.local.conf
 
 # Alacritty
-mkdir -p ~/.dotfiles/alacritty
+mkdir -p ~/.config/alacritty
 \cp ~/.dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 \cp ~/.dotfiles/alacritty/alacritty_private.yml ~/.alacritty_private.yml
 ```
