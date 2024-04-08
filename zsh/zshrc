@@ -210,13 +210,17 @@ export GOPATH GOBIN GOPROXY GOPRIVATE GOSUMDB PATH
 
 # python3
 # brew install python3
+# NOTE:
+#   cd /usr/local/opt/python3/bin
+#   ln -sf python3.11 python3
+#   ln -sf python3.11 python
 export PATH="/usr/local/opt/python3/bin:$PATH"
 
 # poetry
 # 1) Install:
-#    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python3 -
+#    curl -sSL https://install.python-poetry.org | python3 -
 # 2) Uninstall:
-#    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python3 - --uninstall
+#    curl -sSL https://install.python-poetry.org | python3 - --uninstall
 # 3) Update:
 #    poetry self update
 # 4) Enable tab completion:
@@ -225,7 +229,7 @@ export PATH="/usr/local/opt/python3/bin:$PATH"
 #    exec zsh
 # NOTE:
 #   1) Do not use 'deactivate' to exit from 'poetry shell', use 'exit'.
-export PATH="/Users/xg/Library/Python/3.9/bin:$PATH"
+export PATH="/Users/xg/.local/bin:$PATH"
 
 # ****** Lua ******
 # brew install lua@5.3
