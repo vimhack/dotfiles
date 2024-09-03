@@ -178,6 +178,8 @@ gsed -i '/^#Host github.com/{s/^#//;n;s/^#//}' ~/.ssh/config"
 # 安装 protoc 需要的 Go 语言代码转换工具 protoc-gen-go:
 #   brew install protoc-gen-go
 
+GOROOT="/usr/local/opt/go" # /usr/local/opt/go or /opt/homebrew/opt/go
+
 GOPATH=$HOME/go
 
 GOBIN=$GOPATH/bin
@@ -202,7 +204,8 @@ GOPRIVATE=
 # 确保拉取到的 Go 包未经过篡改, 如果不需要校验, 则设置为 off.
 GOSUMDB=sum.golang.org
 
-PATH="/usr/local/opt/go/bin:$GOBIN:$PATH"
+
+PATH="$GOROOT/bin:$GOBIN:$PATH"
 
 export GOPATH GOBIN GOPROXY GOPRIVATE GOSUMDB PATH
 

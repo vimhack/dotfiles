@@ -292,7 +292,10 @@ Plug 'Raimondi/delimitMate'
 " doc: https://github.com/Exafunction/codeium.vim
 " NOTE: 1. Run `:Codeium Auth` to set up the plugin and start using Codeium;
 " 2. Run `:help codeium` for a full list of commands and configuration options.
-Plug 'Exafunction/codeium.vim'
+" 3. 不可用问题解决思路:
+"    - 代理问题
+"    - 重新安装此插件
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
 " }}
 
@@ -3446,8 +3449,8 @@ let &cpo = s:save_cpo
 
 " ctrl u/d  normal 模式下, 光标向上或向下移动的时候,
 " 从默认的每次移动半屏改为移动 10 行.
-noremap <C-u> 10k
-noremap <C-d> 10j
+"noremap <C-u> 10k
+"noremap <C-d> 10j
 
 " 将在多窗口之间进行上下左右跳转光标的快捷键重新映射:
 "   ctrl h  跳转到左边的窗口;
