@@ -1,0 +1,121 @@
+---
+# clang-format version: 19+
+# clang-format style options: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+#
+# 将此文件重命名为 .clang-format，然后将其放置在你的项目根目录下或加目录下。
+
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+BasedOnStyle: LLVM
+IndentWidth: 4
+---
+Language: Proto
+# Don't format .proto files.
+DisableFormat: true
+---
+Language: Cpp
+
+# 设定每行代码的最大长度为 80 个字符。
+ColumnLimit: 80
+
+# 不使用制表符，仅使用空格。
+UseTab: Never
+
+# 代码行续行的缩进宽度。
+ContinuationIndentWidth: 2
+
+# include头文件自动分组。
+IncludeBlocks: Regroup
+
+# 头文件排序方式。
+SortIncludes: CaseSensitive
+
+# 排序Using声明。
+SortUsingDeclarations: LexicographicNumeric
+
+# 将括号内的内容在新行时对齐到第一个参数的位置。
+AlignAfterOpenBracket: Align
+
+# 强制换行长字符串。
+BreakStringLiterals: true
+
+# 指针*号对齐方式：
+#   Left: int* a;
+#   Right: int *a;
+#   Middle: int * a;
+PointerAlignment: Left
+
+# 连续赋值对齐。
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true
+  # 复合赋值语句（如 +=、-= 等）是否启用对齐。
+  AlignCompound: false
+  PadOperators: true
+
+# 如果为 true，连续的命名空间声明将位于同一行;
+# 如果为 false，每个命名空间声明将位于新的一行。
+CompactNamespaces: false
+
+# 值为0表示，所有命名空间都FixNamespaceComments。
+ShortNamespaceLines: 0
+# 如果为 true，会为命名空间添加缺失的结束注释，并修复无效的现有注释。
+# NOTE: 只针对命名空间内容行数大于 ShortNamespaceLines 的情况生效。
+FixNamespaceComments: true
+
+# 自动调整注释的格式，使其符合行宽限制。
+ReflowComments: true
+
+# 文件头尾位置、代码块起始位置是否可以有空行。
+KeepEmptyLines:
+  AtStartOfFile: false
+  AtEndOfFile: false
+  AtStartOfBlock: false
+
+# 语句之间最大空行数。
+MaxEmptyLinesToKeep: 1
+
+# 注释符号后必须有空格，且只能有一个空格。
+SpacesInLineCommentPrefix:
+  Minimum: 1
+  Maximum: 1
+
+# 在代码行尾注释, 必须有 1 个空格。
+SpacesBeforeTrailingComments: 1
+
+# 容器内的元素间是否需要空格。
+SpacesInContainerLiterals: true
+
+# 大括号与控制语句放在同一行。
+BreakBeforeBraces: Attach
+
+# 让三元运算符的各部分在不同的行上，以增强代码可读性。
+BreakBeforeTernaryOperators: true
+
+# 如果为 true，则按照最适合 C++11 花括号列表的方式格式化带括号的列表。
+Cpp11BracedListStyle: true
+
+# 自动推导指针和引用符号（* 和 &）的对齐方式，使指针和引用保持一致的对齐风格.
+DerivePointerAlignment: true
+
+# 用于控制类或结构体中访问控制修饰符（如 public:、private:、protected:）后是否插入空行。
+EmptyLineAfterAccessModifier: Never
+
+# 仅当访问修饰符开始一个新的逻辑块时, 才添加空行。
+EmptyLineBeforeAccessModifier: LogicalBlock
+
+# 访问控制修饰符是否有自己的缩进(缩进空格数和IndentWidth设置的一致）。
+IndentAccessModifiers: false
+
+# 访问修饰符（如 public:、private:）的缩进相对于类的缩进减少几个空格。
+# 默认值：-2
+AccessModifierOffset: -4
+
+# 移除函数和构造函数/析构函数闭括号后的分号。
+RemoveSemicolon: true
+
+# requires表达式主体的缩进方式。
+RequiresExpressionIndentation: OuterScope
+
+# 指定使用空行来分隔定义块，包括类、结构体、枚举和函数。
+SeparateDefinitionBlocks: Always

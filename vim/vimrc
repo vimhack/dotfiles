@@ -2173,7 +2173,8 @@ if &rtp =~ '/ale,'
   "      配置规则参考: https://github.com/stylelint/stylelint/blob/main/docs/user-guide/rules/list.md
   let g:ale_linters = {
     \  'go': ['golangci-lint', 'gopls'],
-    \  'c': ['cc', 'clangd'],
+    \  'c': ['clangd'],
+    \  'cpp': ['clangd'],
     \  'rust': ['analyzer', 'cargo', 'rls', 'rustc'],
     \  'python': ['pylint', 'flake8'],
     \  'lua': ['luac', 'luacheck'],
@@ -2192,6 +2193,14 @@ if &rtp =~ '/ale,'
     \  'markdown': ['markdownlint'],
     \  'terraform': ['terraform', 'terraform_ls', 'tflint'],
     \ }
+
+  " cpp静态代码检查配置.
+  " NOTE: clangd 依赖 compile_commands.json 文件来获取编译选项, 需要确保该文件是最新的，
+  " 并且准确反映了项目的编译过程，否则静态代码检查会大量误报，
+  " 可以使用如下方式自动生成compile_commands.json文件：
+  " mkdir build && cd build
+  " cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+  let g:ale_cpp_clangd_executable = 'clangd'
 
   " golangci-lint 配置:
   " 指定可执行文件的具体名称.
@@ -2242,6 +2251,7 @@ if &rtp =~ '/ale,'
   "       pip3 install black isort
   "       go install mvdan.cc/sh/v3/cmd/shfmt@latest
   "       brew install pandoc
+  "       brew install clang-format
   "
   " NOTE: g:ale_fixers注意事项:
   "   1) 不要使用 python 的 autoimport 工具, 重新排版的 import 可能发生错误;
@@ -2251,9 +2261,15 @@ if &rtp =~ '/ale,'
   "      我这里暂不启用.
   "   3) prettier 等工具自身就有 trim_whitespace 和 remove_trailing_lines 的能力,
   "      所以不用重复添加.
+  "   4) clang-format, 需要在项目根目录下创建.clang-format配置文件，
+  "      并在配置文件中添加对应的格式化规则, 可参考: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+  "      内容示例：
+  "      BasedOnStyle: LLVM
+  "      IndentWidth: 4
   let g:ale_fixers = {
     \  'go': ['gofmt', 'goimports', 'gopls'],
     \  'c': ['clang-format'],
+    \  'cpp': ['clang-format'],
     \  'rust': ['rustfmt'],
     \  'python': ['black', 'add_blank_lines_for_python_control_statements'],
     \  'lua': ['luafmt'],
