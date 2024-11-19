@@ -246,9 +246,18 @@ alias luarocks="luarocks  --lua-dir=/usr/local/opt/lua@5.3"
 export PATH=$HOME/.luarocks/bin:$PATH
 
 # ****** node ******
-# brew install node@16
-
-export PATH="/usr/local/opt/node@16/bin:$PATH"
+# node版本管理器: nvm
+#
+# brew install nvm      # https://github.com/nvm-sh/nvm
+#
+# nvm install 16        # 安装node@16
+# nvm use 16            # 切换到node@16
+# nvm alias default 16  # 设置默认版本
+# nvm list              # 查看已安装的所有版本
+# nvm uninstall 16      # 卸载node@16
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # ****** ruby ******
 # brew install ruby
@@ -257,9 +266,10 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # ****** java ******
 # brew install java
+# brew install openjdk@17
 
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export CPPFLAGS="-I/usr/local/opt/openjdk/include"
+export PATH="/usr/local/opt/openjdk@17/bin:$PATH"
+export CPPFLAGS="-I/usr/local/opt/openjdk@17/include"
 
 # ****** bash ******
 # brew install bash
