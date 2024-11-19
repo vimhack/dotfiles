@@ -2786,7 +2786,7 @@ autocmd FileType jsonc setlocal commentstring=//\ %s
 " doc: https://github.com/preservim/nerdtree
 
 if &rtp =~ '/nerdtree,'
-  " ,t  normal 模式下显示或隐藏目录树的快捷键.
+  " ,x  normal 模式下显示或隐藏目录树的快捷键.
   nnoremap <leader>x :NERDTreeToggle<CR>
 
   " 目录树显示在左侧还是右侧.
@@ -2846,7 +2846,7 @@ if &rtp =~ '/nerdtree,'
   let NERDTreeIgnore=['\.git$','\.pyc$','__pycache__','\.swp$']
 
   " 是否显示目录树的行号, 默认值: 0, 表示不显示.
-  let NERDTreeShowLineNumbers=0
+  let NERDTreeShowLineNumbers=1
 endif
 
 """""" 'francoiscabrol/ranger.vim'
